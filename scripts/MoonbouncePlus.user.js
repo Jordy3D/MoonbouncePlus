@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.4.1
+// @version      0.5.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -32,6 +32,7 @@
 //          - Shifted data to new repository
 //          - Fixed Pondering not taking into account the tools needed for crafting
 //          - Code cleanup and commenting
+// 0.5.0    - Added a highlight for items in the inventory that are not in the database
 //
 // ==/Changelog==
 
@@ -131,6 +132,7 @@ if (isWebDoc) {                 // Actual Web Script
     loadData();
     setInterval(addCopyDetailstoItemImage, 1000);
     setInterval(addPonderButton, 1000);
+    setInterval(highlightUnknownItems, 1000);
 }
 else {                          // Local Debugging Script
     // import the local data/MoonbouncePlus.json file
@@ -455,6 +457,63 @@ function checkRecipes() {
 
     floatingNotification(message, 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 
+}
+
+
+/**
+ * Highlight items in the inventory that are not in the database
+ */
+function highlightUnknownItems() {
+    let inventory = findInventory();
+    if (inventory == null) return;
+
+    let inventoryItems = inventory.querySelectorAll("img");
+
+    for (let item of inventoryItems) {
+        let uuid = getUUIDFromSrc(item.src);
+        let resultItem = items.find(item => item.uuid == uuid);
+
+        // get the nearest button parent
+        let buttonParent = item.closest("button");
+        if (buttonParent == null) continue;
+
+        buttonParent.classList.remove("unknown-item");
+
+        if (resultItem == null)
+            buttonParent.classList.add("unknown-item");
+    }
+
+    // add some CSS to highlight the unknown items
+    addCSS(`
+        .cfWcg
+{
+  overflow: visible;
+    
+  .unknown-item {
+    background: linear-gradient(45deg, #f2be4470, #fff, #f2be4470) !important;
+    
+    & > div
+    {
+      background: inherit !important;
+    }
+
+    position: relative;
+    
+    [class*="_rarity_box"]
+    {
+      width: 40% !important;
+    }
+    
+    &::before
+    {
+      content:"✨";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+    }
+  }
+}
+`, "highlightUnknownItemsCSS");
 }
 
 

@@ -999,6 +999,16 @@
             "sources": []
         },
         {
+            "id": 539,
+            "name": "Holy Crown",
+            "uuid": "0a2eab37-78b5-4339-813e-884cfaed5b7d",
+            "description": "Holy crown? More like holy #blessed,  look at that thing!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
+        },
+        {
             "id": 540,
             "name": "Wooden Plank",
             "uuid": "b86d4d4e-9ca4-42e2-b716-223f8edc87c9",
