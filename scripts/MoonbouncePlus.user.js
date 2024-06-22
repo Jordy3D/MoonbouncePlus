@@ -81,7 +81,7 @@ function loadData(isLocal = false) {
     console.log("Loading data...");
 
     if (isLocal) {
-        var data = require('./data/MoonbouncePlus.json');
+        var data = require('../data/MoonbouncePlus.json');
         items = data.items;
         recipes = data.recipes;
 
