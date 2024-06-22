@@ -1,6 +1,6 @@
 # Moonbounce Plus
 
-A userscrript that adds a few features to the Moonbounce website and experience.
+A userscript that adds a few features to the Moonbounce website and experience.
 
 ## Features
 

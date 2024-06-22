@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.5.1
+// @version      0.6.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -34,6 +34,8 @@
 //          - Code cleanup and commenting
 // 0.5.0    - Added a highlight for items in the inventory that are not in the database
 // 0.5.1    - ACTUALLY fixed the Pondering not taking into account the tools needed for crafting
+// 0.6.0    - Added an Appraise button to evaluate the number of items in the inventory, and their total value
+//          - Added spacing between the buttons in the inventory controls
 //
 // ==/Changelog==
 
@@ -110,6 +112,7 @@ const targetClasses = [
     { name: "Moonbounce Portal Buttons", class: "._base_11wdf_1" },
     { name: "Source List Item", class: ".mSsVp" },
     { name: "Diffuse Value", class: ".WVOcs" },
+    { name: "Stack Size", class: "._stack_count_16kzs_52" },
 ]
 const getTargetClass = name => targetClasses.find(x => x.name == name).class;
 
@@ -133,6 +136,7 @@ if (isWebDoc) {                 // Actual Web Script
     loadData();
     setInterval(addCopyDetailstoItemImage, 1000);
     setInterval(addPonderButton, 1000);
+    setInterval(addAppraiseButton, 1000);
     setInterval(highlightUnknownItems, 1000);
 }
 else {                          // Local Debugging Script
@@ -335,6 +339,37 @@ function addInventoryControlBar() {
 
     inventoryControls.parentElement.insertBefore(container, inventoryControls);
 
+    // add some CSS to the button
+    addCSS(`#bane-inventory-controls
+        {
+          gap: 8px;
+
+          button
+          {
+            background: white;
+            border: 2px solid #E6E8EC;
+            color: #141416;
+        
+            cursor: pointer;
+                
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 16px;
+            gap: 8px;
+            box-shadow: 0 1px 2px #1018280d;
+            border-radius: 8px;
+            transition: .2s;
+            
+            &:hover
+            {
+              background: #E6E8EC;
+              border-color: #d2d5de;
+            }
+          }
+        }`, "inventoryControlsCSS");
+
     return container;
 }
 
@@ -365,35 +400,6 @@ function addPonderButton() {
     });
 
     container.appendChild(button);
-
-    // add some CSS to the button
-    addCSS(`#bane-inventory-controls
-{
-  button
-  {
-    background: white;
-    border: 2px solid #E6E8EC;
-    color: #141416;
-
-    cursor: pointer;
-        
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    gap: 8px;
-    box-shadow: 0 1px 2px #1018280d;
-    border-radius: 8px;
-    transition: .2s;
-    
-    &:hover
-    {
-      background: #E6E8EC;
-      border-color: #d2d5de;
-    }
-  }
-}`, "inventoryControlsCSS");
 }
 
 /**
@@ -518,6 +524,100 @@ function highlightUnknownItems() {
 }
 `, "highlightUnknownItemsCSS");
 }
+
+
+function evaluateInventory() {
+    // Get the number of unique items in the inventory
+    // Get the total number of items in the inventory (the count of all items)
+    // Get the total value of the items in the inventory (the sum of all item values)
+
+    let inventory = findInventory();
+    if (inventory == null) return;
+
+    let inventoryItems = inventory.querySelectorAll("img");
+
+
+    let uniqueItems = [];
+    let totalItems = 0;
+    let totalValue = 0;
+
+    let unknownValueItems = [];
+
+    for (let item of inventoryItems) {
+        // it's a unique item, add it
+        uniqueItems.push(item.src);
+
+        // Find the stack size to add to the total item count
+        // find the stack size of the item
+        let stackSize = item.parentElement.querySelector(getTargetClass("Stack Size"));
+        if (stackSize == null) continue;
+
+        // convert the stack size to a number
+        let value = parseInt(stackSize.innerText);
+        totalItems += value;
+
+        // Find the value of the item
+        let uuid = getUUIDFromSrc(item.src);
+        let resultItem = items.find(item => item.uuid == uuid);
+
+        if (resultItem != null) {
+            totalValue += resultItem.value * value;
+        }
+        else {
+            unknownValueItems.push(item.src);
+        }
+    }
+
+    let appraisalMessage = "";
+    appraisalMessage += `Unique Items: ${uniqueItems.length}\n`;
+    appraisalMessage += `Total Items: ${totalItems}\n`;
+    appraisalMessage += `Total Value: ${totalValue} MP\n`;
+    if (unknownValueItems.length > 0) {
+        if (unknownValueItems.length == 1)
+            appraisalMessage += `\nHowever, I couldn't find the value of an item...\n`;
+        else
+            appraisalMessage += `\nHowever, I couldn't find the\n value of some items...\n`;
+    }
+
+    // replace the newlines with <br> for the notification
+    appraisalMessage = appraisalMessage.replace(/\n/g, "<br>");
+
+    // spawn a notification under the cursor position
+    let pos = { top: event.clientY, left: event.clientX };              // get the current mouse position
+    pos.top += 10;                                                      // offset the position down by 10 pixels
+
+    floatingNotification(appraisalMessage, 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
+}
+
+
+/**
+ * Add an Appraise button to evaluate the number of items in the inventory, and their total value
+ */
+function addAppraiseButton() {
+    // find the inventory controls div
+    let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
+    if (inventoryControls == null) return;
+
+    // if the inventory controls already have the bane-appraise-button, return
+    let existingButton = document.querySelector("#bane-appraise-button");
+    if (existingButton != null) return;
+
+    // create a new container div after the inventory controls
+    let container = addInventoryControlBar();
+
+    // create a new button in the container
+    let button = document.createElement("button");
+    button.innerText = "Appraise";
+    button.id = "bane-appraise-button";
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        evaluateInventory();
+    });
+
+    container.appendChild(button);
+}
+
 
 
 // ██╗  ██╗███████╗██╗     ██████╗ ███████╗██████╗ 

@@ -1025,7 +1025,7 @@
             "description": "It’s got a name that’ll make your friends do a double-take and wonder if you just sneezed or discovered an ancient artifact,  so we shortened it for ya.",
             "rarity": "RARE",
             "type": "ACCESSORY",
-            "value": null,
+            "value": 200,
             "sources": []
         },
         {
@@ -1136,6 +1136,16 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 10,
+            "sources": ["Soup's Goodies"]
+        },
+        {
+            "id": 557,
+            "name": "Banana",
+            "uuid": "87f3f4de-7b2c-4b78-a8cc-4105032b570c",
+            "description": "Craft it into something a-peeling.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
             "sources": ["Soup's Goodies"]
         },
         {
