@@ -415,7 +415,9 @@ function checkRecipes() {
     var craftableRecipes = [];
     for (let recipe of recipes) {
         let canCraft = true;
-        for (let ingredient of recipe.ingredients + recipe.tools) {
+        let requiredItems = [...recipe.ingredients, ...recipe.tools];
+
+        for (let ingredient of requiredItems) {
             let ingredientUUID = getUUIDFromItemName(ingredient);
 
             // Check if the ingredient is in the inventory
