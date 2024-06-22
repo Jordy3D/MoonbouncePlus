@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.5.0
+// @version      0.5.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -33,6 +33,7 @@
 //          - Fixed Pondering not taking into account the tools needed for crafting
 //          - Code cleanup and commenting
 // 0.5.0    - Added a highlight for items in the inventory that are not in the database
+// 0.5.1    - ACTUALLY fixed the Pondering not taking into account the tools needed for crafting
 //
 // ==/Changelog==
 
