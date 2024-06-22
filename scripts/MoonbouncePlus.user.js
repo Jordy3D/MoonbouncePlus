@@ -58,6 +58,21 @@
 var items = null;
 var recipes = null;
 
+var inventoryData = null;
+
+// define an inventory item object
+class InventoryItem {
+    constructor(id, name, uuid, rarity, type, value, quantity) {
+        this.id = id;
+        this.name = name;
+        this.uuid = uuid;
+        this.rarity = rarity;
+        this.type = type;
+        this.value = value;
+        this.quantity = quantity;
+    }
+}
+
 /**
  * Load the data from MoonbouncePlus.json file
  * @param {boolean} isLocal whether to load the data locally or from the web
@@ -133,11 +148,7 @@ const getTargetURL = name => targetURLs.find(x => x.name == name).url;
 var isWebDoc = typeof document !== 'undefined';
 
 if (isWebDoc) {                 // Actual Web Script
-    loadData();
-    setInterval(addCopyDetailstoItemImage, 1000);
-    setInterval(addPonderButton, 1000);
-    setInterval(addAppraiseButton, 1000);
-    setInterval(highlightUnknownItems, 1000);
+    init();
 }
 else {                          // Local Debugging Script
     // import the local data/MoonbouncePlus.json file
@@ -197,6 +208,55 @@ else {                          // Local Debugging Script
 // ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
 // ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+
+/**
+ * Initialize the script and other initial functions
+ */
+function init() {  
+    // print Deathworlders Tweaks in large letters
+    var textCSSMain = 'font-size: 30px; font-weight: bold; text-shadow: -3px 0px 0px rgba(255, 0, 0, 1),3px 0px 0px rgba(8, 0, 255, 1);';
+    var textCSSSub = 'font-size: 15px; font-weight: bold;';
+    console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
+    
+    loadData();
+
+    setInterval(addCopyDetailstoItemImage, 1000);
+    setInterval(addPonderButton, 1000);
+    setInterval(addAppraiseButton, 1000);
+    setInterval(highlightUnknownItems, 1000);
+}
+
+
+
+/**
+ * Refresh the inventory list
+ */
+function refreshInventoryArray() {
+    inventoryData = [];
+
+    let inventory = findInventory();
+    if (inventory == null) return;
+
+    let inventoryItems = inventory.querySelectorAll("img");
+
+    for (let item of inventoryItems) {
+        let uuid = getUUIDFromSrc(item.src);
+        let resultItem = items.find(item => item.uuid == uuid);
+
+        // find the stack size of the item
+        let stackSize = item.parentElement.querySelector(getTargetClass("Stack Size"));
+        if (stackSize == null) continue;
+
+        // convert the stack size to a number
+        let quantity = parseInt(stackSize.innerText);
+
+        let inventoryItem = new InventoryItem(resultItem.id, resultItem.name, resultItem.uuid, resultItem.rarity, resultItem.type, resultItem.value, quantity);
+        inventoryData.push(inventoryItem);
+    }
+}
+
+
+
 
 /**
  * Add an event listener to item images that copies the item's UUID to the clipboard
@@ -406,6 +466,7 @@ function addPonderButton() {
  * Check if any recipes can be crafted with the items in the inventory.
  */
 function checkRecipes() {
+    // TODO: Use the inventoryData array to check for craftable recipes instead of getting the inventory items again
     let inventory = findInventory();
     if (inventory == null) return;
 
@@ -525,59 +586,36 @@ function highlightUnknownItems() {
 `, "highlightUnknownItemsCSS");
 }
 
-
+/**
+ * Evaluate the number of items in the inventory, and their total value
+ */
 function evaluateInventory() {
-    // Get the number of unique items in the inventory
-    // Get the total number of items in the inventory (the count of all items)
-    // Get the total value of the items in the inventory (the sum of all item values)
+    console.log("Appraising...");
 
-    let inventory = findInventory();
-    if (inventory == null) return;
+    refreshInventoryArray();
 
-    let inventoryItems = inventory.querySelectorAll("img");
-
-
-    let uniqueItems = [];
+    // unique items is the number of items in the inventoryData array
     let totalItems = 0;
     let totalValue = 0;
 
     let unknownValueItems = [];
 
-    for (let item of inventoryItems) {
-        // it's a unique item, add it
-        uniqueItems.push(item.src);
+    for (let item of inventoryData) {
+        totalItems += item.quantity;
 
-        // Find the stack size to add to the total item count
-        // find the stack size of the item
-        let stackSize = item.parentElement.querySelector(getTargetClass("Stack Size"));
-        if (stackSize == null) continue;
-
-        // convert the stack size to a number
-        let value = parseInt(stackSize.innerText);
-        totalItems += value;
-
-        // Find the value of the item
-        let uuid = getUUIDFromSrc(item.src);
-        let resultItem = items.find(item => item.uuid == uuid);
-
-        if (resultItem != null) {
-            totalValue += resultItem.value * value;
+        if (items.find(x => x.uuid == item.uuid) == null) {
+            unknownValueItems.push(item);
+            continue;
         }
-        else {
-            unknownValueItems.push(item.src);
-        }
+        totalValue += item.value * item.quantity;
     }
 
     let appraisalMessage = "";
-    appraisalMessage += `Unique Items: ${uniqueItems.length}\n`;
+    appraisalMessage += `Unique Items: ${inventoryData.length}\n`;
     appraisalMessage += `Total Items: ${totalItems}\n`;
     appraisalMessage += `Total Value: ${totalValue} MP\n`;
-    if (unknownValueItems.length > 0) {
-        if (unknownValueItems.length == 1)
-            appraisalMessage += `\nHowever, I couldn't find the value of an item...\n`;
-        else
-            appraisalMessage += `\nHowever, I couldn't find the\n value of some items...\n`;
-    }
+    if (unknownValueItems.length > 0)
+        appraisalMessage += `\nHowever, I couldn't find the value of ${unknownValueItems.length == 1 ? "an item" : "some items"}...\n`;
 
     // replace the newlines with <br> for the notification
     appraisalMessage = appraisalMessage.replace(/\n/g, "<br>");
