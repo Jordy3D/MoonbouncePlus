@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.4.0
+// @version      0.4.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -28,6 +28,10 @@
 //          - Code cleanup and reorganization
 // 0.3.3    - Changed the Selected Item Window class to a new one (Moonbounce updated their site)
 // 0.4.0    - Added a Ponder button to check if any recipes can be crafted with the items in the inventory (that aren't already in the inventory)
+// 0.4.1    - Reduced Console spam
+//          - Shifted data to new repository
+//          - Fixed Pondering not taking into account the tools needed for crafting
+//          - Code cleanup and commenting
 //
 // ==/Changelog==
 
@@ -159,7 +163,6 @@ else {                          // Local Debugging Script
 
             var output = `${id}: ${name} ${rarity} ${type} ${value}`;
 
-            https://moonbounce.gg/images/fp/4b51f64d-a5e1-4fba-8713-f15414306330/c/f/preview.png
             output += `\n       Image URL: https://moonbounce.gg/images/fp/${item.uuid}/c/f/preview.png`;
 
             displayLog += `\n${output}`;
@@ -310,7 +313,9 @@ function addCopyDetailstoItemImage() {
     }
 }
 
-
+/**
+ * Adds a container div above the inventory controls to hold new buttons
+ */
 function addInventoryControlBar() {
     // find the inventory controls div
     let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
@@ -330,7 +335,10 @@ function addInventoryControlBar() {
     return container;
 }
 
-
+/**
+ * Add a Ponder button to the inventory controls that checks if any recipes can be crafted with the items in the inventory.
+ * If there are any, it will display a notification with a random recipe that can be crafted.
+ */
 function addPonderButton() {
     // find the inventory controls div
     let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
@@ -392,6 +400,8 @@ function checkRecipes() {
     let inventory = findInventory();
     if (inventory == null) return;
 
+    console.log("Pondering...");
+
     let inventoryItems = inventory.querySelectorAll("img");
 
     let inventoryUUIDs = [];
@@ -402,11 +412,8 @@ function checkRecipes() {
 
     var craftableRecipes = [];
     for (let recipe of recipes) {
-
-        console.log(`Checking recipe: ${recipe.result}`);
-
         let canCraft = true;
-        for (let ingredient of recipe.ingredients) {
+        for (let ingredient of recipe.ingredients + recipe.tools) {
             let ingredientUUID = getUUIDFromItemName(ingredient);
 
             // Check if the ingredient is in the inventory
@@ -439,7 +446,7 @@ function checkRecipes() {
         message = `I have a feeling you can craft ${article} ${randomRecipe.result}...`;
     }
     else {
-        message = `I don't think you can craft anything right now...`;
+        message = `I don't think you can craft anything new right now...`;
     }
 
     // spawn a notification under the cursor position
