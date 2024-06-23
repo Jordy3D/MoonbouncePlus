@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.6.0
+// @version      0.6.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -36,6 +36,7 @@
 // 0.5.1    - ACTUALLY fixed the Pondering not taking into account the tools needed for crafting
 // 0.6.0    - Added an Appraise button to evaluate the number of items in the inventory, and their total value
 //          - Added spacing between the buttons in the inventory controls
+// 0.6.1    - Fixed a bug with Appraisal breaking on unknown items
 //
 // ==/Changelog==
 
@@ -250,8 +251,14 @@ function refreshInventoryArray() {
         // convert the stack size to a number
         let quantity = parseInt(stackSize.innerText);
 
-        let inventoryItem = new InventoryItem(resultItem.id, resultItem.name, resultItem.uuid, resultItem.rarity, resultItem.type, resultItem.value, quantity);
-        inventoryData.push(inventoryItem);
+        try {
+            let inventoryItem = new InventoryItem(resultItem.id, resultItem.name, resultItem.uuid, resultItem.rarity, resultItem.type, resultItem.value, quantity);
+            inventoryData.push(inventoryItem);
+        }
+        catch (e) {
+            inventoryData.push( new InventoryItem(0, "Unknown", uuid, "Unknown", "Unknown", 0, quantity) );
+        }
+
     }
 }
 

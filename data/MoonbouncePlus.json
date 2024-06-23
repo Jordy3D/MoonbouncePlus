@@ -21,6 +21,16 @@
             "sources": []
         },
         {
+            "id": 6,
+            "name": "Pengu",
+            "uuid": "7ab872f5-816e-4d24-abe9-53ab4ce3c9dd",
+            "description": "This flightless bird is a master of waddling across the internet.",
+            "rarity": "COMMON",
+            "type": "CHARACTER",
+            "value": null,
+            "sources": []
+        },
+        {
             "id": 8,
             "name": "Empty Bottle",
             "uuid": "ff73877e-7e36-45be-8f6a-cbedfee59ed2",
@@ -241,6 +251,16 @@
             "sources": ["Assorted Goodie Bag"]
         },
         {
+            "id": 199,
+            "name": "Puff",
+            "uuid": "304de861-c658-4c78-b818-830746734075",
+            "description": "Ghostly grin,  zero scares. A see-through buddy bringing laughs,  not shivers. Spookiness? Nah,  just playful antics. Levitating things,  ghost-style.",
+            "rarity": "RARE",
+            "type": "CHARACTER",
+            "value": null,
+            "sources": []
+        },
+        {
             "id": 232,
             "name": "Star Sickle",
             "uuid": "ea51c90c-3334-4131-a305-e8b5bd24854f",
@@ -269,6 +289,16 @@
             "type": "MATERIAL",
             "value": 5,
             "sources": ["Rock Collection"]
+        },
+        {
+            "id": 236,
+            "name": "Olive",
+            "uuid": "70b8a883-04ce-43cf-a8c9-03a8adca469f",
+            "description": "King of the salt,  always has something to say at the family function",
+            "rarity": "RARE",
+            "type": "CHARACTER",
+            "value": null,
+            "sources": []
         },
         {
             "id": 265,
@@ -1099,11 +1129,31 @@
             "sources": []
         },
         {
+            "id": 550,
+            "name": "Bowl of Soup",
+            "uuid": "06b9bf67-f3ff-4e52-b74c-46fc79177a49",
+            "description": "Keep your head warm and your tummy happy with this savory accessory! Just don't be surprised if people try to slurp your new lid.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": null,
+            "sources": []
+        },
+        {
             "id": 552,
             "name": "Blue Halo",
             "uuid": "32434cca-87be-4252-91e0-e18c95b9536c",
             "description": "This halo is the perfect way to show off your saintly side without having to sprout wings. Just be careful,  bandits may start attacking if they see you wearing this.",
             "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": null,
+            "sources": []
+        },
+        {
+            "id": 553,
+            "name": "Purple Flame Hat",
+            "uuid": "7a612adc-25c3-487a-8faf-ac97f3da7ee1",
+            "description": "This hat is perfect for those who want to look like they are magical without going full-on wizard",
+            "rarity": "RARE",
             "type": "ACCESSORY",
             "value": null,
             "sources": []

@@ -245,8 +245,7 @@ def replace_template(template, item):
         new_template = replace_text(new_template, '<SOURCEHYPHENED>', 'X')
     else:
         new_template = replace_text(new_template, '<DROPS>', 'Yes')
-        new_template = replace_text(new_template, '<SOURCES>', ', '.join([source.name for source in item.sources]))
-
+        new_template = replace_text(new_template, '<SOURCES>', ', '.join([f"[[{source.name}]]" for source in item.sources]))
         new_template = replace_text(new_template, '<SOURCEHYPHENED>', item.sources[0].name_hyphen)
         
     # check if the item has a recipe
