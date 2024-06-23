@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.6.1
+// @version      0.7.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -37,6 +37,10 @@
 // 0.6.0    - Added an Appraise button to evaluate the number of items in the inventory, and their total value
 //          - Added spacing between the buttons in the inventory controls
 // 0.6.1    - Fixed a bug with Appraisal breaking on unknown items
+// 0.7.0    - Added a select element to choose a sorting method for the inventory
+//              - Added sorting methods for Name, ID, Rarity, Type, Value, Quantity, Stack Value
+//              - Added supporting CSS for the sorting select
+//          - Modified the new button container slightly to avoid the layout looking weird
 //
 // ==/Changelog==
 
@@ -213,18 +217,20 @@ else {                          // Local Debugging Script
 /**
  * Initialize the script and other initial functions
  */
-function init() {  
+function init() {
     // print Deathworlders Tweaks in large letters
     var textCSSMain = 'font-size: 30px; font-weight: bold; text-shadow: -3px 0px 0px rgba(255, 0, 0, 1),3px 0px 0px rgba(8, 0, 255, 1);';
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
-    
+
     loadData();
 
     setInterval(addCopyDetailstoItemImage, 1000);
     setInterval(addPonderButton, 1000);
     setInterval(addAppraiseButton, 1000);
     setInterval(highlightUnknownItems, 1000);
+
+    setInterval(addSortInventorySelect, 1000);
 }
 
 
@@ -256,7 +262,7 @@ function refreshInventoryArray() {
             inventoryData.push(inventoryItem);
         }
         catch (e) {
-            inventoryData.push( new InventoryItem(0, "Unknown", uuid, "Unknown", "Unknown", 0, quantity) );
+            inventoryData.push(new InventoryItem(0, "Unknown", uuid, "Unknown", "Unknown", 0, quantity));
         }
 
     }
@@ -407,38 +413,55 @@ function addInventoryControlBar() {
     inventoryControls.parentElement.insertBefore(container, inventoryControls);
 
     // add some CSS to the button
-    addCSS(`#bane-inventory-controls
-        {
-          gap: 8px;
+    addCSS(`
+#bane-inventory-controls
+{
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 1em;
 
-          button
-          {
-            background: white;
-            border: 2px solid #E6E8EC;
-            color: #141416;
-        
-            cursor: pointer;
-                
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            padding: 8px 16px;
-            gap: 8px;
-            box-shadow: 0 1px 2px #1018280d;
-            border-radius: 8px;
-            transition: .2s;
+    button
+    {
+        background: white;
+        border: 2px solid #E6E8EC;
+        color: #141416;
+
+        cursor: pointer;
             
-            &:hover
-            {
-              background: #E6E8EC;
-              border-color: #d2d5de;
-            }
-          }
-        }`, "inventoryControlsCSS");
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 16px;
+        gap: 8px;
+        box-shadow: 0 1px 2px #1018280d;
+        border-radius: 8px;
+        transition: .2s;
+        
+        &:hover
+        {
+            background: #E6E8EC;
+            border-color: #d2d5de;
+        }
+    }
+
+    select {
+        display: flex;
+        padding: 8px;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 8px;
+        border: 2px solid var(--Neutrals-75, #E6E8EC);
+        cursor: pointer;
+        
+        margin-left: auto !important;
+    }
+}`, "inventoryControlsCSS");
 
     return container;
 }
+
 
 /**
  * Add a Ponder button to the inventory controls that checks if any recipes can be crafted with the items in the inventory.
@@ -593,6 +616,35 @@ function highlightUnknownItems() {
 `, "highlightUnknownItemsCSS");
 }
 
+
+/**
+ * Add an Appraise button to evaluate the number of items in the inventory, and their total value
+ */
+function addAppraiseButton() {
+    // find the inventory controls div
+    let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
+    if (inventoryControls == null) return;
+
+    // if the inventory controls already have the bane-appraise-button, return
+    let existingButton = document.querySelector("#bane-appraise-button");
+    if (existingButton != null) return;
+
+    // create a new container div after the inventory controls
+    let container = addInventoryControlBar();
+
+    // create a new button in the container
+    let button = document.createElement("button");
+    button.innerText = "Appraise";
+    button.id = "bane-appraise-button";
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        evaluateInventory();
+    });
+
+    container.appendChild(button);
+}
+
 /**
  * Evaluate the number of items in the inventory, and their total value
  */
@@ -634,33 +686,143 @@ function evaluateInventory() {
     floatingNotification(appraisalMessage, 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 }
 
+// Common > Uncommon > Rare > Epic > Legendary > Mythic
+const rarityOrder = [
+    { name: "COMMON", value: 0 },
+    { name: "UNCOMMON", value: 1 },
+    { name: "RARE", value: 2 },
+    { name: "EPIC", value: 3 },
+    { name: "LEGENDARY", value: 4 },
+    { name: "MYTHIC", value: 5 },
+]
+
+const sortingMethods = [
+    { name: "Name", method: (a, b) => a.name.localeCompare(b.name) },
+    { name: "ID", method: (a, b) => sortId(a, b) },
+
+    { name: "Rarity (Common > Mythic)", method: (a, b) => sortRarity(a, b) },
+    { name: "Rarity (Mythic > Common)", method: (a, b) => sortRarity(b, a) },
+
+    { name: "Type", method: (a, b) => sortType(a, b) },
+    { name: "Value (High > Low)", method: (a, b) => sortValue(a, b) },
+    { name: "Value (Low > High)", method: (a, b) => sortValue(b, a) },
+    { name: "Quantity (High > Low)", method: (a, b) => sortQuantity(a, b) },
+    { name: "Quantity (Low > High)", method: (a, b) => sortQuantity(b, a) },
+
+    { name: "Stack Value (High > Low)", method: (a, b) => sortStackValue(b, a) },
+    { name: "Stack Value (Low > High)", method: (a, b) => sortStackValue(a, b) },
+]
+
+function sortId(a, b) {
+    return (a.id || 0) - (b.id || 0);
+}
+
+function getRarityValue(item) {
+    return rarityOrder.find(x => x.name === item.rarity || x.name.toLowerCase() === "unknown").value;
+}
+function sortRarity(a, b) {
+    return getRarityValue(a) - getRarityValue(b);
+}
+
+function sortType(a, b) {
+    const defaultType = ""; // Assuming empty string as default for items with no type
+    const typeA = a.type || defaultType;
+    const typeB = b.type || defaultType;
+
+    // Sort by type, then by name if types are the same
+    if (typeA === typeB) {
+        return a.name.localeCompare(b.name);
+    }
+    return typeA.localeCompare(typeB);
+}
+
+function sortValue(a, b) {
+    // Handle "no value" by treating it as 0 for sorting
+    const aValue = a.value || 0;
+    const bValue = b.value || 0;
+
+    // Sort by value, then by quantity if values are the same
+    if (aValue == bValue)
+        return b.quantity - a.quantity;
+    return bValue - aValue;
+}
+
+function sortQuantity(a, b) {
+    // sort by quantity, then by value
+    if (a.quantity == b.quantity)
+        return b.value - a.value;
+    return b.quantity - a.quantity;
+}
+
+function sortStackValue(a, b) {
+    // sort by stack value (value * quantity)
+    return (a.value * a.quantity) - (b.value * b.quantity);
+}
 
 /**
- * Add an Appraise button to evaluate the number of items in the inventory, and their total value
+ * Add a select element to choose a sorting method for the inventory
  */
-function addAppraiseButton() {
+function addSortInventorySelect() {
     // find the inventory controls div
     let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
     if (inventoryControls == null) return;
 
-    // if the inventory controls already have the bane-appraise-button, return
-    let existingButton = document.querySelector("#bane-appraise-button");
-    if (existingButton != null) return;
+    // if the inventory controls already have the bane-sort-inventory-select, return
+    let existingSelect = document.querySelector("#bane-sort-inventory-select");
+    if (existingSelect != null) return;
 
     // create a new container div after the inventory controls
     let container = addInventoryControlBar();
 
-    // create a new button in the container
-    let button = document.createElement("button");
-    button.innerText = "Appraise";
-    button.id = "bane-appraise-button";
+    // create a new select element in the container
+    let select = document.createElement("select");
+    select.id = "bane-sort-inventory-select";
 
-    // add an event listener to the button
-    button.addEventListener("click", function () {
-        evaluateInventory();
+    // add an event listener to the select element
+    select.addEventListener("change", function () {
+        sortInventory(this.value);
     });
 
-    container.appendChild(button);
+    // add the sorting methods to the select element
+    for (let method of sortingMethods) {
+        let option = document.createElement("option");
+        option.value = method.name;
+        option.innerText = method.name;
+
+        select.appendChild(option);
+    }
+
+    container.appendChild(select);
+}
+
+/**
+ * Sort the inventory by the selected method
+ */
+function sortInventory(method) {
+    console.log(`Sorting inventory by ${method}`);
+
+    refreshInventoryArray();
+
+    let sortMethod = sortingMethods.find(x => x.name == method).method;
+    inventoryData.sort(sortMethod);
+
+    let inventory = findInventory();
+    if (inventory == null) return;
+
+    let inventoryItems = inventory.querySelectorAll("img");
+
+    // get the inventory items in the order of the inventoryData array by adding the sorted index to the item as an attribute
+    for (let i = 0; i < inventoryItems.length; i++) {
+        let item = inventoryItems[i];
+        let uuid = getUUIDFromSrc(item.src);
+        let inventoryItem = inventoryData.find(x => x.uuid == uuid);
+
+        // set the item's flex order to the index of the inventoryData array (the nearest button parent)
+        let buttonParent = item.closest("button");
+        if (buttonParent == null) continue;
+
+        buttonParent.style.order = inventoryData.indexOf(inventoryItem);
+    }
 }
 
 

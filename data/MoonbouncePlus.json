@@ -1639,5 +1639,324 @@
             "tools": ["Wooden Spoon"],
             "type": "Partnership (SoupRS)"
         }
-    ]
+    ],
+
+    "marketplace": {
+        "items": [
+            {
+                "name": "Pengu",
+                "section": "Characters",
+                "cost": 500
+            },
+            {
+                "name": "Devo",
+                "section": "Characters",
+                "cost": 500
+            },
+            {
+                "name": "Brown Wizard Hat",
+                "section": "Accessories",
+                "cost": 750,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Holy Crown",
+                "section": "Accessories",
+                "cost": 750,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Orange Wizard Hat",
+                "section": "Accessories",
+                "cost": 750,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Olive",
+                "section": "Characters",
+                "cost": 1500
+            },
+            {
+                "name": "Raw Moonstone",
+                "section": "Materials",
+                "cost": 100
+            },
+            {
+                "name": "Empty Potion Bottle",
+                "section": "Materials",
+                "cost": 100
+            },
+            {
+                "name": "Crumpled Metal",
+                "section": "Materials",
+                "cost": 100
+            },
+            {
+                "name": "White Fabric",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Wooden Plank",
+                "section": "Materials",
+                "cost": 750,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Two Gold Coins",
+                "section": "Materials",
+                "cost": 100
+            },
+            {
+                "name": "Two Blue Coins",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Empty Bottle",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Slightly Magical Fruit",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Prismatic Dust",
+                "section": "Materials",
+                "cost": 500
+            },
+            {
+                "name": "Sewing Needle",
+                "section": "Tools",
+                "cost": 100
+            },
+            {
+                "name": "Wooden Spoon",
+                "section": "Tools",
+                "cost": 100
+            },
+            {
+                "name": "Hammer",
+                "section": "Tools",
+                "cost": 100
+            },
+            {
+                "name": "Craftsman Blade",
+                "section": "Tools",
+                "cost": 100
+            },
+            {
+                "name": "Witch's Cauldron",
+                "section": "Tools",
+                "cost": 100
+            }
+        ],
+        "recipes" : [
+            {
+                "name":"Mr. Man",
+                "section": "Characters",
+                "cost": 2500
+            },
+            {
+                "name": "Purple Flower Pot",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Blue Flower Pot",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Red Flower Pot",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Wizard Hat",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Red Space Mask",
+                "section": "Accessories",
+                "cost": 7500
+            },
+            {
+                "name": "Crown",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Elite Party Hat",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "3-D Glasses",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Flower Crown",
+                "section": "Accessories",
+                "cost": 7500
+            },
+            {
+                "name": "Blue Space Mask",
+                "section": "Accessories",
+                "cost": 7500
+            },
+            {
+                "name": "Hard Hat",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Red Bonnet",
+                "section": "Accessories",
+                "cost": 1000
+            },
+            {
+                "name": "Purple Bonnet",
+                "section": "Accessories",
+                "cost": 1000
+            },
+            {
+                "name": "Blue Bonnet",
+                "section": "Accessories",
+                "cost": 1000
+            },
+            {
+                "name": "Smooth Silk",
+                "section": "Materials",
+                "cost": 0
+            },
+            {
+                "name": "Minor Magic Potion",
+                "section": "Materials",
+                "cost": 0
+            },
+            {
+                "name": "Nebula Orb",
+                "section": "Materials",
+                "cost": 1000
+            },
+            {
+                "name": "Starlight Alloy",
+                "section": "Materials",
+                "cost": 1000
+            },
+            {
+                "name": "Circuit",
+                "section": "Materials",
+                "cost": 2500
+            },
+            {
+                "name": "Red Button",
+                "section": "Materials",
+                "cost": 2500
+            },
+            {
+                "name": "Iron Plate",
+                "section": "Materials",
+                "cost": 1000
+            },
+            {
+                "name": "Polished Moonstone",
+                "section": "Materials",
+                "cost": 500
+            },
+            {
+                "name": "Star Sickle",
+                "section": "Tools",
+                "cost": 5000
+            },
+            {
+                "name": "Sewing Needle",
+                "section": "Tools",
+                "cost": 250
+            },
+            {
+                "name": "Bowl of Soup",
+                "section": "Accessories",
+                "cost": 1000,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Purple Flame Hat",
+                "section": "Accessories",
+                "cost": 1000,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Blue Halo",
+                "section": "Accessories",
+                "cost": 1000,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Dragon Helm",
+                "section": "Accessories",
+                "cost": 1000,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Banana Hat",
+                "section": "Accessories",
+                "cost": 1000,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Josh's Discord Brew",
+                "section": "Materials",
+                "cost": 250,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Mithril Helmet",
+                "section": "Accessories",
+                "cost": 250,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Bucket of Magic Glue",
+                "section": "Materials",
+                "cost": 250,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Zerk Helm",
+                "section": "Accessories",
+                "cost": 250,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Gold Spellcap",
+                "section": "Accessories",
+                "cost": 250,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Zerk Mask",
+                "section": "Accessories",
+                "cost": 250,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Winged Helm",
+                "section": "Accessories",
+                "cost": 750,
+                "info": "Sponsored"
+            },
+            {
+                "name": "Status Skull",
+                "section": "Accessories",
+                "cost": 500,
+                "info": "Sponsored"
+            }
+        ]
+    }
 }
