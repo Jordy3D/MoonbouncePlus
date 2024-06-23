@@ -22,8 +22,7 @@ This repo also contains a Python script to help generate wiki page template code
 
 ## To-Do
 
-- [ ] Add a feature to copy or save the image of the currently selected item
-- [ ] Add sorting options to the inventory (by name, by type, by quantity, by rarity, by id, etc.)
+- [ ] Add buttons to go to the Marketplace and Backpack on the Moonbounce Portal
 
 ## Changelog
 

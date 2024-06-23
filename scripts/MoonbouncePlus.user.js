@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.7.0
+// @version      0.7.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -41,6 +41,10 @@
 //              - Added sorting methods for Name, ID, Rarity, Type, Value, Quantity, Stack Value
 //              - Added supporting CSS for the sorting select
 //          - Modified the new button container slightly to avoid the layout looking weird
+// 0.7.1    - Added a right-click option to save the item image as a file with the item name formatted to Wiki standards
+//          - Enabled normal right-click on the image to save the image as a file (Ctrl + right-click to save as item name)
+//          - Added a notification when an item image is saved as a file
+//          - Code cleanup and commenting
 //
 // ==/Changelog==
 
@@ -159,18 +163,9 @@ else {                          // Local Debugging Script
     // import the local data/MoonbouncePlus.json file
     loadData(true);
 
-    function displayIncompleteItems() {
-        // get the items that are missing a value
-        let missingValueItems = items.filter(x => !x.hasOwnProperty('value'));
-        // sort the items by name
-        missingValueItems.sort((a, b) => a.name.localeCompare(b.name));
-
-        // display the items
-        for (let item of missingValueItems)
-            console.log(`#${item.id}: ${item.name}`);
-    }
-
-    // nicely print each item and a few of its properties
+    /**
+     * Display the items in the console with a few details
+     */
     function displayItems() {
         console.log(`Showing ${items.length} items\n`);
 
@@ -194,14 +189,72 @@ else {                          // Local Debugging Script
         console.log(displayLog);
     }
 
+    /**
+     * Print the IDs of each item into the console
+     */
     function printIDs() {
         for (let item of items)
             console.log(`${item.id}`);
     }
 
-    // displayIncompleteItems();
-    displayItems();
+    /**
+     * Calculate the best value recipe based on the value of the ingredients
+     */
+    function calculateBestValueCraft() {
+        // calculate the best value recipe based on the value of the ingredients
+        // if the ingredients are more valuable than the result, it's not worth crafting
+
+        let bestValue = 0;
+        let bestRecipe = null;
+
+        let bestValueItems = [];
+
+        for (let recipe of recipes) {
+            // tools can be ignored for this calculation as they are not consumed
+            let requiredItems = recipe.ingredients;
+
+            let valueOfIngredients = 0;
+            for (let ingredient of requiredItems) {
+                let item = items.find(x => x.name == ingredient);
+                if (item == null) continue;
+
+                valueOfIngredients += item.value;
+            }
+
+            let resultItem = items.find(x => x.name == recipe.result);
+            if (resultItem == null) continue;
+
+            actualValue = resultItem.value - valueOfIngredients;
+
+            if (actualValue > bestValue) {
+                bestValue = resultItem.value;
+                bestRecipe = recipe;
+                bestValueItems = requiredItems;
+            }
+        }
+
+        let message = `Best Value Recipe: ${bestRecipe.result} (${bestValue} MP)`;
+        // list the ingredients, their values, and the total value of the ingredients
+        let ingredientList = [];
+        let ingredientValue = 0;
+        for (let ingredient of bestValueItems) {
+            let item = items.find(x => x.name == ingredient);
+            if (item == null) continue;
+
+            ingredientList.push(`${item.name} (${item.value} MP)`);
+            ingredientValue += item.value;
+        }
+        let ingredientString = ingredientList.join(", ");
+        ingredientString += ` | Total Value (${ingredientValue} MP), for a profit of ${bestValue - ingredientValue} MP`;
+
+
+        console.log(message);
+        console.log(ingredientString);
+    }
+
+    // calculateBestValueCraft();
     // printIDs();
+    displayItems();
 }
 
 
@@ -233,43 +286,7 @@ function init() {
     setInterval(addSortInventorySelect, 1000);
 }
 
-
-
-/**
- * Refresh the inventory list
- */
-function refreshInventoryArray() {
-    inventoryData = [];
-
-    let inventory = findInventory();
-    if (inventory == null) return;
-
-    let inventoryItems = inventory.querySelectorAll("img");
-
-    for (let item of inventoryItems) {
-        let uuid = getUUIDFromSrc(item.src);
-        let resultItem = items.find(item => item.uuid == uuid);
-
-        // find the stack size of the item
-        let stackSize = item.parentElement.querySelector(getTargetClass("Stack Size"));
-        if (stackSize == null) continue;
-
-        // convert the stack size to a number
-        let quantity = parseInt(stackSize.innerText);
-
-        try {
-            let inventoryItem = new InventoryItem(resultItem.id, resultItem.name, resultItem.uuid, resultItem.rarity, resultItem.type, resultItem.value, quantity);
-            inventoryData.push(inventoryItem);
-        }
-        catch (e) {
-            inventoryData.push(new InventoryItem(0, "Unknown", uuid, "Unknown", "Unknown", 0, quantity));
-        }
-
-    }
-}
-
-
-
+// Main Functions
 
 /**
  * Add an event listener to item images that copies the item's UUID to the clipboard
@@ -308,8 +325,6 @@ function addCopyDetailstoItemImage() {
 }
         `, "copyDetailsToItemCSS");
     }
-
-
 
     function getDetails(details) {
         let nameIdBlock = details.children[0];                                  // get the first child of the details element
@@ -390,6 +405,29 @@ function addCopyDetailstoItemImage() {
 
         // add a class to the item to show that it has an event listener
         item.classList.add("item-uuid-event");
+        item.style.pointerEvents = "unset";
+        
+        // enable right-click on the image to save the image as a file
+        item.addEventListener("contextmenu", function (e) {
+            // if ctrl is held, save the image as a file with the name of the item with the space replaced with an underscore
+            if (e.ctrlKey) {
+                e.preventDefault();
+
+                let img = this;
+                let uuid = getUUIDFromSrc(img.src);
+                let itemObject = getItemFromUUID(uuid);
+                let name = itemObject.name;
+                
+                downloadFile(img.src, `${name.replace(" ", "_")}.png`);
+
+                // Place a notification right below the item, centered directly below it
+                let pos = img.getBoundingClientRect();
+                let imgCenter = pos.left + (pos.width / 2);
+                floatingNotification("Item image saved as file", 1000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.bottom + 10 + "px", left: imgCenter + "px" });
+
+                return false;
+            }
+        });
     }
 }
 
@@ -834,6 +872,8 @@ function sortInventory(method) {
 // ██║  ██║███████╗███████╗██║     ███████╗██║  ██║
 // ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
+// HTML and Web Functions
+
 /**
  * Finds the current page's URL
  */
@@ -848,7 +888,6 @@ function isTargetURL(targetURL) {
     let currentURL = findCurrentURL();
     return currentURL == targetURL;
 }
-
 
 /**
  * Find the inventory on the page
@@ -874,7 +913,6 @@ function findSelectedItemWindow() {
     return selectedItemWindow;
 }
 
-
 /**
  * Find the Moonbounce Portal on the page
  */
@@ -886,6 +924,21 @@ function findMoonbouncePortal() {
     return portal;
 }
 
+/**
+ * Find the Moonbounce Portal buttons on the page
+ */
+function findMoonbouncePortalButtons() {
+    let portal = findMoonbouncePortal();
+    if (portal == null) return;
+
+    // find the buttons
+    let buttons = portal.querySelector(getTargetClass("Moonbounce Portal Buttons"));
+    if (buttons == null) return;
+
+    return buttons;
+}
+
+// Get data and information
 
 function getUUIDFromSrc(src) {
     let start = src.indexOf("/fp/") + 4;                                // find the index of /fp/ and add 4 to get the start of the uuid
@@ -902,19 +955,56 @@ function getUUIDFromItemName(name) {
     return resultUUID;
 }
 
+function getItemFromUUID(uuid) {
+    let resultItem = items.find(item => item.uuid == uuid);
+    return resultItem;
+}
 
 /**
- * Find the Moonbounce Portal buttons on the page
+ * Refresh the inventory list
  */
-function findMoonbouncePortalButtons() {
-    let portal = findMoonbouncePortal();
-    if (portal == null) return;
+function refreshInventoryArray() {
+    inventoryData = [];
 
-    // find the buttons
-    let buttons = portal.querySelector(getTargetClass("Moonbounce Portal Buttons"));
-    if (buttons == null) return;
+    let inventory = findInventory();
+    if (inventory == null) return;
 
-    return buttons;
+    let inventoryItems = inventory.querySelectorAll("img");
+
+    for (let item of inventoryItems) {
+        let uuid = getUUIDFromSrc(item.src);
+        let resultItem = items.find(item => item.uuid == uuid);
+
+        // find the stack size of the item
+        let stackSize = item.parentElement.querySelector(getTargetClass("Stack Size"));
+        if (stackSize == null) continue;
+
+        // convert the stack size to a number
+        let quantity = parseInt(stackSize.innerText);
+
+        try {
+            let inventoryItem = new InventoryItem(resultItem.id, resultItem.name, resultItem.uuid, resultItem.rarity, resultItem.type, resultItem.value, quantity);
+            inventoryData.push(inventoryItem);
+        }
+        catch (e) {
+            inventoryData.push(new InventoryItem(0, "Unknown", uuid, "Unknown", "Unknown", 0, quantity));
+        }
+
+    }
+}
+
+
+// Miscellaneous support Functions
+
+/**
+ * Download a file from a URL
+ */
+function downloadFile(url, filename) {
+    let a = document.createElement("a");            // create a new link element
+    a.href = url;                                   // set the href of the link to the URL
+    a.download = filename;                          // set the download attribute to the filename
+    a.click();                                      // simulate a click on the link
+    a.remove();                                     // remove the link from the document
 }
 
 /**
