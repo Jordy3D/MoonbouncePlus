@@ -7,8 +7,11 @@
 
 - Ponder for potential new crafting opportunities based on your inventory
 - Appraise the value of your inventory, as well as how many items are contained within (both total and unique)
+- Sort your inventory by name, id, rarity, type, item value, quantity, stack value
+  - NOTE: Currently doesn't work in the Crafting tab
 - Copy the info from the currently selected item to your clipboard (for data collection, such as for the [Moonbounce Wiki](https://moonbounce.wiki))
   - Click on the item's image to copy the item data
+  - Ctrl+Right Click on the item's image download the image with its name formatted for the wiki
 
 ## Installation
 
@@ -19,6 +22,10 @@
 ## Side Features
 
 This repo also contains a Python script to help generate wiki page template code. It will output a .txt file for every item in the data file into a newly created `wiki` folder, organised by type.
+
+## Known Issues
+
+- Sometimes the script fails to download the data file before you click on something, causing the script to not work properly. If this happens, simply refresh the page and try again.
 
 ## To-Do
 

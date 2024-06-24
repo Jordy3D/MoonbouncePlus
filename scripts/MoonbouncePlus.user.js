@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.7.1
+// @version      0.7.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -45,6 +45,7 @@
 //          - Enabled normal right-click on the image to save the image as a file (Ctrl + right-click to save as item name)
 //          - Added a notification when an item image is saved as a file
 //          - Code cleanup and commenting
+// 0.7.2    - Add a line break in the Ponder notification message
 //
 // ==/Changelog==
 
@@ -583,10 +584,10 @@ function checkRecipes() {
         let randomRecipe = craftableResults[randomIndex];
 
         let article = ['a', 'e', 'i', 'o', 'u'].includes(randomRecipe.result[0].toLowerCase()) ? 'an' : 'a';
-        message = `I have a feeling you can craft ${article} ${randomRecipe.result}...`;
+        message = `I have a feeling you can craft<br> ${article} ${randomRecipe.result}...`;
     }
     else {
-        message = `I don't think you can craft anything new right now...`;
+        message = `I don't think you can craft<br> anything new right now...`;
     }
 
     // spawn a notification under the cursor position
