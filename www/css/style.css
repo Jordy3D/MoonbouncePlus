@@ -1,0 +1,213 @@
+:root {
+    --commonColour: 88, 189, 125;
+    --uncommonColour: 59, 113, 254;
+    --rareColour: 159, 115, 230;
+    --legendaryColour: 232, 89, 41;
+    --mythicColour: 75, 201, 240;
+
+    --accessoryColour: 232, 89, 41;
+    --materialColour: 75, 201, 240;
+    --toolColour: 37, 102, 254;
+    --characterColour: 159, 115, 230;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    padding: 1rem;
+
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.desriptionbox {
+    margin: 0 auto;
+    width: 80%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+h3,
+p {
+    margin: 0;
+}
+
+#items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.item {
+    border: 1px solid #333;
+    /* padding: 1rem; */
+    border-radius: 0.5rem;
+
+    max-width: 290px;
+    width: 100%;
+
+    .description {
+        margin-bottom: 1rem;
+    }
+
+    .rarity {
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+    }
+
+    &.common {
+        border: 2px solid rgb(var(--commonColour));
+        background-color: rgba(var(--commonColour), 0.1);
+
+        .rarity,
+        .name {
+            background-color: rgb(var(--commonColour));
+        }
+    }
+
+    &.uncommon {
+        border: 2px solid rgb(var(--uncommonColour));
+        background-color: rgba(var(--uncommonColour), 0.1);
+
+        .rarity,
+        .name {
+            background-color: rgb(var(--uncommonColour));
+        }
+    }
+
+    &.rare {
+        border: 2px solid rgb(var(--rareColour));
+        background-color: rgba(var(--rareColour), 0.1);
+
+        .rarity,
+        .name {
+            background-color: rgb(var(--rareColour));
+        }
+    }
+
+    &.legendary {
+        border: 2px solid rgb(var(--legendaryColour));
+
+        .rarity,
+        .name {
+            background-color: rgb(var(--legendaryColour));
+        }
+    }
+
+    &.mythic {
+        border: 2px solid rgb(var(--mythicColour));
+        background-color: rgba(var(--mythicColour), 0.1);
+
+        .rarity,
+        .name {
+            background-color: rgb(var(--mythicColour));
+        }
+    }
+
+    .type {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        color: white;
+    }
+
+    &.material {
+        .type {
+            background-color: rgb(var(--materialColour));
+        }
+    }
+
+    &.accessory {
+        .type {
+            background-color: rgb(var(--accessoryColour));
+        }
+    }
+
+    &.tool {
+        .type {
+            background-color: rgb(var(--toolColour));
+        }
+    }
+
+    &.character {
+        .type {
+            background-color: rgb(var(--characterColour));
+        }
+    }
+}
+
+.name {
+    padding: 0.5rem;
+    color: white;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+
+    .pill-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.5rem;
+    }
+
+    .pill {
+        background-color: #333;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+
+        text-align: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .source {
+        margin-top: 1rem;
+        width: 100%;
+
+        h3 {
+            margin: 0;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+    }
+}
