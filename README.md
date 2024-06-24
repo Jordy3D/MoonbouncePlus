@@ -5,8 +5,10 @@
 
 ## Features
 
-- Ponder for potential new crafting opportunities based on your inventory
-- Appraise the value of your inventory, as well as how many items are contained within (both total and unique)
+- Ponder for potential new crafting opportunities based on your inventory  
+  ![chrome_DU5zjnsLiU](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/3a386947-a633-405b-9ed4-5e3432abe4c2)
+- Appraise the value of your inventory, as well as how many items are contained within (both total and unique)  
+  ![chrome_FPrdEws6If](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/1efd6494-434b-4bbd-90bc-7b6aad0e6916)
 - Sort your inventory by name, id, rarity, type, item value, quantity, stack value
   - NOTE: Currently doesn't work in the Crafting tab
 - Copy the info from the currently selected item to your clipboard (for data collection, such as for the [Moonbounce Wiki](https://moonbounce.wiki))
