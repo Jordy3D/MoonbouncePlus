@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Moonbounce Data</title>
+
+        <!-- load the data in ../data/MoonbouncePlus.json via request -->
+        <script>
+            var moonbounceData = null;
+
+            fetch("../data/MoonbouncePlus.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    moonbounceData = data;
+
+                    displayData();
+                });
+        </script>
+
+        <!-- import css/magic.css -->
+        <link rel="stylesheet" href="css/magic.css" />
+        <link rel="stylesheet" href="css/style.css" />
+
+        <style>
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Moonbounce Data</h1>
+            </nav>
+        </header>
+        <main>
+            <div class="desriptionbox">
+                <p>Below is a list of items and their recipes in the game Moonbounce Plus. The data is pulled from the MoonbouncePlus.json file in the data folder.</p>
+                <p>The data is updated whenever I receive new item data from the game, and so the data may not be up to date with the game.</p>
+                <p>Some recipes are not included in the below data, as the items they create have not been obtained by me yet.</p>
+            </div>
+            
+            <h2>
+                Items
+            </h2>
+            <!-- shows the Items, their recipes if they have one, and other various information -->
+            <div id="items">
+                <!-- <div class="item uncommon material">
+                    <div class="details">
+                        <h2 class="name">Nebula Orb</h2>
+                        <p class="description">
+                            It’s emitting an interesting and chaotic aura
+                        </p>
+                        <div class="pill-details">
+                            <p class="pill rarity">UNCOMMON</p>
+                            <p class="pill type">MATERIAL</p>
+                            <p class="pill value">100 MP</p>
+                        </div>
+                        <div class="source-details">
+                            <div class="source">
+                                <h3>Drops From</h3>
+                                <ul>
+                                    <li>Nothing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </main>
+        <footer></footer>
+
+    </body>
+
+    <script src="js/script.js"></script>
+</html>
