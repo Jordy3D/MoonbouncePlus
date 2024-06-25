@@ -9,12 +9,20 @@
         <script>
             var moonbounceData = null;
 
-            fetch("../data/MoonbouncePlus.json")
-                .then((response) => response.json())
-                .then((data) => {
-                    moonbounceData = data;
+            // main data URL https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/MoonbouncePlus.json
+            var dataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/MoonbouncePlus.json";
 
+            // fetch the data from the URL
+            fetch(dataURL)
+                .then(response => response.json())
+                .then(data => {
+                    moonbounceData = data;
+                    // console.log(moonbounceData);
+                    // call the function to display the data
                     displayData();
+                })
+                .catch(error => {
+                    console.error("Error fetching data: ", error);
                 });
         </script>
 
