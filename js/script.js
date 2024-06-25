@@ -1,6 +1,25 @@
 
+
+var moonbounceData = null;
+
+var dataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/MoonbouncePlus.json";
+
+// fetch the data from the URL
+fetch(dataURL)
+    .then(response => response.json())
+    .then(data => {
+        moonbounceData = data;
+        // console.log(moonbounceData);
+        // call the function to display the data
+        displayData();
+    })
+    .catch(error => {
+        console.error("Error fetching data: ", error);
+    });
+
 // create a new div for each item in the data
 const items = document.getElementById("items");
+const searchBox = document.getElementById("search");
 
 const itemTemplate = `
                 <h3 class="name"></h3>
@@ -166,4 +185,24 @@ function displayData() {
     } else {
         // items.innerHTML = '<p>Loading...</p>';
     }
+}
+
+function searchItems() {
+    const searchValue = searchBox.value.toLowerCase();
+    const items = document.querySelectorAll(".item");
+
+    items.forEach(item => {
+        // search the item's data-name, data-id, data-rarity, and data-type
+        const name = item.getAttribute("data-name").toLowerCase();
+        const id = item.getAttribute("data-id").toLowerCase();
+        const rarity = item.getAttribute("data-rarity").toLowerCase();
+        const type = item.getAttribute("data-type").toLowerCase();
+
+        if (name.includes(searchValue) || id.includes(searchValue) || rarity.includes(searchValue) || type.includes(searchValue)) {
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+
+    });
 }

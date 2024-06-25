@@ -19,17 +19,38 @@
         sans-serif;
 }
 
+
+/*Dark Scrollbar*/
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #fff0; }
+::-webkit-scrollbar-thumb { background: #222; }
+::-webkit-scrollbar-thumb:hover { background: #252525; }
+::-webkit-scrollbar-corner { background: #0000; }
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-header {
+header, footer {
     background-color: #333;
     color: white;
     padding: 1rem;
     text-align: center;
+
+    a {
+        color: #58BD7D;
+        text-decoration: none;
+    }
+
+    .footer-text {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    
+    }
 }
 
 main {
@@ -55,6 +76,23 @@ h1 {
 h2 {
     margin-bottom: 1rem;
     font-size: 2rem;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+
+    h2 {
+        margin: 0;
+    }
+
+    input {
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid #000;
+    }
 }
 
 h3,
