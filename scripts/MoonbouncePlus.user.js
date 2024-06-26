@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.7.2
+// @version      0.7.3
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -46,6 +46,9 @@
 //          - Added a notification when an item image is saved as a file
 //          - Code cleanup and commenting
 // 0.7.2    - Add a line break in the Ponder notification message
+// 0.7.3    - Fixed the sorting methods not working correctly on the Crafting page
+//          - Fixed sorting breaking on Unknown items
+//          - Fixed the Backpack page not being properly detected if the URL has a query string
 //
 // ==/Changelog==
 
@@ -294,7 +297,7 @@ function init() {
  * If ctrl is held, also copy the item's name and ID
  */
 function addCopyDetailstoItemImage() {
-    if (!isTargetURL(getTargetURL("Inventory"))) return;
+    if (!isTargetURL(getTargetURL("Inventory"), true)) return;
 
     let itemWindow = findSelectedItemWindow();
     if (itemWindow == null) return;
@@ -407,7 +410,7 @@ function addCopyDetailstoItemImage() {
         // add a class to the item to show that it has an event listener
         item.classList.add("item-uuid-event");
         item.style.pointerEvents = "unset";
-        
+
         // enable right-click on the image to save the image as a file
         item.addEventListener("contextmenu", function (e) {
             // if ctrl is held, save the image as a file with the name of the item with the space replaced with an underscore
@@ -418,7 +421,7 @@ function addCopyDetailstoItemImage() {
                 let uuid = getUUIDFromSrc(img.src);
                 let itemObject = getItemFromUUID(uuid);
                 let name = itemObject.name;
-                
+
                 downloadFile(img.src, `${name.replace(" ", "_")}.png`);
 
                 // Place a notification right below the item, centered directly below it
@@ -733,6 +736,7 @@ const rarityOrder = [
     { name: "EPIC", value: 3 },
     { name: "LEGENDARY", value: 4 },
     { name: "MYTHIC", value: 5 },
+    { name: "UNKNOWN", value: 6 },
 ]
 
 const sortingMethods = [
@@ -757,7 +761,13 @@ function sortId(a, b) {
 }
 
 function getRarityValue(item) {
-    return rarityOrder.find(x => x.name === item.rarity || x.name.toLowerCase() === "unknown").value;
+    try {
+        return rarityOrder.find(x => x.name == (item.rarity || "UNKNOWN")).value;
+    }
+    catch (e) {
+        console.error(`Error getting rarity value for item: ${item.name}`);
+        console.error(item);
+    }
 }
 function sortRarity(a, b) {
     return getRarityValue(a) - getRarityValue(b);
@@ -859,6 +869,9 @@ function sortInventory(method) {
         // set the item's flex order to the index of the inventoryData array (the nearest button parent)
         let buttonParent = item.closest("button");
         if (buttonParent == null) continue;
+        // if the parent of buttonParent has [draggable="true"], use that as the parent instead
+        if (buttonParent.parentElement.hasAttribute("draggable"))
+            buttonParent = buttonParent.parentElement;
 
         buttonParent.style.order = inventoryData.indexOf(inventoryItem);
     }
@@ -885,8 +898,14 @@ function findCurrentURL() {
 /**
  * Checks if the current URL is the target URL
  */
-function isTargetURL(targetURL) {
+function isTargetURL(targetURL, skipQuery = false) {
     let currentURL = findCurrentURL();
+    // remove anything after the ? in the URL
+    if (skipQuery) {
+        currentURL = currentURL.split("?")[0];
+        targetURL = targetURL.split("?")[0];
+    }
+
     return currentURL == targetURL;
 }
 
@@ -988,7 +1007,7 @@ function refreshInventoryArray() {
             inventoryData.push(inventoryItem);
         }
         catch (e) {
-            inventoryData.push(new InventoryItem(0, "Unknown", uuid, "Unknown", "Unknown", 0, quantity));
+            inventoryData.push(new InventoryItem(0, "Unknown", uuid, "UNKNOWN", "UNKNOWN", 0, quantity));
         }
 
     }

@@ -999,6 +999,16 @@
             "sources": ["JoshIsn't Crate"]
         },
         {
+            "id": 511,
+            "name": "Solar Overhead",
+            "uuid": "f9313bd9-e67d-48b0-b127-93bb6775db33",
+            "description": "Soak up the virtual sunshine and make every pixel day feel like a bright new beginning.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 50,
+            "sources": []
+        },
+        {
             "id": 536,
             "name": "Zerk Helm",
             "uuid": "43dbed88-6c82-45e8-b8de-e74db5c16ed6",
@@ -1753,9 +1763,9 @@
                 "cost": 100
             }
         ],
-        "recipes" : [
+        "recipes": [
             {
-                "name":"Mr. Man",
+                "name": "Mr. Man",
                 "section": "Characters",
                 "cost": 2500
             },
