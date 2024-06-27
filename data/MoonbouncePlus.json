@@ -38,7 +38,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
         },
         {
             "id": 10,
@@ -48,7 +50,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
         },
         {
             "id": 11,
@@ -58,7 +62,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
         },
         {
             "id": 12,
@@ -68,7 +74,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
         },
         {
             "id": 13,
@@ -98,7 +106,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Rock Collection"]
+            "sources": [
+                "Rock Collection"
+            ]
         },
         {
             "id": 68,
@@ -118,7 +128,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Framed Chest"]
+            "sources": [
+                "Framed Chest"
+            ]
         },
         {
             "id": 70,
@@ -128,7 +140,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Rock Collection"]
+            "sources": [
+                "Rock Collection"
+            ]
         },
         {
             "id": 71,
@@ -138,7 +152,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
         },
         {
             "id": 72,
@@ -158,7 +174,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Soup's Goodies"]
+            "sources": [
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 74,
@@ -171,6 +189,16 @@
             "sources": []
         },
         {
+            "id": 100,
+            "name": "Monster Eye",
+            "uuid": "f55ae298-0e05-4cd5-adaa-5cf7d4e333bb",
+            "description": "It's looking right at you!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 101,
             "name": "Plain Milk Carton",
             "uuid": "2c1f7554-9dea-4a06-a891-f3adb133759f",
@@ -178,7 +206,89 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
+        },
+        {
+            "id": 166,
+            "name": "Pumpkin",
+            "uuid": "dc00cd73-1366-48ad-85fe-88478be72750",
+            "description": "The MVP of the gourd world,  the pumpkin is the gourd that’s got game. Slice it,  dice it,  or carve it into spooky faces.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 167,
+            "name": "Jack-O-Lantern",
+            "uuid": "6a70ec67-0f62-4279-8f0d-b498f8799457",
+            "description": "Born from a humble pumpkin,  the Jack-O'-Lantern underwent a magical transformation,  a “Gourd Metamorphosis” if you will.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 168,
+            "name": "Cute-O-Lantern",
+            "uuid": "696c0099-181c-4c94-a8ea-196e8c90f73e",
+            "description": "Flicker of Eerie Elegance:  While it doesn't produce ethereal flames,  the Jack-O'-Lantern emanates a warm,  inviting glow. It's like a digital fireplace,  cozy without the soot.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 169,
+            "name": "Happy-O-Lantern",
+            "uuid": "e70f28e7-b50b-4377-a0ff-0a8d0d31de70",
+            "description": "Collector's Delight:  In the multiplayer internet,  these grinning gourds are the crown jewels of collectors. They're displayed proudly,  both as decorations and symbols of merriment.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 170,
+            "name": "Mean-O-Lantern",
+            "uuid": "cbb01a69-d070-4828-9564-d174bc3ea717",
+            "description": "Its surface is etched with intricate carvings that tell tales of haunted houses,  cackling witches,  and mischievous black cats.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 171,
+            "name": "Spooky Hat",
+            "uuid": "bc998a95-f3f2-4915-ba1a-1a630f9c35ff",
+            "description": "It's the accessory you never knew you probably didn't need",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 172,
+            "name": "Skull",
+            "uuid": "6cab52e4-1d71-4b9a-88d1-224b63f9cff8",
+            "description": "Your sidekick for when you need to summon a few chills.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 173,
+            "name": "Candle",
+            "uuid": "7ad52efc-ab3d-40bd-8402-45bbffaf461c",
+            "description": "Wax wizardry? Nah,  just soft glows. It doesn't summon the sun,  it won’t light up a stadium,  but it’s still the champion of coziness. So dim the lights,  cue the candle.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
         },
         {
             "id": 174,
@@ -198,7 +308,19 @@
             "rarity": "UNCOMMON",
             "type": "TOOL",
             "value": 5,
-            "sources": ["Framed Chest"]
+            "sources": [
+                "Framed Chest"
+            ]
+        },
+        {
+            "id": 176,
+            "name": "Witch's Hat",
+            "uuid": "b787b966-fd76-4621-893c-5e9ccf562beb",
+            "description": "A charming choice for those who dream of stylishly blending in with the disheveled broomstick-riding crowd.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
         },
         {
             "id": 177,
@@ -208,7 +330,11 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Normal Candy Basket", "Disco Mats", "Framed Chest"]
+            "sources": [
+                "Normal Candy Basket",
+                "Disco Mats",
+                "Framed Chest"
+            ]
         },
         {
             "id": 178,
@@ -218,7 +344,9 @@
             "rarity": "COMMON",
             "type": "TOOL",
             "value": 5,
-            "sources": ["Framed Chest"]
+            "sources": [
+                "Framed Chest"
+            ]
         },
         {
             "id": 179,
@@ -228,7 +356,9 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 100,
-            "sources": ["Framed Chest"]
+            "sources": [
+                "Framed Chest"
+            ]
         },
         {
             "id": 180,
@@ -238,7 +368,10 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": ["Normal Candy Basket", "Framed Chest"]
+            "sources": [
+                "Normal Candy Basket",
+                "Framed Chest"
+            ]
         },
         {
             "id": 181,
@@ -248,7 +381,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
         },
         {
             "id": 199,
@@ -278,7 +413,9 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": ["Assorted Goodie Bag"]
+            "sources": [
+                "Assorted Goodie Bag"
+            ]
         },
         {
             "id": 235,
@@ -288,7 +425,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Rock Collection"]
+            "sources": [
+                "Rock Collection"
+            ]
         },
         {
             "id": 236,
@@ -308,7 +447,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Red Loot Bag"]
+            "sources": [
+                "Red Loot Bag"
+            ]
         },
         {
             "id": 266,
@@ -318,7 +459,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Red Loot Bag"]
+            "sources": [
+                "Red Loot Bag"
+            ]
         },
         {
             "id": 267,
@@ -328,7 +471,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": ["Red Loot Bag"]
+            "sources": [
+                "Red Loot Bag"
+            ]
         },
         {
             "id": 268,
@@ -338,7 +483,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": ["Red Loot Bag"]
+            "sources": [
+                "Red Loot Bag"
+            ]
         },
         {
             "id": 269,
@@ -368,7 +515,10 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Rock Collection", "Soup's Goodies"]
+            "sources": [
+                "Rock Collection",
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 299,
@@ -378,7 +528,10 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": ["Rock Collection", "Potion Supplies"]
+            "sources": [
+                "Rock Collection",
+                "Potion Supplies"
+            ]
         },
         {
             "id": 300,
@@ -388,7 +541,311 @@
             "rarity": "COMMON",
             "type": "TOOL",
             "value": 5,
-            "sources": ["Potion Supplies", "Alien Food Pouch", "Framed Chest"]
+            "sources": [
+                "Potion Supplies",
+                "Alien Food Pouch",
+                "Framed Chest"
+            ]
+        },
+        {
+            "id": 331,
+            "name": "Snowball (small)",
+            "uuid": "039f6dfc-0c4e-42b0-873f-27eb856da7ce",
+            "description": "A classic winter delight,  perfect for snowball fights or building a snowman.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 332,
+            "name": "Snowball (large)",
+            "uuid": "89f2cf6f-8ffe-486f-bb78-3ae06a695482",
+            "description": "A snowball for the ambitious snowball sculptor - watch out for the extra chill!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 333,
+            "name": "Frosty Tree",
+            "uuid": "1d5383f3-d1ec-4922-83bd-d0cf533d6073",
+            "description": "Although it's just pixels,  it radiates frosty charm that Jack Frost himself would envy.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 334,
+            "name": "Turkey Dinner",
+            "uuid": "0ddd5e2d-2e70-40aa-b389-ae5bc90d6322",
+            "description": "Golden brown,  crispy skin,  with a powerful aroma.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 335,
+            "name": "Cup of Cocoa",
+            "uuid": "c4330775-736f-44df-96cb-b13c02c5a9e8",
+            "description": "A warm cup of cocoa to keep you toasty during the snowy festivities.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 336,
+            "name": "Red Ornament",
+            "uuid": "95512b04-06bc-4e66-bd35-801fd815c4ce",
+            "description": "Bright and traditional,  this red ornament adds a pop of color to any tree.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 337,
+            "name": "Orange Ornament",
+            "uuid": "0e834ab6-b84d-4508-87e5-03873cddfff6",
+            "description": "This ornament is the orange gem our virtual tree never knew it needed",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 338,
+            "name": "Pink Stocking",
+            "uuid": "c22ceb20-d78c-4eeb-8530-44b9ac77649b",
+            "description": "This pink stocking is not just for looks; it might contain quirky and delightful treats.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 339,
+            "name": "Green Stocking",
+            "uuid": "5be35ef8-4af5-468c-bbd7-a449fff3a718",
+            "description": "Hang this green stocking with care,  and who knows what surprises it might bear?",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 341,
+            "name": "Mystical Ornament",
+            "uuid": "4ceef5b6-b73b-41ea-92cf-dfecb5dd0829",
+            "description": "Picture this ornament,  nestled in your inventory,  whispering tales of joy and merriment. Well,  okay,  maybe not literally whispering,  but you get the vibe",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 342,
+            "name": "Green Ornament",
+            "uuid": "55ea6794-95f8-4c75-9e58-015c03ea8497",
+            "description": "It's like bringing a touch of real-world charm into your internet browser. The sparkle might be digital,  but the cheer is real!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 343,
+            "name": "Tree Star",
+            "uuid": "192ecf98-aaf2-45d2-8a76-72aecc19561b",
+            "description": "Perfect for putting on top of a tree! or on top of your character!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 344,
+            "name": "Holiday Magic Orb",
+            "uuid": "7abb6170-7f55-4cc3-9f12-fb01982bab4f",
+            "description": "This snow-globe is emanating an intense holiday magic.",
+            "rarity": "RARE",
+            "type": "TOOL",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 345,
+            "name": "Twinkling Lights",
+            "uuid": "c0f202e4-0d39-4954-bb05-1baf4764729f",
+            "description": "Twinkle twinkle little… bulb?",
+            "rarity": "COMMON",
+            "type": "TOOL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 347,
+            "name": "Winter Tree",
+            "uuid": "51a9f2d3-bbd4-47f2-9e17-088fa71731d3",
+            "description": "A miniature Evergreen tree that twinkles with magic.",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 348,
+            "name": "Snowy Tree",
+            "uuid": "e1b4ebcc-aff5-4e0c-9d73-b9f927f2871f",
+            "description": "A snowy evergreen tree full of winter joy!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 349,
+            "name": "Decorated Tree",
+            "uuid": "827f751c-c434-473d-b06d-a3fc6d540db8",
+            "description": "A shiny and decorated tree fit with snow and ornaments.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 350,
+            "name": "Perfect Tree",
+            "uuid": "f6c52741-23e1-43ed-a453-cd15327b1c29",
+            "description": "The is peak perfection! A tree star,  ornaments and snow,  all in a perfect little package!",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
+            "id": 351,
+            "name": "Fruit Cake",
+            "uuid": "ebccd933-804f-4860-b211-981f3cf61d44",
+            "description": "A fruit-tastic fusion of flavors – because even virtual fruit cakes deserve a moment in the spotlight.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 1000,
+            "sources": []
+        },
+        {
+            "id": 352,
+            "name": "Candy Cane",
+            "uuid": "74df8003-078a-4b6b-988e-ac047961952d",
+            "description": "Twist,  twirl,  and taste the peppermint magic in every delightful crunch.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 354,
+            "name": "Blue Bow",
+            "uuid": "20126793-dfa1-4b44-bbd6-37dd8d58b5a0",
+            "description": "A beautifully crafted blue bow that adds a touch of elegance to any holiday package.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 355,
+            "name": "Red Bow",
+            "uuid": "42900bc2-f7ec-4131-897e-da3d36046186",
+            "description": "A beautifully crafted red bow that adds a touch of elegance to any holiday package.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 356,
+            "name": "Plate of Cookies",
+            "uuid": "feb18d6a-14c3-49ac-b0df-3df7115fbf52",
+            "description": "A plate piled high with virtual love – because you can never have just one cookie.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 700,
+            "sources": []
+        },
+        {
+            "id": 357,
+            "name": "Naked Gingerbread",
+            "uuid": "cc3e3923-9c74-448c-a909-254a17e174f7",
+            "description": "Ginger-spiced charm without the frosting alarm – a treat for the purists at heart.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 800,
+            "sources": []
+        },
+        {
+            "id": 358,
+            "name": "Frosted Gingerbread",
+            "uuid": "bc4e24bc-67bb-4d67-b2fd-c8c7f7daf3c6",
+            "description": "Complete with gumdrop buttons!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 1100,
+            "sources": []
+        },
+        {
+            "id": 359,
+            "name": "Baked Cookie",
+            "uuid": "b4d315d7-4355-4fbf-b630-aca73ea8044f",
+            "description": "Fresh out of the virtual oven – a cookie that's baked to perfection and ready for a byte!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 200,
+            "sources": []
+        },
+        {
+            "id": 360,
+            "name": "Frosted Cookie",
+            "uuid": "105c3768-526b-48c6-927a-62ecb0136168",
+            "description": "A cookie so sweet,  it got a chilly makeover – frosty vibes for a delightful byte.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": []
+        },
+        {
+            "id": 362,
+            "name": "Holly Cake",
+            "uuid": "7ec3cbeb-2571-41fb-a041-e8a522d21015",
+            "description": "Decked with holly and a sprinkle of joy – a cake that's as festive as it is delicious.",
+            "rarity": "LEGENDARY",
+            "type": "MATERIAL",
+            "value": 1200,
+            "sources": []
+        },
+        {
+            "id": 364,
+            "name": "Santa Hat",
+            "uuid": "a990e398-625d-4892-af5e-5303cea7314d",
+            "description": "Looks like someone left their hat behind. Will you turn into Santa if you put it on?",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
+            "id": 365,
+            "name": "Rudolph's Nose",
+            "uuid": "0e7db70f-2ac4-43a8-b1ee-2411d812d245",
+            "description": "The most famous nose of the holiday season. Pop it into your collection and watch the other items go,  'Whoa,  this nose is pretty lit.’",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 30,
+            "sources": []
         },
         {
             "id": 366,
@@ -398,7 +855,91 @@
             "rarity": "RARE",
             "type": "TOOL",
             "value": 30,
-            "sources": ["Box of Cheer", "Alien Food Pouch", "Framed Chest"]
+            "sources": [
+                "Box of Cheer",
+                "Alien Food Pouch",
+                "Framed Chest"
+            ]
+        },
+        {
+            "id": 367,
+            "name": "Red Stocking",
+            "uuid": "4d433381-6684-4a36-8d1d-d393925618a9",
+            "description": "Keep it on the downlow if you’ve acquired this. Someone told that this stocking has been known to channel cheer chi energy straight from the north pole.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 368,
+            "name": "Snowman Toy",
+            "uuid": "858c3333-b1d5-466a-aa9b-ee6d6bffdccd",
+            "description": "This snowman is said to have been made from some magic in an old silk hat some children found one day. He can often be seen running around some village square before he puddles.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 369,
+            "name": "Rudolph Toy",
+            "uuid": "33e79782-fe6c-48f3-9298-853ee0339bd9",
+            "description": "This pixel-eyed tribute to Santa’s fogbusting reindeer star seems innocent. But scan your screens twice when his crimson schnoz starts glowing…You don’t want him straying near flight tracker sites!",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 371,
+            "name": "Green Gift Cap",
+            "uuid": "18ce82b1-81a1-4780-9e64-3c0bcf8c3b50",
+            "description": "Snagged straight from a certain jolly guy's R&D labs up North. Between us,  certain employees in the know suggest giving that dorky giant bow a boop if you feel like stirring up a little holiday cheer.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 372,
+            "name": "Red Gift Cap",
+            "uuid": "8da4546c-4925-445f-b18b-56474fe3857c",
+            "description": "Looks like your typical present cap,  but our legal team insist this one's got extra \"presence\" packed inside. Just remember we're not liable if you suddenly crave cocoa by the gallon after wear.",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 374,
+            "name": "Green Present",
+            "uuid": "332652ab-80cf-4ce5-a18f-f5e04244b82f",
+            "description": "At first glance,  this package looks deceptively like those tantalizing loot boxes dropped on certain sites. But our resident makers say this present holds far greater potential",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 375,
+            "name": "Red Present",
+            "uuid": "5b75ff62-311d-4ab0-b35a-b759cae5e7d5",
+            "description": "At first glance,  this package looks deceptively like those tantalizing loot boxes dropped on certain sites. But our resident makers say this present holds far greater potential",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 376,
+            "name": "Blue Present",
+            "uuid": "7508a728-1d17-449d-8523-b88d9a66b12b",
+            "description": "At first glance,  this package looks deceptively like those tantalizing loot boxes dropped on certain sites. But our resident makers say this present holds far greater potential",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 30,
+            "sources": []
         },
         {
             "id": 377,
@@ -408,7 +949,10 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Assorted Goodie Bag", "Chicken"]
+            "sources": [
+                "Assorted Goodie Bag",
+                "Chicken"
+            ]
         },
         {
             "id": 378,
@@ -418,7 +962,20 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Assorted Goodie Bag", "Alien Food Pouch"]
+            "sources": [
+                "Assorted Goodie Bag",
+                "Alien Food Pouch"
+            ]
+        },
+        {
+            "id": 379,
+            "name": "New Years Hat",
+            "uuid": "b3d44087-0376-47f8-bb52-7392e922275f",
+            "description": "Ring in the New Year with style – this hat's got the countdown covered!",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 5,
+            "sources": []
         },
         {
             "id": 380,
@@ -428,7 +985,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Style Crate #1"]
+            "sources": [
+                "Style Crate #1"
+            ]
         },
         {
             "id": 381,
@@ -448,7 +1007,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Style Crate #1"]
+            "sources": [
+                "Style Crate #1"
+            ]
         },
         {
             "id": 383,
@@ -458,7 +1019,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Style Crate #1"]
+            "sources": [
+                "Style Crate #1"
+            ]
         },
         {
             "id": 384,
@@ -468,7 +1031,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Style Crate #1"]
+            "sources": [
+                "Style Crate #1"
+            ]
         },
         {
             "id": 385,
@@ -478,7 +1043,10 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Style Crate #1", "Soup's Goodies"]
+            "sources": [
+                "Style Crate #1",
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 386,
@@ -498,7 +1066,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Style Crate #1"]
+            "sources": [
+                "Style Crate #1"
+            ]
         },
         {
             "id": 389,
@@ -508,7 +1078,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": ["Blue Loot Crate"]
+            "sources": [
+                "Blue Loot Crate"
+            ]
         },
         {
             "id": 390,
@@ -518,7 +1090,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Blue Loot Crate"]
+            "sources": [
+                "Blue Loot Crate"
+            ]
         },
         {
             "id": 391,
@@ -528,7 +1102,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Blue Loot Crate"]
+            "sources": [
+                "Blue Loot Crate"
+            ]
         },
         {
             "id": 392,
@@ -538,7 +1114,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": ["Blue Loot Crate"]
+            "sources": [
+                "Blue Loot Crate"
+            ]
         },
         {
             "id": 393,
@@ -548,7 +1126,19 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Blue Loot Crate"]
+            "sources": [
+                "Blue Loot Crate"
+            ]
+        },
+        {
+            "id": 394,
+            "name": "Rabbit Hole Ears",
+            "uuid": "41528928-41e8-41fe-8622-5b396cf39dcc",
+            "description": "Hop into a world of charm and whimsy with these rabbit hole ears",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
         },
         {
             "id": 395,
@@ -571,6 +1161,16 @@
             "sources": []
         },
         {
+            "id": 397,
+            "name": "Lantern Hat",
+            "uuid": "1aeb5aa1-78f3-4b17-a500-1da15aefc95c",
+            "description": "A sure fire way to light up the way to the new year!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 398,
             "name": "Yin Yang",
             "uuid": "325fb98b-5556-4fc2-b680-4ac7d167c0f0",
@@ -578,7 +1178,80 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Cookie Crate", "Red Loot Bag"]
+            "sources": [
+                "Cookie Crate",
+                "Red Loot Bag"
+            ]
+        },
+        {
+            "id": 399,
+            "name": "Firecracker",
+            "uuid": "304bc360-d1b0-4c51-9265-5a22028fe3e2",
+            "description": "Light this off to show your spirit for the new year!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 400,
+            "name": "Fortune",
+            "uuid": "a9c9c70d-7037-4d50-9a40-9a143eae5a4d",
+            "description": "A fortune to bring you luck for the new year. Lucky Numbers:  1,  6,  7,  13",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 401,
+            "name": "Lucky Coin",
+            "uuid": "c040bdae-1db7-42a9-945d-7bd3a7bd3f0d",
+            "description": "Heads or tails doesn't matter here,  no matter which way you flip it,  you'll be blessed with great luck!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 402,
+            "name": "Dragon Egg Hat",
+            "uuid": "abc6db93-b6fc-4251-aac5-f953fc6a90d5",
+            "description": "A tiny dragon egg thats already hatched! but you can still put the shell on your head.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 0,
+            "sources": []
+        },
+        {
+            "id": 403,
+            "name": "Heart Trucker",
+            "uuid": "7b2d7da8-ef13-4876-b100-1b403a2b5383",
+            "description": "A pink trucker hat to show your love for the road while your on your route",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 407,
+            "name": "Heart Tophat",
+            "uuid": "c8c15184-3d70-4318-8aff-333ac3e4d943",
+            "description": "Large and in charge... and in love.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 408,
+            "name": "Heart Emblem",
+            "uuid": "7990cfee-48cf-45b0-bf77-3a6c11af7dbd",
+            "description": "An emblem to show you've got a heart of gold!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
         },
         {
             "id": 409,
@@ -588,7 +1261,40 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": ["Red Loot Bag", "Heart Box"]
+            "sources": [
+                "Red Loot Bag",
+                "Heart Box"
+            ]
+        },
+        {
+            "id": 410,
+            "name": "Golden Heart",
+            "uuid": "4f571260-1dd5-4c02-84c6-35a173bfea0d",
+            "description": "A gold encrusted heart,  straight from cupid!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 411,
+            "name": "Mini Heart",
+            "uuid": "348bb2d4-0d8f-49ca-a8c9-560f42f138ab",
+            "description": "Cupids baby brother hand delivered this himself!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 412,
+            "name": "Heart Coin",
+            "uuid": "2bac0ca1-4cf0-4995-a801-754f5e39c68c",
+            "description": "It looks like someone wasn't feeling the love and robbed cupid,  and realized you can't spend them here.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
         },
         {
             "id": 414,
@@ -718,7 +1424,19 @@
             "rarity": "COMMON",
             "type": "ACCESSORY",
             "value": 5,
-            "sources": ["Spring Leaves"]
+            "sources": [
+                "Spring Leaves"
+            ]
+        },
+        {
+            "id": 429,
+            "name": "Pengu Plushie",
+            "uuid": "36d24f94-895a-49c3-ba89-67a31b6b445b",
+            "description": "Add a burst of adorable to your virtual life,  turning every pixel hug into a warm and fuzzy moment.",
+            "rarity": "MYTHIC",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
         },
         {
             "id": 430,
@@ -758,7 +1476,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Spring Leaves"]
+            "sources": [
+                "Spring Leaves"
+            ]
         },
         {
             "id": 434,
@@ -768,7 +1488,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Spring Leaves"]
+            "sources": [
+                "Spring Leaves"
+            ]
         },
         {
             "id": 435,
@@ -778,7 +1500,9 @@
             "rarity": "UNCOMMON",
             "type": "TOOL",
             "value": 15,
-            "sources": ["Spring Leaves"]
+            "sources": [
+                "Spring Leaves"
+            ]
         },
         {
             "id": 436,
@@ -788,7 +1512,9 @@
             "rarity": "COMMON",
             "type": "TOOL",
             "value": 5,
-            "sources": ["Spring Leaves"]
+            "sources": [
+                "Spring Leaves"
+            ]
         },
         {
             "id": 437,
@@ -813,7 +1539,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Dusty Box"]
+            "sources": [
+                "Dusty Box"
+            ]
         },
         {
             "id": 439,
@@ -823,7 +1551,11 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": ["Dusty Box", "Potion Supplies", "Soup's Goodies"]
+            "sources": [
+                "Dusty Box",
+                "Potion Supplies",
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 440,
@@ -833,7 +1565,9 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Disco Mats"]
+            "sources": [
+                "Disco Mats"
+            ]
         },
         {
             "id": 441,
@@ -843,7 +1577,9 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Disco Mats"]
+            "sources": [
+                "Disco Mats"
+            ]
         },
         {
             "id": 442,
@@ -853,7 +1589,10 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Dusty Box", "Framed Chest"]
+            "sources": [
+                "Dusty Box",
+                "Framed Chest"
+            ]
         },
         {
             "id": 443,
@@ -863,7 +1602,10 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Dusty Box", "Framed Chest"]
+            "sources": [
+                "Dusty Box",
+                "Framed Chest"
+            ]
         },
         {
             "id": 444,
@@ -873,7 +1615,11 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Disco Mats", "Alien Food Pouch", "Soup's Goodies"]
+            "sources": [
+                "Disco Mats",
+                "Alien Food Pouch",
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 445,
@@ -883,7 +1629,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Disco Mats"]
+            "sources": [
+                "Disco Mats"
+            ]
         },
         {
             "id": 447,
@@ -893,6 +1641,66 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 250,
+            "sources": []
+        },
+        {
+            "id": 449,
+            "name": "Heart Charm",
+            "uuid": "dde8e2f4-0aeb-4f0a-b5e0-4b1d8832ae56",
+            "description": "The sweetest marshmallow of the bunch.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 450,
+            "name": "Balloon Charm",
+            "uuid": "c5fef956-a5e1-45a5-a6a5-79edbd0447be",
+            "description": "A Balloon made of marshmallow,  but not for smores",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 451,
+            "name": "Gold Charm",
+            "uuid": "da8d5e53-91ef-416a-8455-5a759a7f65d7",
+            "description": "A lucky and shiny item,  sugar coated and all!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 452,
+            "name": "Blue Moon Charm",
+            "uuid": "ddbefe2d-af9c-48a0-88a1-3290212b0dce",
+            "description": "Moonlight so bright,  you can still see the patch full of clovers and shooting stars in the distance.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 455,
+            "name": "Pile O' Coins",
+            "uuid": "98cecc3a-c788-41b9-8b1d-536038bba39a",
+            "description": "The second we try to pick this up it teleports to another location?!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 458,
+            "name": "Clover Charm",
+            "uuid": "071493a5-65eb-4abd-a6cc-5174df88956c",
+            "description": "Looks like someone dropped their hat,  and something magical turned it into a sweet!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
             "sources": []
         },
         {
@@ -924,6 +1732,196 @@
             ]
         },
         {
+            "id": 462,
+            "name": "St. Paddy's Top Hat",
+            "uuid": "d4acdc45-2fd1-4ae9-a246-d88a50bac85b",
+            "description": "With a hat this charming,  be prepared for people to start asking you for directions to the end of the rainbow. Just flash them a knowing grin and point towards the nearest garden center",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 463,
+            "name": "Quad Luck Crown",
+            "uuid": "b3d247f6-bd5f-467f-9980-3435336dfe83",
+            "description": "When wearing this crown,  Don't be surprised if people start flocking to you for lottery number suggestions or begging you to rub your lucky crown before their big job interviews",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 464,
+            "name": "Paddy's Gnome Hat",
+            "uuid": "d30f4fdf-6d58-4dfc-af8f-1f035eb09637",
+            "description": "Sure,  gnomes may be more associated with garden décor and questionable travel agency mascots,  but who says they can't join in on the St. Paddy's Day fun?",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 465,
+            "name": "Wee Lucky Topper",
+            "uuid": "c1aee235-ea66-4e15-a4e4-8199393bd66f",
+            "description": "If anyone dares to pinch you for not wearing green,  just point to this tiny topper and watch them squint in confusion",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 466,
+            "name": "Pot O' Gold Hat",
+            "uuid": "37c0b5aa-1141-46dc-b1fd-616322b5eee7",
+            "description": "Legend says at the end of every rainbow lies a leprechaun's lucky loot stash,  but why wait? Stick this gilded lid on your noggin and bring the treasure to you!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 467,
+            "name": "24k Clover Crown",
+            "uuid": "159413b0-b7ce-465f-98ad-0a41aba7a4f8",
+            "description": "With its dazzling metallic finish,  you'll be sure to catch the eye of every leprechaun in the room. Just be prepared for the weight of all that gold on your head - both literally and figuratively.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 468,
+            "name": "Shamrock Bowler",
+            "uuid": "710e82e9-113a-4ed4-a20a-ad4e428cccaf",
+            "description": "Rumor has it a certain green-suited imp sewed secrets in the seams of this seemingly innocent bowler.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 470,
+            "name": "Bunny Ears",
+            "uuid": "55773e1d-1abc-4fe0-bb88-96c2d0ed69f4",
+            "description": "Floppy ears fit for a magical rabbit.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 0,
+            "sources": []
+        },
+        {
+            "id": 472,
+            "name": "Chocolate Bunny",
+            "uuid": "44f5f374-6311-48ad-aad7-727946e876c1",
+            "description": "Super sweet in such a cute shape! Don’t bite this!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 473,
+            "name": "Bunny Mask",
+            "uuid": "709cbf81-8d6b-4ea5-aab1-e80b69270519",
+            "description": "A cute mask to match the ears so you can pretend to be a bunny!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 474,
+            "name": "Sparkle Egg Hat",
+            "uuid": "587552a9-3acc-4a8f-b304-4bfe0aa38bf7",
+            "description": "This sparkling egg has beautiful handcrafter designs on every turn!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 475,
+            "name": "Split Egg Hat",
+            "uuid": "834ad1b1-289a-4b5a-beef-38d91824fae2",
+            "description": "A multicolored egg,  fit with two colors,  cracked perfectly to put on your head!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 476,
+            "name": "Striped Egg Hat",
+            "uuid": "4556f294-aa66-4b78-b5c7-850c2065aa51",
+            "description": "A magical egg,  fit with all the colors,  cracked perfectly to put on your head!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 477,
+            "name": "Vinegar",
+            "uuid": "3149e76c-d456-46fd-a3c6-9b205f3711d8",
+            "description": "One part of a salt and vinegar chip that you can’t go without",
+            "rarity": "COMMON",
+            "type": "TOOL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 478,
+            "name": "Bunny Headband",
+            "uuid": "a13c6792-47b4-4d86-8de3-26dcb3db1fd1",
+            "description": "Wait… if this is the Bunny Headband,  then where are the actual ears?",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 479,
+            "name": "Blue Dye Powder",
+            "uuid": "2ea2ee53-e281-462b-88b0-cfae6c109381",
+            "description": "A dye powder that has a deep indigo hue",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 480,
+            "name": "Red Dye Powder",
+            "uuid": "eb4f4c65-1ca3-4ab6-9217-05be30c1f2d4",
+            "description": "A dye powder that has a deep crimson hue",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 483,
+            "name": "Plain Egg",
+            "uuid": "950aa8ba-059e-427f-8c16-b065b0b36c40",
+            "description": "That's it,  its just a plain egg : )",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 484,
+            "name": "Plain Split Egg",
+            "uuid": "6749cbbf-b25c-4965-9c3e-03f9803be1b4",
+            "description": "Theres a weird mark on half the egg?",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 497,
             "name": "Wooden Spoon",
             "uuid": "f6644644-0f45-4de9-95dc-c508bf572751",
@@ -937,6 +1935,16 @@
                 "Alien Food Pouch",
                 "Soup's Goodies"
             ]
+        },
+        {
+            "id": 498,
+            "name": "Bunny Plushie",
+            "uuid": "2c78d74e-11d1-42df-a7e6-46aca6a07478",
+            "description": "A little bunny to place on your head,  what's more to want out of life than this!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
         },
         {
             "id": 499,
@@ -966,7 +1974,9 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Potion Supplies"]
+            "sources": [
+                "Potion Supplies"
+            ]
         },
         {
             "id": 502,
@@ -976,7 +1986,9 @@
             "rarity": "LEGENDARY",
             "type": "MATERIAL",
             "value": 500,
-            "sources": ["JoshIsn't Crate"]
+            "sources": [
+                "JoshIsn't Crate"
+            ]
         },
         {
             "id": 503,
@@ -986,7 +1998,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["JoshIsn't Crate"]
+            "sources": [
+                "JoshIsn't Crate"
+            ]
         },
         {
             "id": 504,
@@ -996,7 +2010,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["JoshIsn't Crate"]
+            "sources": [
+                "JoshIsn't Crate"
+            ]
         },
         {
             "id": 505,
@@ -1006,7 +2022,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["JoshIsn't Crate"]
+            "sources": [
+                "JoshIsn't Crate"
+            ]
         },
         {
             "id": 506,
@@ -1016,7 +2034,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": ["JoshIsn't Crate"]
+            "sources": [
+                "JoshIsn't Crate"
+            ]
         },
         {
             "id": 507,
@@ -1036,7 +2056,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["JoshIsn't Crate"]
+            "sources": [
+                "JoshIsn't Crate"
+            ]
         },
         {
             "id": 509,
@@ -1046,7 +2068,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 250,
-            "sources": ["JoshIsn't Crate"]
+            "sources": [
+                "JoshIsn't Crate"
+            ]
         },
         {
             "id": 511,
@@ -1136,7 +2160,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": ["Alien Food Pouch"]
+            "sources": [
+                "Alien Food Pouch"
+            ]
         },
         {
             "id": 538,
@@ -1166,7 +2192,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Alien Food Pouch"]
+            "sources": [
+                "Alien Food Pouch"
+            ]
         },
         {
             "id": 542,
@@ -1216,7 +2244,11 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Framed Chest", "Disco Mats", "Dusty Box"]
+            "sources": [
+                "Framed Chest",
+                "Disco Mats",
+                "Dusty Box"
+            ]
         },
         {
             "id": 547,
@@ -1226,7 +2258,9 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Framed Chest"]
+            "sources": [
+                "Framed Chest"
+            ]
         },
         {
             "id": 548,
@@ -1286,7 +2320,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Soup's Goodies"]
+            "sources": [
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 555,
@@ -1296,7 +2332,9 @@
             "rarity": "UNCOMMON",
             "type": "TOOL",
             "value": 10,
-            "sources": ["Soup's Goodies"]
+            "sources": [
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 556,
@@ -1306,7 +2344,9 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 10,
-            "sources": ["Soup's Goodies"]
+            "sources": [
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 557,
@@ -1316,7 +2356,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Soup's Goodies"]
+            "sources": [
+                "Soup's Goodies"
+            ]
         },
         {
             "id": 558,
@@ -1346,26 +2388,36 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Soup's Goodies"]
+            "sources": [
+                "Soup's Goodies"
+            ]
         }
     ],
-
     "recipes": [
         {
             "result": "Wizard Hat",
-            "ingredients": ["Minor Magic Potion", "Smooth Silk"],
+            "ingredients": [
+                "Minor Magic Potion",
+                "Smooth Silk"
+            ],
             "tools": [],
             "type": ""
         },
         {
             "result": "Smooth Silk",
-            "ingredients": ["White Fabric", "Two Blue Coins"],
+            "ingredients": [
+                "White Fabric",
+                "Two Blue Coins"
+            ],
             "tools": [],
             "type": ""
         },
         {
             "result": "Minor Magic Potion",
-            "ingredients": ["Slightly Magical Fruit", "Empty Bottle"],
+            "ingredients": [
+                "Slightly Magical Fruit",
+                "Empty Bottle"
+            ],
             "tools": [],
             "type": ""
         },
@@ -1376,7 +2428,9 @@
                 "Polished Blue Gem",
                 "Polished Red Gem"
             ],
-            "tools": ["Hammer"],
+            "tools": [
+                "Hammer"
+            ],
             "type": ""
         },
         {
@@ -1386,121 +2440,220 @@
                 "Nebula Orb",
                 "Polished Blue Gem"
             ],
-            "tools": ["Star Sickle"],
+            "tools": [
+                "Star Sickle"
+            ],
             "type": ""
         },
         {
             "result": "Red Space Mask",
-            "ingredients": ["Crumpled Metal", "Nebula Orb", "Polished Red Gem"],
-            "tools": ["Star Sickle"],
+            "ingredients": [
+                "Crumpled Metal",
+                "Nebula Orb",
+                "Polished Red Gem"
+            ],
+            "tools": [
+                "Star Sickle"
+            ],
             "type": ""
         },
         {
             "result": "Sewing Needle",
-            "ingredients": ["Crumpled Metal", "Old Thread"],
+            "ingredients": [
+                "Crumpled Metal",
+                "Old Thread"
+            ],
             "tools": [],
             "type": ""
         },
         {
             "result": "Nebula Orb",
-            "ingredients": ["Two Gold Coins", "Uncut Nebula"],
+            "ingredients": [
+                "Two Gold Coins",
+                "Uncut Nebula"
+            ],
             "tools": [],
             "type": ""
         },
         {
             "result": "Starlight Alloy",
-            "ingredients": ["Uncut Nebula", "Green Gem", "Stardust"],
+            "ingredients": [
+                "Uncut Nebula",
+                "Green Gem",
+                "Stardust"
+            ],
             "tools": [],
             "type": ""
         },
         {
             "result": "3-D Glasses",
-            "ingredients": ["Vinyl Sheet", "Red Lens", "Blue Lens"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Vinyl Sheet",
+                "Red Lens",
+                "Blue Lens"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": ""
         },
         {
             "result": "Circuit",
-            "ingredients": ["Gold Orb", "Electricity", "Iron Plate"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Gold Orb",
+                "Electricity",
+                "Iron Plate"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": ""
         },
         {
             "result": "Mr. Man",
-            "ingredients": ["Smooth Silk", "Yin Yang", "Anatomical Heart"],
+            "ingredients": [
+                "Smooth Silk",
+                "Yin Yang",
+                "Anatomical Heart"
+            ],
             "tools": [],
             "type": ""
         },
         {
             "result": "Red Button",
-            "ingredients": ["Electricity", "Magnet", "Circuit"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Electricity",
+                "Magnet",
+                "Circuit"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": ""
         },
         {
             "result": "Hard Hat",
-            "ingredients": ["Electricity", "Iron Plate"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Electricity",
+                "Iron Plate"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": ""
         },
         {
             "result": "Iron Plate",
-            "ingredients": ["Crumpled Metal", "Strange Cloth"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Crumpled Metal",
+                "Strange Cloth"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": ""
         },
         {
             "result": "Polished Moonstone",
-            "ingredients": ["Stardust", "Raw Moonstone"],
-            "tools": ["Hammer", "Craftsman Blade"],
+            "ingredients": [
+                "Stardust",
+                "Raw Moonstone"
+            ],
+            "tools": [
+                "Hammer",
+                "Craftsman Blade"
+            ],
             "type": ""
         },
         {
             "result": "Skull",
-            "ingredients": ["Monster Eye", "Haunted Bone"],
+            "ingredients": [
+                "Monster Eye",
+                "Haunted Bone"
+            ],
             "tools": [],
             "type": "Seasonal (Halloween)"
         },
         {
             "result": "Spooky Hat",
-            "ingredients": ["Smooth Silk", "Jack-O-Lantern", "Skull"],
-            "tools": ["Sewing Needle"],
+            "ingredients": [
+                "Smooth Silk",
+                "Jack-O-Lantern",
+                "Skull"
+            ],
+            "tools": [
+                "Sewing Needle"
+            ],
             "type": "Seasonal (Halloween)"
         },
         {
             "result": "Witch's Hat",
-            "ingredients": ["Spooky Hat", "Skull Potion", "Shadow Essence"],
-            "tools": ["Sewing Needle"],
+            "ingredients": [
+                "Spooky Hat",
+                "Skull Potion",
+                "Shadow Essence"
+            ],
+            "tools": [
+                "Sewing Needle"
+            ],
             "type": "Seasonal (Halloween)"
         },
         {
             "result": "Jack-O-Lantern",
-            "ingredients": ["Pumpkin", "Candle"],
-            "tools": ["Craftsman Blade"],
+            "ingredients": [
+                "Pumpkin",
+                "Candle"
+            ],
+            "tools": [
+                "Craftsman Blade"
+            ],
             "type": "Seasonal (Halloween)"
         },
         {
             "result": "Skull Potion",
-            "ingredients": ["Empty Bottle", "Haunted Bone", "Skull"],
-            "tools": ["Witch's Cauldron"],
+            "ingredients": [
+                "Empty Bottle",
+                "Haunted Bone",
+                "Skull"
+            ],
+            "tools": [
+                "Witch's Cauldron"
+            ],
             "type": "Seasonal (Halloween)"
         },
         {
             "result": "Puff",
-            "ingredients": ["Smooth Silk", "Skull Potion", "Shadow Essence"],
-            "tools": ["Sewing Needle", "Witch's Cauldron"],
+            "ingredients": [
+                "Smooth Silk",
+                "Skull Potion",
+                "Shadow Essence"
+            ],
+            "tools": [
+                "Sewing Needle",
+                "Witch's Cauldron"
+            ],
             "type": "Seasonal (Halloween)"
         },
         {
             "result": "Perfect Tree",
-            "ingredients": ["Tree Star", "Perfect Snowflake", "Decorated Tree"],
+            "ingredients": [
+                "Tree Star",
+                "Perfect Snowflake",
+                "Decorated Tree"
+            ],
             "tools": [],
             "type": "Seasonal (Christmas)"
         },
         {
             "result": "Mystical Ornament",
-            "ingredients": ["Yellow Ornament", "Red Bow", "Twinkling Lights"],
-            "tools": ["Holiday Magic Orb"],
+            "ingredients": [
+                "Yellow Ornament",
+                "Red Bow",
+                "Twinkling Lights"
+            ],
+            "tools": [
+                "Holiday Magic Orb"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
@@ -1510,7 +2663,9 @@
                 "Cup of Cocoa",
                 "Snowball (large)"
             ],
-            "tools": ["Holiday Magic Orb"],
+            "tools": [
+                "Holiday Magic Orb"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
@@ -1520,12 +2675,18 @@
                 "Perfect Snowflake",
                 "Mystical Ornament"
             ],
-            "tools": ["Holiday Magic Orb"],
+            "tools": [
+                "Holiday Magic Orb"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
             "result": "Decorated Tree",
-            "ingredients": ["Red Ornament", "Green Stocking", "Snowy Tree"],
+            "ingredients": [
+                "Red Ornament",
+                "Green Stocking",
+                "Snowy Tree"
+            ],
             "tools": [],
             "type": "Seasonal (Christmas)"
         },
@@ -1541,37 +2702,67 @@
         },
         {
             "result": "Red Gift Cap",
-            "ingredients": ["Strawberry Bon Bon", "Red Present"],
-            "tools": ["Craftsman Blade"],
+            "ingredients": [
+                "Strawberry Bon Bon",
+                "Red Present"
+            ],
+            "tools": [
+                "Craftsman Blade"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
             "result": "Blue Gift Cap",
-            "ingredients": ["Blueberry Bon Bon", "Blue Present"],
-            "tools": ["Craftsman Blade"],
+            "ingredients": [
+                "Blueberry Bon Bon",
+                "Blue Present"
+            ],
+            "tools": [
+                "Craftsman Blade"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
             "result": "Green Gift Cap",
-            "ingredients": ["Kiwi Bon Bon", "Green Present"],
-            "tools": ["Craftsman Blade"],
+            "ingredients": [
+                "Kiwi Bon Bon",
+                "Green Present"
+            ],
+            "tools": [
+                "Craftsman Blade"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
             "result": "Rudolph Toy",
-            "ingredients": ["Perfect Snowflake", "Rudolph's Nose"],
-            "tools": ["Holiday Magic Orb", "Fairy Particles"],
+            "ingredients": [
+                "Perfect Snowflake",
+                "Rudolph's Nose"
+            ],
+            "tools": [
+                "Holiday Magic Orb",
+                "Fairy Particles"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
             "result": "Snowman Toy",
-            "ingredients": ["Perfect Snowflake", "Carrot"],
-            "tools": ["Fairy Particles"],
+            "ingredients": [
+                "Perfect Snowflake",
+                "Carrot"
+            ],
+            "tools": [
+                "Fairy Particles"
+            ],
             "type": "Seasonal (Christmas)"
         },
         {
             "result": "Crown",
-            "ingredients": ["Tiny Crown", "Tiny Tiara", "Star Hat"],
+            "ingredients": [
+                "Tiny Crown",
+                "Tiny Tiara",
+                "Star Hat"
+            ],
             "tools": [],
             "type": "Seasonal (New Years 2024)"
         },
@@ -1587,62 +2778,111 @@
         },
         {
             "result": "Lantern Hat",
-            "ingredients": ["Firecracker", "Fortune", "Lucky Coin"],
+            "ingredients": [
+                "Firecracker",
+                "Fortune",
+                "Lucky Coin"
+            ],
             "tools": [],
             "type": "Seasonal (Lunar New Year)"
         },
         {
             "result": "Shiny Heart",
-            "ingredients": ["Golden Heart", "Heart Coin"],
+            "ingredients": [
+                "Golden Heart",
+                "Heart Coin"
+            ],
             "tools": [],
             "type": "Seasonal (Valentines)"
         },
         {
             "result": "Heart Stack",
-            "ingredients": ["Shiny Heart", "Mini Heart", "Heart Coin"],
+            "ingredients": [
+                "Shiny Heart",
+                "Mini Heart",
+                "Heart Coin"
+            ],
             "tools": [],
             "type": "Seasonal (Valentines)"
         },
         {
             "result": "Heart Headband",
-            "ingredients": ["Heart Tophat", "Mini Heart"],
-            "tools": ["Craftsman Blade"],
+            "ingredients": [
+                "Heart Tophat",
+                "Mini Heart"
+            ],
+            "tools": [
+                "Craftsman Blade"
+            ],
             "type": "Seasonal (Valentines)"
         },
         {
             "result": "Blue Bonnet",
-            "ingredients": ["Polished Blue Gem", "Bonnet Sprout"],
-            "tools": ["Watering Can"],
+            "ingredients": [
+                "Polished Blue Gem",
+                "Bonnet Sprout"
+            ],
+            "tools": [
+                "Watering Can"
+            ],
             "type": "Seasonal (Spring)"
         },
         {
             "result": "Red Bonnet",
-            "ingredients": ["Polished Red Gem", "Bonnet Sprout"],
-            "tools": ["Watering Can"],
+            "ingredients": [
+                "Polished Red Gem",
+                "Bonnet Sprout"
+            ],
+            "tools": [
+                "Watering Can"
+            ],
             "type": "Seasonal (Spring)"
         },
         {
             "result": "Purple Bonnet",
-            "ingredients": ["Purple Gem", "Bonnet Sprout"],
-            "tools": ["Watering Can"],
+            "ingredients": [
+                "Purple Gem",
+                "Bonnet Sprout"
+            ],
+            "tools": [
+                "Watering Can"
+            ],
             "type": "Seasonal (Spring)"
         },
         {
             "result": "Blue Flower Pot",
-            "ingredients": ["Garden Pot", "Blue Bonnet", "Fertilizer"],
-            "tools": ["Garden Shovel"],
+            "ingredients": [
+                "Garden Pot",
+                "Blue Bonnet",
+                "Fertilizer"
+            ],
+            "tools": [
+                "Garden Shovel"
+            ],
             "type": "Seasonal (Spring)"
         },
         {
             "result": "Red Flower Pot",
-            "ingredients": ["Garden Pot", "Red Bonnet", "Fertilizer"],
-            "tools": ["Garden Shovel"],
+            "ingredients": [
+                "Garden Pot",
+                "Red Bonnet",
+                "Fertilizer"
+            ],
+            "tools": [
+                "Garden Shovel"
+            ],
             "type": "Seasonal (Spring)"
         },
         {
             "result": "Purple Flower Pot",
-            "ingredients": ["Garden Pot", "Purple Bonnet", "Fertilizer"],
-            "tools": ["Garden Shovel"],
+            "ingredients": [
+                "Garden Pot",
+                "Purple Bonnet",
+                "Fertilizer"
+            ],
+            "tools": [
+                "Garden Shovel"
+            ],
             "type": "Seasonal (Spring)"
         },
         {
@@ -1657,13 +2897,21 @@
         },
         {
             "result": "Gold Horseshoe",
-            "ingredients": ["Gold Charm", "Lucky Coin", "Horseshoe Charm"],
+            "ingredients": [
+                "Gold Charm",
+                "Lucky Coin",
+                "Horseshoe Charm"
+            ],
             "tools": [],
             "type": "Seasonal (St. Patrick's Day)"
         },
         {
             "result": "24k Clover Crown",
-            "ingredients": ["Gold Charm", "Lucky Coin", "Quad Luck Crown"],
+            "ingredients": [
+                "Gold Charm",
+                "Lucky Coin",
+                "Quad Luck Crown"
+            ],
             "tools": [],
             "type": "Seasonal (St. Patrick's Day)"
         },
@@ -1674,7 +2922,9 @@
                 "Prismatic Dust",
                 "Empty Potion Bottle"
             ],
-            "tools": ["Wooden Spoon"],
+            "tools": [
+                "Wooden Spoon"
+            ],
             "type": "Partnership (Josh Isn't Gaming)"
         },
         {
@@ -1684,83 +2934,153 @@
                 "Prismatic Dust",
                 "Empty Potion Bottle"
             ],
-            "tools": ["Wooden Spoon"],
+            "tools": [
+                "Wooden Spoon"
+            ],
             "type": "Partnership (Josh Isn't Gaming)"
         },
         {
             "result": "Mithril Helmet",
-            "ingredients": ["Polished Blue Gem", "Iron Plate", "Steel Med"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Polished Blue Gem",
+                "Iron Plate",
+                "Steel Med"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": "Partnership (Josh Isn't Gaming)"
         },
         {
             "result": "Bucket of Magic Glue",
-            "ingredients": ["Branch", "Wooden Plank"],
-            "tools": ["Wooden Spoon", "Fairy Particles"],
+            "ingredients": [
+                "Branch",
+                "Wooden Plank"
+            ],
+            "tools": [
+                "Wooden Spoon",
+                "Fairy Particles"
+            ],
             "type": "Partnership (Alien Food)"
         },
         {
             "result": "Zerk Helm",
-            "ingredients": ["Iron Plate", "Electricity", "Wooden Plank"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Iron Plate",
+                "Electricity",
+                "Wooden Plank"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": "Partnership (Alien Food)"
         },
         {
             "result": "Gold Spellcap",
-            "ingredients": ["Gold Thread", "Strange Cloth"],
-            "tools": ["Sewing Needle", "Fairy Particles"],
+            "ingredients": [
+                "Gold Thread",
+                "Strange Cloth"
+            ],
+            "tools": [
+                "Sewing Needle",
+                "Fairy Particles"
+            ],
             "type": "Partnership (Framed)"
         },
         {
             "result": "Zerk Mask",
-            "ingredients": ["Crumpled Metal", "Shadow Essence", "Iron Plate"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Crumpled Metal",
+                "Shadow Essence",
+                "Iron Plate"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": "Partnership (Framed)"
         },
         {
             "result": "Winged Helm",
-            "ingredients": ["Gold Orb", "Iron Plate", "Feather"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Gold Orb",
+                "Iron Plate",
+                "Feather"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": "Partnership (Framed)"
         },
         {
             "result": "Status Skull",
-            "ingredients": ["Haunted Bone", "Skull Potion"],
-            "tools": ["Witch's Cauldron"],
+            "ingredients": [
+                "Haunted Bone",
+                "Skull Potion"
+            ],
+            "tools": [
+                "Witch's Cauldron"
+            ],
             "type": "Partnership (Framed)"
         },
         {
             "result": "Dragon Helm",
-            "ingredients": ["Polished Red Gem", "Red Party Hat", "Iron Plate"],
-            "tools": ["Hammer"],
+            "ingredients": [
+                "Polished Red Gem",
+                "Red Party Hat",
+                "Iron Plate"
+            ],
+            "tools": [
+                "Hammer"
+            ],
             "type": "Partnership (SoupRS)"
         },
         {
             "result": "Blue Halo",
-            "ingredients": ["Stardust", "Polished Moonstone", "Prismatic Dust"],
-            "tools": ["Witch's Cauldron"],
+            "ingredients": [
+                "Stardust",
+                "Polished Moonstone",
+                "Prismatic Dust"
+            ],
+            "tools": [
+                "Witch's Cauldron"
+            ],
             "type": "Partnership (SoupRS)"
         },
         {
             "result": "Banana Hat",
-            "ingredients": ["Strange Cloth", "Banana"],
-            "tools": ["Sewing Needle"],
+            "ingredients": [
+                "Strange Cloth",
+                "Banana"
+            ],
+            "tools": [
+                "Sewing Needle"
+            ],
             "type": "Partnership (SoupRS)"
         },
         {
             "result": "Purple Flame Hat",
-            "ingredients": ["Starlight Alloy", "Wooden Log", "Electricity"],
-            "tools": ["Lighter"],
+            "ingredients": [
+                "Starlight Alloy",
+                "Wooden Log",
+                "Electricity"
+            ],
+            "tools": [
+                "Lighter"
+            ],
             "type": "Partnership (SoupRS)"
         },
         {
             "result": "Bowl of Soup",
-            "ingredients": ["Soup Can", "Salt & Pepper"],
-            "tools": ["Wooden Spoon"],
+            "ingredients": [
+                "Soup Can",
+                "Salt & Pepper"
+            ],
+            "tools": [
+                "Wooden Spoon"
+            ],
             "type": "Partnership (SoupRS)"
         }
     ],
-
     "marketplace": {
         "items": [
             {
