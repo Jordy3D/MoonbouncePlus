@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.7.3
+// @version      0.8.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -49,6 +49,7 @@
 // 0.7.3    - Fixed the sorting methods not working correctly on the Crafting page
 //          - Fixed sorting breaking on Unknown items
 //          - Fixed the Backpack page not being properly detected if the URL has a query string
+// 0.8.0    - Update to match version 0.25 of Moonbounce
 //
 // ==/Changelog==
 
