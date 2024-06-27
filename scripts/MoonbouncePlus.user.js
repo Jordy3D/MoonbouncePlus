@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.8.0
+// @version      0.9.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        https://moonbounce.gg/u/@me/*
@@ -50,6 +50,14 @@
 //          - Fixed sorting breaking on Unknown items
 //          - Fixed the Backpack page not being properly detected if the URL has a query string
 // 0.8.0    - Update to match version 0.25 of Moonbounce
+// 0.9.0    - Added a slew of Moonbounce Portal buttons
+//              - Added a button to go to the Marketplace on the Moonbounce Portal
+//              - Added a button to go to the Backpack on the Moonbounce Portal
+//              - Added a button to go to the Directory on the Moonbounce Portal
+//              - Added a button to go to the Moonbounce Plus GitHub Repository
+//          - Reworked some of the code to be more efficient or more generic
+//          - Fixed the box sizing on the inventory controls being too large
+//          - Preparation for more CSS injection into the Moonbounce Portal
 //
 // ==/Changelog==
 
@@ -61,7 +69,7 @@
 //
 // ==/TODO==
 
-
+//#region Data
 // ██████╗  █████╗ ████████╗ █████╗ 
 // ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗
 // ██║  ██║███████║   ██║   ███████║
@@ -73,6 +81,8 @@ var items = null;
 var recipes = null;
 
 var inventoryData = null;
+
+var moonbouncePortal = null;
 
 // define an inventory item object
 class InventoryItem {
@@ -133,25 +143,29 @@ function loadData(isLocal = false) {
  * name: the name of the class
  * class: the class name
  */
-const targetClasses = [
-    { name: "Inventory", class: ".cfWcg" },
-    { name: "Inventory Controls", class: ".S-h7a" },
-    { name: "Selected Item Window", class: "._base_7aiat_1" },
-    { name: "Selected Item Details", class: "._base_awewl_1" },
-    { name: "Moonbounce Portal Buttons", class: "._base_11wdf_1" },
-    { name: "Source List Item", class: ".gf3oJ" },
-    { name: "Diffuse Value", class: ".WVOcs" },
-    { name: "Stack Size", class: "._stack_count_252dr_52" },
+const targetSelector = [
+    { name: "Inventory", selector: ".cfWcg" },
+    { name: "Inventory Controls", selector: ".S-h7a" },
+    { name: "Selected Item Window", selector: "._base_7aiat_1" },
+    { name: "Selected Item Details", selector: "._base_awewl_1" },
+    { name: "Moonbounce Portal Button Container", selector: "._base_11wdf_1" },
+    { name: "Source List Item", selector: ".gf3oJ" },
+    { name: "Diffuse Value", selector: ".WVOcs" },
+    { name: "Stack Size", selector: "._stack_count_252dr_52" },
+
+    { name: "Moonbounce Portal", selector: "[id='MOONBOUNCE.PORTAL']" },
 ]
-const getTargetClass = name => targetClasses.find(x => x.name == name).class;
+const getTargetSelector = name => targetSelector.find(x => x.name == name).selector;
 
 const targetURLs = [
     { name: "Inventory", url: "https://moonbounce.gg/u/@me/backpack" },
 ]
 const getTargetURL = name => targetURLs.find(x => x.name == name).url;
 
+//#endregion
 
 
+//#region Entry Point
 // ███╗   ███╗ █████╗ ██╗███╗   ██╗
 // ████╗ ████║██╔══██╗██║████╗  ██║
 // ██╔████╔██║███████║██║██╔██╗ ██║
@@ -263,6 +277,7 @@ else {                          // Local Debugging Script
 }
 
 
+//#endregion
 
 
 // ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
@@ -283,16 +298,21 @@ function init() {
 
     loadData();
 
-    setInterval(addCopyDetailstoItemImage, 1000);
-    setInterval(addPonderButton, 1000);
-    setInterval(addAppraiseButton, 1000);
-    setInterval(highlightUnknownItems, 1000);
+    setInterval(() => {
+        addCopyDetailstoItemImage();
+        addPonderButton();
+        addAppraiseButton();
+        highlightUnknownItems();
 
-    setInterval(addSortInventorySelect, 1000);
+        addSortInventorySelect();
+
+        addMoonbouncePortalButtons();
+    }, 1000);
 }
 
-// Main Functions
+//#region Main Functions
 
+//#region Data
 /**
  * Add an event listener to item images that copies the item's UUID to the clipboard
  * If ctrl is held, also copy the item's name and ID
@@ -306,7 +326,7 @@ function addCopyDetailstoItemImage() {
     let items = itemWindow.querySelectorAll("img");
     if (items.length == 0) return;
 
-    let details = itemWindow.querySelector(getTargetClass("Selected Item Details"));
+    let details = itemWindow.querySelector(getTargetSelector("Selected Item Details"));
     if (details == null) return;
 
     addSupportCSS();
@@ -344,7 +364,7 @@ function addCopyDetailstoItemImage() {
         let type = info.children[1].children[1].innerText;                      // get the text of the second child of the second child (the type)
 
         // get the value of the item
-        let valueDiv = info.querySelector(getTargetClass("Diffuse Value"));     // get the element with the value
+        let valueDiv = info.querySelector(getTargetSelector("Diffuse Value"));     // get the element with the value
         let value = null;                                                       // set the value to 0 by default
         if (valueDiv != null) {
             value = valueDiv.innerText;                                         // get the text of the value
@@ -352,7 +372,7 @@ function addCopyDetailstoItemImage() {
         }
 
         let sources = details.children[2];                                      // get the third child of the details element
-        let sourceObjects = sources.querySelectorAll(getTargetClass("Source List Item"));
+        let sourceObjects = sources.querySelectorAll(getTargetSelector("Source List Item"));
         // get the p from each source object and add it to the source list
         let sourceList = [];
         for (let source of sourceObjects) {
@@ -436,13 +456,15 @@ function addCopyDetailstoItemImage() {
         });
     }
 }
+//#endregion
 
+//#region Control Bar
 /**
  * Adds a container div above the inventory controls to hold new buttons
  */
 function addInventoryControlBar() {
     // find the inventory controls div
-    let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
+    let inventoryControls = document.querySelector(getTargetSelector("Inventory Controls"));
     if (inventoryControls == null) return;
 
     // if the inventory controls already have the bane-inventory-controls div, return
@@ -463,6 +485,7 @@ function addInventoryControlBar() {
     gap: 8px;
     width: 100%;
     margin-bottom: 1em;
+    box-sizing: border-box;
 
     button
     {
@@ -509,15 +532,16 @@ function addInventoryControlBar() {
 
     return container;
 }
+//#endregion
 
-
+//#region Pondering
 /**
  * Add a Ponder button to the inventory controls that checks if any recipes can be crafted with the items in the inventory.
  * If there are any, it will display a notification with a random recipe that can be crafted.
  */
 function addPonderButton() {
     // find the inventory controls div
-    let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
+    let inventoryControls = document.querySelector(getTargetSelector("Inventory Controls"));
     if (inventoryControls == null) return;
 
     // if the inventory controls already have the bane-ponder-button, return
@@ -606,8 +630,9 @@ function checkRecipes() {
     floatingNotification(message, 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 
 }
+//#endregion
 
-
+//#region Unknown Items
 /**
  * Highlight items in the inventory that are not in the database
  */
@@ -665,14 +690,15 @@ function highlightUnknownItems() {
 }
 `, "highlightUnknownItemsCSS");
 }
+//#endregion
 
-
+//#region Appraisal
 /**
  * Add an Appraise button to evaluate the number of items in the inventory, and their total value
  */
 function addAppraiseButton() {
     // find the inventory controls div
-    let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
+    let inventoryControls = document.querySelector(getTargetSelector("Inventory Controls"));
     if (inventoryControls == null) return;
 
     // if the inventory controls already have the bane-appraise-button, return
@@ -735,6 +761,9 @@ function evaluateInventory() {
 
     floatingNotification(appraisalMessage, 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 }
+//#endregion
+
+//#region Sorting Inventory
 
 // Common > Uncommon > Rare > Epic > Legendary > Mythic
 const rarityOrder = [
@@ -821,7 +850,7 @@ function sortStackValue(a, b) {
  */
 function addSortInventorySelect() {
     // find the inventory controls div
-    let inventoryControls = document.querySelector(getTargetClass("Inventory Controls"));
+    let inventoryControls = document.querySelector(getTargetSelector("Inventory Controls"));
     if (inventoryControls == null) return;
 
     // if the inventory controls already have the bane-sort-inventory-select, return
@@ -884,9 +913,193 @@ function sortInventory(method) {
         buttonParent.style.order = inventoryData.indexOf(inventoryItem);
     }
 }
+//#endregion
 
+//#region Moonbounce Portal Buttons
+/**
+ * Add buttons to the Moonbounce Portal to quickly access Moonbounce features
+ */
+function addMoonbouncePortalButtons() {
+    // add a button to go to the Moonbounce Plus GitHub Repository
+    addMoonbouncePlusButton();
 
+    // quick access buttons
+    addDirectoryButton();
+    addBackpackButton();
+    addMarketplaceButton();
+}
 
+/**
+ * Adds a button to the Moonbounce Portal 
+ */
+function addMoonbouncePortalButton(button) {
+    let buttons = findMoonbouncePortalButtons();
+    if (buttons == null) return;
+
+    let moonbouncePlusButtonContainer = buttons.querySelector("#moonbounce-plus-button-container");
+    if (moonbouncePlusButtonContainer == null) {
+        // create a new button container for the Moonbounce Plus buttons
+        moonbouncePlusButtonContainer = document.createElement("div");
+        moonbouncePlusButtonContainer.id = "moonbounce-plus-button-container";
+
+        buttons.appendChild(moonbouncePlusButtonContainer);
+    }
+
+    // check if the container already contains the button with the id
+    let newId = button.id;
+    let existingButton = moonbouncePlusButtonContainer.querySelector(`#${newId}`);
+    if (existingButton != null) return;
+
+    button.classList.add("moonbounce-plus-button");
+
+    moonbouncePlusButtonContainer.appendChild(button);
+
+    // add some CSS to the button
+    addCSS(`
+#moonbounce-plus-button-container
+{
+    display: flex;
+    gap: 8px;
+    /* margin-bottom: 1em; */
+
+    .moonbounce-plus-button
+    {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+
+        outline: none;
+
+        cursor: pointer;
+
+        background: var(--background-color-3);
+        border: 2px solid var(--text-color);
+        box-shadow: none !important;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 10px;
+        box-sizing: border-box;
+
+        user-select: none;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+
+            pointer-events: none;
+        }
+
+        svg {
+            /*width: 100%;
+            height: 100%;*/
+            object-fit: contain;
+
+            pointer-events: none;
+        }
+    }
+}`, "moonbouncePortalButtonCSS", moonbouncePortal);
+}
+
+/**
+ * Add button to go to Moonbounce Plus GitHub Repository
+ */
+function addMoonbouncePlusButton() {
+    let button = document.createElement("div");
+    // button.innerText = "Moonbounce Plus";
+    button.id = "moonbounce-plus-button";
+
+    // add an image inside the button https://i.imgur.com/5sie5Oq.png
+    let img = document.createElement("img");
+    img.src = "https://i.imgur.com/5sie5Oq.png";
+    button.appendChild(img);
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        window.open("https://github.com/Jordy3D/MoonbouncePlus", "_blank");
+    });
+
+    addMoonbouncePortalButton(button);
+}
+
+/**
+ * Add a button to go straight to the backpack
+ * https://moonbounce.gg/u/@me/backpack
+ */
+function addBackpackButton() {
+    let button = document.createElement("div");
+    button.id = "backpack-button";
+
+    // add the backpack icon to the button
+    let path = "M16 6V18C16 19.1 15.1 20 14 20H2C0.9 20 0 19.1 0 18V6C0 4.14 1.28 2.59 3 2.14V0H6V2H10V0H13V2.14C14.72 2.59 16 4.14 16 6ZM2 10V12H12V14H14V10H2Z";
+    let fill = "#808080";
+
+    let offset = { x: 2, y: 0 };
+
+    let svg = createSvgElement(20, 18, path, fill, offset);
+    button.appendChild(svg);
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        window.open("https://moonbounce.gg/u/@me/backpack", "_blank");
+    });
+
+    addMoonbouncePortalButton(button);
+}
+
+/**
+ * Add a button to go straight to the directory
+ * https://moonbounce.gg/u/@me/directory
+ */
+function addDirectoryButton() {
+    let button = document.createElement("div");
+    button.id = "directory-button";
+
+    // add the directory icon to the button
+    let path = "M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM14.5 5.5L8 8L5.5 14.5L12 12L14.5 5.5ZM10 11C9.73478 11 9.48043 10.8946 9.29289 10.7071C9.10536 10.5196 9 10.2652 9 10C9 9.73478 9.10536 9.48043 9.29289 9.29289C9.48043 9.10536 9.73478 9 10 9C10.2652 9 10.5196 9.10536 10.7071 9.29289C10.8946 9.48043 11 9.73478 11 10C11 10.2652 10.8946 10.5196 10.7071 10.7071C10.5196 10.8946 10.2652 11 10 11Z";
+    let fill = "#808080";
+
+    let svg = createSvgElement(20, 20, path, fill);
+    button.appendChild(svg);
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        window.open("https://moonbounce.gg/u/@me/directory", "_blank");
+    });
+
+    addMoonbouncePortalButton(button);
+}
+
+/**
+ * Add a button to go straight to the marketplace
+ * https://moonbounce.gg/u/@me/marketplace
+ */
+function addMarketplaceButton() {
+    let button = document.createElement("div");
+    button.id = "marketplace-button";
+
+    // add the marketplace icon to the button
+    let path = "M4 7H17.938L18.438 5H6V3H19.72C19.872 3 20.022 3.03466 20.1586 3.10134C20.2952 3.16801 20.4148 3.26495 20.5083 3.38479C20.6019 3.50462 20.6668 3.6442 20.6983 3.79291C20.7298 3.94162 20.7269 4.09555 20.69 4.243L18.19 14.243C18.1358 14.4592 18.011 14.6512 17.8352 14.7883C17.6595 14.9255 17.4429 15 17.22 15H3C2.73478 15 2.48043 14.8946 2.29289 14.7071C2.10536 14.5196 2 14.2652 2 14V2H0V0H3C3.26522 0 3.51957 0.105357 3.70711 0.292893C3.89464 0.48043 4 0.734784 4 1V7ZM4 21C3.46957 21 2.96086 20.7893 2.58579 20.4142C2.21071 20.0391 2 19.5304 2 19C2 18.4696 2.21071 17.9609 2.58579 17.5858C2.96086 17.2107 3.46957 17 4 17C4.53043 17 5.03914 17.2107 5.41421 17.5858C5.78929 17.9609 6 18.4696 6 19C6 19.5304 5.78929 20.0391 5.41421 20.4142C5.03914 20.7893 4.53043 21 4 21ZM16 21C15.4696 21 14.9609 20.7893 14.5858 20.4142C14.2107 20.0391 14 19.5304 14 19C14 18.4696 14.2107 17.9609 14.5858 17.5858C14.9609 17.2107 15.4696 17 16 17C16.5304 17 17.0391 17.2107 17.4142 17.5858C17.7893 17.9609 18 18.4696 18 19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21Z";
+    let fill = "#808080";
+
+    let svg = createSvgElement(20, 20, path, fill);
+    button.appendChild(svg);
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        window.open("https://moonbounce.gg/u/@me/marketplace", "_blank");
+    });
+
+    addMoonbouncePortalButton(button);
+}
+//#endregion
+
+//#endregion
+
+//#region Helper Functions
 // ██╗  ██╗███████╗██╗     ██████╗ ███████╗██████╗ 
 // ██║  ██║██╔════╝██║     ██╔══██╗██╔════╝██╔══██╗
 // ███████║█████╗  ██║     ██████╔╝█████╗  ██████╔╝
@@ -894,7 +1107,7 @@ function sortInventory(method) {
 // ██║  ██║███████╗███████╗██║     ███████╗██║  ██║
 // ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
-// HTML and Web Functions
+//#region HTML and Web Functions
 
 /**
  * Finds the current page's URL
@@ -923,7 +1136,7 @@ function isTargetURL(targetURL, skipQuery = false) {
  */
 function findInventory() {
     // find the inventory div
-    let inventory = document.querySelector(getTargetClass("Inventory"));
+    let inventory = document.querySelector(getTargetSelector("Inventory"));
     if (inventory == null) return;
 
     return inventory;
@@ -935,19 +1148,38 @@ function findInventory() {
  */
 function findSelectedItemWindow() {
     // find the selected item window
-    let selectedItemWindow = document.querySelector(getTargetClass("Selected Item Window"));
+    let selectedItemWindow = document.querySelector(getTargetSelector("Selected Item Window"));
     if (selectedItemWindow == null) return;
 
     return selectedItemWindow;
 }
 
 /**
+ * Find Moonbounce Container
+ */
+function findMoonbounceContainer() {
+
+    // id starts with moonbounce-ext-container
+    let container = document.querySelector("[id^='moonbounce-ext-container']");
+    if (container == null) return;
+
+    return container;
+}
+
+/**
  * Find the Moonbounce Portal on the page
  */
 function findMoonbouncePortal() {
-    // find #MOONBOUNCE.PORTAL
-    let portal = document.querySelector("#MOONBOUNCE.PORTAL");
+    let container = findMoonbounceContainer();
+    if (container == null) return;
+
+    let shadowRoot = container.shadowRoot;
+    if (shadowRoot == null) return;
+
+    let portal = shadowRoot.querySelector(getTargetSelector("Moonbounce Portal"));
     if (portal == null) return;
+
+    moonbouncePortal = portal;
 
     return portal;
 }
@@ -959,14 +1191,19 @@ function findMoonbouncePortalButtons() {
     let portal = findMoonbouncePortal();
     if (portal == null) return;
 
+    // set the button parent to the portal's second child
+    let buttonParent = portal.children[1];
+    if (buttonParent == null) return;
+
     // find the buttons
-    let buttons = portal.querySelector(getTargetClass("Moonbounce Portal Buttons"));
+    let buttons = buttonParent.querySelector(getTargetSelector("Moonbounce Portal Button Container"));
     if (buttons == null) return;
 
     return buttons;
 }
+//#endregion
 
-// Get data and information
+//#region Data and Information Functions
 
 function getUUIDFromSrc(src) {
     let start = src.indexOf("/fp/") + 4;                                // find the index of /fp/ and add 4 to get the start of the uuid
@@ -1004,7 +1241,7 @@ function refreshInventoryArray() {
         let resultItem = items.find(item => item.uuid == uuid);
 
         // find the stack size of the item
-        let stackSize = item.parentElement.querySelector(getTargetClass("Stack Size"));
+        let stackSize = item.parentElement.querySelector(getTargetSelector("Stack Size"));
         if (stackSize == null) continue;
 
         // convert the stack size to a number
@@ -1021,8 +1258,53 @@ function refreshInventoryArray() {
     }
 }
 
+//#endregion
 
-// Miscellaneous support Functions
+//#region Create Elements
+
+/**
+ * Create an SVG element, with a path, fill, and optional offset
+ */
+function createSvgElement(width, height, pathData, fill, offset = { x: 0, y: 0 }) {
+    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttributeNS(null, "width", width)
+    svg.setAttributeNS(null, "height", height)
+    svg.setAttributeNS(null, "preserveAspectRatio", "meet");
+    svg.setAttributeNS(null, "fill", "none");
+    // calculate the viewbox based on the width and height
+    svg.setAttributeNS(null, "viewBox", `0 0 ${width} ${height}`);
+
+    let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttributeNS(null, "fill-rule", "evenodd");
+    path.setAttributeNS(null, "clip-rule", "evenodd");
+    path.setAttributeNS(null, "d", pathData);
+    path.setAttributeNS(null, "fill", fill);
+
+    // offset the path
+    path.style.transform = `translate(${offset.x}px, ${offset.y}px)`;
+
+    svg.appendChild(path);
+
+    return svg;
+}
+
+//#endregion
+
+//#region Miscellaneous Support Functions
+
+/**
+ * Returns the result of an evaluation and logs a message based on the result
+ */
+function returnMessage(statement, trueMessage, falseMessage) {
+    if (statement) {
+        console.log(trueMessage);
+        return true;
+    }
+    else {
+        console.log(falseMessage);
+        return false;
+    }
+}
 
 /**
  * Download a file from a URL
@@ -1030,7 +1312,10 @@ function refreshInventoryArray() {
 function downloadFile(url, filename) {
     let a = document.createElement("a");            // create a new link element
     a.href = url;                                   // set the href of the link to the URL
-    a.download = filename;                          // set the download attribute to the filename
+    if (filename)                                   // if a filename is provided
+        a.download = filename;                      //  set the download attribute to the filename
+    else                                            // otherwise
+        a.download = url.split("/").pop();          //  set the download attribute to the last part of the URL
     a.click();                                      // simulate a click on the link
     a.remove();                                     // remove the link from the document
 }
@@ -1048,13 +1333,13 @@ function copyToClipboard(text) {
  * @param {string} css the CSS to add
  * @param {string} id the id of the CSS element
  */
-function addCSS(css, id) {
+function addCSS(css, id, parent = document.head) {
     if (document.getElementById(id) != null) return;
 
     let style = document.createElement('style');
     style.id = id;
     style.innerHTML = css;
-    document.head.appendChild(style);
+    parent.appendChild(style);
 }
 
 /**
@@ -1131,3 +1416,5 @@ function floatingNotification(message, duration = 3000, css = "", position = "to
         }, 500);
     }, duration);
 }
+
+//#endregion
