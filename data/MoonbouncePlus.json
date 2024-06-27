@@ -1009,6 +1009,16 @@
             "sources": []
         },
         {
+            "id": 512,
+            "name": "Lunar Overhead",
+            "uuid": "0d207749-2988-4270-ad6c-f08f811c0543",
+            "description": "Makes every pixel moonlit stroll feel like a cosmic adventure",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 50,
+            "sources": []
+        },
+        {
             "id": 536,
             "name": "Zerk Helm",
             "uuid": "43dbed88-6c82-45e8-b8de-e74db5c16ed6",

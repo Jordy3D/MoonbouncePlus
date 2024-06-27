@@ -135,12 +135,12 @@ function loadData(isLocal = false) {
 const targetClasses = [
     { name: "Inventory", class: ".cfWcg" },
     { name: "Inventory Controls", class: ".S-h7a" },
-    { name: "Selected Item Window", class: "._base_adyd1_1" },
+    { name: "Selected Item Window", class: "._base_7aiat_1" },
     { name: "Selected Item Details", class: "._base_awewl_1" },
     { name: "Moonbounce Portal Buttons", class: "._base_11wdf_1" },
-    { name: "Source List Item", class: ".mSsVp" },
+    { name: "Source List Item", class: ".gf3oJ" },
     { name: "Diffuse Value", class: ".WVOcs" },
-    { name: "Stack Size", class: "._stack_count_16kzs_52" },
+    { name: "Stack Size", class: "._stack_count_252dr_52" },
 ]
 const getTargetClass = name => targetClasses.find(x => x.name == name).class;
 
@@ -306,12 +306,13 @@ function addCopyDetailstoItemImage() {
     if (items.length == 0) return;
 
     let details = itemWindow.querySelector(getTargetClass("Selected Item Details"));
+    if (details == null) return;
 
     addSupportCSS();
 
     function addSupportCSS() {
         addCSS(`
-._base_107fx_1 
+.item-uuid-event
 {
   cursor: pointer;
   user-select: none;
@@ -464,9 +465,9 @@ function addInventoryControlBar() {
 
     button
     {
-        background: white;
-        border: 2px solid #E6E8EC;
-        color: #141416;
+        background-color: var(--background-color);
+        border: 2px solid var(--border-color);
+        color: var(--text-color);
 
         cursor: pointer;
             
@@ -488,13 +489,17 @@ function addInventoryControlBar() {
     }
 
     select {
+        
+        background-color: var(--background-color);
+        border: 2px solid var(--border-color);
+        color: var(--text-color);
+
         display: flex;
         padding: 8px;
         justify-content: space-between;
         align-items: center;
         flex-shrink: 0;
         border-radius: 8px;
-        border: 2px solid var(--Neutrals-75, #E6E8EC);
         cursor: pointer;
         
         margin-left: auto !important;
@@ -610,6 +615,8 @@ function highlightUnknownItems() {
     if (inventory == null) return;
 
     let inventoryItems = inventory.querySelectorAll("img");
+
+    if (items == null) return;
 
     for (let item of inventoryItems) {
         let uuid = getUUIDFromSrc(item.src);
