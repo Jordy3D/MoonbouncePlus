@@ -10,7 +10,6 @@
 - Appraise the value of your inventory, as well as how many items are contained within (both total and unique)  
   ![chrome_FPrdEws6If](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/1efd6494-434b-4bbd-90bc-7b6aad0e6916)
 - Sort your inventory by name, id, rarity, type, item value, quantity, stack value
-  - NOTE: Currently doesn't work in the Crafting tab
 - Copy the info from the currently selected item to your clipboard (for data collection, such as for the [Moonbounce Wiki](https://moonbounce.wiki))
   - Click on the item's image to copy the item data
   - Ctrl+Right Click on the item's image download the image with its name formatted for the wiki
