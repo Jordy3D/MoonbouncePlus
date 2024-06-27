@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.1
+// @version      0.9.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -62,6 +62,7 @@
 //          - Shift CSS injection on the Moonbounce Portal to a separate function
 //          - Fixed quick access buttons not having the correct styling
 //          - Fixed styles duping because Shadow DOMs weren't seen by the ID check
+// 0.9.2    - Fix accidentally ignoring the main Moonbounce page
 //
 // ==/Changelog==
 
@@ -300,7 +301,9 @@ function init() {
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
 
-    var isOnMoonbounceSite = isTargetURL("moonbounce.gg", false);
+    // check if the current page is on the moonbounce.gg domain 
+    var currentURL = window.location.href;
+    var isOnMoonbounceSite = currentURL.includes("moonbounce.gg");
 
     // if on the inventory page, load the data and add the event listener
     if (isOnMoonbounceSite) {
