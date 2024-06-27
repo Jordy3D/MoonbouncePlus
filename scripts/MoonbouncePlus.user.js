@@ -4,7 +4,7 @@
 // @version      0.9.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
-// @match        https://moonbounce.gg/u/@me/*
+// @match        *://*/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=moonbounce.gg
 // @grant        none
 // ==/UserScript==
