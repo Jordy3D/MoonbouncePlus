@@ -1,7 +1,7 @@
 ---
 name: Data Template
 about: Data submission
-title: "[DATA]"
+title: "New Data: [ITEM NAME]"
 labels: ''
 assignees: ''
 
