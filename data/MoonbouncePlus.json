@@ -561,6 +561,16 @@
             "sources": []
         },
         {
+            "id": 396,
+            "name": "Bumpy",
+            "uuid": "091397d8-ee81-4f26-8928-f262e940c169",
+            "description": "Bumpy rough on edges. Bumpy not know much. Bumpy like MP.",
+            "rarity": "LEGENDARY",
+            "type": "CHARACTER",
+            "value": null,
+            "sources": []
+        },
+        {
             "id": 398,
             "name": "Yin Yang",
             "uuid": "325fb98b-5556-4fc2-b680-4ac7d167c0f0",
@@ -581,10 +591,50 @@
             "sources": ["Red Loot Bag", "Heart Box"]
         },
         {
+            "id": 414,
+            "name": "Black Kitten Ears",
+            "uuid": "b9aaf680-4740-4226-9960-750fb91f4a7b",
+            "description": "These tiny black kitten ears were taken right off of a cute kitten.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 415,
+            "name": "Orange Kitten Ears",
+            "uuid": "21318526-c020-48db-884b-49def5754732",
+            "description": "Wearing these orange kitten ears,  youre guaranteed to have the shared braincell 1% of the time!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 416,
+            "name": "Lavender Wizard Hat",
+            "uuid": "a01af7c2-c220-4c5f-a0c5-6d1e14b86fa0",
+            "description": "An elegant wizard hat,  in a dashing lavender scheme!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 417,
             "name": "Lunar Trucker",
             "uuid": "06736239-1326-4551-b915-7e478bba2471",
             "description": "Cruise through pixelated craters and celestial sights,  transporting yourself to realms beyond imagination.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 418,
+            "name": "Holy Trucker",
+            "uuid": "d2a20f10-4e5b-489d-b6ec-3fce1152cd38",
+            "description": "Have a roadmap to adventure etched onto your character’s style,  guiding you through every pixelated journey.",
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
@@ -1016,6 +1066,56 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 50,
+            "sources": []
+        },
+        {
+            "id": 529,
+            "name": "Rose Wizard Hat",
+            "uuid": "8f3ef917-5317-4c22-a0be-d65d20ec4d46",
+            "description": "An elegant wizard hat,  in a dashing rosy color scheme!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 530,
+            "name": "Green Wizard Hat",
+            "uuid": "dff03097-a7e8-4fd4-9041-5d1536ee23a9",
+            "description": "An elegant wizard hat,  in a dashing green color scheme!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 533,
+            "name": "Fuchsia Wizard Hat",
+            "uuid": "b2bd3369-0551-43b4-b43e-664432c77431",
+            "description": "An elegant wizard hat,  in a dashing fuchsia color scheme!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 534,
+            "name": "Amber Wizard Hat",
+            "uuid": "2349d3bd-5702-4b9e-945a-2010729c2f88",
+            "description": "An elegant wizard hat,  in a dashing amber color scheme!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
+            "id": 535,
+            "name": "White Kitten Ears",
+            "uuid": "94261d4a-3521-4533-9295-b473a3d46958",
+            "description": "These tiny white kitten ears were taken right off of a cute kitten.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
             "sources": []
         },
         {
