@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.0
+// @version      0.9.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -58,6 +58,10 @@
 //          - Reworked some of the code to be more efficient or more generic
 //          - Fixed the box sizing on the inventory controls being too large
 //          - Preparation for more CSS injection into the Moonbounce Portal
+// 0.9.1    - Stop the script from downloading the data from the web when it's not needed
+//          - Shift CSS injection on the Moonbounce Portal to a separate function
+//          - Fixed quick access buttons not having the correct styling
+//          - Fixed styles duping because Shadow DOMs weren't seen by the ID check
 //
 // ==/Changelog==
 
@@ -296,17 +300,25 @@ function init() {
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
 
-    loadData();
+    var isOnMoonbounceSite = isTargetURL("moonbounce.gg", false);
+
+    // if on the inventory page, load the data and add the event listener
+    if (isOnMoonbounceSite) {
+        loadData();
+
+        setInterval(() => {
+            addCopyDetailstoItemImage();
+            addPonderButton();
+            addAppraiseButton();
+            highlightUnknownItems();
+
+            addSortInventorySelect();
+        }, 1000);
+    }
 
     setInterval(() => {
-        addCopyDetailstoItemImage();
-        addPonderButton();
-        addAppraiseButton();
-        highlightUnknownItems();
-
-        addSortInventorySelect();
-
         addMoonbouncePortalButtons();
+        addMoonbouncePortalCSS();
     }, 1000);
 }
 
@@ -915,7 +927,99 @@ function sortInventory(method) {
 }
 //#endregion
 
-//#region Moonbounce Portal Buttons
+//#region Moonbounce Portal
+
+/**
+ * Add CSS to the Moonbounce Portal to style the buttons
+ */
+function addMoonbouncePortalCSS() {
+    findMoonbouncePortal();
+
+    if (moonbouncePortal == null) return;
+
+    addCSS(`
+#moonbounce-plus-button-container {
+    --background-color: white;
+    --background-color-2: #F8F9FA;
+    --background-color-3: #F1F3F5;
+    --content-color: white;
+    --text-color: #23262F;
+    --border-color: #E6E8EC;
+    --navbar-bg: white;
+    --background-color-hover: #F8F9FA;
+
+    --header-bg: white;
+    --line-color: #E6E8EC;
+    --top-nav-bg: #333;
+    --top-nav-text: white;
+}
+
+@media (prefers-color-scheme: dark) {
+    #moonbounce-plus-button-container {
+        --background-color: #131317;
+        --background-color-2: #23262f;
+        --background-color-3: #1a1a22;
+        --content-color: #131317;
+        --text-color: #e0e0e0;
+        --border-color: #353945;
+        --navbar-bg: #2a2a2a;
+        --background-color-hover: #23262f;
+
+        --border-color-3: #353945;
+        --fill-icon: #e0e0e0;
+    }
+}
+`, "moonbouncePortalCSS", moonbouncePortal);
+
+    addCSS(`
+    #moonbounce-plus-button-container
+    {
+        display: flex;
+        gap: 8px;
+        /* margin-bottom: 1em; */
+    
+        .moonbounce-plus-button
+        {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+    
+            outline: none;
+    
+            cursor: pointer;
+    
+            background: var(--background-color-3);
+            border: 2px solid var(--text-color);
+            box-shadow: none !important;
+    
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    
+            padding: 10px;
+            box-sizing: border-box;
+    
+            user-select: none;
+    
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+    
+                pointer-events: none;
+            }
+    
+            svg {
+                /*width: 100%;
+                height: 100%;*/
+                object-fit: contain;
+    
+                pointer-events: none;
+            }
+        }
+    }`, "moonbouncePortalButtonCSS", moonbouncePortal);
+}
+
 /**
  * Add buttons to the Moonbounce Portal to quickly access Moonbounce features
  */
@@ -953,55 +1057,6 @@ function addMoonbouncePortalButton(button) {
     button.classList.add("moonbounce-plus-button");
 
     moonbouncePlusButtonContainer.appendChild(button);
-
-    // add some CSS to the button
-    addCSS(`
-#moonbounce-plus-button-container
-{
-    display: flex;
-    gap: 8px;
-    /* margin-bottom: 1em; */
-
-    .moonbounce-plus-button
-    {
-        width: 54px;
-        height: 54px;
-        border-radius: 50%;
-
-        outline: none;
-
-        cursor: pointer;
-
-        background: var(--background-color-3);
-        border: 2px solid var(--text-color);
-        box-shadow: none !important;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        padding: 10px;
-        box-sizing: border-box;
-
-        user-select: none;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-
-            pointer-events: none;
-        }
-
-        svg {
-            /*width: 100%;
-            height: 100%;*/
-            object-fit: contain;
-
-            pointer-events: none;
-        }
-    }
-}`, "moonbouncePortalButtonCSS", moonbouncePortal);
 }
 
 /**
@@ -1188,16 +1243,22 @@ function findMoonbouncePortal() {
  * Find the Moonbounce Portal buttons on the page
  */
 function findMoonbouncePortalButtons() {
-    let portal = findMoonbouncePortal();
-    if (portal == null) return;
+    findMoonbouncePortal();
+    if (moonbouncePortal == null) return;
 
-    // set the button parent to the portal's second child
-    let buttonParent = portal.children[1];
+    // set the button parent to the portal's second div child (the first few elements are styles, so find the second DIV
+    let moonbouncePortalChildren = moonbouncePortal.children;
+    if (moonbouncePortalChildren == null) return;
+    // delete all non-div children from the list (not from the DOM)
+    moonbouncePortalChildren = Array.from(moonbouncePortalChildren).filter(x => x.tagName == "DIV");
+    // get the second div child
+    let buttonParent = moonbouncePortalChildren[1];
+
     if (buttonParent == null) return;
 
     // find the buttons
     let buttons = buttonParent.querySelector(getTargetSelector("Moonbounce Portal Button Container"));
-    if (buttons == null) return;
+    if (returnMessage(buttons == null, "Could not find Moonbounce Portal buttons")) return;
 
     return buttons;
 }
@@ -1269,7 +1330,7 @@ function createSvgElement(width, height, pathData, fill, offset = { x: 0, y: 0 }
     let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttributeNS(null, "width", width)
     svg.setAttributeNS(null, "height", height)
-    svg.setAttributeNS(null, "preserveAspectRatio", "meet");
+    // svg.setAttributeNS(null, "preserveAspectRatio", "meet");
     svg.setAttributeNS(null, "fill", "none");
     // calculate the viewbox based on the width and height
     svg.setAttributeNS(null, "viewBox", `0 0 ${width} ${height}`);
@@ -1295,13 +1356,13 @@ function createSvgElement(width, height, pathData, fill, offset = { x: 0, y: 0 }
 /**
  * Returns the result of an evaluation and logs a message based on the result
  */
-function returnMessage(statement, trueMessage, falseMessage) {
+function returnMessage(statement, trueMessage = "", falseMessage = "") {
     if (statement) {
-        console.log(trueMessage);
+        if (trueMessage != "") console.log(trueMessage);
         return true;
     }
     else {
-        console.log(falseMessage);
+        if (falseMessage != "") console.log(falseMessage);
         return false;
     }
 }
@@ -1334,7 +1395,11 @@ function copyToClipboard(text) {
  * @param {string} id the id of the CSS element
  */
 function addCSS(css, id, parent = document.head) {
+    // search the head for an element with the id
     if (document.getElementById(id) != null) return;
+    // search the parent for an element with the id
+    if (parent.querySelector(`#${id}`) != null) return;
+
 
     let style = document.createElement('style');
     style.id = id;
