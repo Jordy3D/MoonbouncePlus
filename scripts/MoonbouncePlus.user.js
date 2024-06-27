@@ -484,8 +484,8 @@ function addInventoryControlBar() {
         
         &:hover
         {
-            background: #E6E8EC;
-            border-color: #d2d5de;
+            background: var(--background-color-hover);
+            border-color: var(--background-color-hover);
         }
     }
 
