@@ -1,5 +1,6 @@
 <div align="center">
   <h1>Moonbounce Plus</h1>
+  <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/65fb6083-77cd-422b-abf1-c9bec3d3ac00" height=100>
   <p>A userscript that adds a few features to the Moonbounce website and experience.</p>
 </div>
 
