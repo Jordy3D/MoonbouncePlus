@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.2
+// @version      0.9.3
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -63,6 +63,10 @@
 //          - Fixed quick access buttons not having the correct styling
 //          - Fixed styles duping because Shadow DOMs weren't seen by the ID check
 // 0.9.2    - Fix accidentally ignoring the main Moonbounce page
+// 0.9.3    - Added a button to go to the Wiki page for the selected item in the inventory
+//          - Added the ability to copy data from the Marketplace
+//          - Improved script loading to minimise the need for refreshes
+//          - Cleaned up the Regions in the script
 //
 // ==/Changelog==
 
@@ -107,6 +111,8 @@ class InventoryItem {
  * @param {boolean} isLocal whether to load the data locally or from the web
  */
 function loadData(isLocal = false) {
+    if (items != null && recipes != null) return;
+
     console.log("Loading data...");
 
     if (isLocal) {
@@ -158,12 +164,23 @@ const targetSelector = [
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "._stack_count_252dr_52" },
 
+    { name: "Marketplace Container", selector: ".BLrCt" },
+    { name: "Marketplace Controls", selector: ".t-IQf" },
+    { name: "Marketplace Section", selector: ".FJbq-" },
+    { name: "Marketplace Section Header", selector: "._text-xl_128i6_229" },
+    { name: "Marketplace Section Item", selector: "._base_1ti9u_1" },
+
+    { name: "Marketplace Item Rarity", selector: "[class^='_rarity_box']" },
+    { name: "Marketplace Item Type", selector: ".eMjIv" },
+    { name: "Marketplace Item Details", selector: ".GPrFb" },
+
     { name: "Moonbounce Portal", selector: "[id='MOONBOUNCE.PORTAL']" },
 ]
 const getTargetSelector = name => targetSelector.find(x => x.name == name).selector;
 
 const targetURLs = [
     { name: "Inventory", url: "https://moonbounce.gg/u/@me/backpack" },
+    { name: "Marketplace", url: "https://moonbounce.gg/u/@me/marketplace" },
 ]
 const getTargetURL = name => targetURLs.find(x => x.name == name).url;
 
@@ -282,15 +299,7 @@ else {                          // Local Debugging Script
 }
 
 
-//#endregion
 
-
-// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
-// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
-// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
-// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
-// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
-// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /**
  * Initialize the script and other initial functions
@@ -301,22 +310,34 @@ function init() {
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
 
+    // check the current site every second and page to see what functions to run
+    setInterval(() => {
+        checkSite();
+    }, 1000);
+}
+
+function checkSite() {
     // check if the current page is on the moonbounce.gg domain 
     var currentURL = window.location.href;
     var isOnMoonbounceSite = currentURL.includes("moonbounce.gg");
 
     // if on the inventory page, load the data and add the event listener
     if (isOnMoonbounceSite) {
-        loadData();
+        if (isTargetURL(getTargetURL("Inventory"), true)) {
+            loadData();
 
-        setInterval(() => {
             addCopyDetailstoItemImage();
+            addWikiButton();
+
             addPonderButton();
             addAppraiseButton();
-            highlightUnknownItems();
-
             addSortInventorySelect();
-        }, 1000);
+
+            highlightUnknownItems();
+        }
+        else if (isTargetURL(getTargetURL("Marketplace"), true)) {
+            addCopyMarketplaceDataButton();
+        }
     }
 
     setInterval(() => {
@@ -324,6 +345,8 @@ function init() {
         addMoonbouncePortalCSS();
     }, 1000);
 }
+
+//#endregion
 
 //#region Main Functions
 
@@ -365,37 +388,6 @@ function addCopyDetailstoItemImage() {
   }
 }
         `, "copyDetailsToItemCSS");
-    }
-
-    function getDetails(details) {
-        let nameIdBlock = details.children[0];                                  // get the first child of the details element
-        let name = nameIdBlock.children[0].innerText;                           // get the text of the first child (the name)
-        let id = nameIdBlock.children[1].innerText;                             // get the text of the second child (the id)
-        id = id.substring(1);                                                   // remove the # from the beginning of the id
-
-        let info = details.children[1];                                         // get the second child of the details element
-        let description = info.children[0].innerText;                           // get the text of the first child (the description)
-        let rarity = info.children[1].children[0].innerText;                    // get the text of the first child of the second child (the rarity)
-        let type = info.children[1].children[1].innerText;                      // get the text of the second child of the second child (the type)
-
-        // get the value of the item
-        let valueDiv = info.querySelector(getTargetSelector("Diffuse Value"));     // get the element with the value
-        let value = null;                                                       // set the value to 0 by default
-        if (valueDiv != null) {
-            value = valueDiv.innerText;                                         // get the text of the value
-            value = value.replace("MP", "").trim();                             // clean up the value
-        }
-
-        let sources = details.children[2];                                      // get the third child of the details element
-        let sourceObjects = sources.querySelectorAll(getTargetSelector("Source List Item"));
-        // get the p from each source object and add it to the source list
-        let sourceList = [];
-        for (let source of sourceObjects) {
-            let p = source.querySelector("p");
-            sourceList.push(p.innerText);
-        }
-
-        return { name: name, id: id, description: description, rarity: rarity, type: type, value: value, sources: sourceList };
     }
 
     function cleanJSONString(jsonString, id, value) {
@@ -1155,6 +1147,193 @@ function addMarketplaceButton() {
 }
 //#endregion
 
+//#region Copy Marketplace Data
+
+/**
+ * Add a button to copy the marketplace data to the clipboard
+ */
+function addCopyMarketplaceDataButton() {
+    // find the marketplace container div
+    let marketplaceData = document.querySelector(getTargetSelector("Marketplace Container"));
+    if (marketplaceData == null) return;
+
+    // if the marketplace container already has the bane-copy-marketplace-data-button, return
+    let existingButton = document.querySelector("#bane-copy-marketplace-data-button");
+    if (existingButton != null) return;
+
+    // find the marketplace controls div
+    let marketplaceControls = document.querySelector(getTargetSelector("Marketplace Controls"));
+    if (marketplaceControls == null) return;
+
+    // create a new button in the marketplace controls
+    let button = document.createElement("button");
+    button.innerText = "Copy Data";
+    button.id = "bane-copy-marketplace-data-button";
+    button.classList.add("bane-marketplace-button");
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        copyMarketplaceData();
+    });
+
+    marketplaceControls.appendChild(button);
+
+    // add some CSS to the button
+    addCSS(`
+.bane-marketplace-button {
+    background-color: #353945;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 2em;
+    cursor: pointer;
+
+    font-size: .875rem;
+    line-height: 1rem;
+    font-weight: 600;
+
+    margin-left: 16px;
+
+    transition: .2s;
+
+    &:hover {
+        background-color: white;
+        color: #353945;
+    }
+}
+`, "copyMarketplaceDataButtonCSS");
+}
+
+/**
+ * Copy the marketplace data to the clipboard
+ */
+function copyMarketplaceData() {
+    let marketplaceData = document.querySelector(getTargetSelector("Marketplace Container"));
+    if (marketplaceData == null) return;
+
+    let items = [];
+
+    // find all the sections in the marketplace data
+    let sections = marketplaceData.querySelectorAll(getTargetSelector("Marketplace Section"));
+    for (let section of sections) {
+        // get the section name from the section header
+        let sectionName = section.querySelector(getTargetSelector("Marketplace Section Header")).innerText;
+
+        // find all the items in the section
+        let sectionItems = section.querySelectorAll(getTargetSelector("Marketplace Section Item"));
+
+        for (let item of sectionItems) {
+            let rarity = item.querySelector(getTargetSelector("Marketplace Item Rarity")).innerText;        // May be used in the future
+            let type = item.querySelector(getTargetSelector("Marketplace Item Type")).innerText;            // May be used in the future
+            let details = item.querySelector(getTargetSelector("Marketplace Item Details"));
+            // name is the text content of the first child of the item details, cost is the text content of the last child
+            let name = details.children[0].textContent;
+            let cost = details.children[details.children.length - 1].textContent;
+            // remove the "MP" and commas from the cost
+            cost = cost.replace(/,/g, "").replace("MP", "").trim();
+
+            let itemObject = { name: name, section: sectionName, cost: cost, };
+            items.push(itemObject);
+        }
+    }
+
+    // convert the items array to a JSON string that is formatted with 4 spaces
+    let data = JSON.stringify(items, null, 4);
+    data = data.replace(/"cost": "(.*)"/g, '"cost": $1');
+
+    // copy the data to the clipboard
+    navigator.clipboard.writeText(data);
+
+    // spawn a notification under the cursor position
+    let pos = { top: event.clientY, left: event.clientX };              // get the current mouse position
+    pos.top += 10;                                                      // offset the position down by 10 pixels
+
+    floatingNotification("Marketplace data<br>copied to clipboard", 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
+}
+
+//#endregion
+
+//#region Wiki Button on Items
+
+/**
+ * Add a button to the selected item window to go to the Moonbounce Wiki page for the item
+ */
+function addWikiButton() {
+    if (!isTargetURL(getTargetURL("Inventory"), true)) return;
+
+    // find the selected item window
+    let selectedItemWindow = findSelectedItemWindow();
+    if (selectedItemWindow == null) return;
+
+    // if the selected item window already has the bane-wiki-button, return
+    let existingButton = selectedItemWindow.querySelector("#bane-wiki-button");
+    if (existingButton != null) return;
+
+    // find the item details div
+    let itemDetails = selectedItemWindow.querySelector(getTargetSelector("Selected Item Details"));
+    if (itemDetails == null) return;
+
+    // get the container that will contain the button (the 2nd child of the 2nd child of the selected item details)
+    let buttonContainer = itemDetails.children[1].children[1];
+    if (buttonContainer == null) return;
+
+    // create a new button in the button container
+    let button = document.createElement("button");
+    button.innerText = "Wiki";
+    button.id = "bane-wiki-button";
+    button.classList.add("bane-wiki-button");
+
+    // add an event listener to the button after formatting the item name to be used in the URL
+    button.addEventListener("click", function () {
+        let details = getDetails();
+        let itemName = details.name;
+
+        let formattedName = itemName.replace(/ /g, "_");
+        formattedName = formattedName.replace(/'/g, "%27");
+
+        openWikiPage(formattedName);
+    });
+        
+    buttonContainer.appendChild(button);
+
+    // add some CSS to the button
+    addCSS(`
+.bane-wiki-button {
+    --wikiColour: #B8D0FF;
+
+    background-color: var(--background-color-2);
+    color: var(--text-color);
+
+    border: 2px solid var(--wikiColour);
+    border-radius: 4px;
+
+    padding: 6px 8px;
+    cursor: pointer;
+
+    transition: .2s;
+
+    &:hover {
+        background-color: var(--wikiColour);
+        color: var(--background-color-2);
+    }
+}
+`, "wikiButtonCSS");
+}
+
+/**
+ * Open the Moonbounce Wiki page for the item
+ */
+function openWikiPage(itemName) {
+    // https://moonbounce.wiki/w/ITEM_NAME
+    let wikiURL = `https://moonbounce.wiki/w/${itemName}`;
+    window.open(wikiURL, "_blank");
+}
+
+
+
+//#endregion
+
+
 //#endregion
 
 //#region Helper Functions
@@ -1287,6 +1466,48 @@ function getUUIDFromItemName(name) {
 function getItemFromUUID(uuid) {
     let resultItem = items.find(item => item.uuid == uuid);
     return resultItem;
+}
+
+function getDetails(details = null) {
+    // if details is not set, find the details element
+    if (details == null) {
+        // find the selected item window
+        let selectedItemWindow = findSelectedItemWindow();
+        if (selectedItemWindow == null) return;
+
+        // find the item details div
+        details = selectedItemWindow.querySelector(getTargetSelector("Selected Item Details"));
+        if (details == null) return;
+    }
+
+    let nameIdBlock = details.children[0];                                  // get the first child of the details element
+    let name = nameIdBlock.children[0].innerText;                           // get the text of the first child (the name)
+    let id = nameIdBlock.children[1].innerText;                             // get the text of the second child (the id)
+    id = id.substring(1);                                                   // remove the # from the beginning of the id
+
+    let info = details.children[1];                                         // get the second child of the details element
+    let description = info.children[0].innerText;                           // get the text of the first child (the description)
+    let rarity = info.children[1].children[0].innerText;                    // get the text of the first child of the second child (the rarity)
+    let type = info.children[1].children[1].innerText;                      // get the text of the second child of the second child (the type)
+
+    // get the value of the item
+    let valueDiv = info.querySelector(getTargetSelector("Diffuse Value"));     // get the element with the value
+    let value = null;                                                       // set the value to 0 by default
+    if (valueDiv != null) {
+        value = valueDiv.innerText;                                         // get the text of the value
+        value = value.replace("MP", "").trim();                             // clean up the value
+    }
+
+    let sources = details.children[2];                                      // get the third child of the details element
+    let sourceObjects = sources.querySelectorAll(getTargetSelector("Source List Item"));
+    // get the p from each source object and add it to the source list
+    let sourceList = [];
+    for (let source of sourceObjects) {
+        let p = source.querySelector("p");
+        sourceList.push(p.innerText);
+    }
+
+    return { name: name, id: id, description: description, rarity: rarity, type: type, value: value, sources: sourceList };
 }
 
 /**
@@ -1484,5 +1705,7 @@ function floatingNotification(message, duration = 3000, css = "", position = "to
         }, 500);
     }, duration);
 }
+
+//#endregion
 
 //#endregion
