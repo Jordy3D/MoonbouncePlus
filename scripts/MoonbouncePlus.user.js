@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.3
+// @version      0.9.4
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -67,6 +67,7 @@
 //          - Added the ability to copy data from the Marketplace
 //          - Improved script loading to minimise the need for refreshes
 //          - Cleaned up the Regions in the script
+// 0.9.4    - Fixed an issue that could cause the script to try to load things it shouldn't multiple times
 //
 // ==/Changelog==
 
@@ -1019,6 +1020,10 @@ function addMoonbouncePortalCSS() {
  * Add buttons to the Moonbounce Portal to quickly access Moonbounce features
  */
 function addMoonbouncePortalButtons() {
+    // if the Moonbounce Portal is not found, return
+    let portal = findMoonbouncePortal();
+    if (portal == null) return;
+
     // add a button to go to the Moonbounce Plus GitHub Repository
     addMoonbouncePlusButton();
 
