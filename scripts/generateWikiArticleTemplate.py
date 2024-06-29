@@ -125,6 +125,11 @@ type_to_types_dict = {
 #region Templates
 
 #region Item Page Templates
+
+foundinTemplate = """\
+| found_in<INDEX> = <SOURCE>
+| foundin_icon<INDEX> = <SOURCEHYPHENED>"""
+
 accessoryTemplate = """
 {{Infobox
 | name = <NAME>
@@ -136,17 +141,10 @@ accessoryTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-| found_in = <SOURCE>
-| foundin_icon = <SOURCEHYPHENED>
-| found_in2 = <SOURCE2>
-| foundin_icon2 = <SOURCEHYPHENED2>
-| found_in3 = <SOURCE3>
-| foundin_icon3 = <SOURCEHYPHENED3>
-| found_in4 = <SOURCE4>
-| foundin_icon4 = <SOURCEHYPHENED4>
-| found_in5 = <SOURCE5>
-| foundin_icon5 = <SOURCEHYPHENED5>
-}}The '''<NAME>''' is an [[Accessories|accessory]] in Moonbounce.
+<FOUNDIN>
+}}
+
+The '''<NAME>''' is an [[Accessories|accessory]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -173,17 +171,9 @@ materialTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-| found_in = <SOURCE>
-| foundin_icon = <SOURCEHYPHENED>
-| found_in2 = <SOURCE2>
-| foundin_icon2 = <SOURCEHYPHENED2>
-| found_in3 = <SOURCE3>
-| foundin_icon3 = <SOURCEHYPHENED3>
-| found_in4 = <SOURCE4>
-| foundin_icon4 = <SOURCEHYPHENED4>
-| found_in5 = <SOURCE5>
-| foundin_icon5 = <SOURCEHYPHENED5>
-}}The '''<NAME>''' is a [[Materials|material]] in Moonbounce.
+<FOUNDIN>
+}}
+The '''<NAME>''' is a [[Materials|material]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -208,17 +198,9 @@ characterTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-| found_in = <SOURCE>
-| foundin_icon = <SOURCEHYPHENED>
-| found_in2 = <SOURCE2>
-| foundin_icon2 = <SOURCEHYPHENED2>
-| found_in3 = <SOURCE3>
-| foundin_icon3 = <SOURCEHYPHENED3>
-| found_in4 = <SOURCE4>
-| foundin_icon4 = <SOURCEHYPHENED4>
-| found_in5 = <SOURCE5>
-| foundin_icon5 = <SOURCEHYPHENED5>
-}}'''<NAME>''' is a [[Characters|character]] in Moonbounce.
+<FOUNDIN>
+}}
+'''<NAME>''' is a [[Characters|character]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -243,17 +225,9 @@ toolTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-| found_in = <SOURCE>
-| foundin_icon = <SOURCEHYPHENED>
-| found_in2 = <SOURCE2>
-| foundin_icon2 = <SOURCEHYPHENED2>
-| found_in3 = <SOURCE3>
-| foundin_icon3 = <SOURCEHYPHENED3>
-| found_in4 = <SOURCE4>
-| foundin_icon4 = <SOURCEHYPHENED4>
-| found_in5 = <SOURCE5>
-| foundin_icon5 = <SOURCEHYPHENED5>
-}}The '''<NAME>''' is a [[Tools|tool]] in Moonbounce.
+<FOUNDIN>
+}}
+The '''<NAME>''' is a [[Tools|tool]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -406,23 +380,25 @@ def replace_template(template, item):
     else:
         new_template = replace_text(new_template, '<DROPS>', 'Yes')
         
-    for i in range(5):
+    source_sections = []
+    
+    for i, source in enumerate(item.sources):
         # if i = 0, then it's the first source, so don't add an index
         index = '' if i == 0 else i + 1
-        source_string = f'<SOURCE{index}>'
-        source_hyphen_string = f'<SOURCEHYPHENED{index}>'
+        found_section = foundinTemplate
         
-        # if the item has no sources, then set the source to 'Nothing'
         if i == 0 and len(item.sources) == 0:
-            new_template = replace_text(new_template, source_string, 'Nothing')
-            new_template = replace_text(new_template, source_hyphen_string, 'X.png')
-        elif i < len(item.sources):
-            # wrap the name and the image in a link to the source page
-            new_template = replace_text(new_template, source_string, f'[[{item.sources[i].name}]]')
-            new_template = replace_text(new_template, source_hyphen_string, f'{item.sources[i].name_hyphen}.png')
+            found_section = replace_text(found_section, '<SOURCE>', 'Nothing')
+            found_section = replace_text(found_section, '<SOURCEHYPHENED>', 'X.png')
         else:
-            new_template = replace_text(new_template, source_string, '')
-            new_template = replace_text(new_template, source_hyphen_string, '')
+            # wrap the name and the image in a link to the source page
+            found_section = replace_text(found_section, f'<SOURCE>', f'[[{source.name}]]')
+            found_section = replace_text(found_section, f'<SOURCEHYPHENED>', f'{source.name_hyphen}.png')
+        
+        found_section = replace_text(found_section, '<INDEX>', index)
+        source_sections.append(found_section)
+          
+    new_template = replace_text(new_template, '<FOUNDIN>', ''.join(source_sections))
 
     # check if the item has a recipe
     item_has_recipe = has_recipe(item.name)
@@ -744,11 +720,11 @@ if __name__ == '__main__':
     print(f'Loaded {len(items)} items and {len(recipes)} recipes.')
     print(f'Loaded {len(sources)} sources.')
     
-    # generate_wiki_articles(items)
+    generate_wiki_articles(items)
     
     # sort items by name
     items.sort(key=lambda x: x.name)    
     
-    generate_page_tables(items)
-    generate_cards_lists(items)
+    # generate_page_tables(items)
+    # generate_cards_lists(items)
     # download_images(items)

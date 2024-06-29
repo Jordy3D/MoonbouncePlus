@@ -14,7 +14,9 @@
 - Copy the info from the currently selected item to your clipboard (for data collection, such as for the [Moonbounce Wiki](https://moonbounce.wiki))
   - Click on the item's image to copy the item data
   - Ctrl+Right Click on the item's image download the image with its name formatted for the wiki
+- Copy the info for the Marketplace page you're currently on to your clipboard
 - Quick access buttons to the Marketplace, Inventory, and Directory pages
+- A link to the Moonbounce Wiki page for the currently selected item in your inventory
 
 ## Installation
 
@@ -35,7 +37,6 @@ This repo also contains a Python script to help generate wiki page template code
 - [ ] Add a toggle for horizontal/vertical Moonbounce Portal button layout
 - [ ] Add transparent mode to the Moonbounce Portal (ie: buttons and chat)
 - [ ] Add transparency and/or size options to the item drop notification
-- [ ] Add links to the Wiki for each item in the inventory
 
 ## Changelog
 
