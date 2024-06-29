@@ -92,6 +92,18 @@ h2 {
         padding: 5px;
         border-radius: 10px;
         border: 1px solid #000;
+        height: 30px;
+    }
+
+    .sort {
+        margin-left: auto;
+    }
+
+    select {
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid #000;
+        height: 30px;
     }
 }
 
@@ -104,6 +116,7 @@ p {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    justify-content: space-evenly;
 }
 
 .item {

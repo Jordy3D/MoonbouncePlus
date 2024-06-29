@@ -34,6 +34,10 @@
             <div class="searchbox">
                 <input type="text" id="search" placeholder="Search for an item..." onkeyup="searchItems()" />
             </div>
+            <div class="sort">
+                <label for="sort" hidden>Sort by:</label>
+                <select name="sort" id="sort" onchange="sortItems()"></select>
+            </div>
         </div>
         <!-- shows the Items, their recipes if they have one, and other various information -->
         <div id="items"></div>
