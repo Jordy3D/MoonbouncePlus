@@ -298,6 +298,21 @@ toolsPageTableItemTemplate = """
 #endregion
 
 #region Main Page Card Templates
+accessoryCardBodyTemplate = """
+== Accessory List ==
+<div class="card-container">
+<ITEMS>
+</div>"""
+
+accessoryCardItemTemplate = """
+{{Card
+|title=<NAME>
+|image=<NAMEHYPHENED>.png
+|rarity=<RARITY>
+|linktarget=<NAMEHYPHENED>
+}}
+"""
+
 materialCardBodyTemplate = """
 == Material List ==
 <div class="card-container">
@@ -678,12 +693,22 @@ def generate_page_tables(items):
 
 def generate_cards_lists(items):
     """Generate the material cards for the items in the items list."""
+    accessory_card_body = accessoryCardBodyTemplate
+    accessoryItems = []
+
     material_card_body = materialCardBodyTemplate
-    tool_card_body = toolCardBodyTemplte
     materialItems = []
+
+    tool_card_body = toolCardBodyTemplte
     toolItems = []
     
     for item in items:
+        if item.type.lower() == 'accessory':
+            new_item = accessoryCardItemTemplate
+            new_item = replace_text(new_item, '<NAME>', item.name)
+            new_item = replace_text(new_item, '<RARITY>', item.rarity.lower())
+            new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
+            accessoryItems.append(new_item)
         if item.type.lower() == 'material':
             new_item = materialCardItemTemplate
             new_item = replace_text(new_item, '<NAME>', item.name)
@@ -697,8 +722,12 @@ def generate_cards_lists(items):
             new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
             toolItems.append(new_item)
     
+    accessory_card_body = replace_text(accessory_card_body, '<ITEMS>', ''.join(accessoryItems))
     material_card_body = replace_text(material_card_body, '<ITEMS>', ''.join(materialItems))
     tool_card_body = replace_text(tool_card_body, '<ITEMS>', ''.join(toolItems))
+    
+    with open(os.path.join(script_dir, '..', 'wiki', 'accessories-cards.txt'), 'w', encoding='utf-8') as f:
+        f.write(accessory_card_body)
     
     with open(os.path.join(script_dir, '..', 'wiki', 'materials-cards.txt'), 'w', encoding='utf-8') as f:
         f.write(material_card_body)
@@ -706,6 +735,7 @@ def generate_cards_lists(items):
     with open(os.path.join(script_dir, '..', 'wiki', 'tools-cards.txt'), 'w', encoding='utf-8') as f:
         f.write(tool_card_body)
         
+    print('Generated accessory cards.')
     print('Generated material cards.')
     print('Generated tool cards.')
 #endregion
@@ -726,5 +756,5 @@ if __name__ == '__main__':
     items.sort(key=lambda x: x.name)    
     
     # generate_page_tables(items)
-    # generate_cards_lists(items)
+    generate_cards_lists(items)
     # download_images(items)
