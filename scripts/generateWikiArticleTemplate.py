@@ -1,6 +1,8 @@
 import json
 import os
 import re
+import requests
+import time
 
         
 # Initialize the path to the JSON file
@@ -9,7 +11,7 @@ data_path = os.path.join(script_dir, '..', 'data', 'MoonbouncePlus.json')
 
 recipes_enabled = False
 
-
+#region Classes
 class Item:
     """A class to represent an item in Moonbounce.
     
@@ -28,9 +30,11 @@ class Item:
             The rarity of the item.
         sources : list
             A list of sources where the item can be found.
+        uuid : str
+            The UUID of the item's image.
     """
     
-    def __init__(self, id, name, description, type, value, rarity, sources):
+    def __init__(self, id, name, description, type, value, rarity, sources, uuid=None):
         self.id = id
         self.name = name
         self.description = description
@@ -38,6 +42,7 @@ class Item:
         self.value = value
         self.rarity = rarity.lower().capitalize()
         self.sources = sources
+        self.uuid = uuid
         
         self.name_hyphen = format_name(name)
         
@@ -106,8 +111,8 @@ class MarketplaceItem:
         self.section = section
         self.cost = cost,
         self.info = info
-        
 
+#endregion
 
 # Reference for types and their plural forms
 type_to_types_dict = {
@@ -117,7 +122,9 @@ type_to_types_dict = {
     "tool": "Tools",
 }
     
-# Templates for the different types of items
+#region Templates
+
+#region Item Page Templates
 accessoryTemplate = """
 {{Infobox
 | name = <NAME>
@@ -259,8 +266,100 @@ Lorem Ipsum
 
 Placeholder
 """
+#endregion
 
-# Helper functions
+#region Main Page Templates
+accessoriesPageTableTemplate = """
+=== Released ===
+{| class="wikitable sortable mw-collapsible"
+!Preview
+!Name
+!Rarity
+|-<ITEMS>
+|}
+"""
+
+accessoriesPageTableItemTemplate = """
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px]]
+|[[<NAME>]]
+|<RARITY>
+|-"""
+
+
+materialsPageTableTemplate = """
+== Alternative Sortable Table ==
+{| class="wikitable sortable mw-collapsible mw-collapsed"
+|+
+!Preview
+!Name
+!Rarity
+|-<ITEMS>
+|}
+"""
+
+materialsPageTableItemTemplate = """
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px]]
+|[[<NAME>]]
+|<RARITY>
+|-"""
+
+
+toolsPageTableTemplate = """
+== Alternative Sortable Table ==
+{| class="wikitable sortable mw-collapsible mw-collapsed"
+|+
+!Preview
+!Name
+!Rarity
+|-<ITEMS>
+|}
+"""
+
+toolsPageTableItemTemplate = """
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px]]
+|[[<NAME>]]
+|<RARITY>
+|-"""
+
+#endregion
+
+#region Main Page Card Templates
+materialCardBodyTemplate = """
+== Material List ==
+<div class="card-container">
+<ITEMS>
+</div>"""
+
+materialCardItemTemplate = """
+{{Card
+|title=<NAME>
+|image=<NAMEHYPHENED>.png
+|rarity=<RARITY>
+|linktarget=<NAMEHYPHENED>
+}}
+"""
+
+
+toolCardBodyTemplte = """
+== Tool List ==
+<div class="card-container">
+<ITEMS>
+</div>"""
+
+toolCardItemTemplate = """
+{{Card
+|title=<NAME>
+|image=<NAMEHYPHENED>.png
+|rarity=<RARITY>
+|linktarget=<NAMEHYPHENED>
+}}
+"""
+
+#endregion
+
+#endregion
+
+#region Helper functions
 def replace_text(body, target, replacement):
     """Replace the target text in the body with the replacement text.
     
@@ -282,12 +381,9 @@ def has_recipe(item):
             return 'Yes'
     return 'No'
 
-
-
 def format_name(name):
     # formats the name from Item Name to Item_Name
     return name.replace(" ", "_")
-
 
 def replace_template(template, item):
     """Replace the placeholders in the template with the actual data."""
@@ -410,7 +506,41 @@ def check_if_in_marketplace(item_name, marketplace_items):
             return True
     return False
 
-# Main functions
+def download_images(items):
+    """Download the images for the items in the items list."""
+    for item in items:
+        
+        save_path = os.path.join(f'images/{item.type.lower()}')
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
+        save_path = os.path.join(save_path, f'{item.name_hyphen}.png')
+        
+        if not os.path.exists(save_path):
+            print(f'Downloading {item.name}...')
+            # download the image by combining the UUID with the normal image path
+            # https://moonbounce.gg/images/fp/<UUID>/c/f/preview.png
+            image_path = f'https://moonbounce.gg/images/fp/{item.uuid}/c/f/preview.png'
+            
+            # save the image into the images directory, in a folder named after the item type
+            image = requests.get(image_path)
+            
+            # save the image to the save path
+            with open(save_path, 'wb') as f:
+                f.write(image.content)
+
+                
+            # wait for 1 second before downloading the next image
+            time.sleep(1)
+        else:
+            print(f'{item.name} already exists.')
+            
+    print('Downloaded images.')
+#endregion
+
+
+#region Main functions
+
+#region Loading Data
 def load_data(data_path):
     """Load the data from the specified JSON file and populate the items and recipes lists."""
     
@@ -453,7 +583,7 @@ def load_data(data_path):
         if check_if_in_marketplace(item['name'], marketplace_items):
             item_sources.append(marketplace_source)
         
-        items.append(Item(item['id'], item['name'], item['description'], item['type'], item['value'], item['rarity'], item_sources))
+        items.append(Item(item['id'], item['name'], item['description'], item['type'], item['value'], item['rarity'], item_sources, item['uuid']))
         
     # Go through the recipes in the JSON file and create a new Recipe object for each one
     for recipe in data['recipes']:
@@ -468,7 +598,9 @@ def load_data(data_path):
             f.write(output + '\n\n')
     
     return items, recipes, sources
+#endregion
 
+#region Generating Wiki Data
 def generate_wiki_articles(items, print_file_names=False):
     """Generate the wiki articles for the items in the items list."""
     for item in items:
@@ -520,6 +652,91 @@ def generate_wiki_articles(items, print_file_names=False):
                     print(f'Writing {item.name} to file')
 
 
+def generate_page_tables(items):
+    """Generate the page tables for the items in the items list."""
+    accessories_table = accessoriesPageTableTemplate
+    materials_table = materialsPageTableTemplate
+    tools_table = toolsPageTableTemplate
+    accesoryItems = []
+    materialItems = []
+    toolItems = []
+    
+    for item in items:
+        if item.type.lower() == 'accessory':
+            new_item = accessoriesPageTableItemTemplate
+            new_item = replace_text(new_item, '<NAME>', item.name)
+            new_item = replace_text(new_item, '<RARITY>', item.rarity)
+            new_item = replace_text(new_item, '<NAMEFORMATTED>', format_name(item.name))
+            accesoryItems.append(new_item)
+        if item.type.lower() == 'material':
+            new_item = materialsPageTableItemTemplate
+            new_item = replace_text(new_item, '<NAME>', item.name)
+            new_item = replace_text(new_item, '<RARITY>', item.rarity)
+            new_item = replace_text(new_item, '<NAMEFORMATTED>', format_name(item.name))
+            materialItems.append(new_item)
+        if item.type.lower() == 'tool':
+            new_item = toolsPageTableItemTemplate
+            new_item = replace_text(new_item, '<NAME>', item.name)
+            new_item = replace_text(new_item, '<RARITY>', item.rarity)
+            new_item = replace_text(new_item, '<NAMEFORMATTED>', format_name(item.name))
+            toolItems.append(new_item)
+        
+    
+    accessories_table = replace_text(accessories_table, '<ITEMS>', ''.join(accesoryItems))
+    materials_table = replace_text(materials_table, '<ITEMS>', ''.join(materialItems))
+    tools_table = replace_text(tools_table, '<ITEMS>', ''.join(toolItems))
+    
+    with open(os.path.join(script_dir, '..', 'wiki', 'accessories-table.txt'), 'w', encoding='utf-8') as f:
+        f.write(accessories_table)
+        
+    with open(os.path.join(script_dir, '..', 'wiki', 'materials-table.txt'), 'w', encoding='utf-8') as f:
+        f.write(materials_table)
+        
+    with open(os.path.join(script_dir, '..', 'wiki', 'tools-table.txt'), 'w', encoding='utf-8') as f:
+        f.write(tools_table)
+        
+    print('Generated page tables for accessories.')
+    print('Generated page tables for materials.')
+    print('Generated page tables for tools.')
+
+
+def generate_cards_lists(items):
+    """Generate the material cards for the items in the items list."""
+    material_card_body = materialCardBodyTemplate
+    tool_card_body = toolCardBodyTemplte
+    materialItems = []
+    toolItems = []
+    
+    for item in items:
+        if item.type.lower() == 'material':
+            new_item = materialCardItemTemplate
+            new_item = replace_text(new_item, '<NAME>', item.name)
+            new_item = replace_text(new_item, '<RARITY>', item.rarity.lower())
+            new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
+            materialItems.append(new_item)
+        if item.type.lower() == 'tool':
+            new_item = toolCardItemTemplate
+            new_item = replace_text(new_item, '<NAME>', item.name)
+            new_item = replace_text(new_item, '<RARITY>', item.rarity.lower())
+            new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
+            toolItems.append(new_item)
+    
+    material_card_body = replace_text(material_card_body, '<ITEMS>', ''.join(materialItems))
+    tool_card_body = replace_text(tool_card_body, '<ITEMS>', ''.join(toolItems))
+    
+    with open(os.path.join(script_dir, '..', 'wiki', 'materials-cards.txt'), 'w', encoding='utf-8') as f:
+        f.write(material_card_body)
+        
+    with open(os.path.join(script_dir, '..', 'wiki', 'tools-cards.txt'), 'w', encoding='utf-8') as f:
+        f.write(tool_card_body)
+        
+    print('Generated material cards.')
+    print('Generated tool cards.')
+#endregion
+
+#endregion
+
+
 if __name__ == '__main__':
     # Initialize the lists to store the items, recipes, and sources
     items, recipes, sources = load_data(data_path)
@@ -527,4 +744,11 @@ if __name__ == '__main__':
     print(f'Loaded {len(items)} items and {len(recipes)} recipes.')
     print(f'Loaded {len(sources)} sources.')
     
-    generate_wiki_articles(items)
+    # generate_wiki_articles(items)
+    
+    # sort items by name
+    items.sort(key=lambda x: x.name)    
+    
+    generate_page_tables(items)
+    generate_cards_lists(items)
+    # download_images(items)

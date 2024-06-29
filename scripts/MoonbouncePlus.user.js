@@ -1070,9 +1070,9 @@ function addMoonbouncePlusButton() {
     // button.innerText = "Moonbounce Plus";
     button.id = "moonbounce-plus-button";
 
-    // add an image inside the button https://i.imgur.com/5sie5Oq.png
+    // add an image inside the button
     let img = document.createElement("img");
-    img.src = "https://i.imgur.com/5sie5Oq.png";
+    img.src = "https://i.imgur.com/KzKSn2S.png";
     button.appendChild(img);
 
     // add an event listener to the button
