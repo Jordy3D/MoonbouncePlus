@@ -1695,7 +1695,7 @@ function floatingNotification(message, duration = 3000, css = "", position = "to
             notification.style.transform = "translate(-50%, -50%)";
             break;
         default:
-            notification.style.position = "absolute";
+            notification.style.position = "fixed";
             notification.style.top = position.top;
             notification.style.left = position.left;
             break;
