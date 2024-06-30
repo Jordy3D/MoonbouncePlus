@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.4
+// @version      0.9.5
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -68,6 +68,8 @@
 //          - Improved script loading to minimise the need for refreshes
 //          - Cleaned up the Regions in the script
 // 0.9.4    - Fixed an issue that could cause the script to try to load things it shouldn't multiple times
+// 0.9.5    - Try a few things to improve the script's performance by reducing the number of times it looks for things
+//          - Prep work for normal selectors to be used on the Moonbounce Portal for styling
 //
 // ==/Changelog==
 
@@ -114,7 +116,7 @@ class InventoryItem {
 function loadData(isLocal = false) {
     if (items != null && recipes != null) return;
 
-    console.log("Loading data...");
+    log("Loading data...");
 
     if (isLocal) {
         var data = require('../data/MoonbouncePlus.json');
@@ -133,18 +135,18 @@ function loadData(isLocal = false) {
     xhr.onload = function () {
         var status = xhr.status;
         if (status === 200) {
-            console.log(xhr.response);
+            // console.log(xhr.response);
 
             // get the items and recipes from the response json
             items = xhr.response.items;
             recipes = xhr.response.recipes || xhr.response.recipies;    // I misspelled recipes in the JSON file at first
 
-            console.log("Data loaded successfully");
-            console.log(`Items: ${items.length}`);
-            console.log(`Recipes: ${recipes.length}`);
+            log("Data loaded successfully");
+            log(`Items: ${items.length}`);
+            log(`Recipes: ${recipes.length}`);
 
         } else {
-            console.error('Failed to load data');
+            error('Failed to load data');
         }
     };
     xhr.send();
@@ -160,7 +162,6 @@ const targetSelector = [
     { name: "Inventory Controls", selector: ".S-h7a" },
     { name: "Selected Item Window", selector: "._base_7aiat_1" },
     { name: "Selected Item Details", selector: "._base_awewl_1" },
-    { name: "Moonbounce Portal Button Container", selector: "._base_11wdf_1" },
     { name: "Source List Item", selector: ".gf3oJ" },
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "._stack_count_252dr_52" },
@@ -176,6 +177,8 @@ const targetSelector = [
     { name: "Marketplace Item Details", selector: ".GPrFb" },
 
     { name: "Moonbounce Portal", selector: "[id='MOONBOUNCE.PORTAL']" },
+    { name: "Moonbounce Portal Root Container", selector: "[id*='moonbounce-root-container']" },
+    { name: "Moonbounce Portal Button Container", selector: "._base_11wdf_1" },
 ]
 const getTargetSelector = name => targetSelector.find(x => x.name == name).selector;
 
@@ -318,33 +321,35 @@ function init() {
 }
 
 function checkSite() {
-    // check if the current page is on the moonbounce.gg domain 
     var currentURL = window.location.href;
     var isOnMoonbounceSite = currentURL.includes("moonbounce.gg");
 
-    // if on the inventory page, load the data and add the event listener
+    // Stuff specifically for Moonbounce
     if (isOnMoonbounceSite) {
         if (isTargetURL(getTargetURL("Inventory"), true)) {
             loadData();
-
+            
             addCopyDetailstoItemImage();
             addWikiButton();
 
             addPonderButton();
             addAppraiseButton();
             addSortInventorySelect();
-
+            
             highlightUnknownItems();
-        }
-        else if (isTargetURL(getTargetURL("Marketplace"), true)) {
+        } else if (isTargetURL(getTargetURL("Marketplace"), true)) {
             addCopyMarketplaceDataButton();
         }
     }
 
-    setInterval(() => {
-        addMoonbouncePortalButtons();
-        addMoonbouncePortalCSS();
-    }, 1000);
+    // Stuff for the Moonbounce Portal, which can be on any site
+    moonbouncePortal = findMoonbouncePortal();                      // Attempt to find the portal once
+    if (moonbouncePortal != null) {                                 // If the portal's found, run the Moonbounce Portal functions
+        addMoonbouncePortalButtons(moonbouncePortal);
+        addMoonbouncePortalCSS(moonbouncePortal);
+        
+        assignCustomSelectorsToPortalElements(moonbouncePortal);
+    }
 }
 
 //#endregion
@@ -410,7 +415,7 @@ function addCopyDetailstoItemImage() {
         // if the item has an event listener, skip it
         if (item.classList.contains("item-uuid-event")) continue;
 
-        console.log("Adding event listener to item");
+        log("Adding event listener to item");
 
         // add an event listener to the item's parent
         item.parentElement.addEventListener("click", function () {
@@ -419,7 +424,7 @@ function addCopyDetailstoItemImage() {
 
             // also get the item name and id, and format it as
             // { id: "item id", name: "item name", uuid: "item uuid" }
-            console.log("Copying item info to clipboard");
+            log("Copying item info to clipboard");
 
             let { name, id, description, rarity, type, value, sources } = getDetails(details);
 
@@ -580,7 +585,7 @@ function checkRecipes() {
     let inventory = findInventory();
     if (inventory == null) return;
 
-    console.log("Pondering...");
+    log("Pondering...");
 
     let inventoryItems = inventory.querySelectorAll("img");
 
@@ -733,7 +738,7 @@ function addAppraiseButton() {
  * Evaluate the number of items in the inventory, and their total value
  */
 function evaluateInventory() {
-    console.log("Appraising...");
+    log("Appraising...");
 
     refreshInventoryArray();
 
@@ -893,7 +898,7 @@ function addSortInventorySelect() {
  * Sort the inventory by the selected method
  */
 function sortInventory(method) {
-    console.log(`Sorting inventory by ${method}`);
+    log(`Sorting inventory by ${method}`);
 
     refreshInventoryArray();
 
@@ -928,11 +933,7 @@ function sortInventory(method) {
 /**
  * Add CSS to the Moonbounce Portal to style the buttons
  */
-function addMoonbouncePortalCSS() {
-    findMoonbouncePortal();
-
-    if (moonbouncePortal == null) return;
-
+function addMoonbouncePortalCSS(portal) {
     addCSS(`
 #moonbounce-plus-button-container {
     --background-color: white;
@@ -965,7 +966,7 @@ function addMoonbouncePortalCSS() {
         --fill-icon: #e0e0e0;
     }
 }
-`, "moonbouncePortalCSS", moonbouncePortal);
+`, "moonbouncePortalCSS", portal);
 
     addCSS(`
     #moonbounce-plus-button-container
@@ -1013,31 +1014,60 @@ function addMoonbouncePortalCSS() {
                 pointer-events: none;
             }
         }
-    }`, "moonbouncePortalButtonCSS", moonbouncePortal);
+    }`, "moonbouncePortalButtonCSS", portal);
 }
+
+
+/**
+ * Adds custom selectors to the Moonbounce Portal elements to allow for easier styling
+ */
+function assignCustomSelectorsToPortalElements(portal) {
+    // if the portal already contains #classesAssigned, return
+    // let existing = portal.querySelector("#classesAssigned");
+    // if (existing != null) return;
+
+    const classes = [
+        { name: "Button Control Bar", selector: "._base_11wdf_1._nowrap_11wdf_12._justify_start_11wdf_21._align_center_11wdf_42._content_normal_11wdf_60", id: "button-control-bar", class: "" },
+        { name: "Chat Container", selector: "._base_1jhq3_1", id: "chat-container", class: null },
+        { name: "Chat Window", selector: "._base_1jhq3_1 ._content_1jhq3_13", id: "chat-window", class: null },
+    ]
+
+    for (let item of classes) {
+        let element = portal.querySelector(item.selector);
+        if (element == null) continue;
+        if (element.id == item.id) continue;
+        if (element.classList.contains(item.class)) continue;
+
+        let idToAssign = item.id;
+        let classToAdd = item.class;
+        if (idToAssign != "" && idToAssign != null)
+            element.id = idToAssign;
+
+        if (classToAdd != "" && classToAdd != null)
+            element.classList.add(classToAdd);
+    }
+}
+
+
 
 /**
  * Add buttons to the Moonbounce Portal to quickly access Moonbounce features
  */
-function addMoonbouncePortalButtons() {
-    // if the Moonbounce Portal is not found, return
-    let portal = findMoonbouncePortal();
-    if (portal == null) return;
-
+function addMoonbouncePortalButtons(portal) {
     // add a button to go to the Moonbounce Plus GitHub Repository
-    addMoonbouncePlusButton();
+    addMoonbouncePlusButton(portal);
 
     // quick access buttons
-    addDirectoryButton();
-    addBackpackButton();
-    addMarketplaceButton();
+    addDirectoryButton(portal);
+    addBackpackButton(portal);
+    addMarketplaceButton(portal);
 }
 
 /**
  * Adds a button to the Moonbounce Portal 
  */
-function addMoonbouncePortalButton(button) {
-    let buttons = findMoonbouncePortalButtons();
+function addMoonbouncePortalButton(button, portal = null) {
+    let buttons = findMoonbouncePortalButtons(portal);
     if (buttons == null) return;
 
     let moonbouncePlusButtonContainer = buttons.querySelector("#moonbounce-plus-button-container");
@@ -1062,7 +1092,7 @@ function addMoonbouncePortalButton(button) {
 /**
  * Add button to go to Moonbounce Plus GitHub Repository
  */
-function addMoonbouncePlusButton() {
+function addMoonbouncePlusButton(portal) {
     let button = document.createElement("div");
     // button.innerText = "Moonbounce Plus";
     button.id = "moonbounce-plus-button";
@@ -1077,14 +1107,14 @@ function addMoonbouncePlusButton() {
         window.open("https://github.com/Jordy3D/MoonbouncePlus", "_blank");
     });
 
-    addMoonbouncePortalButton(button);
+    addMoonbouncePortalButton(button, portal);
 }
 
 /**
  * Add a button to go straight to the backpack
  * https://moonbounce.gg/u/@me/backpack
  */
-function addBackpackButton() {
+function addBackpackButton(portal) {
     let button = document.createElement("div");
     button.id = "backpack-button";
 
@@ -1102,14 +1132,14 @@ function addBackpackButton() {
         window.open("https://moonbounce.gg/u/@me/backpack", "_blank");
     });
 
-    addMoonbouncePortalButton(button);
+    addMoonbouncePortalButton(button, portal);
 }
 
 /**
  * Add a button to go straight to the directory
  * https://moonbounce.gg/u/@me/directory
  */
-function addDirectoryButton() {
+function addDirectoryButton(portal) {
     let button = document.createElement("div");
     button.id = "directory-button";
 
@@ -1125,14 +1155,14 @@ function addDirectoryButton() {
         window.open("https://moonbounce.gg/u/@me/directory", "_blank");
     });
 
-    addMoonbouncePortalButton(button);
+    addMoonbouncePortalButton(button, portal);
 }
 
 /**
  * Add a button to go straight to the marketplace
  * https://moonbounce.gg/u/@me/marketplace
  */
-function addMarketplaceButton() {
+function addMarketplaceButton(portal) {
     let button = document.createElement("div");
     button.id = "marketplace-button";
 
@@ -1148,7 +1178,7 @@ function addMarketplaceButton() {
         window.open("https://moonbounce.gg/u/@me/marketplace", "_blank");
     });
 
-    addMoonbouncePortalButton(button);
+    addMoonbouncePortalButton(button, portal);
 }
 //#endregion
 
@@ -1298,7 +1328,7 @@ function addWikiButton() {
 
         openWikiPage(formattedName);
     });
-        
+
     buttonContainer.appendChild(button);
 
     // add some CSS to the button
@@ -1400,12 +1430,30 @@ function findSelectedItemWindow() {
  * Find Moonbounce Container
  */
 function findMoonbounceContainer() {
+    // find all elements whose id starts with moonbounce-ext-container
+    let containers = document.querySelectorAll("[id^='moonbounce-ext-container']");
+    if (containers == null) return;
 
-    // id starts with moonbounce-ext-container
-    let container = document.querySelector("[id^='moonbounce-ext-container']");
+    // get the last container in the list, as it is the most recent
+    let container = containers[containers.length - 1];
     if (container == null) return;
 
+    clearOtherContainers(containers, container);
+
     return container;
+}
+
+/**
+ * Clear all containers except the current container
+ * @param {Array} containers - the list of all containers
+ * @param {Element} currentContainer - the container to keep
+ */
+function clearOtherContainers(containers, currentContainer) {
+    // remove all containers that are not the current container
+    for (let c of containers) {
+        if (c != currentContainer)
+            c.remove();
+    }
 }
 
 /**
@@ -1421,7 +1469,7 @@ function findMoonbouncePortal() {
     let portal = shadowRoot.querySelector(getTargetSelector("Moonbounce Portal"));
     if (portal == null) return;
 
-    moonbouncePortal = portal;
+    portal = portal;
 
     return portal;
 }
@@ -1429,15 +1477,17 @@ function findMoonbouncePortal() {
 /**
  * Find the Moonbounce Portal buttons on the page
  */
-function findMoonbouncePortalButtons() {
-    findMoonbouncePortal();
-    if (moonbouncePortal == null) return;
+function findMoonbouncePortalButtons(portal = null) {
+    if (portal == null) portal = findMoonbouncePortal();
+    if (portal == null) return;
 
     // set the button parent to the portal's second div child (the first few elements are styles, so find the second DIV
-    let moonbouncePortalChildren = moonbouncePortal.children;
+    let moonbouncePortalChildren = portal.children;
     if (moonbouncePortalChildren == null) return;
     // delete all non-div children from the list (not from the DOM)
     moonbouncePortalChildren = Array.from(moonbouncePortalChildren).filter(x => x.tagName == "DIV");
+    // delete all divs with an id
+    moonbouncePortalChildren = moonbouncePortalChildren.filter(x => x.id == "");
     // get the second div child
     let buttonParent = moonbouncePortalChildren[1];
 
@@ -1586,15 +1636,30 @@ function createSvgElement(width, height, pathData, fill, offset = { x: 0, y: 0 }
  * Returns the result of an evaluation and logs a message based on the result
  */
 function returnMessage(statement, trueMessage = "", falseMessage = "") {
-    if (statement) {
-        if (trueMessage != "") console.log(trueMessage);
-        return true;
-    }
-    else {
-        if (falseMessage != "") console.log(falseMessage);
-        return false;
-    }
+    message = statement ? trueMessage : falseMessage;
+    if (message != "") log(message);
+    return statement;
 }
+
+
+function log(message) {
+    // add a tag at the start of the message saying "MB+" in a div with white text, a black background, red left border and blue right border
+    let tag = `%cMB+`;
+    let tagStyle = "background-color: black; color: white; padding: 2px 4px; border-left: 4px solid red; border-right: 4px solid blue;";
+
+    // clear the style before the message
+    console.log(tag, tagStyle, message);
+}
+
+function error(message) {
+    // add a tag at the start of the message saying "MB+" in a div with white text, a black background, red left border and blue right border
+    let tag = `%cMB+`;
+    let tagStyle = "background-color: black; color: white; padding: 2px 4px; border-left: 4px solid red; border-right: 4px solid blue;";
+
+    // clear the style before the message
+    console.error(tag, tagStyle, message);
+}
+
 
 /**
  * Download a file from a URL
