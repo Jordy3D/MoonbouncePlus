@@ -2229,6 +2229,16 @@
             "sources": ["Soup's Goodies"]
         },
         {
+            "id": 563,
+            "name": "Mermaid Tiara",
+            "uuid": "96956d91-23b3-42af-a559-5b76671fdbee",
+            "description": "Your ticket to underwater royalty,  no gills required. Beach hair not included,  but the attitude? That's all you,  fish face.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 567,
             "name": "Sparkler",
             "uuid": "56dcfab7-c5dc-4619-ba31-5218f0376463",
@@ -2236,6 +2246,26 @@
             "rarity": "COMMON",
             "type": "ACCESSORY",
             "value": 5,
+            "sources": []
+        },
+        {
+            "id": 574,
+            "name": "Sliced Coconut",
+            "uuid": "c398574e-de7e-46ea-ac82-9f094441ba01",
+            "description": "Perfect for snacking or fooling yourself that your oatmeal is exotic.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 576,
+            "name": "Watermelon Slice",
+            "uuid": "4665d145-8586-4088-8716-b9a939326f26",
+            "description": "Nature's juice box. Handle included.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
             "sources": []
         }
     ],
