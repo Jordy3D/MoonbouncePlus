@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.5
+// @version      0.9.6
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -70,6 +70,7 @@
 // 0.9.4    - Fixed an issue that could cause the script to try to load things it shouldn't multiple times
 // 0.9.5    - Try a few things to improve the script's performance by reducing the number of times it looks for things
 //          - Prep work for normal selectors to be used on the Moonbounce Portal for styling
+// 0.9.6    - Fix URL being too specific for targetURL check on Moonbounce site
 //
 // ==/Changelog==
 
