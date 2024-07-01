@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonbounce Hat Preview</title>
+
+    <link rel="stylesheet" href="css/magic.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* a style for the main element */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #preview {
+            image-rendering: pixelated;
+        }
+
+        /* a style for the section element */
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+
+            /* a style for the input element */
+            input {
+                margin-bottom: 1rem;
+            }
+
+            #previews {
+                display: flex;
+                gap: 1rem;
+            }
+
+            /* a style for the canvas element */
+            canvas {
+                border: 1px solid #333;
+                border-radius: 5px;
+                padding: 1rem;
+            }
+
+            /* a style for the image-preview element */
+            #image-preview {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+
+                min-height: 200px;
+                min-width: 200px;
+                border: 1px solid #333;
+                border-radius: 5px;
+
+                /* a style for the img element */
+                img {
+                    max-width: 100%;
+                    max-height: 200px;
+                    border-radius: 5px;
+
+                    image-rendering: pixelated;
+                }
+
+                /* a style for the div element */
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+            }
+        }
+
+        /* if the width gets below 600 */
+        @media (max-width: 600px) {
+            /* a style for the section element */
+            section {
+                padding: 0.5rem;
+
+                /* a style for the input element */
+                input {
+                    margin-bottom: 0.5rem;
+                }
+
+                #previews {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+
+                /* a style for the canvas element */
+                canvas {
+                    padding: 0.5rem;
+                }
+
+                /* a style for the image-preview element */
+                #image-preview {
+                    gap: 0.5rem;
+
+                    min-height: 100px;
+                    min-width: 100px;
+
+                    /* a style for the img element */
+                    img {
+                        max-height: 100px;
+                    }
+                }
+            }
+        }
+    </style>
+
+    <script>
+        // a list of image files in the /image directory, the character's name, and the height offset of their hat
+        var characters = [
+            { file: 'image/character/Rollo.png', name: 'Rollo', hatOffset: 60, },
+            { file: 'image/character/Devo.png', name: 'Devo', hatOffset: 44, },
+            { file: 'image/character/Mr._Man.png', name: 'Mr. Man', hatOffset: 54, },
+            { file: 'image/character/Bumpy.png', name: 'Bumpy', hatOffset: 47, },
+            { file: 'image/character/Puff.png', name: 'Puff', hatOffset: 49, },
+            { file: 'image/character/Pengu.png', name: 'Pengu', hatOffset: 60, },
+        ]
+    </script>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <!-- a section to drop an image into the page and a window to display that image on top of 6 characters-->
+        <section>
+            <div id="controls">
+                <input type="file" id="file" accept="image/*">
+                <!-- button to clear and redraw the characters -->
+                <!-- <button id="reset">Reset</button> -->
+            </div>
+            <!-- previews -->
+            <div id="previews">
+                <canvas id="preview"></canvas>
+                <div id="image-preview"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+    <script>
+        // get the input elements
+        const file = document.getElementById('file');
+        const reset = document.getElementById('reset');
+
+        // get the preview elements
+        const preview = document.getElementById('preview');
+        const imagePreview = document.getElementById('image-preview');
+
+        // Define variables
+        var verticalGap = 50;
+        var horizontalGap = 20;
+        var startHeight = 30;
+        var characterSize = null;
+
+        var characterPositions = [];
+
+        function setCanvasSize(width, height) {
+            // set the width and height of the canvas
+            preview.width = width;
+            preview.height = height;
+        }
+
+
+        function drawImageToCanvas(image, position, size, clear = false) {
+            // get the canvas context
+            const context = preview.getContext('2d');
+            if (clear) {
+                // clear the canvas
+                context.clearRect(0, 0, preview.width, preview.height);
+            }
+
+            // if image = null, clear the canvas
+            if (image === null) {
+                context.clearRect(position.x, position.y, size.width, size.height);
+                return;
+            }
+
+            // draw the character to the canvas
+            context.drawImage(image, position.x, position.y, size.width, size.height);
+        }
+
+        function roundToPowerOfTwo(value) {
+            return Math.pow(2, Math.ceil(Math.log2(value)));
+        }
+
+        function renderCharacters() {
+            // get the width and height of the preview element
+            var width = preview.width;
+            var height = preview.height;
+
+            // Adjust the size calculation to account for the gaps
+            // There are 2 gaps horizontally and vertically, hence the -2 * gap
+            var size = (Math.min(width - 2 * horizontalGap, height - 2 * verticalGap) / 3);
+            // round the characters to the nearest power of 2
+            size = roundToPowerOfTwo(size);
+
+            characterSize = size;
+
+            startHeight = size;
+
+            for (let i = 0; i < characters.length; i++) {
+                // get the image object
+                const image = new Image();
+                image.src = characters[i].file;
+                image.onload = function () {
+                    // Adjust the x and y position to include the gap
+                    const x = (i % 3) * (size + horizontalGap);
+                    const y = Math.floor(i / 3) * (size + verticalGap) + startHeight;
+
+                    // draw the image to the canvas
+                    drawImageToCanvas(image, { x: x, y: y }, { width: size, height: size });
+
+                    characterPositions[i] = { x: x, y: y };
+                };
+            }
+        }
+
+        // set the width and height of the canvas
+        setCanvasSize(256, 256);
+
+        // call the renderCharacters function
+        renderCharacters();
+
+
+        file.addEventListener('click', function () {
+            resetCanvas();
+        });
+
+
+        // listen for the change event on the file input element
+        file.addEventListener('change', function () {
+
+            // get the file object
+            const fileObject = file.files[0];
+            // create a new FileReader object
+            const reader = new FileReader();
+
+            // listen for the load event on the FileReader object
+            reader.addEventListener('load', function () {
+                // create a new Image object
+                const image = new Image();
+                image.addEventListener('load', function () {
+                    // resetCanvas();
+
+                    for (let i = 0; i < characters.length; i++) {
+                        const character = characters[i];                // Get the character object to reference for the hat offset
+                        const position = characterPositions[i];         // Get the character's position to draw the hat at the correct position
+                        const size = characterSize;                     // Get the character's size to draw the hat at the correct size
+
+                        // calculate the hat position based on the size of the character and its y position
+                        const hatPosCalculated = position.y - character.hatOffset;
+
+                        // draw the character to the canvas
+                        drawImageToCanvas(image, { x: position.x, y: hatPosCalculated }, { width: size, height: size });
+                    }
+                });
+
+                // set the src of the Image object to the result of the FileReader object
+                image.src = reader.result;
+
+                // create a new Image object
+                const imagePreviewElement = new Image();
+                // set the src of the Image object to the result of the FileReader object
+                imagePreviewElement.src = reader.result;
+
+                // append the Image object to the image-preview element
+                imagePreview.innerHTML = '';
+                imagePreview.appendChild(imagePreviewElement);
+            });
+
+            // read the file object as a data URL
+            reader.readAsDataURL(fileObject);
+        });
+
+        function resetCanvas() {
+            // clear the canvas
+            drawImageToCanvas(null, { x: 0, y: 0 }, { width: preview.width, height: preview.height }, true);
+
+            // call the renderCharacters function
+            renderCharacters();
+
+            // clear the image-preview element
+            imagePreview.innerHTML = '';
+        }
+
+
+        // listen for the click event on the reset button
+        reset.addEventListener('click', function () {
+            // call the resetCanvas function
+            resetCanvas();
+        });
+    </script>
+</body>
+
+</html>
