@@ -1399,6 +1399,9 @@ function isTargetURL(targetURL, skipQuery = false) {
         targetURL = targetURL.split("?")[0];
     }
 
+    // find if the targetURL is in the currentURL
+    if (currentURL.includes(targetURL)) return true;
+
     return currentURL == targetURL;
 }
 
