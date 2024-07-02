@@ -6,6 +6,7 @@
 
 ## Features
 
+- OSRS chat effects! Use most of the chat effects you're familiar with from OldSchool RuneScape!
 - Ponder for potential new crafting opportunities based on your inventory  
   ![chrome_DU5zjnsLiU](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/3a386947-a633-405b-9ed4-5e3432abe4c2)
 - Appraise the value of your inventory, as well as how many items are contained within (both total and unique)  
@@ -31,12 +32,14 @@ This repo also contains a Python script to help generate wiki page template code
 ## Known Issues
 
 - Sometimes the script fails to download the data file before you click on something, causing the script to not work properly. If this happens, simply refresh the page and try again.
+- The script may not work properly if the Moonbounce website is updated and the script is not updated to match it. If this happens, please open an issue on this repo.
 
 ## To-Do
 
 - [ ] Add a toggle for horizontal/vertical Moonbounce Portal button layout
 - [ ] Add transparent mode to the Moonbounce Portal (ie: buttons and chat)
 - [ ] Add transparency and/or size options to the item drop notification
+- [ ] Add settings to toggle features on and off
 
 ## Changelog
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.7
+// @version      0.10.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -73,6 +73,8 @@
 //          - Prep work for normal selectors to be used on the Moonbounce Portal for styling
 // 0.9.6    - Fix URL being too specific for targetURL check on Moonbounce site
 // 0.9.7    - Update selected item source class to keep up with Moonbounce changes
+// 0.10.0   - OSRS Effects in chat!
+//              - Currently limited to the Chat Window (not the speech bubbles)
 //
 // ==/Changelog==
 
@@ -80,7 +82,6 @@
 //
 // - Add more items and recipes (endless task)
 // - Add more classes to find elements on the page (endless task)
-// - Add buttons to go to the Marketplace and Backpack on the Moonbounce Portal (whenever it's active on a page)
 //
 // ==/TODO==
 
@@ -355,10 +356,7 @@ function checkSite() {
 
         assignCustomSelectorsToPortalElements(moonbouncePortal);
 
-        // // INCOMPLETE
-        // if (observer == null) {
-        //     observer = addMessageChecker(moonbouncePortal);
-        // }
+        observer = addMessageChecker(moonbouncePortal);
     }
 }
 
@@ -1025,6 +1023,285 @@ function addMoonbouncePortalCSS(portal) {
             }
         }
     }`, "moonbouncePortalButtonCSS", portal);
+
+    addCSS(`
+/* 
+
+OSRS EFFECTS!!!!!!!
+
+*/
+
+#chat-window {
+    --rs-red: red;
+    --rs-cyan: cyan;
+    --rs-yellow: yellow;
+    --rs-green: lime;
+    --rs-purple: magenta;
+  
+  
+    --rs-blue: blue;
+    --rs-dark-green: green;
+}
+
+.rs-red {
+    color: var(--rs-red);
+}
+.rs-cyan {
+    color: var(--rs-cyan);
+}
+.rs-yellow {
+    color: var(--rs-yellow);
+}
+.rs-green {
+    color: var(--rs-green);
+}
+.rs-purple {
+    color: var(--rs-purple);
+}
+
+/* flash1: red/yellow flash */
+/* flash2: cyan/blue flash */
+/* flash3: light/dark green flash */
+
+.rs-flash1 {
+    animation: flash1 1s infinite;
+}
+
+/* flash1 */
+@keyframes flash1 {
+    0%, 50% {
+        color: var(--rs-red);
+    }
+    50.1%, 100% {
+        color: var(--rs-yellow);
+    }
+}
+
+.rs-flash2 {
+    animation: flash2 1s infinite;
+}
+
+/* flash2 */
+@keyframes flash2 {
+    0%, 50% {
+        color: var(--rs-cyan);
+    }
+    50.1%, 100% {
+        color: var(--rs-blue);
+    }
+}
+
+.rs-flash3 {
+    animation: flash3 1s infinite;
+}
+
+/* flash3 */
+@keyframes flash3 {
+    0%, 50% {
+        color: var(--rs-green);
+    }
+    50.1%, 100% {
+        color: var(--rs-dark-green);
+    }
+}
+/* 
+"glow1", // red/blue fade
+"glow2", // red/purple/blue fade
+"glow3", // white/green/blue fade */
+
+.rs-glow1 {
+    animation: glow1 1s infinite;
+}
+@keyframes glow1 {
+    0%, 100%{
+        color: var(--rs-red);
+    }
+    50%{
+        color: var(--rs-blue);
+    }
+}
+
+.rs-glow2 {
+    animation: glow2 1s infinite;
+}
+@keyframes glow2 {
+    0%, 100%{
+        color: var(--rs-red);
+    }
+    33%{
+        color: var(--rs-purple);
+    }
+    66%{
+        color: var(--rs-blue);
+    }
+}
+
+.rs-glow3 {
+    animation: glow3 3s infinite;
+}
+@keyframes glow3 {
+    0%, 100%{
+        color: white;
+    }
+    33%{
+        color: var(--rs-green);
+    }
+    66%{
+        color: var(--rs-blue);
+    }
+}
+
+
+
+/* in the .rs-wave element, animate the children up and down, offset from each other by 50ms */
+.rs-wave1, .rs-wave2 {
+    display: inline-block;
+    position: relative;
+  
+  overflow-x: visible;
+}
+
+.rs-wave1 > * {
+    position: relative;
+    animation: wave1 1s infinite;
+  
+  display: inline-block;
+}
+
+.rs-wave1 > *:nth-child(5n) {
+    animation-delay: -0.5s;
+}
+.rs-wave1 > *:nth-child(5n-1) {
+    animation-delay: -0.4s;
+}
+.rs-wave1 > *:nth-child(5n-2) {
+    animation-delay: -0.3s;
+}
+.rs-wave1 > *:nth-child(5n-3) {
+    animation-delay: -0.2s;
+}
+.rs-wave1 > *:nth-child(5n-4) {
+    animation-delay: -0.1s;
+}
+
+
+@keyframes wave1 {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.rs-wave2 > * {
+    position: relative;
+    animation: wave2 1s infinite linear;
+  
+  display: inline-block;
+}
+
+.rs-wave2 > *:nth-child(5n) {
+    animation-delay: -0.5s;
+}
+.rs-wave2 > *:nth-child(5n-1) {
+    animation-delay: -0.4s;
+}
+.rs-wave2 > *:nth-child(5n-2) {
+    animation-delay: -0.3s;
+}
+.rs-wave2 > *:nth-child(5n-3) {
+    animation-delay: -0.2s;
+}
+.rs-wave2 > *:nth-child(5n-4) {
+    animation-delay: -0.1s;
+}
+
+
+@keyframes wave2 {
+    0%, 100% {
+        transform: translate(0,0);
+    }
+    50% {
+        transform: translate(5px, 5px);
+    }
+}
+
+
+.rs-scroll > span
+{
+    animation: scroll 3s infinite linear;
+    display: inline-block;
+}
+
+/* scroll from the right to the left, stopping in the middle for a bit */
+@keyframes scroll {
+    0%, 10% {
+        transform: translateX(110%);
+    }
+    30%, 70% {
+        transform: translateX(0%);
+    }
+  
+    90%, 100%{
+      transform: translatex(-100%);
+    }
+}
+
+.rs-slide > span
+{
+    animation: slide 3s infinite linear;
+    display: inline-block;
+}
+
+/* scroll from the right to the left, stopping in the middle for a bit */
+@keyframes slide {
+    0%, 10% {
+        transform: translateY(-100%);
+    }
+    30%, 70% {
+        transform: translateY(0%);
+    }
+  
+    90%, 100%{
+      transform: translateY(100%);
+    }
+}
+
+.checked {
+    padding: 0;
+}
+
+.rs-rainbow {
+    animation: rainbow 5s infinite linear;
+}
+
+@keyframes rainbow {
+    0% {
+        color: var(--rs-red);
+    }
+    16.666% {
+        color: var(--rs-yellow);
+    }
+    33.333% {
+        color: var(--rs-green);
+    }
+    50% {
+        color: var(--rs-cyan);
+    }
+    66.666% {
+        color: var(--rs-blue);
+    }
+    83.333% {
+        color: var(--rs-purple);
+    }
+    100% {
+        color: var(--rs-red);
+    }
+}
+
+
+  `, "osrsEffectsCSS", portal);
 }
 
 
@@ -1216,45 +1493,118 @@ function addMarketplaceButton(portal) {
 //#region Chat Notifications
 var lastMessage = "";
 
+function handleNewMessageSameAuthor(mutation) {
+    // log("New message detected from same author");
+
+    let messageText = mutation.target.querySelector("[class*='_message_']:last-child");
+    if (messageText == null) return;
+
+    // if the message has the class "checked", return
+    if (messageText.classList.contains("checked")) return;
+
+    let messageAuthor = mutation.target.querySelector("[class^='_display_name_']");
+
+    let newMessage = messageText.innerText;
+    log(`New message by ${messageAuthor.innerText}: ${newMessage}`);
+
+    // add the class "checked" to the message
+    messageText.classList.add("checked");
+
+    // try and parse the message to see if it has an effect tag
+    let parsedMessage = parseMessage(newMessage);
+    if (parsedMessage != newMessage) {
+        messageText.innerHTML = parsedMessage;
+    }
+}
+
+function handleNewMessageNewAuthor(mutation) {
+    // log("New message detected from new author");
+
+    // find the second last message in the message feed
+    // let messageText = mutation.target.querySelector(">div:nth-last-child(2)");
+    let messageTarget = mutation.target.children[mutation.target.children.length - 2];
+    let messageText = messageTarget.querySelector("[class*='_message_'");
+    if (messageText == null) return;
+
+    // if the message has the class "checked", return
+    if (messageText.classList.contains("checked")) return;
+
+    let messageAuthor = messageTarget.querySelector("[class^='_display_name_']");
+    let newMessage = messageText.innerText;
+
+    log(`New message by ${messageAuthor.innerText}: ${newMessage}`);
+
+    // add the class "checked" to the message
+    messageText.classList.add("checked");
+
+    // try and parse the message to see if it has an effect tag
+    let parsedMessage = parseMessage(newMessage);
+    if (parsedMessage != newMessage) {
+        messageText.innerHTML = parsedMessage;
+    }
+}
+
+function handleNewMessageFromScratch(mutation) {
+    // log("New message detected from scratch");
+
+    let messageText = mutation.target.querySelector("[class*='_message_']:last-child");
+    if (messageText == null) return;
+
+    // if the message has the class "checked", return
+    if (messageText.classList.contains("checked")) return;
+
+    let messageAuthor = mutation.target.querySelector("[class^='_display_name_']");
+
+    let newMessage = messageText.innerText;
+    log(`New message by ${messageAuthor.innerText}: ${newMessage}`);
+
+    // add the class "checked" to the message
+    messageText.classList.add("checked");
+
+    // try and parse the message to see if it has an effect tag
+    let parsedMessage = parseMessage(newMessage);
+    if (parsedMessage != newMessage) {
+        messageText.innerHTML = parsedMessage;
+    }
+}
+
+let messageObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        // log("New message detected");
+        // this will either grab the parent message feed if the target is a child of it, or the message feed itself if that is what changed (such as on the first message sent)
+        let messageFeed = mutation.target.closest("#message-feed") || mutation.target.querySelector("[class*='_middle_']");
+        if (messageFeed == null) return;
+
+        // if the mutation parent matches the selector [class*='_middle_'], handle the new message from a new author
+        if (mutation.target.matches("[class*='_middle_']"))
+            handleNewMessageNewAuthor(mutation);
+        else if (mutation.target.matches("[class*='_message_']"))
+            handleNewMessageSameAuthor(mutation);
+        else
+            handleNewMessageFromScratch(mutation);
+
+        // add stale class to the message feed
+        messageFeed.classList.remove("fresh");
+    });
+});
+
+
 // add a checker on the #message-feed to check for new messages and log them
 function addMessageChecker(portal) {
     let messageFeed = portal.querySelector("#message-feed");
     if (returnMessage(messageFeed == null, "Message Feed not found")) return;
 
-    // get the change to the message feedm and only send a notification if the window is not focused
-    let observer = new MutationObserver(function (mutations) {
+    messageFeed = messageFeed.parentElement;
 
-        for (let mutation of mutations) {
-            for (let node of mutation.addedNodes) {
-                if (node.nodeType === 1) {
-                    let messages = node.querySelectorAll("[class^='_message_']");
-                    if (messages == null) continue;
-
-                    for (let message of messages) {
-
-
-                        let messageText = message.innerText;
-
-                        if (messageText == lastMessage) continue;
-                        lastMessage = messageText;
-
-                        // check if the window is focused
-                        if (document.hasFocus()) return;
-
-                        // create a chrome notification
-                        testNotification(messageText);
-                    }
-                }
-            }
-        }
-    });
-
-
-    observer.observe(messageFeed, { childList: true });
-
-    return observer;
+    // if the messageFeed has the class "stale"
+    if (!messageFeed.classList.contains("fresh")) {
+        log("Adding fresh message observer to message feed");
+        messageObserver.observe(messageFeed, { childList: true, subtree: true });
+        // remove the class "stale" from the messageFeed
+        messageFeed.classList.add("fresh");
+    }
 }
-//#endregion
+
 
 /**
  * Notification
@@ -1271,15 +1621,28 @@ function testNotification(message) {
 }
 
 const effectTags = [
-    "yellow:",
-    "red",
-    "green:",
-    "cyan",
-    "purple",
-    "white",
-    "flash1", // red/yellow flash
-    "flash2", // cyan/blue flash
-    "flash3", // light/dark green flash
+    { name: "yellow", type: "colour" },
+    { name: "red", type: "colour" },
+    { name: "green", type: "colour" },
+    { name: "cyan", type: "colour" },
+    { name: "purple", type: "colour" },
+    { name: "white", type: "colour" },
+    { name: "rainbow", type: "colour" },
+
+    { name: "flash1", type: "colour" }, // red/yellow flash
+    { name: "flash2", type: "colour" }, // cyan/blue flash
+    { name: "flash3", type: "colour" }, // light/dark green flash
+
+    { name: "glow1", type: "colour" }, // red/blue fade
+    { name: "glow2", type: "colour" }, // red/purple/blue fade
+    { name: "glow3", type: "colour" }, // white/green/blue fade
+
+    { name: "wave1", type: "character" }, // wave effect 1
+    { name: "wave2", type: "character" }, // wave effect 2",
+    // { name: "shake", type: "character" }, // shake effect
+
+    { name: "scroll", type: "body" },   // scroll effect
+    { name: "slide", type: "body" },    // slide effect
 ]
 
 function parseMessage(message) {
@@ -1290,20 +1653,102 @@ function parseMessage(message) {
     let tagIndex = parsedMessage.indexOf(":");
     if (tagIndex == -1) return parsedMessage;
 
-    // look for the message starting with an "effect tag"
-    for (let tag of effectTags) {
-        let tagIndex = parsedMessage.indexOf(tag);
-        if (tagIndex == -1) continue;
+    // if the tag is the first character or last character, return
+    if (tagIndex == 0 || tagIndex == parsedMessage.length - 1) return parsedMessage;
 
-        // add a class called .rs-[tag] to the message as by surrounding it with a span
-        let wrappedMessage = `<span class="rs-${tag}">${parsedMessage}</span>`;
 
-        return wrappedMessage;
+
+    // find every tag in the message
+    let foundTags = parsedMessage.match(/(\w+):/g);
+    if (foundTags == null) return parsedMessage;
+
+    var realTags = [];
+
+    // for each tag in the message, remove the tag and colon from the message
+    for (let tag of foundTags) {
+
+        // if the tag is a valid effect tag, add it to the realTags array
+        let foundTag = effectTags.find(x => x.name == tag.replace(":", ""));
+        if (foundTag != null) {
+            realTags.push(foundTag);
+
+            // remove the tag and colon from the message
+            let fullTag = tag + ":";
+            parsedMessage = parsedMessage.replace(fullTag, "");
+        }
     }
 
-    return parsedMessage;
+    // if there are no real tags, return the parsed message
+    if (realTags.length == 0) return parsedMessage;
+
+    // remove the effect tags from the message
+    for (let tag of effectTags) {
+        let fullTag = tag.name + ":";
+        parsedMessage = parsedMessage.replace(fullTag, "");
+    }
+
+    // trim the message
+    parsedMessage = parsedMessage.trim();
+
+    var hasColourTag = false;
+    var hasCharacterTag = false;
+    var hasBodyTag = false;
+
+    classesToAdd = [];
+
+    // if there are real tags, add the effect tags to the message
+    for (let tag of realTags) {
+        if (tag.type == "colour" && !hasColourTag) {
+            hasColourTag = true;
+
+            classesToAdd.push(`rs-${tag.name}`);
+        }
+
+        if (tag.type == "character" && !hasCharacterTag) {
+            hasCharacterTag = true;
+
+            let spans = splitTextIntoSpans(parsedMessage);
+            parsedMessage = "";
+            for (let span of spans) {
+                parsedMessage += span.outerHTML;
+            }
+
+            classesToAdd.push(`rs-${tag.name}`);
+        }
+
+        if (tag.type == "body" && !hasBodyTag) {
+            hasBodyTag = true;
+
+            // wrap the message in a div with a span
+            parsedMessage = `<span>${parsedMessage}</span>`;
+
+            classesToAdd.push(`rs-${tag.name}`);
+        }
+
+    }
+
+    // add a class called .rs-[tag] to the message as by surrounding it with an rs tag
+    let wrappedMessage = `<rs class="${classesToAdd.join(" ")}">${parsedMessage}</rs>`;
+    return wrappedMessage;
 }
 
+function splitTextIntoSpans(text) {
+    let spans = [];
+    // split the input text into an array of characters
+    let characters = text.split("");
+
+    // for each character in the array, create a rsc element with the character as the text content
+    for (let character of characters) {
+        let span = document.createElement("rsc");
+        if (character == " ") character = " ";
+        span.textContent = character;
+        spans.push(span);
+    }
+
+    return spans;
+}
+
+//#endregion
 
 
 
@@ -1685,7 +2130,7 @@ function getDetails(details = null) {
 
     let sources = details.children[2];                                      // get the third child of the details element
     let sourceObjects = sources.querySelectorAll(getTargetSelector("Source List Item"));
-    
+
     // get the p from each source object and add it to the source list
     let sourceList = [];
     for (let source of sourceObjects) {
