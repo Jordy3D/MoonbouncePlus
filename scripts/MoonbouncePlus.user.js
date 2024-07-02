@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.10.0
+// @version      0.10.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -75,6 +75,10 @@
 // 0.9.7    - Update selected item source class to keep up with Moonbounce changes
 // 0.10.0   - OSRS Effects in chat!
 //              - Currently limited to the Chat Window (not the speech bubbles)
+// 0.10.1   - More selectors added to Moonbounce Portal elements
+//              - Prep work for Notification area when items are collected
+//              - Each character element's root (name, button, etc)
+//          - Custom name banner for little ol' me 
 //
 // ==/Changelog==
 
@@ -1302,6 +1306,64 @@ OSRS EFFECTS!!!!!!!
 
 
   `, "osrsEffectsCSS", portal);
+
+    addCSS(`
+.bane-banner {
+    background: black;
+    border-radius: 4px;
+    border-left: 4px solid red;
+    border-right: 4px solid #0095ff;
+
+    p {
+        display: flex;
+        position: relative;
+    }
+
+    ::before,
+    ::after {
+        content: "Bane";
+        font-size: inherit;
+        line-height: inherit;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+    
+        filter: blur(1px);
+    }
+
+    ::before {
+        color: red;
+        animation: redGlitch 1s infinite;
+    }
+    ::after {
+        color: #0095ff;
+        animation: blueGlitch 1s infinite;
+        animation-delay: 0.5s;
+    }
+}
+
+/* animate the before and after pseudoelements to look glitchy (moving left and right erratically) */
+@keyframes redGlitch {
+    0%   { transform: translateX(0); } 
+    15%  { transform: translateX(-3px); } 
+    35%  { transform: translateX(2px); } 
+    55%  { transform: translateX(-4px); } 
+    75%  { transform: translateX(1px); } 
+    100% { transform: translateX(0); }
+}
+
+@keyframes blueGlitch {
+    0%   { transform: translateX(0); }
+    10%  { transform: translateX(4px); }
+    30%  { transform: translateX(-2px); }
+    50%  { transform: translateX(5px); }
+    70%  { transform: translateX(-1px); }
+    90%  { transform: translateX(3px); }
+    100% { transform: translateX(0); }
+}`, "baneBannerCSS", portal);
 }
 
 
@@ -1312,6 +1374,7 @@ function assignCustomSelectorsToPortalElements(portal) {
     // if the portal already contains #classesAssigned, return
     // let existing = portal.querySelector("#classesAssigned");
     // if (existing != null) return;
+    assignLabelsToPortalChildren(portal);
 
     const classes = [
         { name: "Button Control Bar", selector: "._base_11wdf_1._nowrap_11wdf_12._justify_start_11wdf_21._align_center_11wdf_42._content_normal_11wdf_60", id: "button-control-bar", class: "" },
@@ -1321,6 +1384,8 @@ function assignCustomSelectorsToPortalElements(portal) {
         { name: "Message", selector: "#message-feed > div", id: null, class: "message", all: true },
         { name: "Message Content", selector: ".message .message_row", id: null, class: "message-content", all: true },
         { name: "Message Text", selector: ".message-content [class^='_message_'", id: null, class: "message-text", all: true },
+        { name: "Pickup Notification Container", selector: "div:nth-child(1) ._base_1d537_1", id: "pickup-notification-container", class: null },
+        { name: "Character Name Banner", selector: "[label='MBP.CHARACTER.NAME'] ._base_5l9jc_1", id: null, class: "character-name-banner", all: true },
     ]
 
     for (let item of classes) {
@@ -1354,8 +1419,68 @@ function assignCustomSelectorsToPortalElements(portal) {
         if (classToAdd != "" && classToAdd != null)
             element.classList.add(classToAdd);
     }
+
+    giveBaneSpecialBanner(portal);
 }
 
+function giveBaneSpecialBanner(portal) {
+    // if bane already has a banner, return
+    if (portal.querySelector(".bane-banner") != null) return;
+
+    let banners = portal.querySelectorAll(".character-name-banner");
+    if (banners == null) return;
+
+    for (let banner of banners) {
+        let name = banner.innerText;
+        if (name == "Bane")
+            banner.classList.add("bane-banner");
+    }
+}
+
+
+function assignLabelsToPortalChildren(portal) {
+    let children = portal.children;
+
+    // create an array of the children of the portal, ignoring non-div elements
+    children = Array.from(children).filter(x => x.tagName == "DIV");
+
+    // if all children have labels, return
+    let allHaveLabels = children.every(x => x.hasAttribute("label"));
+    if (allHaveLabels) return;
+
+    // create an array called controlChildren of just the first two children
+    let controlChildren = children.slice(0, 2);
+    // create an array called characterChildren of the rest of the children
+    let characterChildren = children.slice(2);
+
+    // the character children containing the following selectors will be labelled as follows:
+    let selectorAndLabels = [
+        { selector: "button", label: "MBP.CHARACTER.BUTTON" },
+        { selector: "._base_5l9jc_1", label: "MBP.CHARACTER.NAME" },
+        { selector: "._base_1d537_1", label: "MBP.CHARACTER.SPEECH" }
+    ];
+
+    let controleLabels = ["MBP.NOTIFICATION", "MBP.CONTROLS"];
+    let characterLabels = ["MBP.CHARACTER.BUTTON", "MBP.CHARACTER.NAME", "MBP.CHARACTER.SPEECH"];
+
+    for (let i = 0; i < controlChildren.length; i++) {
+        controlChildren[i].setAttribute("label", controleLabels[i]);
+    }
+
+    for (let i = 0; i < characterChildren.length; i++) {
+        if (characterChildren[i].hasAttribute("label")) continue;
+
+        let element = characterChildren[i];
+        // if the element contains the selector, assign the label to the element
+        for (let item of selectorAndLabels) {
+            if (element.querySelector(item.selector) != null) {
+                element.setAttribute("label", item.label);
+                break;
+            }
+        }
+
+    }
+}
 
 
 /**
@@ -1592,7 +1717,8 @@ let messageObserver = new MutationObserver(function (mutations) {
 // add a checker on the #message-feed to check for new messages and log them
 function addMessageChecker(portal) {
     let messageFeed = portal.querySelector("#message-feed");
-    if (returnMessage(messageFeed == null, "Message Feed not found")) return;
+    // if (returnMessage(messageFeed == null, "Message Feed not found")) return;
+    if (messageFeed == null) return;
 
     messageFeed = messageFeed.parentElement;
 
@@ -1648,15 +1774,12 @@ const effectTags = [
 function parseMessage(message) {
     let parsedMessage = message;
 
-
     // check if message has tag by checking if it has a :
     let tagIndex = parsedMessage.indexOf(":");
     if (tagIndex == -1) return parsedMessage;
 
     // if the tag is the first character or last character, return
     if (tagIndex == 0 || tagIndex == parsedMessage.length - 1) return parsedMessage;
-
-
 
     // find every tag in the message
     let foundTags = parsedMessage.match(/(\w+):/g);
