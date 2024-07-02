@@ -7,6 +7,7 @@
 ## Features
 
 - OSRS chat effects! Use most of the chat effects you're familiar with from OldSchool RuneScape!
+  ![chrome_OL53FAc6ib](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/33e1a56b-4c4f-462e-a7fd-794786b892f3)
 - Ponder for potential new crafting opportunities based on your inventory  
   ![chrome_DU5zjnsLiU](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/3a386947-a633-405b-9ed4-5e3432abe4c2)
 - Appraise the value of your inventory, as well as how many items are contained within (both total and unique)  
