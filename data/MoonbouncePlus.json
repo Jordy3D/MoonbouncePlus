@@ -2280,6 +2280,16 @@
             "sources": []
         },
         {
+            "id": 570,
+            "name": "Flamingo Hat",
+            "uuid": "dde91408-d3fa-4156-9b2b-41634a37c729",
+            "description": "Your head’s ticket to fabulous. Warning:  may cause sudden urges to stand on one leg. Instant conversation starter or a great excuse to leave parties early.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 572,
             "name": "Coconut Drink",
             "uuid": "677e04cb-c232-4179-9de2-3f108243f332",
@@ -2287,6 +2297,16 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 250,
+            "sources": []
+        },
+        {
+            "id": 573,
+            "name": "Empty Coconut",
+            "uuid": "7aa6f797-8f0d-44fd-acaf-31cc43f0ad38",
+            "description": "Nature's original zero-waste cup. Once full of tropical goodness,  now a blank canvas.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
             "sources": []
         },
         {
@@ -2728,6 +2748,58 @@
             "ingredients": ["Soup Can", "Salt & Pepper"],
             "tools": ["Wooden Spoon"],
             "type": "Partnership (SoupRS)"
+        },
+        {
+            "result": "Empty Coconut",
+            "ingredients": ["Sliced Coconut"],
+            "tools": ["Wooden Spoon"],
+            "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "Coconut Drink",
+            "ingredients": [
+                "Empty Coconut",
+                "Plain Milk Carton",
+                "Watermelon Slice"
+            ],
+            "tools": ["Fairy Particles"],
+            "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "Tiki Drink",
+            "ingredients": ["Banana", "Empty Coconut", "Pineapple"],
+            "tools": ["Lighter"],
+            "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "Fruit Bowl",
+            "ingredients": ["Banana", "Watermelon Slice", "Kiwi Slice"],
+            "tools": ["Craftsman Blade"],
+            "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "Fruit Hat",
+            "ingredients": ["Tiki Drink", "Coconut Drink", "Fruit Bowl"],
+            "tools": [],
+            "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "Floppy Sun Hat",
+            "ingredients": ["Coconut Drink", "Gold Thread", "Corn on the Cob"],
+            "tools": ["Sewing Needle"],
+            "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "Flamingo Hat",
+            "ingredients": ["Anatomical Heart", "Red Dye Powder", "Feather"],
+            "tools": ["Garden Shovel"],
+            "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "Ice Cream Hat",
+            "ingredients": ["Strawberry Milk Carton", "Ice Cream Cone"],
+            "tools": ["Lighter"],
+            "type": "Seasonal (Summer)"
         }
     ],
     "marketplace": {
