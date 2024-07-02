@@ -381,6 +381,16 @@
             "sources": ["Assorted Goodie Bag"]
         },
         {
+            "id": 234,
+            "name": "Strawberry Milk",
+            "uuid": "675fc262-4da6-4d13-8c62-591ae55b7f24",
+            "description": "It’s as if a fruit basket had a wild party in your mouth. Udderly irresistible.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": ["Summery Gifts"]
+        },
+        {
             "id": 235,
             "name": "Purple Gem",
             "uuid": "d1e142fa-3ede-4960-817b-3bc4e7a5f72a",
@@ -1771,7 +1781,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Red Chicken", "Summery Gifts"]
         },
         {
             "id": 483,
@@ -2797,7 +2807,7 @@
         },
         {
             "result": "Ice Cream Hat",
-            "ingredients": ["Strawberry Milk Carton", "Ice Cream Cone"],
+            "ingredients": ["Strawberry Milk", "Ice Cream Cone"],
             "tools": ["Lighter"],
             "type": "Seasonal (Summer)"
         }

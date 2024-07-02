@@ -126,10 +126,6 @@ type_to_types_dict = {
 
 #region Item Page Templates
 
-foundinTemplate = """\
-| found_in<INDEX> = <SOURCE>
-| foundin_icon<INDEX> = <SOURCEHYPHENED>"""
-
 accessoryTemplate = """
 {{Infobox
 | name = <NAME>
@@ -141,7 +137,7 @@ accessoryTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-<FOUNDIN>
+| found_in = <FOUNDIN>
 }}
 
 The '''<NAME>''' is an [[Accessories|accessory]] in Moonbounce.
@@ -171,7 +167,7 @@ materialTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-<FOUNDIN>
+| found_in = <FOUNDIN>
 }}
 The '''<NAME>''' is a [[Materials|material]] in Moonbounce.
 
@@ -198,7 +194,7 @@ characterTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-<FOUNDIN>
+| found_in = <FOUNDIN>
 }}
 '''<NAME>''' is a [[Characters|character]] in Moonbounce.
 
@@ -225,7 +221,7 @@ toolTemplate = """
 | diffuse_value = <VALUE> MP
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
-<FOUNDIN>
+| found_in = <FOUNDIN>
 }}
 The '''<NAME>''' is a [[Tools|tool]] in Moonbounce.
 
@@ -394,26 +390,16 @@ def replace_template(template, item):
         new_template = replace_text(new_template, '<DROPS>', 'No')
     else:
         new_template = replace_text(new_template, '<DROPS>', 'Yes')
-        
-    source_sections = []
     
-    for i, source in enumerate(item.sources):
-        # if i = 0, then it's the first source, so don't add an index
-        index = '' if i == 0 else i + 1
-        found_section = foundinTemplate
-        
-        if i == 0 and len(item.sources) == 0:
-            found_section = replace_text(found_section, '<SOURCE>', 'Nothing')
-            found_section = replace_text(found_section, '<SOURCEHYPHENED>', 'X.png')
-        else:
-            # wrap the name and the image in a link to the source page
-            found_section = replace_text(found_section, f'<SOURCE>', f'[[{source.name}]]')
-            found_section = replace_text(found_section, f'<SOURCEHYPHENED>', f'{source.name_hyphen}.png')
-        
-        found_section = replace_text(found_section, '<INDEX>', index)
-        source_sections.append(found_section)
+    if len(item.sources) == 0:
+        item.sources.append(Source('Nothing'))
+    
+    
+    foundin_string = ', '.join([source.name for source in item.sources])
+    
+    
           
-    new_template = replace_text(new_template, '<FOUNDIN>', ''.join(source_sections))
+    new_template = replace_text(new_template, '<FOUNDIN>', foundin_string)
 
     # check if the item has a recipe
     item_has_recipe = has_recipe(item.name)
@@ -522,8 +508,8 @@ def download_images(items):
                 
             # wait for 1 second before downloading the next image
             time.sleep(1)
-        else:
-            print(f'{item.name} already exists.')
+        # else:
+        #     print(f'{item.name} already exists.')
             
     print('Downloaded images.')
 #endregion
@@ -643,6 +629,135 @@ def generate_wiki_articles(items, print_file_names=False):
                     print(f'Writing {item.name} to file')
 
 
+recipe_table_template = """
+=== <u><TYPENAME></u> Recipes ===
+{| class="wikitable sortable"
+!Item
+!=
+!Material
+!Material
+!Material
+!+
+!Tool
+!Tool
+<RECIPE_ROWS>
+|}"""
+
+# === <u>Halloween</u> ===
+# {| class="wikitable sortable"
+# !Item
+# !=
+# !Material
+# !Material
+# !Material
+# !+
+# !Tool
+# !Tool
+
+recipe_row_template = """
+|-
+| [[File:<RESULTHYPHEN>.png|frameless|64x64px]]<br>'''<RESULT>'''
+|
+<INGREDIENT1>
+<INGREDIENT2>
+<INGREDIENT3>
+|
+<TOOL1>
+<TOOL2>
+"""
+
+recipe_use_item_template = """\
+| [[File:<ITEMHYPHEN>.png|frameless|64x64px]]<br>'''<ITEM>'''"""
+
+# |-
+# |[[File:Skull Potion.png|frameless|64x64px]]
+# '''Skull Potion'''
+# |
+# |[[File:Empty-bottle.png|frameless|64x64px]]
+# '''Empty Bottle'''
+# |[[File:Haunted Bone.png|frameless|64x64px]]
+# '''Haunted Bone'''
+# |[[File:Skull.png|frameless|64x64px]]
+# '''Skull'''
+# |
+# |[[File:Witch's Cauldron.png|frameless|64x64px]]
+# '''Witch's Cauldron'''
+# |
+
+
+def generate_recipe_table(recipes):
+    """Generate the recipe table for the recipes in the recipes list."""
+    
+    # get all the types of recipe
+    types = set([recipe.type for recipe in recipes])
+    
+    recipe_type_tables = []
+    
+    # create a new recipe table for each type
+    for type in types:
+        new_table = recipe_table_template
+        new_table = replace_text(new_table, '<TYPENAME>', type)
+        
+        # get all the recipes of the current type
+        type_recipes = [recipe for recipe in recipes if recipe.type == type]
+        
+        recipe_rows = []
+        
+        for recipe in type_recipes:
+            new_row = recipe_row_template
+            new_row = replace_text(new_row, '<RESULT>', recipe.result)
+            new_row = replace_text(new_row, '<RESULTHYPHEN>', format_name(recipe.result))
+            
+            ingredient_template = recipe_use_item_template
+            tool_template = recipe_use_item_template
+            
+            ingredient_sections = []
+            tool_sections = []
+            
+            for ingredient in recipe.ingredients:
+                new_ingredient = ingredient_template
+                new_ingredient = replace_text(new_ingredient, '<ITEM>', ingredient)
+                new_ingredient = replace_text(new_ingredient, '<ITEMHYPHEN>', format_name(ingredient))
+                ingredient_sections.append(new_ingredient)
+                
+            for tool in recipe.tools:
+                new_tool = tool_template
+                new_tool = replace_text(new_tool, '<ITEM>', tool)
+                new_tool = replace_text(new_tool, '<ITEMHYPHEN>', format_name(tool))
+                tool_sections.append(new_tool)
+                
+            if len(ingredient_sections) < 3:
+                for i in range(3 - len(ingredient_sections)):
+                    ingredient_sections.append("|")
+                    
+            if len(tool_sections) < 2:
+                for i in range(2 - len(tool_sections)):
+                    tool_sections.append("|")
+                    
+            new_row = replace_text(new_row, '<INGREDIENT1>', ingredient_sections[0])
+            new_row = replace_text(new_row, '<INGREDIENT2>', ingredient_sections[1])
+            new_row = replace_text(new_row, '<INGREDIENT3>', ingredient_sections[2])
+            
+            new_row = replace_text(new_row, '<TOOL1>', tool_sections[0])
+            new_row = replace_text(new_row, '<TOOL2>', tool_sections[1])            
+            
+            recipe_rows.append(new_row)
+            
+        new_table = replace_text(new_table, '<RECIPE_ROWS>', ''.join(recipe_rows))
+        
+        recipe_type_tables.append(new_table)
+        
+        
+        
+        
+    recipe_table = '\n\n\n'.join(recipe_type_tables)   
+    
+    with open(os.path.join(script_dir, '..', 'wiki', 'recipes.txt'), 'w', encoding='utf-8') as f:
+        f.write(recipe_table)
+        
+    print('Generated recipe table.')
+
+
 def generate_page_tables(items):
     """Generate the page tables for the items in the items list."""
     accessories_table = accessoriesPageTableTemplate
@@ -752,9 +867,11 @@ if __name__ == '__main__':
     
     generate_wiki_articles(items)
     
+    generate_recipe_table(recipes)
+    
     # sort items by name
     items.sort(key=lambda x: x.name)    
     
     # generate_page_tables(items)
     generate_cards_lists(items)
-    # download_images(items)
+    download_images(items)
