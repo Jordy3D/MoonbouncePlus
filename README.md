@@ -34,6 +34,7 @@ This repo also contains a Python script to help generate wiki page template code
 
 - Sometimes the script fails to download the data file before you click on something, causing the script to not work properly. If this happens, simply refresh the page and try again.
 - The script may not work properly if the Moonbounce website is updated and the script is not updated to match it. If this happens, please open an issue on this repo.
+- If you open chat after an OSRS-styled message has been sent, it won't be styled. It's only on new message while the window is open.
 
 ## To-Do
 
