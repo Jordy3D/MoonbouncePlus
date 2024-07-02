@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.9.6
+// @version      0.9.7
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
 // @icon         https://i.imgur.com/KzKSn2S.png
-// @grant        none
+// @grant        GM_notification
+// @grant        window.focus
 // ==/UserScript==
 
 // ==Changelog==
@@ -71,6 +72,7 @@
 // 0.9.5    - Try a few things to improve the script's performance by reducing the number of times it looks for things
 //          - Prep work for normal selectors to be used on the Moonbounce Portal for styling
 // 0.9.6    - Fix URL being too specific for targetURL check on Moonbounce site
+// 0.9.7    - Update selected item source class to keep up with Moonbounce changes
 //
 // ==/Changelog==
 
@@ -163,7 +165,7 @@ const targetSelector = [
     { name: "Inventory Controls", selector: ".S-h7a" },
     { name: "Selected Item Window", selector: "._base_7aiat_1" },
     { name: "Selected Item Details", selector: "._base_awewl_1" },
-    { name: "Source List Item", selector: ".gf3oJ" },
+    { name: "Source List Item", selector: ".mSsVp" },
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "._stack_count_252dr_52" },
 
@@ -321,6 +323,8 @@ function init() {
     }, 1000);
 }
 
+var observer = null;
+
 function checkSite() {
     var currentURL = window.location.href;
     var isOnMoonbounceSite = currentURL.includes("moonbounce.gg");
@@ -329,14 +333,14 @@ function checkSite() {
     if (isOnMoonbounceSite) {
         if (isTargetURL(getTargetURL("Inventory"), true)) {
             loadData();
-            
+
             addCopyDetailstoItemImage();
             addWikiButton();
 
             addPonderButton();
             addAppraiseButton();
             addSortInventorySelect();
-            
+
             highlightUnknownItems();
         } else if (isTargetURL(getTargetURL("Marketplace"), true)) {
             addCopyMarketplaceDataButton();
@@ -348,8 +352,13 @@ function checkSite() {
     if (moonbouncePortal != null) {                                 // If the portal's found, run the Moonbounce Portal functions
         addMoonbouncePortalButtons(moonbouncePortal);
         addMoonbouncePortalCSS(moonbouncePortal);
-        
+
         assignCustomSelectorsToPortalElements(moonbouncePortal);
+
+        // // INCOMPLETE
+        // if (observer == null) {
+        //     observer = addMessageChecker(moonbouncePortal);
+        // }
     }
 }
 
@@ -1031,9 +1040,30 @@ function assignCustomSelectorsToPortalElements(portal) {
         { name: "Button Control Bar", selector: "._base_11wdf_1._nowrap_11wdf_12._justify_start_11wdf_21._align_center_11wdf_42._content_normal_11wdf_60", id: "button-control-bar", class: "" },
         { name: "Chat Container", selector: "._base_1jhq3_1", id: "chat-container", class: null },
         { name: "Chat Window", selector: "._base_1jhq3_1 ._content_1jhq3_13", id: "chat-window", class: null },
+        { name: "Message Feed", selector: "#chat-window [class*='_middle_']", id: "message-feed", class: null },
+        { name: "Message", selector: "#message-feed > div", id: null, class: "message", all: true },
+        { name: "Message Content", selector: ".message .message_row", id: null, class: "message-content", all: true },
+        { name: "Message Text", selector: ".message-content [class^='_message_'", id: null, class: "message-text", all: true },
     ]
 
     for (let item of classes) {
+        if (item.all) {
+            let elements = portal.querySelectorAll(item.selector);
+            for (let element of elements) {
+                if (element.id == item.id) continue;
+                if (element.classList.contains(item.class)) continue;
+
+                let idToAssign = item.id;
+                let classToAdd = item.class;
+                if (idToAssign != "" && idToAssign != null)
+                    element.id = idToAssign;
+
+                if (classToAdd != "" && classToAdd != null)
+                    element.classList.add(classToAdd);
+            }
+            continue;
+        }
+
         let element = portal.querySelector(item.selector);
         if (element == null) continue;
         if (element.id == item.id) continue;
@@ -1181,6 +1211,102 @@ function addMarketplaceButton(portal) {
 
     addMoonbouncePortalButton(button, portal);
 }
+
+
+//#region Chat Notifications
+var lastMessage = "";
+
+// add a checker on the #message-feed to check for new messages and log them
+function addMessageChecker(portal) {
+    let messageFeed = portal.querySelector("#message-feed");
+    if (returnMessage(messageFeed == null, "Message Feed not found")) return;
+
+    // get the change to the message feedm and only send a notification if the window is not focused
+    let observer = new MutationObserver(function (mutations) {
+
+        for (let mutation of mutations) {
+            for (let node of mutation.addedNodes) {
+                if (node.nodeType === 1) {
+                    let messages = node.querySelectorAll("[class^='_message_']");
+                    if (messages == null) continue;
+
+                    for (let message of messages) {
+
+
+                        let messageText = message.innerText;
+
+                        if (messageText == lastMessage) continue;
+                        lastMessage = messageText;
+
+                        // check if the window is focused
+                        if (document.hasFocus()) return;
+
+                        // create a chrome notification
+                        testNotification(messageText);
+                    }
+                }
+            }
+        }
+    });
+
+
+    observer.observe(messageFeed, { childList: true });
+
+    return observer;
+}
+//#endregion
+
+/**
+ * Notification
+ */
+function testNotification(message) {
+    let notificationDetails = {
+        text: message,
+        title: 'Moonbounce Plus',
+        timeout: 5000,
+        image: 'https://i.imgur.com/KzKSn2S.png',
+        onclick: function () { window.focus(); },
+    };
+    GM_notification(notificationDetails);
+}
+
+const effectTags = [
+    "yellow:",
+    "red",
+    "green:",
+    "cyan",
+    "purple",
+    "white",
+    "flash1", // red/yellow flash
+    "flash2", // cyan/blue flash
+    "flash3", // light/dark green flash
+]
+
+function parseMessage(message) {
+    let parsedMessage = message;
+
+
+    // check if message has tag by checking if it has a :
+    let tagIndex = parsedMessage.indexOf(":");
+    if (tagIndex == -1) return parsedMessage;
+
+    // look for the message starting with an "effect tag"
+    for (let tag of effectTags) {
+        let tagIndex = parsedMessage.indexOf(tag);
+        if (tagIndex == -1) continue;
+
+        // add a class called .rs-[tag] to the message as by surrounding it with a span
+        let wrappedMessage = `<span class="rs-${tag}">${parsedMessage}</span>`;
+
+        return wrappedMessage;
+    }
+
+    return parsedMessage;
+}
+
+
+
+
 //#endregion
 
 //#region Copy Marketplace Data
@@ -1536,7 +1662,7 @@ function getDetails(details = null) {
 
         // find the item details div
         details = selectedItemWindow.querySelector(getTargetSelector("Selected Item Details"));
-        if (details == null) return;
+        if (returnMessage(details == null, "Could not find Selected Item Details")) return;
     }
 
     let nameIdBlock = details.children[0];                                  // get the first child of the details element
@@ -1559,6 +1685,7 @@ function getDetails(details = null) {
 
     let sources = details.children[2];                                      // get the third child of the details element
     let sourceObjects = sources.querySelectorAll(getTargetSelector("Source List Item"));
+    
     // get the p from each source object and add it to the source list
     let sourceList = [];
     for (let source of sourceObjects) {

@@ -2229,6 +2229,16 @@
             "sources": ["Soup's Goodies"]
         },
         {
+            "id": 561,
+            "name": "Fries Hat",
+            "uuid": "21a56798-5d65-4d35-baa4-3a3f3b928af0",
+            "description": "Instantly turns you into everyone's favorite side dish. May attract people saying “You gonna eat that?”",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 563,
             "name": "Mermaid Tiara",
             "uuid": "96956d91-23b3-42af-a559-5b76671fdbee",
@@ -2238,6 +2248,27 @@
             "value": 15,
             "sources": []
         },
+        {
+            "id": 564,
+            "name": "Safari Hat",
+            "uuid": "8ea0e593-7b56-4d11-88c8-c607eba85c3b",
+            "description": "Indiana Jones meets your grandpa's gardening phase. Repels sun and makes you feel way more outdoorsy than you actually are.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": ["Summery Gifts"]
+        },
+        {
+            "id": 565,
+            "name": "Floppy Sun Hat",
+            "uuid": "01d0c634-a747-4dcf-b891-875dffaecc0c",
+            "description": "Your head's personal sunshade and portable picnic vibe. It's like SPF 50 meets farmcore fashion.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
+        },
+
         {
             "id": 567,
             "name": "Sparkler",
@@ -2249,6 +2280,16 @@
             "sources": []
         },
         {
+            "id": 572,
+            "name": "Coconut Drink",
+            "uuid": "677e04cb-c232-4179-9de2-3f108243f332",
+            "description": "Vacation in a shell. Tropical escape meets nature's cup. Palm tree vibes guaranteed.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 574,
             "name": "Sliced Coconut",
             "uuid": "c398574e-de7e-46ea-ac82-9f094441ba01",
@@ -2256,7 +2297,17 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Summery Gifts"]
+        },
+        {
+            "id": 575,
+            "name": "Corn on the Cob",
+            "uuid": "81600fae-bb24-4f00-ab4f-be45acd2bcf9",
+            "description": "Nature's typewriter for your teeth. Butter's best friend and floss's worst enemy. May temporarily transform you into a human wood-chipper.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": ["Summery Gifts"]
         },
         {
             "id": 576,
@@ -2266,7 +2317,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Summery Gifts"]
         }
     ],
     "recipes": [
