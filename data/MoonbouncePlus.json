@@ -2186,7 +2186,7 @@
             "rarity": "UNCOMMON",
             "type": "TOOL",
             "value": 10,
-            "sources": ["Soup's Goodies"]
+            "sources": ["Soup's Goodies", "Summery Gifts"]
         },
         {
             "id": 556,
@@ -2256,7 +2256,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Summery Gifts"]
         },
         {
             "id": 564,
@@ -2287,6 +2287,16 @@
             "rarity": "COMMON",
             "type": "ACCESSORY",
             "value": 5,
+            "sources": []
+        },
+        {
+            "id": 568,
+            "name": "4th Firework Hat",
+            "uuid": "1fa70d7b-82da-44df-845a-6d7f2365def9",
+            "description": "Warning:  may cause sudden urges to shout \"ooh\" and \"aah\" at yourself. Not recommended for low ceilings or hair gel enthusiasts.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
             "sources": []
         },
         {
