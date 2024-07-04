@@ -630,33 +630,28 @@ def generate_wiki_articles(items, print_file_names=False):
 
 
 recipe_table_template = """
-=== <u><TYPENAME></u> Recipes ===
-{| class="wikitable sortable"
-!Item
+=== <u><TYPENAME></u> ===
+{| class="wikitable sortable mw-collapsible" style="width: 100%; max-width: 800px;"
+|+ Recipes
+! Result
 !=
-!Material
-!Material
-!Material
+! colspan="3" | Ingredients
 !+
-!Tool
-!Tool
+! colspan="2" | Tools
 <RECIPE_ROWS>
 |}"""
 
-# === <u>Halloween</u> ===
-# {| class="wikitable sortable"
-# !Item
-# !=
-# !Material
-# !Material
-# !Material
-# !+
-# !Tool
-# !Tool
+
+# | [[File:Josh's_Support_Tincture.png|64x64px|link=[[Josh's_Support_Tincture]]]]<br>'''[[Josh's Support Tincture]]'''
+
+
 
 recipe_row_template = """
 |-
-| [[File:<RESULTHYPHEN>.png|frameless|64x64px]]<br>'''<RESULT>'''
+| <div style="text-align: center;">\
+[[File:<RESULTHYPHEN>.png|frameless|64x64px|link=[[<RESULTHYPHEN>]]]]<br>\
+'''[[<RESULT>]]'''\
+</div>
 |
 <INGREDIENT1>
 <INGREDIENT2>
@@ -667,7 +662,10 @@ recipe_row_template = """
 """
 
 recipe_use_item_template = """\
-| [[File:<ITEMHYPHEN>.png|frameless|64x64px]]<br>'''<ITEM>'''"""
+| <div style="text-align: center;">\
+[[File:<ITEMHYPHEN>.png|frameless|64x64px|link=[[<ITEMHYPHEN>]]]]<br>\
+'''[[<ITEM>]]'''\
+</div>"""
 
 # |-
 # |[[File:Skull Potion.png|frameless|64x64px]]
@@ -691,12 +689,29 @@ def generate_recipe_table(recipes):
     # get all the types of recipe
     types = set([recipe.type for recipe in recipes])
     
+    # turn the set into a list
+    types = list(types)
+    
+    # sort the types alphabetically
+    types.sort(key=lambda x: x.lower())
+    
+    # put all the partnership recipes at the end of the list
+    partnership_recipes = [type for type in types if 'partnership' in type.lower()]
+    types = [type for type in types if 'partnership' not in type.lower()]
+    types += partnership_recipes
+    
     recipe_type_tables = []
     
     # create a new recipe table for each type
     for type in types:
         new_table = recipe_table_template
-        new_table = replace_text(new_table, '<TYPENAME>', type)
+        
+        # keep only what's inside the ( ) in the type if there's a bracket
+        type_display = type
+        if '(' in type:
+            type_display = type[type.index('(')+1:type.index(')')]
+        
+        new_table = replace_text(new_table, '<TYPENAME>', type_display)
         
         # get all the recipes of the current type
         type_recipes = [recipe for recipe in recipes if recipe.type == type]

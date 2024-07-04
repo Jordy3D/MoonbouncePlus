@@ -1432,7 +1432,7 @@ function giveBaneSpecialBanner(portal) {
 
     for (let banner of banners) {
         let name = banner.innerText;
-        if (name == "Bane")
+        if (name == "Bane‎")
             banner.classList.add("bane-banner");
     }
 }

@@ -2249,6 +2249,16 @@
             "sources": []
         },
         {
+            "id": 562,
+            "name": "Burger Hat",
+            "uuid": "15a6f4a2-ed6f-40b1-bec5-1116332abca7",
+            "description": "Your noggin’s deluxe fast-food fantasy. It's like your head decided to supersize itself. Instantly transforms you from average Joe to walking menu item.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
             "id": 563,
             "name": "Mermaid Tiara",
             "uuid": "96956d91-23b3-42af-a559-5b76671fdbee",
@@ -2278,7 +2288,6 @@
             "value": 100,
             "sources": []
         },
-
         {
             "id": 567,
             "name": "Sparkler",
@@ -2358,6 +2367,16 @@
             "type": "MATERIAL",
             "value": 15,
             "sources": ["Summery Gifts"]
+        },
+        {
+            "id": 583,
+            "name": "Hot Dog Hat",
+            "uuid": "f4add39e-64da-4bbb-8daf-554317629d65",
+            "description": "Perfect for those who relish attention. (Ketchup and mustard not included)",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
         }
     ],
     "recipes": [
