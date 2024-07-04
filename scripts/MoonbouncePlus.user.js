@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.10.1
+// @version      0.11.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
 // @icon         https://i.imgur.com/KzKSn2S.png
 // @grant        GM_notification
 // @grant        window.focus
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 // ==Changelog==
@@ -79,6 +81,8 @@
 //              - Prep work for Notification area when items are collected
 //              - Each character element's root (name, button, etc)
 //          - Custom name banner for little ol' me 
+// 0.11.0   - Added a link to the MoonbouncePlus settings in the Moonbounce settings page
+//          - Hijacked the Moonbounce settings page to add MoonbouncePlus settings
 //
 // ==/Changelog==
 
@@ -86,8 +90,86 @@
 //
 // - Add more items and recipes (endless task)
 // - Add more classes to find elements on the page (endless task)
+// - Replace all links whle the MoonbouncePlus Settings page is open to onclick events to avoid page-reloading breaking
 //
 // ==/TODO==
+
+
+//#region Settings
+
+// create a settings object to store the settings
+var userSettings = [
+    // Inventory
+    { name: "Show Sort", description: "Show the sort select in the inventory controls", type: "boolean", defaultValue: true, value: true },
+    { name: "Show Ponder", description: "Show the Ponder button in the inventory controls", type: "boolean", defaultValue: true, value: true },
+    { name: "Show Appraise", description: "Show the Appraise button in the inventory controls", type: "boolean", defaultValue: true, value: true },
+    { name: "Show Unknown Highlight", description: "Highlight items in the inventory that are not in the database", type: "boolean", defaultValue: true, value: true },
+    { name: "Show Wiki Button", description: "Show the Wiki button in the inventory controls", type: "boolean", defaultValue: true, value: true },
+
+    // Marketplace
+    { name: "Show Copy Marketplace Data", description: "Show the Copy Marketplace Data button in the marketplace controls", type: "boolean", defaultValue: true, value: true },
+
+    // Portal
+    { name: "Show Moonbounce Portal Buttons", description: "Show the Moonbounce Portal buttons", type: "boolean", defaultValue: true, value: true },
+    // { name: "Use Moonbounce Portal CSS", description: "Show the Moonbounce Portal CSS", type: "boolean", defaultValue: true, value: true },
+    { name: "Show OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true },
+
+    // General
+    { name: "Update Refresh Rate", description: "The rate at which the script checks the current site (in milliseconds)", type: "number", defaultValue: 1000, value: 1000, min: 100, max: 10000 },
+    { name: "Notification Duration", description: "The duration of the floating notification (in milliseconds)", type: "number", defaultValue: 2000, value: 2000, min: 500, max: 10000 },
+]
+function getSetting(name) {
+    return userSettings.find(x => x.name == name);
+}
+function setSetting(name, value) {
+    let setting = getSetting(name);
+    if (setting == null) return;
+
+    setting.value = value;
+}
+function getSettingValue(name) {
+    let setting = getSetting(name);
+    if (setting == null) return setting.defaultValue;
+
+    return setting.value;
+}
+
+function saveSettings() {
+    // save to Greasemonkey/Tampermonkey storage
+    for (let setting of userSettings) {
+        GM_setValue(setting.name, setting.value);
+
+        if (setting.name == "Update Refresh Rate") refreshRate = setting.value;
+        if (setting.name == "Notification Duration") notificationDuration = setting.value;
+    }
+
+    log("Settings saved");
+
+    // spawn a notification at the bottom right of the screen
+    floatingNotification("Settings saved", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px;", "bottom-right");
+}
+
+function loadSettings() {
+    // load from Greasemonkey/Tampermonkey storage
+    for (let setting of userSettings) {
+        let value = GM_getValue(setting.name);
+        if (value != null) {
+            if (value === "on") value = true; // Adjust based on storage behavior in case the checkbox was saved before
+
+            // cap the value between the min and max values if they exist
+            if (setting.min != null && value < setting.min) value = setting.min;
+            if (setting.max != null && value > setting.max) value = setting.max;
+
+            setting.value = value;
+        }
+    }
+
+    log("Settings loaded!");
+}
+
+
+//#endregion
+
 
 //#region Data
 // ██████╗  █████╗ ████████╗ █████╗ 
@@ -96,6 +178,9 @@
 // ██║  ██║██╔══██║   ██║   ██╔══██║
 // ██████╔╝██║  ██║   ██║   ██║  ██║
 // ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
+
+var refreshRate = 1000;
+var notificationDuration = 2000;
 
 var items = null;
 var recipes = null;
@@ -149,10 +234,8 @@ function loadData(isLocal = false) {
             items = xhr.response.items;
             recipes = xhr.response.recipes || xhr.response.recipies;    // I misspelled recipes in the JSON file at first
 
-            log("Data loaded successfully");
-            log(`Items: ${items.length}`);
-            log(`Recipes: ${recipes.length}`);
-
+            let logMessage = `Data loaded successfully\nItems: ${items.length}\nRecipes: ${recipes.length}`;
+            log(logMessage);
         } else {
             error('Failed to load data');
         }
@@ -193,6 +276,8 @@ const getTargetSelector = name => targetSelector.find(x => x.name == name).selec
 const targetURLs = [
     { name: "Inventory", url: "https://moonbounce.gg/u/@me/backpack" },
     { name: "Marketplace", url: "https://moonbounce.gg/u/@me/marketplace" },
+    { name: "Settings", url: "https://moonbounce.gg/u/@me/settings" },
+    { name: "MoonbouncePlus Settings", url: "https://moonbounce.gg/u/@me/settings?moonbounceplus" },
 ]
 const getTargetURL = name => targetURLs.find(x => x.name == name).url;
 
@@ -322,10 +407,13 @@ function init() {
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
 
+    // load the settings
+    loadSettings();
+
     // check the current site every second and page to see what functions to run
     setInterval(() => {
         checkSite();
-    }, 1000);
+    }, refreshRate);
 }
 
 var observer = null;
@@ -340,27 +428,37 @@ function checkSite() {
             loadData();
 
             addCopyDetailstoItemImage();
-            addWikiButton();
 
-            addPonderButton();
-            addAppraiseButton();
-            addSortInventorySelect();
+            if (getSettingValue("Show Wiki Button")) addWikiButton();
 
-            highlightUnknownItems();
+            if (getSettingValue("Show Ponder")) addPonderButton();
+            if (getSettingValue("Show Appraise")) addAppraiseButton();
+            if (getSettingValue("Show Sort")) addSortInventorySelect();
+
+            if (getSettingValue("Show Unknown Highlight")) highlightUnknownItems();
+
         } else if (isTargetURL(getTargetURL("Marketplace"), true)) {
-            addCopyMarketplaceDataButton();
+
+            if (getSettingValue("Show Copy Marketplace Data")) addCopyMarketplaceDataButton();
+
+        } else if (isTargetURL(getTargetURL("Settings"), true)) {
+            addLinkToMoonbouncePlusSettings();
+            hijackSettingsPage();
         }
     }
 
     // Stuff for the Moonbounce Portal, which can be on any site
     moonbouncePortal = findMoonbouncePortal();                      // Attempt to find the portal once
     if (moonbouncePortal != null) {                                 // If the portal's found, run the Moonbounce Portal functions
-        addMoonbouncePortalButtons(moonbouncePortal);
-        addMoonbouncePortalCSS(moonbouncePortal);
 
+        if (getSettingValue("Show Moonbounce Portal Buttons")) addMoonbouncePortalButtons(moonbouncePortal);
+
+        addMoonbouncePortalCSS(moonbouncePortal);
         assignCustomSelectorsToPortalElements(moonbouncePortal);
 
-        observer = addMessageChecker(moonbouncePortal);
+        if (getSettingValue("Show OSRS Text Effects")) {
+            observer = addMessageChecker(moonbouncePortal);
+        }
     }
 }
 
@@ -451,7 +549,7 @@ function addCopyDetailstoItemImage() {
             // Place a notification right below the item, centered directly below it
             let pos = img.getBoundingClientRect();
             let imgCenter = pos.left + (pos.width / 2);
-            floatingNotification("Item info copied to clipboard", 1000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.bottom + 10 + "px", left: imgCenter + "px" });
+            floatingNotification("Item info copied to clipboard", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.bottom + 10 + "px", left: imgCenter + "px" });
         });
 
         // add a class to the item to show that it has an event listener
@@ -474,7 +572,7 @@ function addCopyDetailstoItemImage() {
                 // Place a notification right below the item, centered directly below it
                 let pos = img.getBoundingClientRect();
                 let imgCenter = pos.left + (pos.width / 2);
-                floatingNotification("Item image saved as file", 1000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.bottom + 10 + "px", left: imgCenter + "px" });
+                floatingNotification("Item image saved as file", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.bottom + 10 + "px", left: imgCenter + "px" });
 
                 return false;
             }
@@ -652,7 +750,7 @@ function checkRecipes() {
     let pos = { top: event.clientY, left: event.clientX };              // get the current mouse position
     pos.top += 10;                                                      // offset the position down by 10 pixels
 
-    floatingNotification(message, 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
+    floatingNotification(message, notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 
 }
 //#endregion
@@ -784,7 +882,7 @@ function evaluateInventory() {
     let pos = { top: event.clientY, left: event.clientX };              // get the current mouse position
     pos.top += 10;                                                      // offset the position down by 10 pixels
 
-    floatingNotification(appraisalMessage, 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
+    floatingNotification(appraisalMessage, notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 }
 //#endregion
 
@@ -1616,7 +1714,6 @@ function addMarketplaceButton(portal) {
 
 
 //#region Chat Notifications
-var lastMessage = "";
 
 function handleNewMessageSameAuthor(mutation) {
     // log("New message detected from same author");
@@ -1978,7 +2075,7 @@ function copyMarketplaceData() {
     let pos = { top: event.clientY, left: event.clientX };              // get the current mouse position
     pos.top += 10;                                                      // offset the position down by 10 pixels
 
-    floatingNotification("Marketplace data<br>copied to clipboard", 3000, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
+    floatingNotification("Marketplace data<br>copied to clipboard", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 }
 
 //#endregion
@@ -2063,6 +2160,273 @@ function openWikiPage(itemName) {
 
 //#endregion
 
+//#region Settings Page
+
+function addLinkToMoonbouncePlusSettings() {
+    // find the ._base_q8l18_1 div
+    let settingsDiv = document.querySelector("._base_q8l18_1");
+    if (settingsDiv == null) return;
+
+    // if the settingsDiv already has the moonbounce-plus-settings-link, return
+    let existingLink = settingsDiv.querySelector(".moonbounce-plus-settings-link");
+    if (existingLink != null) return;
+
+    // append a blank div with the class "line"
+    let line = createElement("div", { class: "line" }, settingsDiv);
+
+    // create an a element that links to the Moonbounce Plus settings page (https://moonbounce.gg/u/@me/settings?moonbounceplus)
+    let link = createElement("a", { href: "https://moonbounce.gg/u/@me/settings?moonbounceplus", class: "moonbounce-plus-settings-link" }, settingsDiv);
+
+    // create two divs inside the link, one for the icon and one for the text
+    let iconDiv = createElement("div", { class: "icon" }, link);
+    let textDiv = createElement("div", { class: "text" }, link);
+
+    // create an img element inside the icon div
+    let img = createElement("img", { src: "https://i.imgur.com/KzKSn2S.png" }, iconDiv);
+
+    // create a span element inside the text div
+    let span = createElement("span", { textContent: "Moonbounce Plus" }, textDiv);
+
+    // add another line after the link
+    let line2 = createElement("div", { class: "line" }, settingsDiv);
+
+    // add some CSS to the link
+    addCSS(`
+.moonbounce-plus-settings-link {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+
+    background-color: var(--background-color-3);
+    text-decoration: none !important;
+    padding: 24px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+    &:hover {
+        background-color: var(--background-color-hover);
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+
+        filter: saturate(0) brightness(5);
+    }
+
+    &.active {
+        .icon {
+            filter: unset;
+        }
+    }
+
+    .text {
+        color: white;
+    }
+}`, "moonbouncePlusSettingsLinkCSS");
+
+    // If the current page is the Moonbounce Plus settings page, add the aria-current="page" attribute to the link and remove the aria-current="page" attribute from the other links
+    if (isTargetURL(getTargetURL("MoonbouncePlus Settings"))) {
+
+        // remove the aria-current="page" attribute from all other links
+        let links = settingsDiv.querySelectorAll("a");
+        for (let l of links) {
+            if (!l.hasAttribute("aria-current")) continue;
+
+            l.removeAttribute("aria-current");
+
+            // find every path and set the fill to gray
+            let paths = l.querySelectorAll("path");
+            for (let p of paths) {
+                p.style.fill = "gray";
+            }
+
+            // add https://moonbounce.gg/ to the start of the link
+            let linkTarget = l.href;
+
+            // remove the href and give the link a click event that opens the link instead in the same tab
+            l.removeAttribute("href");
+            l.addEventListener("click", function () {
+                window.open(linkTarget, "_self");
+            });
+
+        }
+
+        link.setAttribute("aria-current", "page");
+        link.classList.add("active");
+    }
+}
+
+function hijackSettingsPage() {
+    // find the .content_area with_sidebar and empty it
+    let contentArea = document.querySelector(".content_area.with_sidebar");
+    if (contentArea == null) return;
+
+    if (!isTargetURL(getTargetURL("MoonbouncePlus Settings"))) return;
+
+    let baneSettings = document.querySelector("#bane-settings-page");
+    if (baneSettings != null) return;
+
+    contentArea.innerHTML = "";
+
+    // create a new div with the id "bane-settings-page" and append it to the content area
+    let settingsPage = createElement("div", { id: "bane-settings-page" }, contentArea);
+
+    // create a span with the text "Coming Soon" and append it to the settings page
+    // let comingSoon = createElement("span", { textContent: "Coming Soon" }, settingsPage);
+
+    spawnSettings(settingsPage);
+
+    // add some CSS to the settings page to center the text
+    addCSS(`
+#bane-settings-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    color: var(--text-color);
+
+    width: 100%;
+    height: 100%;
+    
+    padding: 24px;
+}
+
+#bane-settings {
+    width: 100%;
+    max-width: 1000px;
+    
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    
+    #bane-settings-container
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    
+        .setting {
+            padding: 24px;
+            border: 2px solid var(--border-color-3);
+            border-radius: 10px;
+            
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            --switchHeight: 30px;
+            --switchWidth: 60px;
+            --switchPadding: 1px;
+            
+            --switchOffset: calc(var(--switchWidth) - var(--switchHeight));
+
+            .settingInputContainer {
+                input {
+                    border: 2px solid var(--border-color-3);
+                    border-radius: 10px;
+                    background-color: var(--background-color);
+                    color: var(--text-color);
+                    text-align: right;
+                    padding: 10px;
+                    font-size: 30px;
+                    
+                    width: 70%;
+                    float: right;
+                }
+                .switchLabel { 
+                    position : relative ;
+                    display : inline-block;
+                    width : var(--switchWidth);
+                    height : var(--switchHeight);
+                    background-color: var(--background-color);
+                    border-radius: var(--switchHeight);
+                }
+
+                .switchLabel::after {
+                    content: '';
+                    position: absolute;
+                    width: calc(var(--switchHeight) - (var(--switchPadding) * 2));
+                    height: calc(var(--switchHeight) - (var(--switchPadding) * 2));
+                    border-radius: 50%;
+                    background-color: white;
+                    top: var(--switchPadding);
+                    left: var(--switchPadding);
+                    transition: all 0.3s;
+                }
+
+                .switch:checked + .switchLabel::after {
+                    left : calc(var(--switchOffset));
+                }
+                .switch:checked + .switchLabel {
+                    background-color: #2566FE;
+                }
+
+                .switch { 
+                    display : none;
+                }
+            }
+        }
+    }
+}
+`, "settingsPageCSS");
+}
+
+
+function spawnSettings(parent) {
+
+    let settings = createElement("div", { id: "bane-settings" }, parent);
+    let settingsTitle = createElement("h1", { textContent: "Moonbounce Plus Settings" }, settings);
+    let settingsContainer = createElement("div", { id: "bane-settings-container" }, settings);
+
+    // loop through all the settings and create a new setting for each one based on the type
+    for (let setting of userSettings) {
+        let settingDiv = createElement("div", { class: "setting" }, settingsContainer);
+
+        let settingDetailsContainer = createElement("div", { class: "settingDetailsContainer" }, settingDiv);
+        let settingInputContainer = createElement("div", { class: "settingInputContainer" }, settingDiv);
+
+        let settingTitle = createElement("h2", { textContent: setting.name }, settingDetailsContainer);
+        let settingDescription = createElement("p", { textContent: setting.description }, settingDetailsContainer);
+
+        let settingInput = null;
+
+        switch (setting.type) {
+            case "text":
+                settingInput = createElement("input", { type: "text", value: setting.value }, settingInputContainer);
+                break;
+            case "number":
+                settingInput = createElement("input", { type: "number", value: setting.value, min: setting.min, max: setting.max }, settingInputContainer);
+                break;
+            case "checkbox":
+            case "boolean":
+                settingInput = createElement("input", { id: setting.name, type: "checkbox", class: "switch", checked: setting.value }, settingInputContainer);
+                settingLabel = createElement("label", { for: setting.name, class: "switchLabel" }, settingInputContainer);
+                break;
+            case "select":
+                settingInput = createElement("select", {}, settingInputContainer);
+
+                for (let option of setting.options) {
+                    let optionElement = createElement("option", { textContent: option, value: option }, settingInput);
+                    if (option == setting.value) optionElement.selected = true;
+                }
+                break;
+            default:
+                break;
+        }
+
+        settingInput.addEventListener("change", function () {
+            setting.value = settingInput.value == "on" ? settingInput.checked : settingInput.value;
+            saveSettings();
+        });
+
+
+    }
+
+}
+
+//#endregion
 
 //#endregion
 
@@ -2327,6 +2691,68 @@ function createSvgElement(width, height, pathData, fill, offset = { x: 0, y: 0 }
     return svg;
 }
 
+/**
+ * Create an element with options and append it to a parent
+ * @param {string} type the type of element to create
+ * @param {object} userOptions the options for the element
+ * @param {Element} parent the parent element to append the new element to
+ * @returns the new element
+ * @example
+ * createElement("div", { options: { text: "Hello, World!", class: "example" } }, document.body);
+ */
+function createElement(type, userOptions, parent = document.body) {
+    let element = document.createElement(type);
+
+    const defaultOptions = {
+        text: null,
+        textContent: null,
+        class: null,
+        classList: null,
+        id: null,
+        src: null,
+        href: null,
+        onclick: null,
+        type: null,
+        placeholder: null,
+        value: null,
+        checked: null,
+        name: null,
+        for: null,
+        min: null,
+        max: null,
+        style: null,
+    };
+
+    // Merge user-provided options with default options
+    const options = { ...defaultOptions, ...userOptions };
+
+    // set the text, class, id, src, href, onclick, type, placeholder, value, checked, and style of the element
+
+    // set the class of the element, accepting both class and classList as an array or string
+    let classList = [].concat(options.class || options.classList || []);
+    classList.forEach(c => element.classList.add(c));
+
+    let text = options.text || options.textContent;
+
+    if (text) element.innerText = text;
+    if (options.id) element.id = options.id;
+    if (options.src) element.src = options.src;
+    if (options.href) element.href = options.href;
+    if (options.onclick) element.onclick = options.onclick;
+    if (options.type) element.type = options.type;
+    if (options.placeholder) element.placeholder = options.placeholder;
+    if (options.value) element.value = options.value;
+    if (options.checked) element.checked = options.checked;
+    if (options.name) element.name = options.name;
+    if (options.for) element.htmlFor = options.for;
+    if (options.min) element.min = options.min;
+    if (options.max) element.max = options.max;
+    if (options.style) element.style = options.style;
+
+    parent.appendChild(element);
+    return element;
+}
+
 //#endregion
 
 //#region Miscellaneous Support Functions
@@ -2344,7 +2770,7 @@ function returnMessage(statement, trueMessage = "", falseMessage = "") {
 function log(message) {
     // add a tag at the start of the message saying "MB+" in a div with white text, a black background, red left border and blue right border
     let tag = `%cMB+`;
-    let tagStyle = "background-color: black; color: white; padding: 2px 4px; border-left: 4px solid red; border-right: 4px solid blue;";
+    let tagStyle = "background-color: black; color: white; padding: 2px 4px; border-left: 4px solid red; border-right: 4px solid #0095ff;";
 
     // clear the style before the message
     console.log(tag, tagStyle, message);
@@ -2353,7 +2779,7 @@ function log(message) {
 function error(message) {
     // add a tag at the start of the message saying "MB+" in a div with white text, a black background, red left border and blue right border
     let tag = `%cMB+`;
-    let tagStyle = "background-color: black; color: white; padding: 2px 4px; border-left: 4px solid red; border-right: 4px solid blue;";
+    let tagStyle = "background-color: black; color: white; padding: 2px 4px; border-left: 4px solid red; border-right: 4px solid #0095ff;";
 
     // clear the style before the message
     console.error(tag, tagStyle, message);
