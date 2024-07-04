@@ -1,14 +1,21 @@
 :root {
-    --commonColour: 88, 189, 125;
-    --uncommonColour: 59, 113, 254;
-    --rareColour: 159, 115, 230;
-    --legendaryColour: 232, 89, 41;
-    --mythicColour: 75, 201, 240;
+    --commonColour: 142, 43%, 54%;
+    --uncommonColour: 223, 99%, 61%;
+    --rareColour: 263, 70%, 68%;
+    --legendaryColour: 15, 81%, 54%;
+    --mythicColour: 194, 85%, 62%;
 
-    --accessoryColour: 232, 89, 41;
-    --materialColour: 75, 201, 240;
-    --toolColour: 37, 102, 254;
-    --characterColour: 159, 115, 230;
+    /* versions of the colours just a little off from white */
+    --commonFadeColour: 142, 43%, 95%;
+    --uncommonFadeColour: 223, 99%, 95%;
+    --rareFadeColour: 263, 70%, 95%;
+    --legendaryFadeColour: 15, 81%, 95%;
+    --mythicFadeColour: 194, 85%, 95%;
+
+    --accessoryColour: 15, 81%, 54%;
+    --materialColour: 194, 85%, 62%;
+    --toolColour: 222, 99%, 57%;
+    --characterColour: 263, 70%, 68%;
 }
 
 * {
@@ -27,11 +34,19 @@
 ::-webkit-scrollbar-thumb:hover { background: #252525; }
 ::-webkit-scrollbar-corner { background: #0000; }
 
+html {
+    scroll-behavior: smooth;
+
+    width: 100%;
+
+}
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+
+    width: 100%;
 }
 
 header, footer {
@@ -39,6 +54,8 @@ header, footer {
     color: white;
     padding: 1rem;
     text-align: center;
+
+    width: 100%;
 
     a {
         color: #58BD7D;
@@ -120,9 +137,14 @@ p {
 }
 
 .item {
-    border: 1px solid #333;
+    --rarityColour: var(--commonColour);
+    --rarityFadeColour: var(--commonFadeColour);
+    --typeColour: var(--materialColour);
+
+    border: 2px solid #333;
+    border-bottom-width: 5px;
     /* padding: 1rem; */
-    border-radius: 0.5rem;
+    border-radius: 0.5rem 0.5rem 0.7rem 0.7rem;
 
     max-width: 290px;
     width: 100%;
@@ -131,59 +153,54 @@ p {
         margin-bottom: 1rem;
     }
 
+    /* Set the rarity colour */
+    &.common {
+        --rarityColour: var(--commonColour);
+        --rarityFadeColour: var(--commonFadeColour);
+    }
+    &.uncommon {
+        --rarityColour: var(--uncommonColour);
+        --rarityFadeColour: var(--uncommonFadeColour);
+    }
+    &.rare {
+        --rarityColour: var(--rareColour);
+        --rarityFadeColour: var(--rareFadeColour);
+    }
+    &.legendary {
+        --rarityColour: var(--legendaryColour);
+        --rarityFadeColour: var(--legendaryFadeColour);
+    }
+    &.mythic {
+        --rarityColour: var(--mythicColour);
+        --rarityFadeColour: var(--mythicFadeColour);
+    }
+
+    /* Set the type colour */
+    &.material {
+        --typeColour: var(--materialColour);
+    }
+    &.accessory {
+        --typeColour: var(--accessoryColour);
+    }
+    &.tool {
+        --typeColour: var(--toolColour);
+    }
+    &.character {
+        --typeColour: var(--characterColour);
+    }
+
+    border-color: hsl(var(--rarityColour));
+    background: linear-gradient(130deg, white 50%, hsl(var(--rarityFadeColour)) 50%);
+
     .rarity {
         color: white;
         padding: 0.25rem 0.5rem;
         border-radius: 0.25rem;
     }
 
-    &.common {
-        border: 2px solid rgb(var(--commonColour));
-        background-color: rgba(var(--commonColour), 0.1);
-
-        .rarity,
-        .name {
-            background-color: rgb(var(--commonColour));
-        }
-    }
-
-    &.uncommon {
-        border: 2px solid rgb(var(--uncommonColour));
-        background-color: rgba(var(--uncommonColour), 0.1);
-
-        .rarity,
-        .name {
-            background-color: rgb(var(--uncommonColour));
-        }
-    }
-
-    &.rare {
-        border: 2px solid rgb(var(--rareColour));
-        background-color: rgba(var(--rareColour), 0.1);
-
-        .rarity,
-        .name {
-            background-color: rgb(var(--rareColour));
-        }
-    }
-
-    &.legendary {
-        border: 2px solid rgb(var(--legendaryColour));
-
-        .rarity,
-        .name {
-            background-color: rgb(var(--legendaryColour));
-        }
-    }
-
-    &.mythic {
-        border: 2px solid rgb(var(--mythicColour));
-        background-color: rgba(var(--mythicColour), 0.1);
-
-        .rarity,
-        .name {
-            background-color: rgb(var(--mythicColour));
-        }
+    .rarity.pill,
+    .name {
+        background-color: hsl(var(--rarityColour));
     }
 
     .type {
@@ -192,28 +209,11 @@ p {
         color: white;
     }
 
-    &.material {
-        .type {
-            background-color: rgb(var(--materialColour));
-        }
-    }
 
-    &.accessory {
-        .type {
-            background-color: rgb(var(--accessoryColour));
-        }
-    }
+    
 
-    &.tool {
-        .type {
-            background-color: rgb(var(--toolColour));
-        }
-    }
-
-    &.character {
-        .type {
-            background-color: rgb(var(--characterColour));
-        }
+    .type.pill {
+        background-color: hsl(var(--typeColour));
     }
 }
 
@@ -260,5 +260,61 @@ p {
             margin: 0;
             list-style-type: none;
         }
+    }
+}
+
+
+
+/* if the width is less than 600px */
+@media (max-width: 600px) {
+
+    body {
+        font-size: 20px;
+    }
+
+    .desriptionbox {
+        width: 100%;
+
+        p {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .group-header {
+        display: grid;
+
+        grid-template-areas: "h2 select"
+                             "input input";
+
+        gap: 10px;
+
+        h2 {
+            text-align: center;
+
+            grid-area: h2;
+        }
+
+        select, input {
+            font-size: 2rem;
+            height: 50px;
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .searchbox {
+            width: 100%;
+
+            grid-area: input;
+        }
+
+        .sort {
+            margin-left: 0;
+
+            grid-area: select;
+        }
+    }
+
+    .item {
+        max-width: 100%;
     }
 }
