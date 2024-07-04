@@ -265,8 +265,8 @@ p {
 
 
 
-/* if the width is less than 600px */
-@media (max-width: 600px) {
+/* Mobile styling */
+@media (max-width: 800px) {
 
     body {
         font-size: 20px;
