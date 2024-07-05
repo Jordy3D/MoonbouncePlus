@@ -2,6 +2,8 @@
   <h1>Moonbounce Plus</h1>
   <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/65fb6083-77cd-422b-abf1-c9bec3d3ac00" height=100>
   <p>A userscript that adds a few features to the Moonbounce website and experience.</p>
+
+  <a href="#features">Features</a> | <a href="#installation">Installation</a> | <a href="#side-features">Side Features</a> | <a href="#known-issues">Known Issues</a> | <a href="#to-do">To-Do</a> | <a href="#changelog">Changelog</a>
 </div>
 
 ## Features
@@ -19,7 +21,7 @@
 - Copy the info for the Marketplace page you're currently on to your clipboard
 - Quick access buttons to the Marketplace, Inventory, and Directory pages
 - A link to the Moonbounce Wiki page for the currently selected item in your inventory
-- Auto-refresh on Application Error (which happens both naturaly, and due to the script)
+- Auto-refresh on Application Error (which happens both naturally, and due to the script)
 
 
 ## Installation
@@ -37,14 +39,12 @@ This repo also contains a Python script to help generate wiki page template code
 - Sometimes the script fails to download the data file before you click on something, causing the script to not work properly. If this happens, simply refresh the page and try again.
 - The script may not work properly if the Moonbounce website is updated and the script is not updated to match it. If this happens, please open an issue on this repo.
 - If you open chat after an OSRS-styled message has been sent, it won't be styled. It's only on new message while the window is open.
-- If you are on the Setttings page and try to use the left-most sidebar or some of the other links, the application will crash and you will need to refresh the page.
 
 ## To-Do
 
 - [ ] Add a toggle for horizontal/vertical Moonbounce Portal button layout
 - [ ] Add transparent mode to the Moonbounce Portal (ie: buttons and chat)
 - [ ] Add transparency and/or size options to the item drop notification
-- [ ] Add settings to toggle features on and off (in progress!)
 
 ## Changelog
 
