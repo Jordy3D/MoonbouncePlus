@@ -8,12 +8,12 @@
 
 ## Features
 
-- OSRS chat effects! Use most of the chat effects you're familiar with from OldSchool RuneScape!
-  ![chrome_OL53FAc6ib](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/33e1a56b-4c4f-462e-a7fd-794786b892f3)
+- OSRS chat effects! Use most of the chat effects you're familiar with from OldSchool RuneScape!  
+  <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/33e1a56b-4c4f-462e-a7fd-794786b892f3" width=300 style="border-radius: 15px">
 - Ponder for potential new crafting opportunities based on your inventory  
-  ![chrome_DU5zjnsLiU](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/3a386947-a633-405b-9ed4-5e3432abe4c2)
+  <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/3a386947-a633-405b-9ed4-5e3432abe4c2" width=300 style="border-radius: 15px">
 - Appraise the value of your inventory, as well as how many items are contained within (both total and unique)  
-  ![chrome_FPrdEws6If](https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/1efd6494-434b-4bbd-90bc-7b6aad0e6916)
+  <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/1efd6494-434b-4bbd-90bc-7b6aad0e6916" width=300 style="border-radius: 15px">
 - Sort your inventory by Name, ID, Rarity, Type, Item Value, Quantity, Stack Value
 - Copy the info from the currently selected item to your clipboard (for data collection, such as for the [Moonbounce Wiki](https://moonbounce.wiki))
   - Click on the item's image to copy the item data
