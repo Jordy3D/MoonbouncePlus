@@ -2379,6 +2379,26 @@
             "sources": ["Summery Gifts"]
         },
         {
+            "id": 580,
+            "name": "Pineapple",
+            "uuid": "3374c409-a53d-4be7-972a-292803854396",
+            "description": "This spiky fruit is perfect for a warm day and was picked at the peak of pine-fection!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Summery Gifts"]
+        },
+        {
+            "id": 581,
+            "name": "Kiwi Fruit",
+            "uuid": "656263a6-bc3a-4fa4-8926-a435af73cdae",
+            "description": "Unsuspecting from the outside,  but this green fruit is bursting with flavor.. don't worry about all the seeds,  those are edible too!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Summery Gifts"]
+        },
+        {
             "id": 583,
             "name": "Hot Dog Hat",
             "uuid": "f4add39e-64da-4bbb-8daf-554317629d65",
