@@ -2369,6 +2369,16 @@
             "sources": ["Summery Gifts"]
         },
         {
+            "id": 577,
+            "name": "Ice Cream",
+            "uuid": "30788a4e-4b07-4d0b-b2c2-0056b6e607e1",
+            "description": "Just remember:  brain freeze is temporary,  but these flavor memories? They're forever,  baby.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Summery Gifts"]
+        },
+        {
             "id": 583,
             "name": "Hot Dog Hat",
             "uuid": "f4add39e-64da-4bbb-8daf-554317629d65",
@@ -2836,7 +2846,7 @@
         },
         {
             "result": "Ice Cream Hat",
-            "ingredients": ["Strawberry Milk", "Ice Cream Cone"],
+            "ingredients": ["Strawberry Milk", "Ice Cream"],
             "tools": ["Lighter"],
             "type": "Seasonal (Summer)"
         }

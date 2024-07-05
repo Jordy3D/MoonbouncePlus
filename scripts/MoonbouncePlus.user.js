@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.11.0
+// @version      0.11.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -83,6 +83,11 @@
 //          - Custom name banner for little ol' me 
 // 0.11.0   - Added a link to the MoonbouncePlus settings in the Moonbounce settings page
 //          - Hijacked the Moonbounce settings page to add MoonbouncePlus settings
+// 0.11.1   - Fixed the MoonbouncePlus settings link not being properly visible on light mode
+//          - Gave the settings groups so that they're easier to manage
+//          - Added a few more settings
+//              - Auto-refresh on application error
+//          - Renamed some of the settings to avoid them sounding samey
 //
 // ==/Changelog==
 
@@ -90,7 +95,6 @@
 //
 // - Add more items and recipes (endless task)
 // - Add more classes to find elements on the page (endless task)
-// - Replace all links whle the MoonbouncePlus Settings page is open to onclick events to avoid page-reloading breaking
 //
 // ==/TODO==
 
@@ -100,23 +104,24 @@
 // create a settings object to store the settings
 var userSettings = [
     // Inventory
-    { name: "Show Sort", description: "Show the sort select in the inventory controls", type: "boolean", defaultValue: true, value: true },
-    { name: "Show Ponder", description: "Show the Ponder button in the inventory controls", type: "boolean", defaultValue: true, value: true },
-    { name: "Show Appraise", description: "Show the Appraise button in the inventory controls", type: "boolean", defaultValue: true, value: true },
-    { name: "Show Unknown Highlight", description: "Highlight items in the inventory that are not in the database", type: "boolean", defaultValue: true, value: true },
-    { name: "Show Wiki Button", description: "Show the Wiki button in the inventory controls", type: "boolean", defaultValue: true, value: true },
+    { name: "Sort", description: "Show the sort select in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
+    { name: "Ponder", description: "Show the Ponder button in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
+    { name: "Appraise", description: "Show the Appraise button in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
+    { name: "Unknown Item Highlight", description: "Highlight items in the inventory that are not in the database", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
+    { name: "Wiki Button", description: "Show the Wiki button in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
 
     // Marketplace
-    { name: "Show Copy Marketplace Data", description: "Show the Copy Marketplace Data button in the marketplace controls", type: "boolean", defaultValue: true, value: true },
+    { name: "Copy Marketplace Data", description: "Show the Copy Marketplace Data button in the marketplace controls", type: "boolean", defaultValue: true, value: true, group: "Marketplace" },
 
     // Portal
-    { name: "Show Moonbounce Portal Buttons", description: "Show the Moonbounce Portal buttons", type: "boolean", defaultValue: true, value: true },
+    { name: "Moonbounce Portal Buttons", description: "Show the Moonbounce Portal quick-access buttons", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     // { name: "Use Moonbounce Portal CSS", description: "Show the Moonbounce Portal CSS", type: "boolean", defaultValue: true, value: true },
-    { name: "Show OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true },
+    { name: "OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true, group: "Portal" },
 
     // General
-    { name: "Update Refresh Rate", description: "The rate at which the script checks the current site (in milliseconds)", type: "number", defaultValue: 1000, value: 1000, min: 100, max: 10000 },
-    { name: "Notification Duration", description: "The duration of the floating notification (in milliseconds)", type: "number", defaultValue: 2000, value: 2000, min: 500, max: 10000 },
+    { name: "Auto-Refresh on Application Error", description: "Automatically refresh the page when an application error occurs", type: "boolean", defaultValue: true, value: true, group: "General" },
+    { name: "Update Refresh Rate", description: "The rate at which the script checks the current site (in milliseconds)", type: "number", defaultValue: 1000, value: 1000, min: 100, max: 10000, group: "General" },
+    { name: "Notification Duration", description: "The duration of the floating notification (in milliseconds)", type: "number", defaultValue: 2000, value: 2000, min: 500, max: 10000, group: "General" },
 ]
 function getSetting(name) {
     return userSettings.find(x => x.name == name);
@@ -424,22 +429,24 @@ function checkSite() {
 
     // Stuff specifically for Moonbounce
     if (isOnMoonbounceSite) {
+        if (getSettingValue("Auto-Refresh on Application Error")) checkForApplicationError();
+
         if (isTargetURL(getTargetURL("Inventory"), true)) {
             loadData();
 
             addCopyDetailstoItemImage();
 
-            if (getSettingValue("Show Wiki Button")) addWikiButton();
+            if (getSettingValue("Wiki Button")) addWikiButton();
 
-            if (getSettingValue("Show Ponder")) addPonderButton();
-            if (getSettingValue("Show Appraise")) addAppraiseButton();
-            if (getSettingValue("Show Sort")) addSortInventorySelect();
+            if (getSettingValue("Ponder")) addPonderButton();
+            if (getSettingValue("Appraise")) addAppraiseButton();
+            if (getSettingValue("Sort")) addSortInventorySelect();
 
-            if (getSettingValue("Show Unknown Highlight")) highlightUnknownItems();
+            if (getSettingValue("Unknown Item Highlight")) highlightUnknownItems();
 
         } else if (isTargetURL(getTargetURL("Marketplace"), true)) {
 
-            if (getSettingValue("Show Copy Marketplace Data")) addCopyMarketplaceDataButton();
+            if (getSettingValue("Copy Marketplace Data")) addCopyMarketplaceDataButton();
 
         } else if (isTargetURL(getTargetURL("Settings"), true)) {
             addLinkToMoonbouncePlusSettings();
@@ -451,12 +458,12 @@ function checkSite() {
     moonbouncePortal = findMoonbouncePortal();                      // Attempt to find the portal once
     if (moonbouncePortal != null) {                                 // If the portal's found, run the Moonbounce Portal functions
 
-        if (getSettingValue("Show Moonbounce Portal Buttons")) addMoonbouncePortalButtons(moonbouncePortal);
+        if (getSettingValue("Moonbounce Portal Buttons")) addMoonbouncePortalButtons(moonbouncePortal);
 
         addMoonbouncePortalCSS(moonbouncePortal);
         assignCustomSelectorsToPortalElements(moonbouncePortal);
 
-        if (getSettingValue("Show OSRS Text Effects")) {
+        if (getSettingValue("OSRS Text Effects")) {
             observer = addMessageChecker(moonbouncePortal);
         }
     }
@@ -2193,6 +2200,7 @@ function addLinkToMoonbouncePlusSettings() {
     // add some CSS to the link
     addCSS(`
 .moonbounce-plus-settings-link {
+
     display: flex;
     gap: 24px;
     align-items: center;
@@ -2223,7 +2231,7 @@ function addLinkToMoonbouncePlusSettings() {
     }
 
     .text {
-        color: white;
+        color: var(--text-color);
     }
 }`, "moonbouncePlusSettingsLinkCSS");
 
@@ -2282,6 +2290,37 @@ function hijackSettingsPage() {
     // add some CSS to the settings page to center the text
     addCSS(`
 #bane-settings-page {
+    --background-color: white;
+    --background-color-2: #d2d2d2;
+    --background-color-3: #e5e5e5;
+    --content-color: white;
+    --text-color: #23262F;
+    --border-color: #E6E8EC;
+    --navbar-bg: white;
+    --header-bg: white;
+    --line-color: #E6E8EC;
+    --top-nav-bg: #333;
+    --top-nav-text: white;
+
+    --switch-colour-off: gray;
+    --switch-colour-on: #2566FE;
+
+    @media (prefers-color-scheme: dark) {
+        --background-color: #131317;
+        --background-color-2: #23262f;
+        --background-color-3: #1a1a22;
+        --content-color: #131317;
+        --text-color: #e0e0e0;
+        --border-color: #353945;
+        --navbar-bg: #2a2a2a;
+        --background-color-hover: #23262f;
+        --border-color-3: #353945;
+        --fill-icon: #e0e0e0;
+
+        --switch-colour-off: var(--background-color);
+        --switch-colour-on: #2566FE;
+    }
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2306,6 +2345,12 @@ function hijackSettingsPage() {
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        .group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
     
         .setting {
             padding: 24px;
@@ -2340,7 +2385,7 @@ function hijackSettingsPage() {
                     display : inline-block;
                     width : var(--switchWidth);
                     height : var(--switchHeight);
-                    background-color: var(--background-color);
+                    background-color: var(--switch-colour-off);
                     border-radius: var(--switchHeight);
                 }
 
@@ -2360,7 +2405,7 @@ function hijackSettingsPage() {
                     left : calc(var(--switchOffset));
                 }
                 .switch:checked + .switchLabel {
-                    background-color: #2566FE;
+                    background-color: var(--switch-colour-on);
                 }
 
                 .switch { 
@@ -2380,9 +2425,24 @@ function spawnSettings(parent) {
     let settingsTitle = createElement("h1", { textContent: "Moonbounce Plus Settings" }, settings);
     let settingsContainer = createElement("div", { id: "bane-settings-container" }, settings);
 
+    let groups = [];
+    // get every group in the settings
+    for (let setting of userSettings) {
+        if (!groups.includes(setting.group)) groups.push(setting.group);
+    }
+
+    // loop through all the groups and create a new group for each one
+    for (let group of groups) {
+        let groupDiv = createElement("div", { class: "group", id: `group-${group}` }, settingsContainer);
+        let groupTitle = createElement("h2", { textContent: group }, groupDiv);
+    }
+
     // loop through all the settings and create a new setting for each one based on the type
     for (let setting of userSettings) {
-        let settingDiv = createElement("div", { class: "setting" }, settingsContainer);
+        // find the group div that the setting belongs to
+        let groupDiv = document.querySelector(`#group-${setting.group}`);
+
+        let settingDiv = createElement("div", { class: "setting" }, groupDiv);
 
         let settingDetailsContainer = createElement("div", { class: "settingDetailsContainer" }, settingDiv);
         let settingInputContainer = createElement("div", { class: "settingInputContainer" }, settingDiv);
@@ -2427,6 +2487,20 @@ function spawnSettings(parent) {
 }
 
 //#endregion
+
+//#region Refresh on Application Error
+
+function checkForApplicationError() {
+    // look for main > h1 with the text "Application Error"
+    let error = document.querySelector("main > h1");
+    if (error == null) return;
+
+    // if the error is not "Application Error", return
+    if (error.innerText != "Application Error") return;
+
+    // refresh the page
+    location.reload();
+}
 
 //#endregion
 
