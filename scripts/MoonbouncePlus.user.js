@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.11.1
+// @version      0.12.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -88,6 +88,9 @@
 //          - Added a few more settings
 //              - Auto-refresh on application error
 //          - Renamed some of the settings to avoid them sounding samey
+// 0.12.0   - Added chat notifications so you can keep up with the chat without having to keep an eye on it
+//              - Only works while the chat is open
+//              - Options to receive notifications from everyone, no one, or a whitelist or blacklist of users
 //
 // ==/Changelog==
 
@@ -117,6 +120,10 @@ var userSettings = [
     { name: "Moonbounce Portal Buttons", description: "Show the Moonbounce Portal quick-access buttons", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     // { name: "Use Moonbounce Portal CSS", description: "Show the Moonbounce Portal CSS", type: "boolean", defaultValue: true, value: true },
     { name: "OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Chat Notifications", description: "Show notifications when a message is received in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Chat Notification Mode", description: "The users to receive chat notifications from", type: "select", defaultValue: "None", value: "None", options: ["None", "All", "Whitelist", "Blacklist"], group: "Portal" },
+    { name: "Chat Users Whitelist", description: "The users to receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
+    { name: "Chat Users Blacklist", description: "The users to not receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
 
     // General
     { name: "Auto-Refresh on Application Error", description: "Automatically refresh the page when an application error occurs", type: "boolean", defaultValue: true, value: true, group: "General" },
@@ -1718,83 +1725,91 @@ function addMarketplaceButton(portal) {
 
     addMoonbouncePortalButton(button, portal);
 }
+//#endregion
 
 
 //#region Chat Notifications
 
-function handleNewMessageSameAuthor(mutation) {
-    // log("New message detected from same author");
+function handleNewMessage(messageTarget, messageTextElement) {
 
-    let messageText = mutation.target.querySelector("[class*='_message_']:last-child");
-    if (messageText == null) return;
+    if (messageTextElement.classList.contains("checked")) return false;
 
-    // if the message has the class "checked", return
-    if (messageText.classList.contains("checked")) return;
+    let messageAuthorElement = messageTarget.querySelector("[class^='_display_name_']");
 
-    let messageAuthor = mutation.target.querySelector("[class^='_display_name_']");
-
-    let newMessage = messageText.innerText;
-    log(`New message by ${messageAuthor.innerText}: ${newMessage}`);
+    let newMessage = messageTextElement.innerText;
+    log(`New message by ${messageAuthorElement.innerText}: ${newMessage}`);
 
     // add the class "checked" to the message
-    messageText.classList.add("checked");
+    messageTextElement.classList.add("checked");
 
     // try and parse the message to see if it has an effect tag
     let parsedMessage = parseMessage(newMessage);
     if (parsedMessage != newMessage) {
-        messageText.innerHTML = parsedMessage;
+        messageTextElement.innerHTML = parsedMessage;
     }
+
+    // send a notification with the message based on the user's settings
+    let notificationMode = getSetting("Chat Notification Mode").value;
+
+    switch (notificationMode) {
+        case "None":
+            log("Chat notifications are disabled");
+            break;
+        case "All":
+            notify(newMessage);
+            break;
+        case "Whitelist":
+            log("Whitelist mode enabled");
+            let whitelist = getSetting("Chat Users Whitelist").value;
+            if (whitelist.includes(messageAuthorElement.innerText))
+                notify(newMessage);
+            break;
+        case "Blacklist":
+            log("Blacklist mode enabled");
+            let blacklist = getSetting("Chat Users Blacklist").value;
+            if (!blacklist.includes(messageAuthorElement.innerText))
+                notify(newMessage);
+
+            break;
+    }
+
+    return true;
+}
+
+function handleNewMessageSameAuthor(mutation) {
+    // Define what element was changed
+    let messageTarget = mutation.target;
+
+    // Find the last message in the message feed
+    let messageTextElement = messageTarget.querySelector("[class*='_message_']:last-child");
+    if (messageTextElement == null) return;
+
+    // handle the new message
+    let newMessage = handleNewMessage(messageTarget, messageTextElement);
 }
 
 function handleNewMessageNewAuthor(mutation) {
-    // log("New message detected from new author");
-
-    // find the second last message in the message feed
-    // let messageText = mutation.target.querySelector(">div:nth-last-child(2)");
+    // Define what element was changed
     let messageTarget = mutation.target.children[mutation.target.children.length - 2];
-    let messageText = messageTarget.querySelector("[class*='_message_'");
-    if (messageText == null) return;
 
-    // if the message has the class "checked", return
-    if (messageText.classList.contains("checked")) return;
+    // Find the last message in the message feed
+    let messageTextElement = messageTarget.querySelector("[class*='_message_'");
+    if (messageTextElement == null) return;
 
-    let messageAuthor = messageTarget.querySelector("[class^='_display_name_']");
-    let newMessage = messageText.innerText;
-
-    log(`New message by ${messageAuthor.innerText}: ${newMessage}`);
-
-    // add the class "checked" to the message
-    messageText.classList.add("checked");
-
-    // try and parse the message to see if it has an effect tag
-    let parsedMessage = parseMessage(newMessage);
-    if (parsedMessage != newMessage) {
-        messageText.innerHTML = parsedMessage;
-    }
+    // handle the new message
+    let newMessage = handleNewMessage(messageTarget, messageTextElement);
 }
 
 function handleNewMessageFromScratch(mutation) {
-    // log("New message detected from scratch");
+    // Define what element was changed
+    let messageTarget = mutation.target;
 
-    let messageText = mutation.target.querySelector("[class*='_message_']:last-child");
-    if (messageText == null) return;
+    // Find the last message in the message feed
+    let messageTextElement = messageTarget.querySelector("[class*='_message_']:last-child");
+    if (messageTextElement == null) return;
 
-    // if the message has the class "checked", return
-    if (messageText.classList.contains("checked")) return;
-
-    let messageAuthor = mutation.target.querySelector("[class^='_display_name_']");
-
-    let newMessage = messageText.innerText;
-    log(`New message by ${messageAuthor.innerText}: ${newMessage}`);
-
-    // add the class "checked" to the message
-    messageText.classList.add("checked");
-
-    // try and parse the message to see if it has an effect tag
-    let parsedMessage = parseMessage(newMessage);
-    if (parsedMessage != newMessage) {
-        messageText.innerHTML = parsedMessage;
-    }
+    // handle the new message
+    let newMessage = handleNewMessage(messageTarget, messageTextElement);
 }
 
 let messageObserver = new MutationObserver(function (mutations) {
@@ -1839,12 +1854,17 @@ function addMessageChecker(portal) {
 /**
  * Notification
  */
-function testNotification(message) {
+
+function notify(message) {
+    // if the window is focused, return
+    if (document.hasFocus()) return;
+
+    log(`Notifying: ${message}`);
+
     let notificationDetails = {
         text: message,
         title: 'Moonbounce Plus',
         timeout: 5000,
-        image: 'https://i.imgur.com/KzKSn2S.png',
         onclick: function () { window.focus(); },
     };
     GM_notification(notificationDetails);
@@ -2360,6 +2380,9 @@ function hijackSettingsPage() {
             display: flex;
             align-items: center;
             justify-content: space-between;
+    
+            width: 100%;
+            gap: 1em;
             
             --switchHeight: 30px;
             --switchWidth: 60px;
@@ -2368,7 +2391,9 @@ function hijackSettingsPage() {
             --switchOffset: calc(var(--switchWidth) - var(--switchHeight));
 
             .settingInputContainer {
-                input {
+                width: 70%;
+               
+                input, select {
                     border: 2px solid var(--border-color-3);
                     border-radius: 10px;
                     background-color: var(--background-color);
@@ -2376,10 +2401,27 @@ function hijackSettingsPage() {
                     text-align: right;
                     padding: 10px;
                     font-size: 30px;
-                    
-                    width: 70%;
+
+                    width: 100%;
+                    box-sizing: border-box;
+                    max-width: 300px;
+                }
+
+                input {                    
                     float: right;
                 }
+  
+                select {
+                    border: 2px solid var(--border-color-3);
+                    border-radius: 10px;
+                    background-color: var(--background-color);
+                    color: var(--text-color);
+                    text-align: right;
+                    padding: 10px;
+                    float: right;
+                    font-size: 30px;
+                }
+
                 .switchLabel { 
                     position : relative ;
                     display : inline-block;
@@ -2387,6 +2429,8 @@ function hijackSettingsPage() {
                     height : var(--switchHeight);
                     background-color: var(--switch-colour-off);
                     border-radius: var(--switchHeight);
+                    
+                    float: right;
                 }
 
                 .switchLabel::after {

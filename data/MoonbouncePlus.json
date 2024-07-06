@@ -2379,6 +2379,16 @@
             "sources": ["Summery Gifts"]
         },
         {
+            "id": 579,
+            "name": "Fruit Bowl",
+            "uuid": "c64a176d-c5f7-4b19-a473-de8081039680",
+            "description": "A delicious mish mash of all your favorite fruits,  all perfectly ripe!",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 580,
             "name": "Pineapple",
             "uuid": "3374c409-a53d-4be7-972a-292803854396",
@@ -2842,7 +2852,7 @@
         },
         {
             "result": "Fruit Bowl",
-            "ingredients": ["Banana", "Watermelon Slice", "Kiwi Slice"],
+            "ingredients": ["Banana", "Watermelon Slice", "Kiwi Fruit"],
             "tools": ["Craftsman Blade"],
             "type": "Seasonal (Summer)"
         },
