@@ -2289,6 +2289,16 @@
             "sources": []
         },
         {
+            "id": 566,
+            "name": "Fruit Hat",
+            "uuid": "e4daffb1-95b2-4ff7-bc76-f49b6c160ec9",
+            "description": "It's what happens when fashion raids the fridge. Perfect for those \"I woke up like this\" days,  if you sleep in a fruit salad.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
             "id": 567,
             "name": "Sparkler",
             "uuid": "56dcfab7-c5dc-4619-ba31-5218f0376463",
