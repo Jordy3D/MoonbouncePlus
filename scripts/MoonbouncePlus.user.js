@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.12.1
+// @version      0.12.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -93,6 +93,10 @@
 //              - Options to receive notifications from everyone, no one, or a whitelist or blacklist of users
 // 0.12.1   - Stop a fast refresh rate causing a refresh loop on the Application Error page
 //          - Fix the notification duration setting not being applied to Ponder, Appraise, etc
+// 0.12.2   - Added replacing YouTube links with the video title in the chat (prepwork for other links)
+//          - Adjusted Settings page formatting
+//          - Assign usernames to Portal character elements so that they can be targetted later for whatever reason
+//          - Add selectors to parts of the portal to target player-specific elements
 //
 // ==/Changelog==
 
@@ -1557,41 +1561,83 @@ function assignLabelsToPortalChildren(portal) {
     // create an array of the children of the portal, ignoring non-div elements
     children = Array.from(children).filter(x => x.tagName == "DIV");
 
-    // if all children have labels, return
-    let allHaveLabels = children.every(x => x.hasAttribute("label"));
-    if (allHaveLabels) return;
+    // check if all children have label and user attributes
+    let allHaveLabels = true;
+    let allHaveUsers = true;
+    for (i = 0; i < children.length; i++) {
+        let child = children[i];
+        if (!child.hasAttribute("label")) allHaveLabels = false;
+        if (i > 1 && !child.hasAttribute("user")) allHaveUsers = false;
+
+        // If both are already false, break early to avoid unnecessary iterations
+        if (!allHaveLabels && !allHaveUsers) break;
+    }
+    if (allHaveLabels && allHaveUsers) return;
 
     // create an array called controlChildren of just the first two children
     let controlChildren = children.slice(0, 2);
     // create an array called characterChildren of the rest of the children
     let characterChildren = children.slice(2);
 
-    // the character children containing the following selectors will be labelled as follows:
-    let selectorAndLabels = [
-        { selector: "button", label: "MBP.CHARACTER.BUTTON" },
-        { selector: "._base_5l9jc_1", label: "MBP.CHARACTER.NAME" },
-        { selector: "._base_1d537_1", label: "MBP.CHARACTER.SPEECH" }
-    ];
+    // if not all children have labels, assign labels to the control and character children
+    if (!allHaveLabels) {
+        // the character children containing the following selectors will be labelled as follows:
+        let selectorAndLabels = [
+            { selector: "button", label: "MBP.CHARACTER.BUTTON", class: "character-button" },
+            { selector: "._base_5l9jc_1", label: "MBP.CHARACTER.NAME", class: "character-name" },
+            { selector: "._base_1d537_1", label: "MBP.CHARACTER.SPEECH", class: "character-speech" }
+        ];
 
-    let controleLabels = ["MBP.NOTIFICATION", "MBP.CONTROLS"];
-    let characterLabels = ["MBP.CHARACTER.BUTTON", "MBP.CHARACTER.NAME", "MBP.CHARACTER.SPEECH"];
+        // assign the labels to the control children
+        let controlLabels = ["MBP.NOTIFICATION", "MBP.CONTROLS"];
+        for (let i = 0; i < controlChildren.length; i++)
+            controlChildren[i].setAttribute("label", controlLabels[i]);
 
-    for (let i = 0; i < controlChildren.length; i++) {
-        controlChildren[i].setAttribute("label", controleLabels[i]);
-    }
+        // assign the labels to the character children
+        for (let i = 0; i < characterChildren.length; i++) {
+            if (characterChildren[i].hasAttribute("label")) continue;
 
-    for (let i = 0; i < characterChildren.length; i++) {
-        if (characterChildren[i].hasAttribute("label")) continue;
+            let element = characterChildren[i];
+            // if the element contains the selector, assign the label to the element
+            for (let item of selectorAndLabels) {
+                let found = element.querySelector(item.selector);
+                if (found != null) {
+                    element.setAttribute("label", item.label);
 
-        let element = characterChildren[i];
-        // if the element contains the selector, assign the label to the element
-        for (let item of selectorAndLabels) {
-            if (element.querySelector(item.selector) != null) {
-                element.setAttribute("label", item.label);
-                break;
+                    // add the class to the element
+                    if (item.class != null)
+                        found.classList.add(item.class);
+                    break;
+                }
             }
         }
+    }
 
+    // if not all appropriate children have user names, assign user names to the character children
+    if (!allHaveUsers) {
+        // split the characteChildren into groups of 3
+        let characterGroups = [];
+        while (characterChildren.length > 0)
+            characterGroups.push(characterChildren.splice(0, 3));
+
+        function findUserDisplayNameInGroup(group) {
+            for (let element of group) {
+                let nameElement = element.querySelector("._base_5l9jc_1");
+                if (nameElement != null)
+                    return nameElement.innerText;
+            }
+            return null;
+        }
+
+        // in each group, find the character's name and assign the label to every element in the group as user=characterName
+        for (let group of characterGroups) {
+            let characterName = findUserDisplayNameInGroup(group);
+
+            for (let element of group) {
+                if (characterName == null) continue;
+                element.setAttribute("user", characterName);
+            }
+        }
     }
 }
 
@@ -1738,13 +1784,20 @@ function handleNewMessage(messageTarget, messageTextElement) {
     let messageAuthorElement = messageTarget.querySelector("[class^='_display_name_']");
 
     let newMessage = messageTextElement.innerText;
-    log(`New message by ${messageAuthorElement.innerText}: ${newMessage}`);
+    // log(`New message by ${messageAuthorElement.innerText}: ${newMessage}`);
 
     // add the class "checked" to the message
     messageTextElement.classList.add("checked");
 
+
+
+    // try and replace the YouTube link with the video title
+    messageTextElement = parseForYouTube(messageTextElement);
+
+    let parsedMessage = newMessage;
+
     // try and parse the message to see if it has an effect tag
-    let parsedMessage = parseMessage(newMessage);
+    parsedMessage = parseForOSRS(parsedMessage);
     if (parsedMessage != newMessage) {
         messageTextElement.innerHTML = parsedMessage;
     }
@@ -1896,7 +1949,7 @@ const effectTags = [
     { name: "slide", type: "body" },    // slide effect
 ]
 
-function parseMessage(message) {
+function parseForOSRS(message) {
     let parsedMessage = message;
 
     // check if message has tag by checking if it has a :
@@ -1979,6 +2032,34 @@ function parseMessage(message) {
     let wrappedMessage = `<rs class="${classesToAdd.join(" ")}">${parsedMessage}</rs>`;
     return wrappedMessage;
 }
+
+function parseForYouTube(messageTextElement) {
+
+    // find all a tags in the message
+    let links = messageTextElement.querySelectorAll("a");
+    if (links == null) return messageTextElement;
+
+    // check for any YouTube links in the message
+    let youtubeLinks = [];
+    for (let link of links) {
+        if (link.href.includes("youtube.com"))
+            youtubeLinks.push(link);
+    }
+
+    // if there are no YouTube links, return the message
+    if (youtubeLinks.length == 0) return messageTextElement;
+
+    // for each YouTube Link, get the video title and replace the link text with the title
+    for (let link of youtubeLinks) {
+        getPageTitle(link.href).then(title => {
+            // set the text content of the link to the title
+            link.textContent = title;
+        }).catch(error => console.error(error));
+    }
+
+    return messageTextElement;
+}
+
 
 function splitTextIntoSpans(text) {
     let spans = [];
@@ -2360,6 +2441,12 @@ function hijackSettingsPage() {
     
     font-family: Inter, sans-serif;
     font-weight: 400;
+
+    #bane-settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
     
     #bane-settings-container
     {
@@ -2384,6 +2471,8 @@ function hijackSettingsPage() {
     
             width: 100%;
             gap: 1em;
+
+            box-sizing: border-box;
             
             --switchHeight: 30px;
             --switchWidth: 60px;
@@ -2391,8 +2480,12 @@ function hijackSettingsPage() {
             
             --switchOffset: calc(var(--switchWidth) - var(--switchHeight));
 
+            .settingDetailsContainer {
+                flex: 2;
+            }
+
             .settingInputContainer {
-                width: 70%;
+                flex: 1;
                
                 input, select {
                     border: 2px solid var(--border-color-3);
@@ -2466,8 +2559,15 @@ function hijackSettingsPage() {
 
 function spawnSettings(parent) {
 
+    // get script version
+    let scriptVersion = GM_info.script.version;
+
     let settings = createElement("div", { id: "bane-settings" }, parent);
-    let settingsTitle = createElement("h1", { textContent: "Moonbounce Plus Settings" }, settings);
+
+    let settingHeader = createElement("div", { id: "bane-settings-header" }, settings);
+
+    let settingsTitle = createElement("h1", { textContent: "Moonbounce Plus Settings" }, settingHeader);
+    let settingsVersion = createElement("h2", { textContent: `v${scriptVersion}` }, settingHeader);
     let settingsContainer = createElement("div", { id: "bane-settings-container" }, settings);
 
     let groups = [];
@@ -2533,6 +2633,61 @@ function spawnSettings(parent) {
 
 //#endregion
 
+
+
+
+// function to take a URL and get the <title> of the page at that URL
+function getPageTitle(url) {
+
+    const domainWhiteList = ["www.youtube.com"];
+
+    function loadPage(url) {
+        return new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    let parser = new DOMParser();
+                    let doc = parser.parseFromString(xhr.responseText, "text/html");
+                    let titleElement = doc.querySelector("title");
+                    if (titleElement) {
+                        resolve(titleElement.innerText);
+                    } else {
+                        reject("Title element not found");
+                    }
+                } else {
+                    reject("Error: " + xhr.status);
+                }
+            };
+            xhr.onerror = function () {
+                reject("Network error");
+            };
+            xhr.send();
+        });
+    }
+
+    let urlDomain = new URL(url).hostname;
+    if (!domainWhiteList.includes(urlDomain)) return Promise.reject("Domain not whitelisted");
+
+
+    // if the current URL shares the same origin as the target URL
+    if (new URL(url).origin == window.location.origin) {
+        console.log("Same origin detected");
+        return loadPage(url);
+    }
+    else {
+        console.log("Cross-origin detected");
+        // Prepend the CORS proxy URL to the target URL
+        // const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+        // const proxyUrl = `https://test.cors.workers.dev/?${url}`
+        return loadPage(proxyUrl);
+    }
+}
+
+// Usage
+// getPageTitle("https://music.youtube.com/watch?v=LjBhDSgZPCo&si=7zqZ3C6juqVnPA8D").then(title => console.log(title)).catch(error => console.error(error));
+
 //#region Refresh on Application Error
 
 function checkForApplicationError() {
@@ -2545,7 +2700,7 @@ function checkForApplicationError() {
 
     // cancel the interval
     clearInterval(window.refreshInterval);
-    
+
     // refresh the page
     location.reload();
 }
