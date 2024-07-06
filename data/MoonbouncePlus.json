@@ -2309,10 +2309,30 @@
             "sources": []
         },
         {
+            "id": 569,
+            "name": "Ice Cream Hat",
+            "uuid": "82cc534b-dc7d-42b6-ad47-179b4b599d43",
+            "description": "Guaranteed to make people stare - in envy or confusion,  we're not sure.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 570,
             "name": "Flamingo Hat",
             "uuid": "dde91408-d3fa-4156-9b2b-41634a37c729",
             "description": "Your head’s ticket to fabulous. Warning:  may cause sudden urges to stand on one leg. Instant conversation starter or a great excuse to leave parties early.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 571,
+            "name": "Tiki Drink",
+            "uuid": "10395c01-8bba-4b64-bc8f-b97643b32811",
+            "description": "Tropical vacation in a glass. Paper umbrella's not just for show - it's keeping your worries from floating to the top.",
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 250,

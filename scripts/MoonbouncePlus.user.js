@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.12.0
+// @version      0.12.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -91,6 +91,8 @@
 // 0.12.0   - Added chat notifications so you can keep up with the chat without having to keep an eye on it
 //              - Only works while the chat is open
 //              - Options to receive notifications from everyone, no one, or a whitelist or blacklist of users
+// 0.12.1   - Stop a fast refresh rate causing a refresh loop on the Application Error page
+//          - Fix the notification duration setting not being applied to Ponder, Appraise, etc
 //
 // ==/Changelog==
 
@@ -191,8 +193,10 @@ function loadSettings() {
 // ██████╔╝██║  ██║   ██║   ██║  ██║
 // ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
 
-var refreshRate = 1000;
-var notificationDuration = 2000;
+loadSettings();
+
+var refreshRate = getSettingValue("Update Refresh Rate");
+var notificationDuration = getSettingValue("Notification Duration");
 
 var items = null;
 var recipes = null;
@@ -419,11 +423,8 @@ function init() {
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
 
-    // load the settings
-    loadSettings();
-
     // check the current site every second and page to see what functions to run
-    setInterval(() => {
+    window.refreshInterval = setInterval(() => {
         checkSite();
     }, refreshRate);
 }
@@ -2542,6 +2543,9 @@ function checkForApplicationError() {
     // if the error is not "Application Error", return
     if (error.innerText != "Application Error") return;
 
+    // cancel the interval
+    clearInterval(window.refreshInterval);
+    
     // refresh the page
     location.reload();
 }
