@@ -2439,6 +2439,16 @@
             "sources": ["Summery Gifts"]
         },
         {
+            "id": 582,
+            "name": "Swimmers Goggles",
+            "uuid": "e7f23bdf-e1d7-4e3f-9505-9239ff10a978",
+            "description": "A perfect place to wear them is right on top of your head. What? You have plans to go swimming any time soon?",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 583,
             "name": "Hot Dog Hat",
             "uuid": "f4add39e-64da-4bbb-8daf-554317629d65",
