@@ -890,3 +890,5 @@ if __name__ == '__main__':
     # generate_page_tables(items)
     generate_cards_lists(items)
     download_images(items)
+    
+    generate_page_tables(items)

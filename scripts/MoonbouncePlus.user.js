@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.12.2
+// @version      0.12.3
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -97,6 +97,8 @@
 //          - Adjusted Settings page formatting
 //          - Assign usernames to Portal character elements so that they can be targetted later for whatever reason
 //          - Add selectors to parts of the portal to target player-specific elements
+// 0.12.3   - Update to match new Moonbounce class names
+//              - Sorting should now be slightly more reliable going forward as it uses a less specific selector
 //
 // ==/Changelog==
 
@@ -104,6 +106,8 @@
 //
 // - Add more items and recipes (endless task)
 // - Add more classes to find elements on the page (endless task)
+// - Provide common elements with custom selectors on the Moonbounce main site (endless task)
+//      - Or otherwise find a way to get the elements more automatically
 //
 // ==/TODO==
 
@@ -271,11 +275,11 @@ function loadData(isLocal = false) {
 const targetSelector = [
     { name: "Inventory", selector: ".cfWcg" },
     { name: "Inventory Controls", selector: ".S-h7a" },
-    { name: "Selected Item Window", selector: "._base_7aiat_1" },
+    { name: "Selected Item Window", selector: "._base_1xand_1" },
     { name: "Selected Item Details", selector: "._base_awewl_1" },
     { name: "Source List Item", selector: ".mSsVp" },
     { name: "Diffuse Value", selector: ".WVOcs" },
-    { name: "Stack Size", selector: "._stack_count_252dr_52" },
+    { name: "Stack Size", selector: "[class^='_stack_count_'" },
 
     { name: "Marketplace Container", selector: ".BLrCt" },
     { name: "Marketplace Controls", selector: ".t-IQf" },
