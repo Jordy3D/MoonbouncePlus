@@ -2125,7 +2125,7 @@
             "description": "Feeling a bit mushy? Then this is the hat for you.",
             "rarity": "RARE",
             "type": "ACCESSORY",
-            "value": null,
+            "value": 250,
             "sources": []
         },
         {
@@ -2135,7 +2135,7 @@
             "description": "This bold crimson helmet is the perfect way to make a statement without saying a word. Slay all day!",
             "rarity": "LEGENDARY",
             "type": "ACCESSORY",
-            "value": null,
+            "value": 500,
             "sources": []
         },
         {
@@ -2145,7 +2145,7 @@
             "description": "Keep your head warm and your tummy happy with this savory accessory! Just don't be surprised if people try to slurp your new lid.",
             "rarity": "RARE",
             "type": "ACCESSORY",
-            "value": null,
+            "value": 250,
             "sources": []
         },
         {
@@ -2155,7 +2155,7 @@
             "description": "This halo is the perfect way to show off your saintly side without having to sprout wings. Just be careful,  bandits may start attacking if they see you wearing this.",
             "rarity": "LEGENDARY",
             "type": "ACCESSORY",
-            "value": null,
+            "value": 500,
             "sources": []
         },
         {
@@ -2165,7 +2165,7 @@
             "description": "This hat is perfect for those who want to look like they are magical without going full-on wizard",
             "rarity": "RARE",
             "type": "ACCESSORY",
-            "value": null,
+            "value": 250,
             "sources": []
         },
         {
