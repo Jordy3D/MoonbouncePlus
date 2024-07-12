@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.12.3
+// @version      0.13.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -99,6 +99,10 @@
 //          - Add selectors to parts of the portal to target player-specific elements
 // 0.12.3   - Update to match new Moonbounce class names
 //              - Sorting should now be slightly more reliable going forward as it uses a less specific selector
+// 0.13.0   - Added a custom CSS section to the settings
+//              - Allows for custom CSS to be added to the Moonbounce site and portal
+//              - Can make use of the custom selectors I introduce rather than the default Moonbounce classes
+//                  - This will update at approximately the speed of the Update Refresh Rate setting
 //
 // ==/Changelog==
 
@@ -139,6 +143,9 @@ var userSettings = [
     { name: "Auto-Refresh on Application Error", description: "Automatically refresh the page when an application error occurs", type: "boolean", defaultValue: true, value: true, group: "General" },
     { name: "Update Refresh Rate", description: "The rate at which the script checks the current site (in milliseconds)", type: "number", defaultValue: 1000, value: 1000, min: 100, max: 10000, group: "General" },
     { name: "Notification Duration", description: "The duration of the floating notification (in milliseconds)", type: "number", defaultValue: 2000, value: 2000, min: 500, max: 10000, group: "General" },
+
+    // Custom CSS
+    { name: "Custom CSS", description: "Custom CSS for MoonbouncePlus", type: "textarea", defaultValue: "", value: "", group: "Custom" },
 ]
 function getSetting(name) {
     return userSettings.find(x => x.name == name);
@@ -468,6 +475,8 @@ function checkSite() {
             addLinkToMoonbouncePlusSettings();
             hijackSettingsPage();
         }
+
+        addCustomCSS();
     }
 
     // Stuff for the Moonbounce Portal, which can be on any site
@@ -482,10 +491,13 @@ function checkSite() {
         if (getSettingValue("OSRS Text Effects")) {
             observer = addMessageChecker(moonbouncePortal);
         }
+
+        addCustomCSS("portal", moonbouncePortal);
     }
 }
 
 //#endregion
+
 
 //#region Main Functions
 
@@ -1778,7 +1790,6 @@ function addMarketplaceButton(portal) {
 }
 //#endregion
 
-
 //#region Chat Notifications
 
 function handleNewMessage(messageTarget, messageTextElement) {
@@ -2080,10 +2091,6 @@ function splitTextIntoSpans(text) {
 
     return spans;
 }
-
-//#endregion
-
-
 
 //#endregion
 
@@ -2484,6 +2491,14 @@ function hijackSettingsPage() {
             
             --switchOffset: calc(var(--switchWidth) - var(--switchHeight));
 
+            &:has(textarea) {
+                flex-direction: column;
+
+                > div {
+                    width: 100%;
+                }
+            }
+
             .settingDetailsContainer {
                 flex: 2;
             }
@@ -2491,7 +2506,7 @@ function hijackSettingsPage() {
             .settingInputContainer {
                 flex: 1;
                
-                input, select {
+                input, select, textarea {
                     border: 2px solid var(--border-color-3);
                     border-radius: 10px;
                     background-color: var(--background-color);
@@ -2505,7 +2520,7 @@ function hijackSettingsPage() {
                     max-width: 300px;
                 }
 
-                input {                    
+                input {
                     float: right;
                 }
   
@@ -2518,6 +2533,13 @@ function hijackSettingsPage() {
                     padding: 10px;
                     float: right;
                     font-size: 30px;
+                }
+
+                textarea {
+                    text-align: left;
+                    max-width: 100%;
+                    min-width: 100%;
+                    font-size: 20px;
                 }
 
                 .switchLabel { 
@@ -2621,6 +2643,9 @@ function spawnSettings(parent) {
                     if (option == setting.value) optionElement.selected = true;
                 }
                 break;
+            case "textarea":
+                settingInput = createElement("textarea", { value: setting.value }, settingInputContainer);
+                break;
             default:
                 break;
         }
@@ -2637,7 +2662,20 @@ function spawnSettings(parent) {
 
 //#endregion
 
+// region Custom CSS
 
+function addCustomCSS(name="", parent=document.body) {
+    let customCSS = getSetting("Custom CSS").value;
+    
+    // if the value is empty, delete the custom CSS if it exists
+    if (customCSS == "") {
+        let existingCSS = parent.querySelector(`#customCSS${name}`);
+        if (existingCSS != null) existingCSS.remove();
+        return;
+    }
+
+    addCSS(customCSS, `customCSS${name}`, parent);
+}
 
 
 // function to take a URL and get the <title> of the page at that URL
@@ -2710,6 +2748,9 @@ function checkForApplicationError() {
 }
 
 //#endregion
+
+//#endregion
+
 
 //#region Helper Functions
 // ██╗  ██╗███████╗██╗     ██████╗ ███████╗██████╗ 
@@ -2982,6 +3023,8 @@ function createSvgElement(width, height, pathData, fill, offset = { x: 0, y: 0 }
  * createElement("div", { options: { text: "Hello, World!", class: "example" } }, document.body);
  */
 function createElement(type, userOptions, parent = document.body) {
+    if (parent == null) return error(`Parent element not found for ${type} element`);
+
     let element = document.createElement(type);
 
     const defaultOptions = {
