@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Moonbounce Plus</h1>
-  <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/65fb6083-77cd-422b-abf1-c9bec3d3ac00" height=100>
+  <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/1a5eb2bf-5edd-40fc-81ef-39d5cd860c34" height=100>
   <p>A userscript that adds a few features to the Moonbounce website and experience.</p>
 
   <a href="#features">Features</a> | <a href="#installation">Installation</a> | <a href="#side-features">Side Features</a> | <a href="#known-issues">Known Issues</a> | <a href="#to-do">To-Do</a> | <a href="#changelog">Changelog</a>
