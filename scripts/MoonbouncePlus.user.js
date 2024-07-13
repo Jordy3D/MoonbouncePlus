@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.13.0
+// @version      0.14.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -103,6 +103,8 @@
 //              - Allows for custom CSS to be added to the Moonbounce site and portal
 //              - Can make use of the custom selectors I introduce rather than the default Moonbounce classes
 //                  - This will update at approximately the speed of the Update Refresh Rate setting
+// 0.14.0   - Added YouTube video embedding in the chat
+//          - Added messages getting parsed when the chat is opened
 //
 // ==/Changelog==
 
@@ -114,7 +116,6 @@
 //      - Or otherwise find a way to get the elements more automatically
 //
 // ==/TODO==
-
 
 //#region Settings
 
@@ -138,6 +139,7 @@ var userSettings = [
     { name: "Chat Notification Mode", description: "The users to receive chat notifications from", type: "select", defaultValue: "None", value: "None", options: ["None", "All", "Whitelist", "Blacklist"], group: "Portal" },
     { name: "Chat Users Whitelist", description: "The users to receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
     { name: "Chat Users Blacklist", description: "The users to not receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
+    { name: "Embed YouTube Videos", description: "Embed YouTube videos in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
 
     // General
     { name: "Auto-Refresh on Application Error", description: "Automatically refresh the page when an application error occurs", type: "boolean", defaultValue: true, value: true, group: "General" },
@@ -1509,6 +1511,8 @@ function assignCustomSelectorsToPortalElements(portal) {
     // if (existing != null) return;
     assignLabelsToPortalChildren(portal);
 
+    var chatWindowFound = false;
+
     const classes = [
         { name: "Button Control Bar", selector: "._base_11wdf_1._nowrap_11wdf_12._justify_start_11wdf_21._align_center_11wdf_42._content_normal_11wdf_60", id: "button-control-bar", class: "" },
         { name: "Chat Container", selector: "._base_1jhq3_1", id: "chat-container", class: null },
@@ -1551,9 +1555,17 @@ function assignCustomSelectorsToPortalElements(portal) {
 
         if (classToAdd != "" && classToAdd != null)
             element.classList.add(classToAdd);
+
+        // set a flag for if chat was found
+        if (item.name == "Chat Window")
+            chatWindowFound = true;
     }
 
     giveBaneSpecialBanner(portal);
+
+    // if chat was found, force parse the messages
+    if (chatWindowFound)
+        parseChatMessages(portal);
 }
 
 function giveBaneSpecialBanner(portal) {
@@ -1657,6 +1669,7 @@ function assignLabelsToPortalChildren(portal) {
     }
 }
 
+//#region Moonbounce Portal Buttons
 
 /**
  * Add buttons to the Moonbounce Portal to quickly access Moonbounce features
@@ -1789,10 +1802,47 @@ function addMarketplaceButton(portal) {
     addMoonbouncePortalButton(button, portal);
 }
 //#endregion
+//#endregion
 
-//#region Chat Notifications
+//#region Chat Notifications and Effects
 
-function handleNewMessage(messageTarget, messageTextElement) {
+function parseChatMessages(portal) {
+    // find the chat window
+    let chatWindow = portal.querySelector("#chat-window");
+    if (chatWindow == null) return;
+
+    // find the message feed
+    let messageFeed = chatWindow.querySelector("#message-feed");
+    if (messageFeed == null) return;
+
+    // find the messages
+    let messages = messageFeed.querySelectorAll(".message-text");
+
+    // for each message, parse the message
+    for (let message of messages) {
+        parseMessage(message);
+    }
+}
+
+function parseMessage(messageText) {
+    if (messageText.classList.contains("checked")) return;
+
+    // add the class "checked" to the message
+    messageText.classList.add("checked");
+
+    // try and replace the YouTube link with the video title, and embed the video
+    messageText = parseForYouTube(messageText);
+
+    let parsedMessage = messageText.innerText;
+
+    // try and parse the message to see if it has an effect tag
+    parsedMessage = parseForOSRS(parsedMessage);
+    if (parsedMessage != messageText.innerText) {
+        messageText.innerHTML = parsedMessage;
+    }
+}
+
+function handleNewMessage(messageTarget, messageTextElement, chatReload = false) {
 
     if (messageTextElement.classList.contains("checked")) return false;
 
@@ -1803,8 +1853,6 @@ function handleNewMessage(messageTarget, messageTextElement) {
 
     // add the class "checked" to the message
     messageTextElement.classList.add("checked");
-
-
 
     // try and replace the YouTube link with the video title
     messageTextElement = parseForYouTube(messageTextElement);
@@ -1817,24 +1865,23 @@ function handleNewMessage(messageTarget, messageTextElement) {
         messageTextElement.innerHTML = parsedMessage;
     }
 
+    if (chatReload) return true;
+
     // send a notification with the message based on the user's settings
     let notificationMode = getSetting("Chat Notification Mode").value;
 
     switch (notificationMode) {
         case "None":
-            log("Chat notifications are disabled");
             break;
         case "All":
             notify(newMessage);
             break;
         case "Whitelist":
-            log("Whitelist mode enabled");
             let whitelist = getSetting("Chat Users Whitelist").value;
             if (whitelist.includes(messageAuthorElement.innerText))
                 notify(newMessage);
             break;
         case "Blacklist":
-            log("Blacklist mode enabled");
             let blacklist = getSetting("Chat Users Blacklist").value;
             if (!blacklist.includes(messageAuthorElement.innerText))
                 notify(newMessage);
@@ -2064,17 +2111,38 @@ function parseForYouTube(messageTextElement) {
     // if there are no YouTube links, return the message
     if (youtubeLinks.length == 0) return messageTextElement;
 
+    function createEmbed(link) {
+        let videoId = link.href.split("v=")[1];
+        let embedLink = `https://www.youtube.com/embed/${videoId}?rel=0&controls=0`;
+
+        let iframe = document.createElement("iframe");
+        iframe.src = embedLink;
+        iframe.width = "200";
+        iframe.height = "110";
+        iframe.frameborder = "0";
+        iframe.style = "border: none;";
+        // enable allowfullscreen
+        iframe.setAttribute("allowfullscreen", "");
+
+        return iframe;
+    }
+
     // for each YouTube Link, get the video title and replace the link text with the title
     for (let link of youtubeLinks) {
         getPageTitle(link.href).then(title => {
             // set the text content of the link to the title
             link.textContent = title;
         }).catch(error => console.error(error));
+
+        if (getSettingValue("Embed YouTube Videos")) {
+            log("Embedding YouTube video");
+            let embed = createEmbed(link);
+            messageTextElement.appendChild(embed);
+        }
     }
 
     return messageTextElement;
 }
-
 
 function splitTextIntoSpans(text) {
     let spans = [];
@@ -2662,11 +2730,11 @@ function spawnSettings(parent) {
 
 //#endregion
 
-// region Custom CSS
+//#region Custom CSS
 
-function addCustomCSS(name="", parent=document.body) {
+function addCustomCSS(name = "", parent = document.body) {
     let customCSS = getSetting("Custom CSS").value;
-    
+
     // if the value is empty, delete the custom CSS if it exists
     if (customCSS == "") {
         let existingCSS = parent.querySelector(`#customCSS${name}`);
@@ -2676,6 +2744,7 @@ function addCustomCSS(name="", parent=document.body) {
 
     addCSS(customCSS, `customCSS${name}`, parent);
 }
+//#endregion
 
 
 // function to take a URL and get the <title> of the page at that URL
