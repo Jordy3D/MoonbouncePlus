@@ -5,7 +5,7 @@
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
-// @icon         https://i.imgur.com/KzKSn2S.png
+// @icon         https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/assets/MoonbouncePlus.png
 // @grant        GM_notification
 // @grant        window.focus
 // @grant        GM_setValue
@@ -214,6 +214,8 @@ loadSettings();
 
 var refreshRate = getSettingValue("Update Refresh Rate");
 var notificationDuration = getSettingValue("Notification Duration");
+
+const mbpLogo = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/assets/MoonbouncePlus.png"
 
 var items = null;
 var recipes = null;
@@ -1720,7 +1722,7 @@ function addMoonbouncePlusButton(portal) {
 
     // add an image inside the button
     let img = document.createElement("img");
-    img.src = "https://i.imgur.com/KzKSn2S.png";
+    img.src = mbpLogo;
     button.appendChild(img);
 
     // add an event listener to the button
@@ -2370,7 +2372,7 @@ function addLinkToMoonbouncePlusSettings() {
     let textDiv = createElement("div", { class: "text" }, link);
 
     // create an img element inside the icon div
-    let img = createElement("img", { src: "https://i.imgur.com/KzKSn2S.png" }, iconDiv);
+    let img = createElement("img", { src: mbpLogo }, iconDiv);
 
     // create a span element inside the text div
     let span = createElement("span", { textContent: "Moonbounce Plus" }, textDiv);
