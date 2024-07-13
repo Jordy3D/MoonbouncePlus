@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.14.0
+// @version      0.14.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -105,6 +105,7 @@
 //                  - This will update at approximately the speed of the Update Refresh Rate setting
 // 0.14.0   - Added YouTube video embedding in the chat
 //          - Added messages getting parsed when the chat is opened
+// 0.14.1   - Swap logo URL to a link on the MoonbouncePlus GitHub repository
 //
 // ==/Changelog==
 
