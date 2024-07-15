@@ -140,6 +140,9 @@ p {
     --rarityColour: var(--commonColour);
     --rarityFadeColour: var(--commonFadeColour);
     --typeColour: var(--materialColour);
+    
+    display: flex;
+    flex-direction: column;
 
     border: 2px solid #333;
     border-bottom-width: 5px;
@@ -219,9 +222,13 @@ p {
 .name {
     padding: 0.5rem;
     color: white;
+    border-radius: 5px 5px 0 0;
 }
 
 .details {
+    flex: 1;
+    border-radius: 0 0 5px 5px;
+    
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
