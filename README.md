@@ -12,6 +12,7 @@
 - OSRS chat effects! Use most of the chat effects you're familiar with from OldSchool RuneScape!  
   <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/33e1a56b-4c4f-462e-a7fd-794786b892f3" width=300 style="border-radius: 15px">
 - YouTube videos embedded in chat!  
+  <img src="https://github.com/user-attachments/assets/fbece47a-ee5d-40bb-9aa9-5956456d0136" width=300 style="border-radius: 15px">
 - Quick access buttons to the Marketplace, Inventory, and Directory pages
 
 ### Moonbounce Site
