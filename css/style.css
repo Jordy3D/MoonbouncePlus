@@ -190,7 +190,6 @@ p {
     }
 
     border-color: hsl(var(--rarityColour));
-    background: linear-gradient(130deg, white 50%, hsl(var(--rarityFadeColour)) 50%);
 
     .rarity {
         color: white;
@@ -227,6 +226,8 @@ p {
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
+    
+    background: linear-gradient(to bottom right, white 50%, hsl(var(--rarityFadeColour)) 50%);
 
     .pill-details {
         display: grid;
