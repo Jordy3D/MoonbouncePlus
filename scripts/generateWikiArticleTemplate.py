@@ -140,7 +140,7 @@ accessoryTemplate = """
 | found_in = <FOUNDIN>
 }}
 
-The '''<NAME>''' is an [[Accessories|accessory]] in Moonbounce.
+The '''<NAME>''' is an [[Accessory]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -169,7 +169,7 @@ materialTemplate = """
 | craftable = <HAS_RECIPE>
 | found_in = <FOUNDIN>
 }}
-The '''<NAME>''' is a [[Materials|material]] in Moonbounce.
+The '''<NAME>''' is a [[Material]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -196,7 +196,7 @@ characterTemplate = """
 | craftable = <HAS_RECIPE>
 | found_in = <FOUNDIN>
 }}
-'''<NAME>''' is a [[Characters|character]] in Moonbounce.
+'''<NAME>''' is a [[Character]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -223,7 +223,7 @@ toolTemplate = """
 | craftable = <HAS_RECIPE>
 | found_in = <FOUNDIN>
 }}
-The '''<NAME>''' is a [[Tools|tool]] in Moonbounce.
+The '''<NAME>''' is a [[Tool]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
@@ -250,7 +250,7 @@ accessoriesPageTableTemplate = """
 """
 
 accessoriesPageTableItemTemplate = """
-|[[File:<NAMEFORMATTED>.png|frameless|80x80px]]
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px|link=<NAME>]]
 |[[<NAME>]]
 |<RARITY>
 |-"""
@@ -268,7 +268,7 @@ materialsPageTableTemplate = """
 """
 
 materialsPageTableItemTemplate = """
-|[[File:<NAMEFORMATTED>.png|frameless|80x80px]]
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px|link=<NAME>]]
 |[[<NAME>]]
 |<RARITY>
 |-"""
@@ -286,7 +286,7 @@ toolsPageTableTemplate = """
 """
 
 toolsPageTableItemTemplate = """
-|[[File:<NAMEFORMATTED>.png|frameless|80x80px]]
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px|link=<NAME>]]
 |[[<NAME>]]
 |<RARITY>
 |-"""
@@ -409,7 +409,7 @@ def replace_template(template, item):
         recipe_block = f"== Recipe ==\n"
         
         table_format = """
-{| class="wikitable"
+{| class="wikitable" style="text-align: center;"
 |-
 {ingredient_chunk}
 |-
@@ -641,11 +641,6 @@ recipe_table_template = """
 <RECIPE_ROWS>
 |}"""
 
-
-# | [[File:Josh's_Support_Tincture.png|64x64px|link=[[Josh's_Support_Tincture]]]]<br>'''[[Josh's Support Tincture]]'''
-
-
-
 recipe_row_template = """
 |-
 | <div style="text-align: center;">\
@@ -666,21 +661,6 @@ recipe_use_item_template = """\
 [[File:<ITEMHYPHEN>.png|frameless|64x64px|link=[[<ITEMHYPHEN>]]]]<br>\
 '''[[<ITEM>]]'''\
 </div>"""
-
-# |-
-# |[[File:Skull Potion.png|frameless|64x64px]]
-# '''Skull Potion'''
-# |
-# |[[File:Empty-bottle.png|frameless|64x64px]]
-# '''Empty Bottle'''
-# |[[File:Haunted Bone.png|frameless|64x64px]]
-# '''Haunted Bone'''
-# |[[File:Skull.png|frameless|64x64px]]
-# '''Skull'''
-# |
-# |[[File:Witch's Cauldron.png|frameless|64x64px]]
-# '''Witch's Cauldron'''
-# |
 
 
 def generate_recipe_table(recipes):

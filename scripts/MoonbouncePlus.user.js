@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.14.1
+// @version      0.14.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -106,6 +106,7 @@
 // 0.14.0   - Added YouTube video embedding in the chat
 //          - Added messages getting parsed when the chat is opened
 // 0.14.1   - Swap logo URL to a link on the MoonbouncePlus GitHub repository
+// 0.14.2   - Improve the embed visuals and create a base for other embeds going forward
 //
 // ==/Changelog==
 
@@ -1502,6 +1503,52 @@ OSRS EFFECTS!!!!!!!
     90%  { transform: translateX(3px); }
     100% { transform: translateX(0); }
 }`, "baneBannerCSS", portal);
+
+    addCSS(`
+.message-text
+{
+  max-height: unset;
+  overflow: visible;
+}
+
+.mbp-embed
+{
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border-left: 4px solid;
+  margin-left: -8px;  
+  
+  background: var(--background-color);
+ 
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  margin-bottom: 5px;
+  
+  .mbp-embed-header, .mbp-embed-header a
+  {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-bottom: 5px;
+  }
+  
+  .mbp-embed-title, .mbp-embed-title a
+  {
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -.2px;
+    margin-bottom: 5px;
+  }
+  
+  .mbp-embed-subtitle, .mbp-embed-subtitle a
+  {
+    font-size: 14px;
+    color: var(--text-color);
+  }
+}`, "mbpEmbedCSS", portal);
 }
 
 
@@ -2114,33 +2161,45 @@ function parseForYouTube(messageTextElement) {
     // if there are no YouTube links, return the message
     if (youtubeLinks.length == 0) return messageTextElement;
 
-    function createEmbed(link) {
-        let videoId = link.href.split("v=")[1];
-        let embedLink = `https://www.youtube.com/embed/${videoId}?rel=0&controls=0`;
-
-        let iframe = document.createElement("iframe");
-        iframe.src = embedLink;
-        iframe.width = "200";
-        iframe.height = "110";
-        iframe.frameborder = "0";
-        iframe.style = "border: none;";
-        // enable allowfullscreen
-        iframe.setAttribute("allowfullscreen", "");
-
-        return iframe;
-    }
-
     // for each YouTube Link, get the video title and replace the link text with the title
     for (let link of youtubeLinks) {
-        getPageTitle(link.href).then(title => {
-            // set the text content of the link to the title
-            link.textContent = title;
-        }).catch(error => console.error(error));
+        // get the video id from the link
+        let videoId = link.href.split("v=")[1];
+        if (videoId == null) continue;
+
+        // replace the link text with https://youtu.be/[videoId]
+        link.textContent = `https://youtu.be/${videoId}`;
 
         if (getSettingValue("Embed YouTube Videos")) {
-            log("Embedding YouTube video");
-            let embed = createEmbed(link);
-            messageTextElement.appendChild(embed);
+            log(`Embedding YouTube video: ${link.href}`);
+
+            getPageMetas(link).then(metas => {
+                let title = metas.find(x => x.property == "og:title");
+                let title_url = metas.find(x => x.property == "og:url");
+                let domain = metas.find(x => x.property == "og:site_name");
+                // get the domain url by removing the last part of the link
+                let domainUrl = link.href.split("/").slice(0, -1).join("/");
+                let subtitle = metas.find(x => x.property == "author_name");
+                let subtitleUrl = metas.find(x => x.property == "author_url");
+                let borderColor = "red";
+
+                let videoId = link.href.split("v=")[1];
+                let embedLink = `https://www.youtube.com/embed/${videoId}?rel=0&controls=0`;
+
+                let options = {
+                    embedLink: embedLink,
+                    title: title.content,
+                    title_url: title_url.content,
+                    domain: domain.content,
+                    domainUrl: domainUrl,
+                    subtitle: subtitle.content,
+                    subtitleUrl: subtitleUrl.content,
+                    borderColor: borderColor
+                };
+
+                let embed = createEmbed(options);
+                messageTextElement.appendChild(embed);
+            });
         }
     }
 
@@ -2749,12 +2808,8 @@ function addCustomCSS(name = "", parent = document.body) {
 }
 //#endregion
 
-
-// function to take a URL and get the <title> of the page at that URL
-function getPageTitle(url) {
-
-    const domainWhiteList = ["www.youtube.com"];
-
+// function to take a URL and return an array of meta elements and other relevant information
+function getPageMetas(url) {
     function loadPage(url) {
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
@@ -2763,11 +2818,49 @@ function getPageTitle(url) {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     let parser = new DOMParser();
                     let doc = parser.parseFromString(xhr.responseText, "text/html");
+
+                    let metaElements = doc.querySelectorAll("meta");
+                    // get every <link> element with an itemprop attribute and a content attribute or an itemprop attribute and a href attribute
+                    let linkProps = doc.querySelectorAll("link[itemprop][content], link[itemprop][href]");
                     let titleElement = doc.querySelector("title");
+
+                    let metaArray = [];
+
+                    if (metaElements) {
+                        for (let meta of metaElements) {
+                            // if the meta element has a name or property attribute, add it to the metaArray as an object with the name and content
+                            let propertyName = meta.getAttribute("name") || meta.getAttribute("property");
+                            if (propertyName) {
+                                let propertyContent = meta.getAttribute("content");
+                                metaArray.push({ property: propertyName, content: propertyContent });
+                            }
+                        }
+                    }
+                    if (linkProps) {
+                        for (let linkProp of linkProps) {
+                            let propName = linkProp.getAttribute("itemprop");
+
+                            // check if the property has a parent element with the itemprop attribute
+                            let itemPropParent = linkProp.parentElement;
+                            if (itemPropParent.getAttribute("itemprop")) {
+                                parentPropName = itemPropParent.getAttribute("itemprop");
+                                propName = `${parentPropName}_${propName}`;
+                            }
+
+                            if (propName) {
+                                let propContent = linkProp.getAttribute("content") || linkProp.getAttribute("href");
+                                metaArray.push({ property: propName, content: propContent });
+                            }
+                        }
+                    }
                     if (titleElement) {
-                        resolve(titleElement.innerText);
+                        metaArray.push({ property: "page_title", content: titleElement.innerText });
+                    }
+
+                    if (metaArray.length > 0) {
+                        resolve(metaArray);
                     } else {
-                        reject("Title element not found");
+                        reject("Meta elements not found");
                     }
                 } else {
                     reject("Error: " + xhr.status);
@@ -2779,10 +2872,6 @@ function getPageTitle(url) {
             xhr.send();
         });
     }
-
-    let urlDomain = new URL(url).hostname;
-    if (!domainWhiteList.includes(urlDomain)) return Promise.reject("Domain not whitelisted");
-
 
     // if the current URL shares the same origin as the target URL
     if (new URL(url).origin == window.location.origin) {
@@ -2800,7 +2889,7 @@ function getPageTitle(url) {
 }
 
 // Usage
-// getPageTitle("https://music.youtube.com/watch?v=LjBhDSgZPCo&si=7zqZ3C6juqVnPA8D").then(title => console.log(title)).catch(error => console.error(error));
+// getPageMetas("https://music.youtube.com/watch?v=LjBhDSgZPCo&si=7zqZ3C6juqVnPA8D").then(metas => console.log(metas)).catch(error => console.error(error));
 
 //#region Refresh on Application Error
 
@@ -3116,6 +3205,9 @@ function createElement(type, userOptions, parent = document.body) {
         for: null,
         min: null,
         max: null,
+        width: null,
+        height: null,
+        frameborder: null,
         style: null,
     };
 
@@ -3143,10 +3235,99 @@ function createElement(type, userOptions, parent = document.body) {
     if (options.for) element.htmlFor = options.for;
     if (options.min) element.min = options.min;
     if (options.max) element.max = options.max;
+    if (options.width) element.width = options.width;
+    if (options.height) element.height = options.height;
+    if (options.frameborder) element.frameborder = options.frameborder;
     if (options.style) element.style = options.style;
 
     parent.appendChild(element);
     return element;
+}
+
+/**
+ * Create an embed to display in the chat
+ * @param {object} options the options for the embed
+ * @returns the embed element
+ * @example
+ * createEmbed({
+ *   header: "Moonbounce",
+ *   headerUrl: "https://www.getmoonbounce.com/",
+ *   borderColor: " #2566FE",
+ *   title: "Moonbounce",
+ *   title_url: "https://www.getmoonbounce.com/",
+ *   description: "A browser extension designed to make the internet more fun. Hang with friends, collect loot, and customize your own digital spaces. Anywhere online.",
+ */
+function createEmbed(options = {}) {
+
+    // define options
+    let defaultOptions = {
+        embedLink: "",
+        domain: "",
+        domainUrl: "",
+        header: "",
+        headerUrl: "",
+        borderColor: " #0095ff",
+        title: "",
+        title_url: "",
+        subtitle: "",
+        subtitleUrl: "",
+        description: "",
+    }
+
+    options = { ...defaultOptions, ...options };
+
+    // create the embed container
+    let embedContainer = createElement("div", { class: "mbp-embed" });
+    // style the left border of the embed container
+    embedContainer.style.borderColor = `${options.borderColor}`;
+
+    // create the embed header
+    if (options.domain != "" || options.header != "") {
+        let headerContent = options.header != "" ? options.header : options.domain;
+        let headerUrl = options.headerUrl != "" ? options.headerUrl : options.domainUrl;
+        
+        let embedHeader = createElement("div", { class: "mbp-embed-header" }, embedContainer);
+        if (headerUrl != "")
+            embedHeader = createElement("a", { class: "mbp-embed-header-link", href: headerUrl, target: "_blank" }, embedHeader);
+        embedHeader.innerText = headerContent;
+    }
+
+    // create the embed subtitle
+    if (options.subtitle != "") {
+        let embedSubtitle = createElement("div", { class: "mbp-embed-subtitle" }, embedContainer);
+        if (options.subtitleUrl != "")
+            embedSubtitle = createElement("a", { class: "mbp-embed-subtitle-link", href: options.subtitleUrl, target: "_blank" }, embedSubtitle);
+        embedSubtitle.innerText = options.subtitle;
+    }
+    // create the embed title as a link
+    if (options.title_url != "") {
+        let embedTitle = createElement("div", { class: "mbp-embed-title" }, embedContainer);
+        if (options.title_url != "")
+            embedTitle = createElement("a", { class: "mbp-embed-title-link", href: options.title_url, target: "_blank" }, embedTitle);
+        embedTitle.innerText = options.title;
+    }
+
+    // create the embed description
+    if (options.description != "") {
+        let embedDescription = createElement("div", { class: "mbp-embed-description" }, embedContainer);
+        embedDescription.innerText = options.description;
+    }
+
+    if (options.embedLink == "") return embedContainer;
+
+    // create the embed iframe
+    let iframe = createElement("iframe", {
+        src: options.embedLink,
+        width: "200",
+        height: "110",
+        frameborder: "0",
+        style: "border: none;",
+    }, embedContainer);
+
+    // enable allowfullscreen
+    iframe.setAttribute("allowfullscreen", "");
+
+    return embedContainer;
 }
 
 //#endregion
