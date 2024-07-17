@@ -1784,6 +1784,23 @@
             "sources": ["Red Chicken", "Summery Gifts"]
         },
         {
+            "id": 482,
+            "name": "Golden Egg",
+            "uuid": "82b8f0a9-6b81-499a-a87e-925f290ffd10",
+            "description": "You found the most valuable egg! limited in quantity and really hard to find!",
+            "rarity": "LEGENDARY",
+            "type": "MATERIAL",
+            "value": 5000,
+            "sources": [
+                "Egg Basket",
+                "Red Chicken",
+                "Blue Chicken",
+                "Yellow Chicken",
+                "Chicken",
+                "Living Chicken Chest"
+            ]
+        },
+        {
             "id": 483,
             "name": "Plain Egg",
             "uuid": "950aa8ba-059e-427f-8c16-b065b0b36c40",
@@ -2457,6 +2474,26 @@
             "type": "ACCESSORY",
             "value": 15,
             "sources": []
+        },
+        {
+            "id": 584,
+            "name": "Chicken Leg",
+            "uuid": "1604c74e-621a-4842-94bc-9df414104cac",
+            "description": "A well deserved,  perfectly cooked,  finger licking good chicken leg.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 10,
+            "sources": ["Living Chicken Chest"]
+        },
+        {
+            "id": 585,
+            "name": "Earthworm",
+            "uuid": "a4d6f42d-8dec-49d0-9e45-6ee4333d6ed6",
+            "description": "They say that the early bird gets the worm... What does that make you?",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": ["Living Chicken Chest"]
         }
     ],
     "recipes": [
