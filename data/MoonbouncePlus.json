@@ -1808,7 +1808,12 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": [
+                "Red Chicken",
+                "Blue Chicken",
+                "Yellow Chicken",
+                "Living Chicken Chest"
+            ]
         },
         {
             "id": 484,
