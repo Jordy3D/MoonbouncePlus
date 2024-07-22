@@ -2499,6 +2499,16 @@
             "type": "MATERIAL",
             "value": 5,
             "sources": ["Living Chicken Chest"]
+        },
+        { 
+            "id": 586, 
+            "name": "P?t Ch?ck?n", 
+            "uuid": "9b02594a-5734-45b2-beba-8feb82bc99f4", 
+            "description": "He may be following you around soon...", 
+            "rarity": "COMMON", 
+            "type": "UNKNOWN", 
+            "value": 0, 
+            "sources": ["Living Chicken Chest"] 
         }
     ],
     "recipes": [
