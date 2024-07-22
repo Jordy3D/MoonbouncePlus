@@ -305,6 +305,7 @@ const targetSelector = [
     { name: "Marketplace Item Details", selector: ".GPrFb" },
 
     { name: "Moonbounce Portal", selector: "[id='MOONBOUNCE.PORTAL']" },
+    { name: "Moonbounce Extension Container", selector: "[id*='moonbounce-ext-container']" },
     { name: "Moonbounce Portal Root Container", selector: "[id*='moonbounce-root-container']" },
     { name: "Moonbounce Portal Button Container", selector: "._base_11wdf_1" },
 ]
@@ -497,6 +498,8 @@ function checkSite() {
         if (getSettingValue("OSRS Text Effects")) {
             observer = addMessageChecker(moonbouncePortal);
         }
+
+        interceptMessageSend(moonbouncePortal);
 
         addCustomCSS("portal", moonbouncePortal);
     }
@@ -1856,6 +1859,122 @@ function addMarketplaceButton(portal) {
 
 //#region Chat Notifications and Effects
 
+function interceptMessageSend(portal) {
+    let chatWindow = portal.querySelector("#chat-window");
+    if (chatWindow == null) return;
+    // find the form to send messages
+    let messageForm = chatWindow.querySelector("form");
+    if (messageForm == null) return;
+
+    // if the form already has the class "intercepted", return
+    if (messageForm.classList.contains("waitingToIntercept")) return;
+
+    // find the input field to send messages and the submit button
+    let messageInput = messageForm.querySelector("input");
+    let submitButton = messageForm.querySelector("button");
+
+    // add an event listener to the submit button to intercept the message send
+    submitButton.addEventListener("click", function (e) {
+        // if the input does not contain the class "intercepted"
+        if (!messageInput.classList.contains("intercepted")) {
+            // prevent the form from submitting
+            e.preventDefault();
+            e.stopPropagation();
+
+            interception(e, messageInput);
+
+            submitButton.click();
+            setTimeout(() => submitButton.click(), 50);
+        }
+        else {
+            messageInput.classList.remove("intercepted");
+        }
+    });
+
+    // give the form a class of "intercepted" to show that it has been intercepted
+    messageForm.classList.add("waitingToIntercept");
+}
+
+function interception(e, input) {
+    let message = input.value;
+
+    // encrypt the necessart parts of the message to whitespace
+    // parse every effect tag and : in the message
+
+    // find every effect tag in the message
+    for (let effect of effectTags) {
+        log(`Effect: ${effect.name}`);
+        // find the effect name and : and replace it with the encrypted version
+        // if the effect name is red, replace red: with the encrypted version
+        let regex = new RegExp(`${effect.name}:`, "g");
+        if (regex.test(message)) {
+            log(`Regex found: ${effect.name}`);
+            message = message.replace(regex, encryptToWhitespace(effect.name + ":"));
+        }
+    }
+
+    input.value = message;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+
+    // mark the input as ready
+    input.classList.add("intercepted");
+}
+
+const whiteSpaceA = "​";
+const whiteSpaceB = '‌';
+
+function encryptToWhitespace(input) {
+    let output = "";
+
+    for (let i = 0; i < input.length; i++) {
+        let binary = input[i].charCodeAt(0).toString(2);
+        binary = binary.padStart(8, "0");
+
+        output += binary.split("").map((bit) => {
+            return bit === "0" ? whiteSpaceA : whiteSpaceB;
+        }).join("");
+    }
+
+    return output;
+}
+
+function decryptFromWhitespace(input) {
+    let binary = "";
+    let output = "";
+
+    for (let i = 0; i < input.length; i++) {
+        let char = input[i];
+        if (char === whiteSpaceA || char === whiteSpaceB) {
+            binary += char === whiteSpaceA ? "0" : "1";
+
+            // Check if binary has 8 bits to convert
+            if (binary.length === 8) {
+                output += String.fromCharCode(parseInt(binary, 2));
+                binary = ""; // Reset binary string
+            }
+        } else {
+            // If binary string is not empty and is a multiple of 8, convert it before adding the current char
+            if (binary.length >= 8) {
+                while (binary.length >= 8) {
+                    output += String.fromCharCode(parseInt(binary.substring(0, 8), 2));
+                    binary = binary.substring(8); // Remove processed bits
+                }
+            }
+            output += char; // Add current non-encrypted character to output
+        }
+    }
+
+    // Process any remaining binary string
+    if (binary.length >= 8) {
+        while (binary.length >= 8) {
+            output += String.fromCharCode(parseInt(binary.substring(0, 8), 2));
+            binary = binary.substring(8);
+        }
+    }
+
+    return output;
+}
+
 function parseChatMessages(portal) {
     // find the chat window
     let chatWindow = portal.querySelector("#chat-window");
@@ -1885,6 +2004,8 @@ function parseMessage(messageText) {
 
     let parsedMessage = messageText.innerText;
 
+    parsedMessage = decryptFromWhitespace(parsedMessage);
+
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
     if (parsedMessage != messageText.innerText) {
@@ -1908,6 +2029,8 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
     messageTextElement = parseForYouTube(messageTextElement);
 
     let parsedMessage = newMessage;
+
+    parsedMessage = decryptFromWhitespace(parsedMessage);
 
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
@@ -3285,7 +3408,7 @@ function createEmbed(options = {}) {
     if (options.domain != "" || options.header != "") {
         let headerContent = options.header != "" ? options.header : options.domain;
         let headerUrl = options.headerUrl != "" ? options.headerUrl : options.domainUrl;
-        
+
         let embedHeader = createElement("div", { class: "mbp-embed-header" }, embedContainer);
         if (headerUrl != "")
             embedHeader = createElement("a", { class: "mbp-embed-header-link", href: headerUrl, target: "_blank" }, embedHeader);

@@ -501,6 +501,9 @@ def download_images(items):
             # save the image into the images directory, in a folder named after the item type
             image = requests.get(image_path)
             
+            # replace ? with - in the name
+            save_path = save_path.replace('?', '-')
+            
             # save the image to the save path
             with open(save_path, 'wb') as f:
                 f.write(image.content)
