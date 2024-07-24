@@ -1787,7 +1787,7 @@
             "id": 482,
             "name": "Golden Egg",
             "uuid": "82b8f0a9-6b81-499a-a87e-925f290ffd10",
-            "description": "You found the most valuable egg! limited in quantity and really hard to find!",
+            "description": "You found the most valuable egg! Limited in quantity and really hard to find!",
             "rarity": "LEGENDARY",
             "type": "MATERIAL",
             "value": 5000,
@@ -2431,6 +2431,16 @@
             "sources": ["Summery Gifts"]
         },
         {
+            "id": 578,
+            "name": "Strawberry Milk Carton",
+            "uuid": "675fc262-4da6-4d13-8c62-591ae55b7f24",
+            "description": "It’s as if a fruit basket had a wild party in your mouth. Udderly irresistible.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 579,
             "name": "Fruit Bowl",
             "uuid": "c64a176d-c5f7-4b19-a473-de8081039680",
@@ -2500,15 +2510,15 @@
             "value": 5,
             "sources": ["Living Chicken Chest"]
         },
-        { 
-            "id": 586, 
-            "name": "P?t Ch?ck?n", 
-            "uuid": "9b02594a-5734-45b2-beba-8feb82bc99f4", 
-            "description": "He may be following you around soon...", 
-            "rarity": "COMMON", 
-            "type": "UNKNOWN", 
-            "value": 0, 
-            "sources": ["Living Chicken Chest"] 
+        {
+            "id": 586,
+            "name": "P?t Ch?ck?n",
+            "uuid": "9b02594a-5734-45b2-beba-8feb82bc99f4",
+            "description": "He may be following you around soon...",
+            "rarity": "COMMON",
+            "type": "UNKNOWN",
+            "value": 0,
+            "sources": ["Living Chicken Chest"]
         }
     ],
     "recipes": [
