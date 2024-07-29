@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.14.2
+// @version      0.15.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -107,6 +107,11 @@
 //          - Added messages getting parsed when the chat is opened
 // 0.14.1   - Swap logo URL to a link on the MoonbouncePlus GitHub repository
 // 0.14.2   - Improve the embed visuals and create a base for other embeds going forward
+// 0.15.0   - Added the option to encode chat effects to reduce clutter for non-MoonbouncePlus users (on by default)
+//              - Each character of the encoding takes up 8 characters in the message character limit, looking to reduce this in the future)
+//          - Fixed scroll and slide effects not being cut off properly
+//          - Improved performance of message parsing when the chat is opened and full of messages
+//          - Updated Chat Notifications to display the username of the sender 
 //
 // ==/Changelog==
 
@@ -137,6 +142,7 @@ var userSettings = [
     { name: "Moonbounce Portal Buttons", description: "Show the Moonbounce Portal quick-access buttons", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     // { name: "Use Moonbounce Portal CSS", description: "Show the Moonbounce Portal CSS", type: "boolean", defaultValue: true, value: true },
     { name: "OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Declutter Chat Effects", description: "Encrypt the chat effects to make them less cluttered for non-MoonbouncePlus users. Note, encryption takes up characters in message character limit.", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Chat Notifications", description: "Show notifications when a message is received in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Chat Notification Mode", description: "The users to receive chat notifications from", type: "select", defaultValue: "None", value: "None", options: ["None", "All", "Whitelist", "Blacklist"], group: "Portal" },
     { name: "Chat Users Whitelist", description: "The users to receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
@@ -305,6 +311,7 @@ const targetSelector = [
     { name: "Marketplace Item Details", selector: ".GPrFb" },
 
     { name: "Moonbounce Portal", selector: "[id='MOONBOUNCE.PORTAL']" },
+    { name: "Moonbounce Extension Container", selector: "[id*='moonbounce-ext-container']" },
     { name: "Moonbounce Portal Root Container", selector: "[id*='moonbounce-root-container']" },
     { name: "Moonbounce Portal Button Container", selector: "._base_11wdf_1" },
 ]
@@ -497,6 +504,8 @@ function checkSite() {
         if (getSettingValue("OSRS Text Effects")) {
             observer = addMessageChecker(moonbouncePortal);
         }
+
+        interceptMessageSend(moonbouncePortal);
 
         addCustomCSS("portal", moonbouncePortal);
     }
@@ -1370,11 +1379,17 @@ OSRS EFFECTS!!!!!!!
     }
 }
 
+.rs-scroll, .rs-slide {
+    overflow: hidden;
+
+    > span {
+        display: inline-block;
+    }
+}
 
 .rs-scroll > span
 {
     animation: scroll 3s infinite linear;
-    display: inline-block;
 }
 
 /* scroll from the right to the left, stopping in the middle for a bit */
@@ -1394,7 +1409,6 @@ OSRS EFFECTS!!!!!!!
 .rs-slide > span
 {
     animation: slide 3s infinite linear;
-    display: inline-block;
 }
 
 /* scroll from the right to the left, stopping in the middle for a bit */
@@ -1856,6 +1870,128 @@ function addMarketplaceButton(portal) {
 
 //#region Chat Notifications and Effects
 
+//#region Encrypt/Decrypt message effects 
+function interceptMessageSend(portal) {
+    let chatWindow = portal.querySelector("#chat-window");
+    if (chatWindow == null) return;
+    // find the form to send messages
+    let messageForm = chatWindow.querySelector("form");
+    if (messageForm == null) return;
+
+    // if the form already has the class "intercepted", return
+    if (messageForm.classList.contains("waitingToIntercept")) return;
+
+    // find the input field to send messages and the submit button
+    let messageInput = messageForm.querySelector("input");
+    let submitButton = messageForm.querySelector("button");
+
+    // add an event listener to the submit button to intercept the message send
+    submitButton.addEventListener("click", function (e) {
+        // if the input does not contain the class "intercepted"
+        if (!messageInput.classList.contains("intercepted")) {
+            // prevent the form from submitting
+            e.preventDefault();
+            e.stopPropagation();
+
+            interception(e, messageInput);
+
+            submitButton.click();
+            setTimeout(() => submitButton.click(), 50);
+        }
+        else {
+            messageInput.classList.remove("intercepted");
+        }
+    });
+
+    // give the form a class of "intercepted" to show that it has been intercepted
+    messageForm.classList.add("waitingToIntercept");
+}
+
+function interception(e, input) {
+    let message = input.value;
+
+    // check the setting for Declutter Chat Effects
+    let declutter = getSetting("Declutter Chat Effects").value;
+    if (declutter) {
+
+        // encrypt the necessart parts of the message to whitespace
+        // parse every effect tag and : in the message
+
+        // find every effect tag in the message
+        for (let effect of effectTags) {
+            // find the effect name and : and replace it with the encrypted version
+            // if the effect name is red, replace red: with the encrypted version
+            let regex = new RegExp(`${effect.name}:`, "g");
+            if (regex.test(message)) {
+                message = message.replace(regex, encryptToWhitespace(effect.name + ":"));
+            }
+        }
+    }
+
+    input.value = message;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+
+    // mark the input as ready
+    input.classList.add("intercepted");
+}
+
+const whiteSpaceA = "​";
+const whiteSpaceB = '‌';
+
+function encryptToWhitespace(input) {
+    let output = "";
+
+    for (let i = 0; i < input.length; i++) {
+        let binary = input[i].charCodeAt(0).toString(2);
+        binary = binary.padStart(8, "0");
+
+        output += binary.split("").map((bit) => {
+            return bit === "0" ? whiteSpaceA : whiteSpaceB;
+        }).join("");
+    }
+
+    return output;
+}
+
+function decryptFromWhitespace(input) {
+    let binary = "";
+    let output = "";
+
+    for (let i = 0; i < input.length; i++) {
+        let char = input[i];
+        if (char === whiteSpaceA || char === whiteSpaceB) {
+            binary += char === whiteSpaceA ? "0" : "1";
+
+            // Check if binary has 8 bits to convert
+            if (binary.length === 8) {
+                output += String.fromCharCode(parseInt(binary, 2));
+                binary = ""; // Reset binary string
+            }
+        } else {
+            // If binary string is not empty and is a multiple of 8, convert it before adding the current char
+            if (binary.length >= 8) {
+                while (binary.length >= 8) {
+                    output += String.fromCharCode(parseInt(binary.substring(0, 8), 2));
+                    binary = binary.substring(8); // Remove processed bits
+                }
+            }
+            output += char; // Add current non-encrypted character to output
+        }
+    }
+
+    // Process any remaining binary string
+    if (binary.length >= 8) {
+        while (binary.length >= 8) {
+            output += String.fromCharCode(parseInt(binary.substring(0, 8), 2));
+            binary = binary.substring(8);
+        }
+    }
+
+    return output;
+}
+//#endregion
+
+//#region Handle and parse messages
 function parseChatMessages(portal) {
     // find the chat window
     let chatWindow = portal.querySelector("#chat-window");
@@ -1877,6 +2013,9 @@ function parseChatMessages(portal) {
 function parseMessage(messageText) {
     if (messageText.classList.contains("checked")) return;
 
+    // if the message contains no link, :, or either whitespace character, return
+    let needsParsing = messageText.innerText.includes(":") || messageText.innerText.includes(whiteSpaceA) || messageText.innerText.includes(whiteSpaceB);
+
     // add the class "checked" to the message
     messageText.classList.add("checked");
 
@@ -1884,6 +2023,8 @@ function parseMessage(messageText) {
     messageText = parseForYouTube(messageText);
 
     let parsedMessage = messageText.innerText;
+
+    parsedMessage = decryptFromWhitespace(parsedMessage);
 
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
@@ -1909,6 +2050,8 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
 
     let parsedMessage = newMessage;
 
+    parsedMessage = decryptFromWhitespace(parsedMessage);
+
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
     if (parsedMessage != newMessage) {
@@ -1920,22 +2063,28 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
     // send a notification with the message based on the user's settings
     let notificationMode = getSetting("Chat Notification Mode").value;
 
+    // get author
+    let messageAuthor = messageAuthorElement.innerText;
+
+    // clean message for notification
+    let notificationMessage = messageTextElement.innerText;
+    notificationMessage = `${messageAuthor}: ${notificationMessage}`;
+
     switch (notificationMode) {
         case "None":
             break;
         case "All":
-            notify(newMessage);
+            notify(notificationMessage);
             break;
         case "Whitelist":
             let whitelist = getSetting("Chat Users Whitelist").value;
-            if (whitelist.includes(messageAuthorElement.innerText))
-                notify(newMessage);
+            if (whitelist.includes(messageAuthor))
+                notify(notificationMessage);
             break;
         case "Blacklist":
             let blacklist = getSetting("Chat Users Blacklist").value;
-            if (!blacklist.includes(messageAuthorElement.innerText))
-                notify(newMessage);
-
+            if (!blacklist.includes(messageAuthor))
+                notify(notificationMessage);
             break;
     }
 
@@ -2221,6 +2370,7 @@ function splitTextIntoSpans(text) {
 
     return spans;
 }
+//#endregion
 
 //#endregion
 
@@ -3285,7 +3435,7 @@ function createEmbed(options = {}) {
     if (options.domain != "" || options.header != "") {
         let headerContent = options.header != "" ? options.header : options.domain;
         let headerUrl = options.headerUrl != "" ? options.headerUrl : options.domainUrl;
-        
+
         let embedHeader = createElement("div", { class: "mbp-embed-header" }, embedContainer);
         if (headerUrl != "")
             embedHeader = createElement("a", { class: "mbp-embed-header-link", href: headerUrl, target: "_blank" }, embedHeader);
