@@ -43,7 +43,6 @@ This repo also contains a Python script to help generate wiki page template code
 
 - Sometimes the script fails to download the data file before you click on something, causing the script to not work properly. If this happens, simply refresh the page and try again.
 - The script may not work properly if the Moonbounce website is updated and the script is not updated to match it. If this happens, please open an issue on this repo.
-- If chat has been going on for a while, it may freeze up for a second or two after being closed and reopened. It'll work fine after it catches up, just be warned.
 - Settings are currently BROKEN on Opera (at least). Investigation will begin as to why. Brave, Edge, and Chrome all work fine.
   
 ## To-Do
