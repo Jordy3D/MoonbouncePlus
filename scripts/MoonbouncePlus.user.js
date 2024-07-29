@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.14.2
+// @version      0.15.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -107,6 +107,11 @@
 //          - Added messages getting parsed when the chat is opened
 // 0.14.1   - Swap logo URL to a link on the MoonbouncePlus GitHub repository
 // 0.14.2   - Improve the embed visuals and create a base for other embeds going forward
+// 0.15.0   - Added the option to encode chat effects to reduce clutter for non-MoonbouncePlus users (on by default)
+//              - Each character of the encoding takes up 8 characters in the message character limit, looking to reduce this in the future)
+//          - Fixed scroll and slide effects not being cut off properly
+//          - Improved performance of message parsing when the chat is opened and full of messages
+//          - Updated Chat Notifications to display the username of the sender 
 //
 // ==/Changelog==
 
@@ -137,6 +142,7 @@ var userSettings = [
     { name: "Moonbounce Portal Buttons", description: "Show the Moonbounce Portal quick-access buttons", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     // { name: "Use Moonbounce Portal CSS", description: "Show the Moonbounce Portal CSS", type: "boolean", defaultValue: true, value: true },
     { name: "OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Declutter Chat Effects", description: "Encrypt the chat effects to make them less cluttered for non-MoonbouncePlus users. Note, encryption takes up characters in message character limit.", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Chat Notifications", description: "Show notifications when a message is received in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Chat Notification Mode", description: "The users to receive chat notifications from", type: "select", defaultValue: "None", value: "None", options: ["None", "All", "Whitelist", "Blacklist"], group: "Portal" },
     { name: "Chat Users Whitelist", description: "The users to receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
@@ -1373,11 +1379,17 @@ OSRS EFFECTS!!!!!!!
     }
 }
 
+.rs-scroll, .rs-slide {
+    overflow: hidden;
+
+    > span {
+        display: inline-block;
+    }
+}
 
 .rs-scroll > span
 {
     animation: scroll 3s infinite linear;
-    display: inline-block;
 }
 
 /* scroll from the right to the left, stopping in the middle for a bit */
@@ -1397,7 +1409,6 @@ OSRS EFFECTS!!!!!!!
 .rs-slide > span
 {
     animation: slide 3s infinite linear;
-    display: inline-block;
 }
 
 /* scroll from the right to the left, stopping in the middle for a bit */
@@ -1859,6 +1870,7 @@ function addMarketplaceButton(portal) {
 
 //#region Chat Notifications and Effects
 
+//#region Encrypt/Decrypt message effects 
 function interceptMessageSend(portal) {
     let chatWindow = portal.querySelector("#chat-window");
     if (chatWindow == null) return;
@@ -1898,18 +1910,21 @@ function interceptMessageSend(portal) {
 function interception(e, input) {
     let message = input.value;
 
-    // encrypt the necessart parts of the message to whitespace
-    // parse every effect tag and : in the message
+    // check the setting for Declutter Chat Effects
+    let declutter = getSetting("Declutter Chat Effects").value;
+    if (declutter) {
 
-    // find every effect tag in the message
-    for (let effect of effectTags) {
-        log(`Effect: ${effect.name}`);
-        // find the effect name and : and replace it with the encrypted version
-        // if the effect name is red, replace red: with the encrypted version
-        let regex = new RegExp(`${effect.name}:`, "g");
-        if (regex.test(message)) {
-            log(`Regex found: ${effect.name}`);
-            message = message.replace(regex, encryptToWhitespace(effect.name + ":"));
+        // encrypt the necessart parts of the message to whitespace
+        // parse every effect tag and : in the message
+
+        // find every effect tag in the message
+        for (let effect of effectTags) {
+            // find the effect name and : and replace it with the encrypted version
+            // if the effect name is red, replace red: with the encrypted version
+            let regex = new RegExp(`${effect.name}:`, "g");
+            if (regex.test(message)) {
+                message = message.replace(regex, encryptToWhitespace(effect.name + ":"));
+            }
         }
     }
 
@@ -1974,7 +1989,9 @@ function decryptFromWhitespace(input) {
 
     return output;
 }
+//#endregion
 
+//#region Handle and parse messages
 function parseChatMessages(portal) {
     // find the chat window
     let chatWindow = portal.querySelector("#chat-window");
@@ -1995,6 +2012,9 @@ function parseChatMessages(portal) {
 
 function parseMessage(messageText) {
     if (messageText.classList.contains("checked")) return;
+
+    // if the message contains no link, :, or either whitespace character, return
+    let needsParsing = messageText.innerText.includes(":") || messageText.innerText.includes(whiteSpaceA) || messageText.innerText.includes(whiteSpaceB);
 
     // add the class "checked" to the message
     messageText.classList.add("checked");
@@ -2043,22 +2063,28 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
     // send a notification with the message based on the user's settings
     let notificationMode = getSetting("Chat Notification Mode").value;
 
+    // get author
+    let messageAuthor = messageAuthorElement.innerText;
+
+    // clean message for notification
+    let notificationMessage = messageTextElement.innerText;
+    notificationMessage = `${messageAuthor}: ${notificationMessage}`;
+
     switch (notificationMode) {
         case "None":
             break;
         case "All":
-            notify(newMessage);
+            notify(notificationMessage);
             break;
         case "Whitelist":
             let whitelist = getSetting("Chat Users Whitelist").value;
-            if (whitelist.includes(messageAuthorElement.innerText))
-                notify(newMessage);
+            if (whitelist.includes(messageAuthor))
+                notify(notificationMessage);
             break;
         case "Blacklist":
             let blacklist = getSetting("Chat Users Blacklist").value;
-            if (!blacklist.includes(messageAuthorElement.innerText))
-                notify(newMessage);
-
+            if (!blacklist.includes(messageAuthor))
+                notify(notificationMessage);
             break;
     }
 
@@ -2344,6 +2370,7 @@ function splitTextIntoSpans(text) {
 
     return spans;
 }
+//#endregion
 
 //#endregion
 
