@@ -1684,6 +1684,16 @@
             "sources": []
         },
         {
+            "id": 469,
+            "name": "Coin Cap",
+            "uuid": "774140f4-b2a6-4914-a509-2f9f0fd0d4ac",
+            "description": "How high can you stack your MP on your head!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 470,
             "name": "Bunny Ears",
             "uuid": "55773e1d-1abc-4fe0-bb88-96c2d0ed69f4",
