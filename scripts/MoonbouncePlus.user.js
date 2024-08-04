@@ -2519,7 +2519,7 @@ function addWikiButton() {
         // format the item name to be used in the URL
         let formattedName = itemName.replace(/ /g, "_");        // replace spaces with underscores
         formattedName = formattedName.replace(/'/g, "%27");     // replace apostrophes with %27
-        formattedName = formattedName.replace(/?/g, "%3F");     // replace question marks with %3F
+        formattedName = formattedName.replace(/\?/g, "%3F");     // replace question marks with %3F
 
         openWikiPage(formattedName);
     });
