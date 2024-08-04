@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.15.0
+// @version      0.15.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -112,6 +112,7 @@
 //          - Fixed scroll and slide effects not being cut off properly
 //          - Improved performance of message parsing when the chat is opened and full of messages
 //          - Updated Chat Notifications to display the username of the sender 
+// 0.15.1   - Fixed the Wiki Button link breaking when the item name has a ? in it
 //
 // ==/Changelog==
 
@@ -2515,8 +2516,10 @@ function addWikiButton() {
         let details = getDetails();
         let itemName = details.name;
 
-        let formattedName = itemName.replace(/ /g, "_");
-        formattedName = formattedName.replace(/'/g, "%27");
+        // format the item name to be used in the URL
+        let formattedName = itemName.replace(/ /g, "_");        // replace spaces with underscores
+        formattedName = formattedName.replace(/'/g, "%27");     // replace apostrophes with %27
+        formattedName = formattedName.replace(/?/g, "%3F");     // replace question marks with %3F
 
         openWikiPage(formattedName);
     });

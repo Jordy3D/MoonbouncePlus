@@ -1321,6 +1321,16 @@
             "sources": []
         },
         {
+            "id": 425,
+            "name": "Red Robin Hat",
+            "uuid": "8622f343-6f20-4b9c-8224-bb84b4b81e15",
+            "description": "Feel like a virtual outlaw and add a dash of medieval flair to your digital persona.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
             "id": 427,
             "name": "Hard Hat",
             "uuid": "951b4abe-02ec-44b7-b767-fdadb23683f7",

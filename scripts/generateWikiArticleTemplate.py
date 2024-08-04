@@ -44,7 +44,7 @@ class Item:
         self.sources = sources
         self.uuid = uuid
         
-        self.name_hyphen = format_name(name)
+        self.name_formatted = format_name(name)
         
     def __str__(self):
         return f'# {self.id} - {self.name} [{self.type}] [{self.rarity}]'
@@ -82,7 +82,7 @@ class Source:
     """
     def __init__(self, name):
         self.name = name
-        self.name_hyphen = format_name(name)
+        self.name_formatted = format_name(name)
         self.drops = []
         
     def __str__(self):
@@ -239,9 +239,10 @@ Placeholder
 #endregion
 
 #region Main Page Templates
-accessoriesPageTableTemplate = """
-=== Released ===
-{| class="wikitable sortable mw-collapsible"
+accessoriesPageTableTemplate = """\
+== Alternative Sortable Table ==
+{| class="wikitable sortable mw-collapsible mw-collapsed"
+|+
 !Preview
 !Name
 !Rarity
@@ -256,7 +257,7 @@ accessoriesPageTableItemTemplate = """
 |-"""
 
 
-materialsPageTableTemplate = """
+materialsPageTableTemplate = """\
 == Alternative Sortable Table ==
 {| class="wikitable sortable mw-collapsible mw-collapsed"
 |+
@@ -274,7 +275,7 @@ materialsPageTableItemTemplate = """
 |-"""
 
 
-toolsPageTableTemplate = """
+toolsPageTableTemplate = """\
 == Alternative Sortable Table ==
 {| class="wikitable sortable mw-collapsible mw-collapsed"
 |+
@@ -367,8 +368,10 @@ def has_recipe(item):
     return 'No'
 
 def format_name(name):
-    # formats the name from Item Name to Item_Name
-    return name.replace(" ", "_")
+    new_name = name.replace(" ", "_")
+    new_name = new_name.replace("?", "-")
+    
+    return new_name
 
 def replace_template(template, item):
     """Replace the placeholders in the template with the actual data."""
@@ -376,7 +379,7 @@ def replace_template(template, item):
     new_template = replace_text(new_template, '<NAME>', item.name)
     new_template = replace_text(new_template, '<ID>', item.id)
     
-    new_template = replace_text(new_template, '<NAMEHYPHENED>', item.name_hyphen)
+    new_template = replace_text(new_template, '<NAMEHYPHENED>', item.name_formatted)
     
     new_template = replace_text(new_template, '<RARITY>', item.rarity)
     new_template = replace_text(new_template, '<TYPE>', item.type)
@@ -490,7 +493,7 @@ def download_images(items):
         save_path = os.path.join(f'images/{item.type.lower()}')
         if not os.path.exists(save_path):
             os.makedirs(save_path)
-        save_path = os.path.join(save_path, f'{item.name_hyphen}.png')
+        save_path = os.path.join(save_path, f'{item.name_formatted}.png')
         
         if not os.path.exists(save_path):
             print(f'Downloading {item.name}...')
@@ -606,6 +609,10 @@ def generate_wiki_articles(items, print_file_names=False):
             valid = True
         else:
             print(f'Uncaught type: {item.type}')
+            # # TEMPORARILY CREATE THE ITEM AS IF IT WERE AN ACCESSORY
+            # new_template = accessoryTemplate
+            # type_path = 'unknown'
+            # valid = True            
             
         # print any items with 4 or more sources
         if len(item.sources) >= 4:
@@ -618,15 +625,15 @@ def generate_wiki_articles(items, print_file_names=False):
             # check if the item has a recipe
             new_template = replace_text(new_template, '<HAS_RECIPE>', has_recipe(item.name))
 
-            # Construct the path to the 'accessories' directory one level up from the script
-            accessories_path = os.path.join(script_dir, '..', 'wiki', type_path)
+            # Construct the path to the appropriate directory one level up from the script
+            wiki_type_path = os.path.join(script_dir, '..', 'wiki', type_path)
             
             # Check if the directory exists, and create it if it doesn't
-            if not os.path.exists(accessories_path):
-                os.makedirs(accessories_path)
+            if not os.path.exists(wiki_type_path):
+                os.makedirs(wiki_type_path)
             
             # write the new template to a file
-            with open(os.path.join(accessories_path, f'{item.name_hyphen}.txt'), 'w', encoding='utf-8') as f:
+            with open(os.path.join(wiki_type_path, f'{item.name_formatted}.txt'), 'w', encoding='utf-8') as f:
                 f.write(new_template)
                 if print_file_names:
                     print(f'Writing {item.name} to file')
