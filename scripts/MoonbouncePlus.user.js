@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.15.1
+// @version      0.16.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -113,6 +113,7 @@
 //          - Improved performance of message parsing when the chat is opened and full of messages
 //          - Updated Chat Notifications to display the username of the sender 
 // 0.15.1   - Fixed the Wiki Button link breaking when the item name has a ? in it
+// 0.16.0   - Halved the character usage for the chat effects encoding
 //
 // ==/Changelog==
 
@@ -1936,57 +1937,92 @@ function interception(e, input) {
     input.classList.add("intercepted");
 }
 
-const whiteSpaceA = "​";
-const whiteSpaceB = '‌';
+const whiteSpaceChars = [
+    "​",
+    '‌',
+    '‍',
+    '⁠',
+]
 
-function encryptToWhitespace(input) {
+/**
+ * Converts a string to binary
+ */
+function toBinary(input) {
+    return input.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join('');
+}
+
+/**
+ * Converts a binary string to a string, converting 8-bit chunks to characters and leaving the rest as is
+ */
+function fromBinary(input) {
+    let output = '';
+    const chunks = input.match(/.{1,8}/g) || [];
+    chunks.forEach(chunk => {
+        if (/^[01]{8}$/.test(chunk)) {
+            output += String.fromCharCode(parseInt(chunk, 2));
+        } else {
+            output += chunk;
+        }
+    });
+    return output;
+}
+
+/**
+ * Converts a string to base-4 using whitespace characters
+ */
+function toBase4(input) {
+    // convert to base-4
     let output = "";
+    let binary = toBinary(input);
+    let binaryLength = binary.length;
+    let binaryIndex = 0;
 
-    for (let i = 0; i < input.length; i++) {
-        let binary = input[i].charCodeAt(0).toString(2);
-        binary = binary.padStart(8, "0");
-
-        output += binary.split("").map((bit) => {
-            return bit === "0" ? whiteSpaceA : whiteSpaceB;
-        }).join("");
+    while (binaryIndex < binaryLength) {
+        let binaryChunk = binary.substring(binaryIndex, binaryIndex + 2);
+        let decimal = parseInt(binaryChunk, 2);
+        let quotient = Math.floor(decimal / 4);
+        let remainder = decimal % 4;
+        output += whiteSpaceChars[remainder];
+        binaryIndex += 2;
     }
 
     return output;
 }
 
-function decryptFromWhitespace(input) {
-    let binary = "";
+/**
+ * Converts a white-space encoded base-4 string to a string
+ */
+function fromBase4(input) {
+    // convert from base-4
     let output = "";
+    let binary = "";
 
     for (let i = 0; i < input.length; i++) {
         let char = input[i];
-        if (char === whiteSpaceA || char === whiteSpaceB) {
-            binary += char === whiteSpaceA ? "0" : "1";
-
-            // Check if binary has 8 bits to convert
-            if (binary.length === 8) {
-                output += String.fromCharCode(parseInt(binary, 2));
-                binary = ""; // Reset binary string
-            }
-        } else {
-            // If binary string is not empty and is a multiple of 8, convert it before adding the current char
-            if (binary.length >= 8) {
-                while (binary.length >= 8) {
-                    output += String.fromCharCode(parseInt(binary.substring(0, 8), 2));
-                    binary = binary.substring(8); // Remove processed bits
-                }
-            }
-            output += char; // Add current non-encrypted character to output
+        let charIndex = whiteSpaceChars.indexOf(char);
+        if (charIndex === -1) {
+            binary += char;
+        }
+        else {
+            let binaryChunk = charIndex.toString(2).padStart(2, "0");
+            binary += binaryChunk;
         }
     }
 
-    // Process any remaining binary string
-    if (binary.length >= 8) {
-        while (binary.length >= 8) {
-            output += String.fromCharCode(parseInt(binary.substring(0, 8), 2));
-            binary = binary.substring(8);
-        }
-    }
+    output = fromBinary(binary);
+    return output;
+}
+
+function encryptToWhitespace(input) {
+    let output = "";
+    output = toBase4(input);
+
+    return output;
+}
+
+function decryptFromWhitespace(input) {
+    let output = "";
+    output = fromBase4(input);
 
     return output;
 }
@@ -2014,8 +2050,8 @@ function parseChatMessages(portal) {
 function parseMessage(messageText) {
     if (messageText.classList.contains("checked")) return;
 
-    // if the message contains no link, :, or either whitespace character, return
-    let needsParsing = messageText.innerText.includes(":") || messageText.innerText.includes(whiteSpaceA) || messageText.innerText.includes(whiteSpaceB);
+    // if the message contains no link, :, or any of the whitespace characters, return
+    let needsParsing = messageText.innerText.includes(":") || messageText.innerText.includes("http") || whiteSpaceChars.some(char => messageText.innerText.includes(char));
 
     // add the class "checked" to the message
     messageText.classList.add("checked");

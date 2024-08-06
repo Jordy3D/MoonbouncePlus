@@ -858,6 +858,76 @@ def generate_cards_lists(items):
     print('Generated accessory cards.')
     print('Generated material cards.')
     print('Generated tool cards.')
+
+# template is
+# Containers
+#   Alien Food Pouch
+#   - table
+#   Assorted Goodie Bag
+#   - table
+
+loot_table_template = """\
+= Containers =
+<CONTAINERS>
+"""
+
+# before the table is the image and name of the container
+loot_table_container_template = """\
+== <CONTAINER> ==
+
+{| class="wikitable sortable mw-collapsible" style="min-width: 300px;"
+|+ [[File:<CONTAINERHYPHEN>.png|frameless|80x80px|link=<CONTAINER>]] Loot Table
+! Item
+! Rarity
+! Diffuse
+<ITEMS>\
+|}
+
+"""
+
+# image and name, rarity, diffuse value
+loot_table_item_template = """\
+|-
+| {{Item | name = <NAME>}}
+| <RARITY>
+| <DIFFUSE>
+"""
+
+
+def generate_loot_table_page(items):
+    """Generate the loot table page for the items in the items list based on their sources."""
+    loot_table = loot_table_template
+    containers = []
+    
+    for source in sources:
+        new_container = loot_table_container_template
+        new_container = replace_text(new_container, '<CONTAINER>', source.name)
+        new_container = replace_text(new_container, '<CONTAINERHYPHEN>', format_name(source.name))
+        
+        items_rows = []
+        
+        for item in items:
+            if source in item.sources:
+                new_item = loot_table_item_template
+                new_item = replace_text(new_item, '<NAME>', item.name.replace('?', '-') )
+                new_item = replace_text(new_item, '<RARITY>', item.rarity)
+                if item.value == 0 or item.value == None:
+                    new_item = replace_text(new_item, '<DIFFUSE>', 'Cannot be diffused')
+                else:
+                    new_item = replace_text(new_item, '<DIFFUSE>', f'{item.value} MP')
+                items_rows.append(new_item)
+                
+        new_container = replace_text(new_container, '<ITEMS>', ''.join(items_rows))
+        containers.append(new_container)
+        
+    loot_table = replace_text(loot_table, '<CONTAINERS>', ''.join(containers))
+    
+    with open(os.path.join(script_dir, '..', 'wiki', 'loot-table.txt'), 'w', encoding='utf-8') as f:
+        f.write(loot_table)
+        
+    print('Generated loot table page.')
+    
+
 #endregion
 
 #endregion
@@ -882,3 +952,4 @@ if __name__ == '__main__':
     download_images(items)
     
     generate_page_tables(items)
+    generate_loot_table_page(items)
