@@ -1331,6 +1331,16 @@
             "sources": []
         },
         {
+            "id": 426,
+            "name": "Blue Robin Hat",
+            "uuid": "56102b12-ebde-43f9-89df-54585a4e5d93",
+            "description": "Embrace your inner hero and add touch of medieval mystique to your character.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
             "id": 427,
             "name": "Hard Hat",
             "uuid": "951b4abe-02ec-44b7-b767-fdadb23683f7",

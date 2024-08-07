@@ -10,6 +10,7 @@ script_dir = os.path.dirname(__file__)
 data_path = os.path.join(script_dir, '..', 'data', 'MoonbouncePlus.json')
 
 recipes_enabled = False
+timeout = 10
 
 #region Classes
 class Item:
@@ -487,8 +488,12 @@ def check_if_in_marketplace(item_name, marketplace_items):
     return False
 
 def download_images(items):
+    should_download = True
+    
     """Download the images for the items in the items list."""
     for item in items:
+        if not should_download:
+            return
         
         save_path = os.path.join(f'images/{item.type.lower()}')
         if not os.path.exists(save_path):
@@ -501,16 +506,23 @@ def download_images(items):
             # https://moonbounce.gg/images/fp/<UUID>/c/f/preview.png
             image_path = f'https://moonbounce.gg/images/fp/{item.uuid}/c/f/preview.png'
             
-            # save the image into the images directory, in a folder named after the item type
-            image = requests.get(image_path)
-            
-            # replace ? with - in the name
-            save_path = save_path.replace('?', '-')
-            
-            # save the image to the save path
-            with open(save_path, 'wb') as f:
-                f.write(image.content)
+            try:
+                # save the image into the images directory, in a folder named after the item type
+                image = requests.get(image_path, timeout=timeout)
+                
+                # replace ? with - in the name
+                save_path = save_path.replace('?', '-')
+                
+                # save the image to the save path
+                with open(save_path, 'wb') as f:
+                    f.write(image.content)
 
+            except requests.exceptions.Timeout:
+                print(f"Request for {image_path} timed out after {timeout} seconds")
+                print(f"The connection is likely blocked or unavailable, skipping further image downloads.")
+                should_download = False
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
                 
             # wait for 1 second before downloading the next image
             time.sleep(1)
@@ -949,7 +961,8 @@ if __name__ == '__main__':
     
     # generate_page_tables(items)
     generate_cards_lists(items)
-    download_images(items)
     
     generate_page_tables(items)
     generate_loot_table_page(items)
+    
+    download_images(items)
