@@ -371,6 +371,8 @@ def has_recipe(item):
 def format_name(name):
     new_name = name.replace(" ", "_")
     new_name = new_name.replace("?", "-")
+    # remove #
+    new_name = new_name.replace("#", "")
     
     return new_name
 
@@ -620,15 +622,15 @@ def generate_wiki_articles(items, print_file_names=False):
             type_path = 'tools'
             valid = True
         else:
-            print(f'Uncaught type: {item.type}')
+            print(f'Uncaught Item type: {item.type} for {item.name}')
             # # TEMPORARILY CREATE THE ITEM AS IF IT WERE AN ACCESSORY
             # new_template = accessoryTemplate
             # type_path = 'unknown'
             # valid = True            
             
         # print any items with 4 or more sources
-        if len(item.sources) >= 4:
-            print(f'{item.name} has {len(item.sources)} sources.')
+        # if len(item.sources) >= 4:
+        #     print(f'{item.name} has {len(item.sources)} sources.')
             
         if valid == True:
             # replace the placeholders with the actual data
@@ -905,6 +907,22 @@ loot_table_item_template = """\
 | <DIFFUSE>
 """
 
+loot_source_page_template = """\
+{{Infobox
+| name = <NAME>
+| image = <NAMEHYPHENED>.png
+| type = Loot Source
+}}The <NAME> is a [[Loot Source]] in Moonbounce.
+
+== Loot Table ==
+{| class="wikitable sortable" style="min-width: 300px;"
+| Item
+| Rarity
+| Diffuse
+<ITEMS>\
+|}
+"""
+
 
 def generate_loot_table_page(items):
     """Generate the loot table page for the items in the items list based on their sources."""
@@ -938,8 +956,41 @@ def generate_loot_table_page(items):
         f.write(loot_table)
         
     print('Generated loot table page.')
-    
 
+def generate_loot_source_pages(items):
+    # create the sources directory if it doesn't exist
+    sources_dir = os.path.join(script_dir, '..', 'wiki', 'sources')
+    if not os.path.exists(sources_dir):
+        os.makedirs(sources_dir)
+        
+    for source in sources:
+        # if the source is the marketplace, skip it
+        if source.name == 'Marketplace':
+            continue
+        
+        new_template = loot_source_page_template
+        new_template = replace_text(new_template, '<NAME>', source.name)
+        new_template = replace_text(new_template, '<NAMEHYPHENED>', format_name(source.name))
+        
+        items_rows = []
+        
+        for item in items:
+            if source in item.sources:
+                new_item = loot_table_item_template
+                new_item = replace_text(new_item, '<NAME>', item.name)
+                new_item = replace_text(new_item, '<RARITY>', item.rarity)
+                if item.value == 0 or item.value == None:
+                    new_item = replace_text(new_item, '<DIFFUSE>', 'Cannot be diffused')
+                else:
+                    new_item = replace_text(new_item, '<DIFFUSE>', f'{item.value} MP')
+                items_rows.append(new_item)
+                
+        new_template = replace_text(new_template, '<ITEMS>', ''.join(items_rows))
+        
+        with open(os.path.join(sources_dir, f'{format_name(source.name)}.txt'), 'w', encoding='utf-8') as f:
+            f.write(new_template)
+        
+    print(f'Generated loot source pages for {len(sources - 1)} sources.')
 #endregion
 
 #endregion
@@ -964,5 +1015,7 @@ if __name__ == '__main__':
     
     generate_page_tables(items)
     generate_loot_table_page(items)
+    
+    generate_loot_source_pages(items)
     
     download_images(items)

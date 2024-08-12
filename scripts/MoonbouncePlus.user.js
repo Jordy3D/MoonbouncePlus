@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.16.0
+// @version      0.16.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -114,6 +114,7 @@
 //          - Updated Chat Notifications to display the username of the sender 
 // 0.15.1   - Fixed the Wiki Button link breaking when the item name has a ? in it
 // 0.16.0   - Halved the character usage for the chat effects encoding
+// 0.16.1   - Apparently forgot to actually re-implement the message parsing improvement when I improved the encoding
 //
 // ==/Changelog==
 
@@ -2052,6 +2053,7 @@ function parseMessage(messageText) {
 
     // if the message contains no link, :, or any of the whitespace characters, return
     let needsParsing = messageText.innerText.includes(":") || messageText.innerText.includes("http") || whiteSpaceChars.some(char => messageText.innerText.includes(char));
+    if (!needsParsing) return;
 
     // add the class "checked" to the message
     messageText.classList.add("checked");
