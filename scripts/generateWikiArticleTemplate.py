@@ -990,7 +990,7 @@ def generate_loot_source_pages(items):
         with open(os.path.join(sources_dir, f'{format_name(source.name)}.txt'), 'w', encoding='utf-8') as f:
             f.write(new_template)
         
-    print(f'Generated loot source pages for {len(sources - 1)} sources.')
+    print(f'Generated loot source pages for {len(sources) - 1} sources.')
 #endregion
 
 #endregion
