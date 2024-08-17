@@ -127,7 +127,7 @@ type_to_types_dict = {
 
 #region Item Page Templates
 
-accessoryTemplate = """
+accessoryTemplate = """\
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -157,7 +157,7 @@ Lorem Ipsum
 Placeholder
 """
 
-materialTemplate = """
+materialTemplate = """\
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -184,7 +184,7 @@ Lorem Ipsum
 Placeholder
 """
 
-characterTemplate = """
+characterTemplate = """\
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -211,7 +211,7 @@ Lorem Ipsum
 Placeholder
 """
 
-toolTemplate = """
+toolTemplate = """\
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -296,7 +296,7 @@ toolsPageTableItemTemplate = """
 #endregion
 
 #region Main Page Card Templates
-accessoryCardBodyTemplate = """
+accessoryCardBodyTemplate = """\
 == Accessory List ==
 <div class="card-container">
 <ITEMS>

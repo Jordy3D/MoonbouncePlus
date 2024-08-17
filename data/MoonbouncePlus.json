@@ -2549,6 +2549,16 @@
             "type": "UNKNOWN",
             "value": 0,
             "sources": ["Living Chicken Chest"]
+        },
+        {
+            "id": 591,
+            "name": "Protective Helmet",
+            "uuid": "75fc2514-e153-4956-b49b-17c91260200d",
+            "description": "Hard at work or hardly working? Either way throw this on.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
         }
     ],
     "recipes": [
