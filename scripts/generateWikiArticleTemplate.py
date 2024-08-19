@@ -311,7 +311,7 @@ accessoryCardItemTemplate = """
 }}
 """
 
-materialCardBodyTemplate = """
+materialCardBodyTemplate = """\
 == Material List ==
 <div class="card-container">
 <ITEMS>
@@ -327,7 +327,7 @@ materialCardItemTemplate = """
 """
 
 
-toolCardBodyTemplte = """
+toolCardBodyTemplte = """\
 == Tool List ==
 <div class="card-container">
 <ITEMS>

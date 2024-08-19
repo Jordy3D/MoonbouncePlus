@@ -2551,6 +2551,16 @@
             "sources": ["Living Chicken Chest"]
         },
         {
+            "id": 590,
+            "name": "Cup o' Cola",
+            "uuid": "93b93c17-0767-4981-be04-066314396e4f",
+            "description": "This is just your standard cup of cola. Very fizzy and never out of place in any social setting and not sugar free but sugar full!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 591,
             "name": "Protective Helmet",
             "uuid": "75fc2514-e153-4956-b49b-17c91260200d",
