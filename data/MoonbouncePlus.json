@@ -2551,6 +2551,16 @@
             "sources": ["Living Chicken Chest"]
         },
         {
+            "id": 587,
+            "name": "Polished Purple Gem",
+            "uuid": "a0652569-983f-406c-b30d-d52eeeff3300",
+            "description": "The dark aura around this purple gem has been enhanced by the polish,  but its intentions are still aren’t clear.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 590,
             "name": "Cup o' Cola",
             "uuid": "93b93c17-0767-4981-be04-066314396e4f",
