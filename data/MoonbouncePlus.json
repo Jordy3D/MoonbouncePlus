@@ -2561,6 +2561,16 @@
             "sources": []
         },
         {
+            "id": 588,
+            "name": "Orange Starfish",
+            "uuid": "63f5ec2b-c2c7-4163-aa6a-61a599ae3534",
+            "description": "This firey fella wants to be as close to you as possible. We don’t think its poisonous at all,  but we don’t know.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 590,
             "name": "Cup o' Cola",
             "uuid": "93b93c17-0767-4981-be04-066314396e4f",
