@@ -2551,12 +2551,12 @@
             "sources": ["Living Chicken Chest"]
         },
         {
-            "id": 588,
-            "name": "Orange Starfish",
-            "uuid": "63f5ec2b-c2c7-4163-aa6a-61a599ae3534",
-            "description": "This firey fella wants to be as close to you as possible. We don’t think its poisonous at all,  but we don’t know.",
+            "id": 587,
+            "name": "Polished Purple Gem",
+            "uuid": "a0652569-983f-406c-b30d-d52eeeff3300",
+            "description": "The dark aura around this purple gem has been enhanced by the polish,  but its intentions are still aren’t clear.",
             "rarity": "UNCOMMON",
-            "type": "ACCESSORY",
+            "type": "MATERIAL",
             "value": 15,
             "sources": []
         },
