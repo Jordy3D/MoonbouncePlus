@@ -2571,6 +2571,16 @@
             "sources": []
         },
         {
+            "id": 589,
+            "name": "Blue Starfish",
+            "uuid": "b383d8c7-2ced-4251-aed7-43bf7e6c4998",
+            "description": "This cute fella wants to be as close to you as possible. Is it malicious? we don’t know,  all we know is that he's blue and he’s kinda cute.",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 590,
             "name": "Cup o' Cola",
             "uuid": "93b93c17-0767-4981-be04-066314396e4f",

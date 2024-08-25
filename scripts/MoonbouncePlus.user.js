@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.16.1
+// @version      0.16.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -115,6 +115,8 @@
 // 0.15.1   - Fixed the Wiki Button link breaking when the item name has a ? in it
 // 0.16.0   - Halved the character usage for the chat effects encoding
 // 0.16.1   - Apparently forgot to actually re-implement the message parsing improvement when I improved the encoding
+// 0.16.2   - Improved the data gathering process to be bit more robust
+//          - Added a button to gather the information of all items in the inventory at once (disabled by default)
 //
 // ==/Changelog==
 
@@ -124,6 +126,7 @@
 // - Add more classes to find elements on the page (endless task)
 // - Provide common elements with custom selectors on the Moonbounce main site (endless task)
 //      - Or otherwise find a way to get the elements more automatically
+// - Fix HTML elements being broken in Moonbounce chat (including URLs)
 //
 // ==/TODO==
 
@@ -137,6 +140,7 @@ var userSettings = [
     { name: "Appraise", description: "Show the Appraise button in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
     { name: "Unknown Item Highlight", description: "Highlight items in the inventory that are not in the database", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
     { name: "Wiki Button", description: "Show the Wiki button in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
+    { name: "Gather", description: "Show the Gather Inventory Information button in the inventory controls", type: "boolean", defaultValue: false, value: false, group: "Inventory" },
 
     // Marketplace
     { name: "Copy Marketplace Data", description: "Show the Copy Marketplace Data button in the marketplace controls", type: "boolean", defaultValue: true, value: true, group: "Marketplace" },
@@ -474,6 +478,7 @@ function checkSite() {
             loadData();
 
             addCopyDetailstoItemImage();
+            if (getSettingValue("Gather")) addGatherInventoryInformationButton();
 
             if (getSettingValue("Wiki Button")) addWikiButton();
 
@@ -520,9 +525,33 @@ function checkSite() {
 //#region Main Functions
 
 //#region Data
+
+class ItemDetails {
+    constructor(id, name, uuid, description, rarity, type, value, sources) {
+        this.id = id;
+        this.name = name;
+        this.uuid = uuid;
+        this.description = description;
+        this.rarity = rarity;
+        this.type = type;
+        this.value = value;
+        this.sources = sources;
+    }
+
+    // function to clean the variables
+    clean() {
+        this.id = parseInt(this.id);
+        this.value = parseInt(this.value);
+    }
+
+    // function to convert the object to a JSON string
+    convertToJSON() {
+        return JSON.stringify(this);
+    }
+}
+
 /**
- * Add an event listener to item images that copies the item's UUID to the clipboard
- * If ctrl is held, also copy the item's name and ID
+ * Add an event listener to item images that copies the item's data to the clipboard
  */
 function addCopyDetailstoItemImage() {
     if (!isTargetURL(getTargetURL("Inventory"), true)) return;
@@ -559,18 +588,6 @@ function addCopyDetailstoItemImage() {
         `, "copyDetailsToItemCSS");
     }
 
-    function cleanJSONString(jsonString, id, value) {
-        jsonString = jsonString.replace(/:/g, ": ");                        // replace all instances of ":" with ": "
-        jsonString = jsonString.replace(/,/g, ", ");                        // replace all instances of "," with ", "
-        jsonString = jsonString.replace(/{/g, "{ ");                        // replace all instances of "{" with "{ "
-        jsonString = jsonString.replace(/}/g, " }");                        // replace all instances of "}" with " }"
-
-        jsonString = jsonString.replace(`"${id}"`, id);                     // Replace the id string with just the id
-        jsonString = jsonString.replace(`"${value}"`, value);               // Replace the value string with just the value
-
-        return jsonString;
-    }
-
     for (let item of items) {
         // If the item is not an item image, skip it
         if (item.alt != "item") continue;
@@ -591,18 +608,19 @@ function addCopyDetailstoItemImage() {
 
             let { name, id, description, rarity, type, value, sources } = getDetails(details);
 
-            let itemInfo = { id: id, name: name, uuid: uuid, description: description, rarity: rarity, type: type, value: value, sources: sources };
-            let jsonString = JSON.stringify(itemInfo);                  // convert the object to a JSON string
+            let itemDetails = new ItemDetails(id, name, uuid, description, rarity, type, value, sources);
+            itemDetails.clean();
+            let itemDetailJSON = itemDetails.convertToJSON();
+            itemDetailJSON += ",";
 
-            jsonString = cleanJSONString(jsonString, id, value);        // Clean up the JSON string
-            jsonString += ",";                                          // Add a comma to the end of the string
-
-            copyToClipboard(jsonString);
+            copyToClipboard(itemDetailJSON);
 
             // Place a notification right below the item, centered directly below it
             let pos = img.getBoundingClientRect();
             let imgCenter = pos.left + (pos.width / 2);
             floatingNotification("Item info copied to clipboard", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.bottom + 10 + "px", left: imgCenter + "px" });
+        
+            return false;
         });
 
         // add a class to the item to show that it has an event listener
@@ -632,6 +650,84 @@ function addCopyDetailstoItemImage() {
         });
     }
 }
+
+/**
+ * Add a button that copies the data from all items in the inventory to the clipboard
+ */
+function addGatherInventoryInformationButton() {
+    let inventoryControls = document.querySelector(getTargetSelector("Inventory Controls"));
+    if (inventoryControls == null) return;
+
+    let existingButton = document.querySelector("#bane-gather-inventory-info");
+    if (existingButton != null) return;
+
+    let container = addInventoryControlBar();
+
+    let button = document.createElement("button");
+    button.innerText = "Gather Inventory Info";
+    button.id = "bane-gather-inventory-info";
+
+    button.addEventListener("click", function () {
+        gatherInventoryInformation();
+    });
+
+    container.appendChild(button);
+}
+
+/**
+ * Go through every item in the inventory and gather the information about each item
+ */
+async function gatherInventoryInformation() {
+    let inventory = findInventory();
+    if (inventory == null) return;
+
+    let inventoryItems = inventory.querySelectorAll("button");
+    let inventoryData = [];
+
+    for (let item of inventoryItems) {
+        await processItem(item, inventoryData);
+    }
+
+    log("Inventory information gathered");
+
+    // sort the inventory data by item id
+    inventoryData.sort((a, b) => a.id - b.id);
+    
+    // wrap the data in an "items" array
+    inventoryData = { items: inventoryData };
+
+    copyToClipboard(JSON.stringify(inventoryData));
+}
+
+function processItem(item, inventoryData) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            let uuid = getUUIDFromSrc(item.querySelector("img").src);
+            item.click();
+
+            setTimeout(() => {
+                let itemWindow = findSelectedItemWindow();
+                if (itemWindow == null) return resolve();
+
+                let img = itemWindow.querySelector("img");
+                if (img == null) return resolve();
+
+                let details = itemWindow.querySelector(getTargetSelector("Selected Item Details"));
+                if (details == null) return resolve();
+
+                let { name, id, description, rarity, type, value, sources } = getDetails(details);
+
+                let itemInfo = new ItemDetails(id, name, uuid, description, rarity, type, value, sources);
+                itemInfo.clean();
+                // itemInfo = itemInfo.convertToJSON();
+
+                inventoryData.push(itemInfo);
+                resolve();
+            }, 5); // Delay to ensure itemWindow is updated
+        }, 5); // Delay for each item
+    });
+}
+
 //#endregion
 
 //#region Control Bar

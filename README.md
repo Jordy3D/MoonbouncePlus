@@ -44,6 +44,7 @@ This repo also contains a Python script to help generate wiki page template code
 - Sometimes the script fails to download the data file before you click on something, causing the script to not work properly. If this happens, simply refresh the page and try again.
 - The script may not work properly if the Moonbounce website is updated and the script is not updated to match it. If this happens, please open an issue on this repo.
 - There have been reports of the settings not working properly on some browsers (namely Opera). I can't seem to reproduce the issue, so there's your warning I guess.
+- URLs got broken a bit in chat at some point if sent in the same message as non-URL text. This also applies to instances of HTML tags. I'll fix this eventually.
   
 ## To-Do
 
