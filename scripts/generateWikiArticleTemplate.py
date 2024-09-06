@@ -423,13 +423,13 @@ def replace_template(template, item):
 |}
 """
 
-        ingredients_chunk = """
+        ingredients_chunk = """\
 | colspan="3" | Ingredients
 |-
-| {ingredients_row}
+| {ingredients_row}\
 """
 
-        tool_chunk = """
+        tool_chunk = """\
 | colspan="3" | Tools
 |-
 | {tools_row}
