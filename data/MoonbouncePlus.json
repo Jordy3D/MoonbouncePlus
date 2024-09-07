@@ -591,6 +591,16 @@
             "sources": []
         },
         {
+            "id": 340,
+            "name": "Perfect Snowflake",
+            "uuid": "e3289cb8-1ace-4e44-8695-38c94fcea0e8",
+            "description": "A rare perfect snowflake, rumored to hold the key to a winter wonderland of dreams.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 341,
             "name": "Mystical Ornament",
             "uuid": "4ceef5b6-b73b-41ea-92cf-dfecb5dd0829",
@@ -1149,6 +1159,26 @@
             "type": "ACCESSORY",
             "value": 15,
             "sources": ["Heart Box"]
+        },
+        {
+            "id": 404,
+            "name": "Heart Headband",
+            "uuid": "25c6f263-981e-42f7-829f-bbb72a2fdbf5",
+            "description": "Do you love to style? Or do you style to love?",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 406,
+            "name": "Shiny Heart",
+            "uuid": "fab723a6-18da-429a-a805-ef5afc2155d5",
+            "description": "Glimmering with love and sweetness, this heart shows the kind of person you are!",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
         },
         {
             "id": 407,
@@ -1853,6 +1883,56 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
+            "sources": []
+        },
+        {
+            "id": 485,
+            "name": "Orange Bunny Ears",
+            "uuid": "93abfe72-843f-4694-b841-d9a920439025",
+            "description": "Who knew the big bunny in charge had an orange sister",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 486,
+            "name": "Green Bunny Ears",
+            "uuid": "f1ccd9e2-2c9b-4fa5-b0a2-0a286607d23f",
+            "description": "Who knew the big bunny in charge had a green brother",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 487,
+            "name": "Purple Bunny Ears",
+            "uuid": "1d2fcd24-ef3c-4957-837d-7755e3c9ed77",
+            "description": "Who knew the big bunny in charge had an purple sibling",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 490,
+            "name": "Blue Egg",
+            "uuid": "17b87ea1-2c56-4de9-9146-8208c02a871f",
+            "description": "A simple egg dyed blue!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 491,
+            "name": "Red Egg",
+            "uuid": "16d0c6db-d192-4e7d-917c-8c7185286c77",
+            "description": "A simple egg dyed red!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 100,
             "sources": []
         },
         {
@@ -3152,12 +3232,12 @@
     "marketplace": {
         "items": [
             {
-                "name": "Devo",
+                "name": "Pengu",
                 "section": "Characters",
                 "cost": 500
             },
             {
-                "name": "Pengu",
+                "name": "Devo",
                 "section": "Characters",
                 "cost": 500
             },
@@ -3167,12 +3247,27 @@
                 "cost": 1500
             },
             {
+                "name": "Slime Green Hat",
+                "section": "Accessories",
+                "cost": 1000
+            },
+            {
+                "name": "Farmer J1m's Hat",
+                "section": "Accessories",
+                "cost": 750
+            },
+            {
+                "name": "Shiny Glasses",
+                "section": "Accessories",
+                "cost": 750
+            },
+            {
                 "name": "Brown Wizard Hat",
                 "section": "Accessories",
                 "cost": 750
             },
             {
-                "name": "Orange Wizard Hat",
+                "name": "Hazmask",
                 "section": "Accessories",
                 "cost": 750
             },
@@ -3182,48 +3277,8 @@
                 "cost": 750
             },
             {
-                "name": "White Fabric",
-                "section": "Materials",
-                "cost": 50
-            },
-            {
-                "name": "Slightly Magical Fruit",
-                "section": "Materials",
-                "cost": 50
-            },
-            {
-                "name": "Two Blue Coins",
-                "section": "Materials",
-                "cost": 50
-            },
-            {
-                "name": "Two Gold Coins",
-                "section": "Materials",
-                "cost": 100
-            },
-            {
-                "name": "Empty Bottle",
-                "section": "Materials",
-                "cost": 50
-            },
-            {
-                "name": "Crumpled Metal",
-                "section": "Materials",
-                "cost": 100
-            },
-            {
-                "name": "Prismatic Dust",
-                "section": "Materials",
-                "cost": 500
-            },
-            {
-                "name": "Empty Potion Bottle",
-                "section": "Materials",
-                "cost": 100
-            },
-            {
-                "name": "Wooden Plank",
-                "section": "Materials",
+                "name": "Orange Wizard Hat",
+                "section": "Accessories",
                 "cost": 750
             },
             {
@@ -3232,9 +3287,54 @@
                 "cost": 100
             },
             {
-                "name": "Craftsman Blade",
-                "section": "Tools",
+                "name": "Empty Potion Bottle",
+                "section": "Materials",
                 "cost": 100
+            },
+            {
+                "name": "Crumpled Metal",
+                "section": "Materials",
+                "cost": 100
+            },
+            {
+                "name": "White Fabric",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Wooden Plank",
+                "section": "Materials",
+                "cost": 750
+            },
+            {
+                "name": "Two Gold Coins",
+                "section": "Materials",
+                "cost": 100
+            },
+            {
+                "name": "Two Blue Coins",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Empty Bottle",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Expert Potion Bottle",
+                "section": "Materials",
+                "cost": 300
+            },
+            {
+                "name": "Slightly Magical Fruit",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
+                "name": "Prismatic Dust",
+                "section": "Materials",
+                "cost": 500
             },
             {
                 "name": "Sewing Needle",
@@ -3242,7 +3342,7 @@
                 "cost": 100
             },
             {
-                "name": "Witch's Cauldron",
+                "name": "Wooden Spoon",
                 "section": "Tools",
                 "cost": 100
             },
@@ -3252,7 +3352,12 @@
                 "cost": 100
             },
             {
-                "name": "Wooden Spoon",
+                "name": "Craftsman Blade",
+                "section": "Tools",
+                "cost": 100
+            },
+            {
+                "name": "Witch's Cauldron",
                 "section": "Tools",
                 "cost": 100
             }
