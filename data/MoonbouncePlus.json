@@ -1844,6 +1844,16 @@
             "sources": ["Summery Gifts", "Red Chicken"]
         },
         {
+            "id": 481,
+            "name": "Yellow Dye Powder",
+            "uuid": "a37bfcc7-0659-42e7-8b14-cbd47997f6fe",
+            "description": "A dye powder that has a deep ochre hue",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
             "id": 482,
             "name": "Golden Egg",
             "uuid": "82b8f0a9-6b81-499a-a87e-925f290ffd10",
@@ -1916,6 +1926,26 @@
             "sources": []
         },
         {
+            "id": 488,
+            "name": "Yellow Egg",
+            "uuid": "6fe4dd3e-65ff-4a0b-ba4b-feef875bac3a",
+            "description": "A simple egg dyed yellow!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 489,
+            "name": "Orange Egg",
+            "uuid": "43149903-d7a1-4b82-8098-01b2f1531bba",
+            "description": "A simple egg dyed orange!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
             "id": 490,
             "name": "Blue Egg",
             "uuid": "17b87ea1-2c56-4de9-9146-8208c02a871f",
@@ -1931,6 +1961,56 @@
             "uuid": "16d0c6db-d192-4e7d-917c-8c7185286c77",
             "description": "A simple egg dyed red!",
             "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 492,
+            "name": "Green Egg",
+            "uuid": "c2b172c4-da5e-472a-9cdf-a7134b7b752c",
+            "description": "A simple egg dyed green!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 493,
+            "name": "Purple Egg",
+            "uuid": "c0d4c1c8-4a8a-4b02-8d3b-2dc138830e26",
+            "description": "A simple egg dyed purple!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 494,
+            "name": "Green Split Egg",
+            "uuid": "3e0b6f97-ffa3-499d-91ce-0623cb6dd608",
+            "description": "A split egg, dyed only a little green",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 495,
+            "name": "Purple Split Egg",
+            "uuid": "aa590869-b9e1-4271-8ce0-39b87259c76f",
+            "description": "A split egg, dyed only a little purple",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 496,
+            "name": "Orange Split Egg",
+            "uuid": "7e146a2c-6a31-40ec-a8c5-4178ed315bb9",
+            "description": "A split egg, dyed only a little orange",
+            "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 100,
             "sources": []
@@ -2871,6 +2951,84 @@
             "ingredients": ["Stardust", "Raw Moonstone"],
             "tools": ["Hammer", "Craftsman Blade"],
             "type": ""
+        },
+        {
+            "result": "Bunny Ears",
+            "ingredients": ["Carrot", "Chocolate Bunny", "Bunny Headband"],
+            "tools": ["Vinegar"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Green Bunny Ears",
+            "ingredients": ["Bunny Ears", "Blue Dye Powder", "Yellow Dye Powder"],
+            "tools": ["Vinegar"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Orange Bunny Ears",
+            "ingredients": ["Bunny Ears", "Red Dye Powder", "Yellow Dye Powder"],
+            "tools": ["Vinegar"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Purple Bunny Ears",
+            "ingredients": ["Bunny Ears", "Blue Dye Powder", "Red Dye Powder"],
+            "tools": ["Vinegar"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Yellow Egg",
+            "ingredients": ["Plain Egg", "Yellow Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Orange Egg",
+            "ingredients": ["Plain Egg", "Red Dye Powder", "Yellow Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Blue Egg",
+            "ingredients": ["Plain Egg", "Blue Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Red Egg",
+            "ingredients": ["Plain Egg", "Red Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Green Egg",
+            "ingredients": ["Plain Egg", "Blue Dye Powder", "Yellow Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Purple Egg",
+            "ingredients": ["Plain Egg", "Blue Dye Powder", "Red Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Green Split Egg",
+            "ingredients": ["Plain Split Egg", "Blue Dye Powder", "Yellow Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Purple Split Egg",
+            "ingredients": ["Plain Split Egg", "Blue Dye Powder", "Red Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
+        },
+        {
+            "result": "Orange Split Egg",
+            "ingredients": ["Plain Split Egg", "Red Dye Powder", "Yellow Dye Powder"],
+            "tools": ["Vinegar", "Wooden Spoon"],
+            "type": "Seasonal (Easter)"
         },
         {
             "result": "Skull",
