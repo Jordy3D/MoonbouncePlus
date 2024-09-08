@@ -41,6 +41,16 @@
             "sources": ["Assorted Goodie Bag"]
         },
         {
+            "id": 9,
+            "name": "Speckled Egg",
+            "uuid": "698450c8-8e5c-4360-a015-3c15c2ba8dca",
+            "description": "This could hold nothing, but it could also hold prizes or even a pet...if you’re lucky!",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 30,
+            "sources": []
+        },
+        {
             "id": 10,
             "name": "Two Blue Coins",
             "uuid": "c912f2bb-c7ab-460a-8fa9-2697be86eb69",
@@ -651,6 +661,16 @@
             "sources": []
         },
         {
+            "id": 346,
+            "name": "Kiwi Bon Bon",
+            "uuid": "f3ec41ae-afbd-44cb-a8da-eabf5e529cc8",
+            "description": "Tropical Zest in a Festive Bite",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 900,
+            "sources": []
+        },
+        {
             "id": 347,
             "name": "Winter Tree",
             "uuid": "51a9f2d3-bbd4-47f2-9e17-088fa71731d3",
@@ -781,6 +801,16 @@
             "sources": []
         },
         {
+            "id": 361,
+            "name": "Strawberry Bon Bon",
+            "uuid": "3b35ed21-ba93-4baf-b036-3a57c6318f38",
+            "description": "Strawberry sweetness in a bite-sized bon bon – a berry good addition to your virtual treat collection!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 600,
+            "sources": []
+        },
+        {
             "id": 362,
             "name": "Holly Cake",
             "uuid": "7ec3cbeb-2571-41fb-a041-e8a522d21015",
@@ -788,6 +818,16 @@
             "rarity": "LEGENDARY",
             "type": "MATERIAL",
             "value": 1200,
+            "sources": []
+        },
+        {
+            "id": 363,
+            "name": "Blueberry Bon Bon",
+            "uuid": "d72aef34-7d09-4c05-8618-341ff3c5829c",
+            "description": "A burst of blueberry bliss in every sweet bite – taste the virtual berrylicious goodness!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 300,
             "sources": []
         },
         {
@@ -1168,6 +1208,16 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 100,
+            "sources": []
+        },
+        {
+            "id": 405,
+            "name": "Heart Stack",
+            "uuid": "1912ce9a-fe35-41eb-b66a-089740654d0c",
+            "description": "Show off how loving you are by equipping this cute heart stack above you!",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
             "sources": []
         },
         {
@@ -1564,6 +1614,16 @@
             "type": "MATERIAL",
             "value": 5,
             "sources": ["Disco Mats"]
+        },
+        {
+            "id": 446,
+            "name": "Magnet",
+            "uuid": "3bfd5144-42bb-4983-8e02-3852130440fe",
+            "description": "Attract some virtual magic and get ready to pull in good vibes",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
         },
         {
             "id": 447,
@@ -2766,6 +2826,16 @@
             "sources": []
         },
         {
+            "id": 597,
+            "name": "Expert Potion Bottle",
+            "uuid": "94245419-2431-455c-b74f-6dec0c2f11f9",
+            "description": "This potion bottles are sought out and often out of stock at other retailers, but we may have a monopoly around them. Shhhh, don’t tell anyone.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 629,
             "name": "Peach",
             "uuid": "ea55dfc6-a216-4743-8888-51f881693988",
@@ -2960,13 +3030,21 @@
         },
         {
             "result": "Green Bunny Ears",
-            "ingredients": ["Bunny Ears", "Blue Dye Powder", "Yellow Dye Powder"],
+            "ingredients": [
+                "Bunny Ears",
+                "Blue Dye Powder",
+                "Yellow Dye Powder"
+            ],
             "tools": ["Vinegar"],
             "type": "Seasonal (Easter)"
         },
         {
             "result": "Orange Bunny Ears",
-            "ingredients": ["Bunny Ears", "Red Dye Powder", "Yellow Dye Powder"],
+            "ingredients": [
+                "Bunny Ears",
+                "Red Dye Powder",
+                "Yellow Dye Powder"
+            ],
             "tools": ["Vinegar"],
             "type": "Seasonal (Easter)"
         },
@@ -3002,7 +3080,11 @@
         },
         {
             "result": "Green Egg",
-            "ingredients": ["Plain Egg", "Blue Dye Powder", "Yellow Dye Powder"],
+            "ingredients": [
+                "Plain Egg",
+                "Blue Dye Powder",
+                "Yellow Dye Powder"
+            ],
             "tools": ["Vinegar", "Wooden Spoon"],
             "type": "Seasonal (Easter)"
         },
@@ -3014,19 +3096,31 @@
         },
         {
             "result": "Green Split Egg",
-            "ingredients": ["Plain Split Egg", "Blue Dye Powder", "Yellow Dye Powder"],
+            "ingredients": [
+                "Plain Split Egg",
+                "Blue Dye Powder",
+                "Yellow Dye Powder"
+            ],
             "tools": ["Vinegar", "Wooden Spoon"],
             "type": "Seasonal (Easter)"
         },
         {
             "result": "Purple Split Egg",
-            "ingredients": ["Plain Split Egg", "Blue Dye Powder", "Red Dye Powder"],
+            "ingredients": [
+                "Plain Split Egg",
+                "Blue Dye Powder",
+                "Red Dye Powder"
+            ],
             "tools": ["Vinegar", "Wooden Spoon"],
             "type": "Seasonal (Easter)"
         },
         {
             "result": "Orange Split Egg",
-            "ingredients": ["Plain Split Egg", "Red Dye Powder", "Yellow Dye Powder"],
+            "ingredients": [
+                "Plain Split Egg",
+                "Red Dye Powder",
+                "Yellow Dye Powder"
+            ],
             "tools": ["Vinegar", "Wooden Spoon"],
             "type": "Seasonal (Easter)"
         },
