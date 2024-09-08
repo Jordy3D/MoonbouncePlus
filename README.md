@@ -28,6 +28,9 @@
 - A link to the Moonbounce Wiki page for the currently selected item in your inventory
 - Auto-refresh on Application Error (which happens both naturally, and due to the script)
 
+### Settings 
+The settings page for MoonbouncePlus is located at https://moonbounce.gg/u/@me/settings?moonbounceplus.  
+It "takes over" the existing settings page in a way it doesn't expect, so you will see an Application Error when navigating away from it, but it should auto-refresh and behave normally from there.
 
 ## Installation
 
