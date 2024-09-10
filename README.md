@@ -21,6 +21,9 @@
 - Appraise the value of your inventory, as well as how many items are contained within (both total and unique)  
   <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/1efd6494-434b-4bbd-90bc-7b6aad0e6916" width=300 style="border-radius: 15px">
 - Sort your inventory by Name, ID, Rarity, Type, Item Value, Quantity, Stack Value
+- Items that are missing MB+ data are highlighted with a golden background  
+  Please [submit it](https://github.com/Jordy3D/MoonbouncePlus/issues/new?assignees=&labels=&projects=&template=data-template.md&title=New+Data%3A+%5BITEM+NAME%5D) if the golden background is there for more than a few hours! Note, if it's a Daily Reward, I'll likely get to it naturally.  
+  <img src="https://github.com/user-attachments/assets/1585aee7-09f6-4377-8592-5ecef0f86c77" width=200 style="border-radius: 15px">
 - Copy the info from the currently selected item to your clipboard (for data collection, such as for the [Moonbounce Wiki](https://moonbounce.wiki))
   - Click on the item's image to copy the item data
   - Ctrl+Right Click on the item's image download the image with its name formatted for the wiki
