@@ -2836,6 +2836,16 @@
             "sources": []
         },
         {
+            "id": 627,
+            "name": "Water Shard",
+            "uuid": "accab883-32c3-4a64-be8d-7496c7be3255",
+            "description": "Whenever you touch this water shard, it starts to turn back into its natural liquid state. Its better to look and not to touch.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Dark Elemental Chest"]
+        },
+        {
             "id": 629,
             "name": "Peach",
             "uuid": "ea55dfc6-a216-4743-8888-51f881693988",
