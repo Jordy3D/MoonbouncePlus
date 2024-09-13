@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.17.1
+// @version      0.17.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -120,6 +120,7 @@
 // 0.17.0   - Added a link to the Moonbounce Wiki for each Source in the inventory
 //          - Added the ability to download the Source image when the Source image element is clicked
 // 0.17.1   - Add a speed setting for the Gather Inventory Information button for devices that can't handle the default speed
+// 0.17.2   - Fixed URLs breaking in chat messages (for now, anyway)
 //
 // ==/Changelog==
 
@@ -129,7 +130,6 @@
 // - Add more classes to find elements on the page (endless task)
 // - Provide common elements with custom selectors on the Moonbounce main site (endless task)
 //      - Or otherwise find a way to get the elements more automatically
-// - Fix HTML elements being broken in Moonbounce chat (including URLs)
 //
 // ==/TODO==
 
@@ -2263,7 +2263,9 @@ function parseMessage(messageText) {
 
     let parsedMessage = messageText.innerText;
 
-    parsedMessage = decryptFromWhitespace(parsedMessage);
+    // if the message contains any of the whitespace characters, decrypt it
+    if (whiteSpaceChars.some(char => parsedMessage.includes(char)))
+        parsedMessage = decryptFromWhitespace(parsedMessage);
 
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
@@ -2289,7 +2291,8 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
 
     let parsedMessage = newMessage;
 
-    parsedMessage = decryptFromWhitespace(parsedMessage);
+    if (whiteSpaceChars.some(char => parsedMessage.includes(char)))
+        parsedMessage = decryptFromWhitespace(parsedMessage);
 
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);

@@ -858,7 +858,12 @@
             "rarity": "RARE",
             "type": "TOOL",
             "value": 30,
-            "sources": ["Framed Chest", "Alien Food Pouch", "Box of Cheer", "Dark Elemental Chest"]
+            "sources": [
+                "Framed Chest",
+                "Alien Food Pouch",
+                "Box of Cheer",
+                "Dark Elemental Chest"
+            ]
         },
         {
             "id": 367,
@@ -1953,11 +1958,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": [
-                "Red Chicken",
-                "Blue Chicken",
-                "Yellow Chicken"
-            ]
+            "sources": ["Red Chicken", "Blue Chicken", "Yellow Chicken"]
         },
         {
             "id": 485,
@@ -2938,6 +2939,56 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 100,
+            "sources": ["Creator Crate"]
+        },
+        {
+            "id": 640,
+            "name": "Tribal Mask",
+            "uuid": "a1878538-b651-4817-a7e9-84e6f59cb8a2",
+            "description": "Ancient face-tech for the modern pixel warrior! Rumor has it this mask grants +5 to woodcutting and a sudden urge to fletch.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 0,
+            "sources": []
+        },
+        {
+            "id": 641,
+            "name": "Twisted Branch",
+            "uuid": "6264a0b8-bb4c-42fe-a53e-8036a689b637",
+            "description": "This branch looks like it came off a thorny tropical tree, but we're not botanists, so who knows.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Creator Crate"]
+        },
+        {
+            "id": 643,
+            "name": "White Dye Powder",
+            "uuid": "ee09ae5e-c463-400b-9a00-2fec73146890",
+            "description": "This is the color of snow, the essence of a cloud, the very being of a glacier.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Creator Crate"]
+        },
+        {
+            "id": 644,
+            "name": "Dragonforce Mask",
+            "uuid": "15b57c30-383e-4cb8-84a0-fb9934728e6a",
+            "description": "Epic face mask forged in the fires of dragons. Grants +100 to agility, so don't be surprised if your typing suddenly hits 1000 WPM.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": ["Creator Crate"]
+        },
+        {
+            "id": 645,
+            "name": "Elder Hat",
+            "uuid": "09479cae-b0db-47a2-8881-710904686561",
+            "description": "Ancient headwear of wisdom (and questionable fashion choices). Grants +5 to lawn-protection skills and the power to ramble about \"the good old days of dial-up.”",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 0,
             "sources": ["Creator Crate"]
         }
     ],
