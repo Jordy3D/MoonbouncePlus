@@ -2826,6 +2826,16 @@
             "sources": []
         },
         {
+            "id": 596,
+            "name": "Earth Shard",
+            "uuid": "e2628a47-2217-4514-935b-5af36c83e853",
+            "description": "These may look like and emerald, or a crystal of some sort, but this shard was taken deep from the center of the earth ( or as close as we could get anyway!)",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Dark Elemental Chest"]
+        },
+        {
             "id": 597,
             "name": "Expert Potion Bottle",
             "uuid": "94245419-2431-455c-b74f-6dec0c2f11f9",
