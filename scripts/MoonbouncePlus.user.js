@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.16.2
+// @version      0.17.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -117,6 +117,8 @@
 // 0.16.1   - Apparently forgot to actually re-implement the message parsing improvement when I improved the encoding
 // 0.16.2   - Improved the data gathering process to be bit more robust
 //          - Added a button to gather the information of all items in the inventory at once (disabled by default)
+// 0.17.0   - Added a link to the Moonbounce Wiki for each Source in the inventory
+//          - Added the ability to download the Source image when the Source image element is clicked
 //
 // ==/Changelog==
 
@@ -304,6 +306,8 @@ const targetSelector = [
     { name: "Selected Item Window", selector: "._base_1xand_1" },
     { name: "Selected Item Details", selector: "._base_awewl_1" },
     { name: "Source List Item", selector: ".mSsVp" },
+    { name: "Source Item Button", selector: "._base_17fa3_1._xs_17fa3_16" },
+    { name: "Source Item Name", selector: "._base_buawu_1" },
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "[class^='_stack_count_'" },
 
@@ -477,10 +481,11 @@ function checkSite() {
         if (isTargetURL(getTargetURL("Inventory"), true)) {
             loadData();
 
-            addCopyDetailstoItemImage();
+            // addCopyDetailstoItemImage();
+            addInventorySidebarFeatures();
             if (getSettingValue("Gather")) addGatherInventoryInformationButton();
 
-            if (getSettingValue("Wiki Button")) addWikiButton();
+            // if (getSettingValue("Wiki Button")) addWikiButton();
 
             if (getSettingValue("Ponder")) addPonderButton();
             if (getSettingValue("Appraise")) addAppraiseButton();
@@ -548,6 +553,17 @@ class ItemDetails {
     convertToJSON() {
         return JSON.stringify(this);
     }
+}
+
+/**
+ * Master function that adds sidebar features to the inventory
+ */
+function addInventorySidebarFeatures() {
+    addCopyDetailstoItemImage();
+    if (getSettingValue("Wiki Button")) addWikiButton();
+
+    addSourceWikiLinks();
+    addSourceImageDownload();
 }
 
 /**
@@ -648,6 +664,91 @@ function addCopyDetailstoItemImage() {
                 return false;
             }
         });
+    }
+}
+
+/**
+ * Add a link to the Wiki page for each Item source
+ */
+function addSourceWikiLinks() {
+    let sources = document.querySelectorAll(getTargetSelector("Source List Item"));
+    if (sources == null || sources.length == 0) return;
+
+    // if all sources are already links, return
+    if (sources[0].querySelector("a") != null) return;
+
+    for (let source of sources) {
+        // https://moonbounce.wiki/w/{name}
+        let nameElement = source.querySelector(getTargetSelector("Source Item Name"));
+        let name = nameElement.innerText;
+
+        // replace spaces and # with _
+        name = name.replace(" ", "_");
+        name = name.replace("#", "_");
+    
+        // copy the element's class and replace it with an a element
+        let link = document.createElement("a");
+        link.href = `https://moonbounce.wiki/w/${name}`;
+        link.target = "_blank"; // Open link in a new tab
+        link.innerText = nameElement.innerText;
+        link.classList = nameElement.classList;
+
+        // set the text decoration to none
+        link.style.textDecoration = "none";
+    
+        // replace the element with the link
+        nameElement.replaceWith(link);
+    }
+}
+
+/**
+ * Add an event to download a source's image when the source item button is clicked
+ */
+function addSourceImageDownload() {
+    let sources = document.querySelectorAll(getTargetSelector("Source List Item"));
+    if (sources == null || sources.length == 0) return;
+
+    // if all sources already have the download event, return
+    if (sources[0].querySelector(getTargetSelector("Source Item Button")).classList.contains("source-image-download")) return;
+
+    for (let source of sources) {
+        let button = source.querySelector(getTargetSelector("Source Item Button"));
+        if (button == null) continue;
+
+        let nameElement = source.querySelector(getTargetSelector("Source Item Name"));
+        let name = nameElement.innerText;
+        
+        // get the image URL from the button's child image
+        let img = button.querySelector("img");
+        let srcURL = img.src;
+        // remove https://imagebucketmoonbounce-production.s3.amazonaws.com/sprites/ and /preview.png from the URL
+        // to get the UUID of the item
+        let uuid = srcURL.replace("https://imagebucketmoonbounce-production.s3.amazonaws.com/sprites/", "").replace("/preview.png", "");
+        
+        // https://moonbounce.gg/images/fp/${item.uuid}/c/f/preview.png
+        let imgURL = `https://moonbounce.gg/images/fp/${uuid}/c/f/preview.png`;
+
+        // add an event listener to the button
+        button.addEventListener("click", function () {
+            log(`Downloading image for ${name}`);
+
+            // replace spaces with underscores in the name
+            name = name.replace(" ", "_");
+
+            downloadFile(imgURL, `${name}.png`, true);
+
+            // Place a notification when the image is saved as a file
+            floatingNotification("Source image saved as file", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px;", "bottom-right");
+        });
+
+        // add a tooltip to the button
+        button.title = "Download image";
+
+        // add a class to the button to show that it has an event listener
+        button.classList.add("source-image-download");
+
+        // display the cursor as a pointer when hovering over the button
+        button.style.cursor = "pointer";
     }
 }
 
@@ -3391,7 +3492,7 @@ function getDetails(details = null) {
     // get the p from each source object and add it to the source list
     let sourceList = [];
     for (let source of sourceObjects) {
-        let p = source.querySelector("p");
+        let p = source.querySelector("p") || source.querySelector("a");
         sourceList.push(p.innerText);
     }
 
@@ -3653,7 +3754,9 @@ function error(message) {
 /**
  * Download a file from a URL
  */
-function downloadFile(url, filename) {
+function downloadFile(url, filename, logMessage = false) {
+    if (logMessage) log(`Downloading ${filename} from ${url}`);
+
     let a = document.createElement("a");            // create a new link element
     a.href = url;                                   // set the href of the link to the URL
     if (filename)                                   // if a filename is provided
@@ -3709,7 +3812,7 @@ function floatingNotification(message, duration = 3000, css = "", position = "to
     notification.innerHTML = message;
     notification.style.cssText = css;
     notification.style.position = "fixed";
-    notification.style.zIndex = 1000;
+    notification.style.zIndex = 100000;
     notification.style.transition = "opacity 0.5s";
     notification.style.opacity = 1;
     notification.style.pointerEvents = "none";
