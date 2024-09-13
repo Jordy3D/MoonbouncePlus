@@ -1643,7 +1643,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Pot O' Gold"]
         },
         {
             "id": 450,
@@ -1653,7 +1653,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Pot O' Gold"]
         },
         {
             "id": 451,
@@ -1663,7 +1663,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Pot O' Gold"]
         },
         {
             "id": 452,
@@ -1673,7 +1673,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Pot O' Gold"]
         },
         {
             "id": 455,
@@ -1683,7 +1683,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Pot O' Gold"]
         },
         {
             "id": 458,
@@ -1693,7 +1693,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Pot O' Gold"]
         },
         {
             "id": 460,
@@ -1881,7 +1881,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Chicken"]
         },
         {
             "id": 479,
@@ -2102,7 +2102,7 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": []
+            "sources": ["Egg Basket"]
         },
         {
             "id": 499,

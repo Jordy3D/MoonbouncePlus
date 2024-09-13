@@ -3,6 +3,11 @@
   <img src="https://github.com/Jordy3D/MoonbouncePlus/blob/main/assets/MoonbouncePlus.png" height=100>
   <p>A userscript that adds a few features to the Moonbounce website and experience.</p>
 
+  <img src="https://img.shields.io/badge/MB+-v0.17.1-blue.svg">
+  <a href="https://github.com/Jordy3D/MoonbouncePlus/raw/main/scripts/MoonbouncePlus.user.js">
+    <img src="https://img.shields.io/badge/Install-g.svg">
+  </a>
+
   <a href="#features">Features</a> | <a href="#installation">Installation</a> | <a href="#side-features">Side Features</a> | <a href="#known-issues">Known Issues</a> | <a href="#to-do">To-Do</a> | <a href="#changelog">Changelog</a>
 </div>
 

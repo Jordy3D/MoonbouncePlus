@@ -993,6 +993,43 @@ def generate_loot_source_pages(items):
     print(f'Generated loot source pages for {len(sources) - 1} sources.')
 #endregion
 
+#region Update Readme
+def update_readme():
+    from pathlib import Path
+    
+    script_dir = Path(__file__).parent
+    root_dir = script_dir.parent
+    
+    # load README.md
+    with open(os.path.join(root_dir, 'README.md'), 'r', encoding='utf-8') as f:
+        readme = f.read()
+        
+    # load MoonbouncePlus.user.js
+    with open(os.path.join(script_dir, 'MoonbouncePlus.user.js'), 'r', encoding='utf-8') as f:
+        script = f.read()
+        
+    # find the @version
+    script_version = re.search(r'@version\s+\d+\.\d+\.\d+', script)    
+    # strip the @version from the string
+    script_version = re.search(r'\d+\.\d+\.\d+', script_version.group())
+    script_version = 'v' + script_version.group()
+       
+    # find the shields.io Version badge
+    readme_version = re.search(r'v\d+\.\d+\.\d+', readme)
+    readme_version = readme_version.group()
+    
+    if script_version == readme_version:
+        return
+    
+    print(f'Updating README version {readme_version} -> {script_version}')
+    
+    # update the version in the README.md
+    readme = readme.replace(readme_version, f'{script_version}')
+    
+    # save the updated README.md
+    with open(os.path.join(script_dir, '..', 'README.md'), 'w', encoding='utf-8') as f:
+        f.write(readme)    
+
 #endregion
 
 
@@ -1019,3 +1056,5 @@ if __name__ == '__main__':
     generate_loot_source_pages(items)
     
     download_images(items)
+    
+    update_readme()
