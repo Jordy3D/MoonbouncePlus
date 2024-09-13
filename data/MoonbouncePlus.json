@@ -518,7 +518,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Snow Crate"]
         },
         {
             "id": 332,
@@ -528,7 +528,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Snow Crate"]
         },
         {
             "id": 333,
@@ -538,7 +538,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Snow Crate"]
         },
         {
             "id": 334,
@@ -548,7 +548,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Special Present"]
         },
         {
             "id": 335,
@@ -558,7 +558,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Special Present"]
         },
         {
             "id": 336,
@@ -568,7 +568,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 337,
@@ -578,7 +578,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 338,
@@ -588,7 +588,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 339,
@@ -598,7 +598,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 340,
@@ -628,7 +628,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 343,
@@ -638,7 +638,7 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 344,
@@ -648,7 +648,7 @@
             "rarity": "RARE",
             "type": "TOOL",
             "value": 30,
-            "sources": []
+            "sources": ["Special Present"]
         },
         {
             "id": 345,
@@ -658,7 +658,7 @@
             "rarity": "COMMON",
             "type": "TOOL",
             "value": 5,
-            "sources": []
+            "sources": ["Special Present"]
         },
         {
             "id": 346,
@@ -738,7 +738,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 355,
@@ -748,7 +748,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Holiday Decorations"]
         },
         {
             "id": 356,
@@ -848,7 +848,7 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": []
+            "sources": ["Box of Cheer"]
         },
         {
             "id": 366,
@@ -858,7 +858,7 @@
             "rarity": "RARE",
             "type": "TOOL",
             "value": 30,
-            "sources": ["Framed Chest", "Alien Food Pouch", "Box of Cheer"]
+            "sources": ["Framed Chest", "Alien Food Pouch", "Box of Cheer", "Dark Elemental Chest"]
         },
         {
             "id": 367,
@@ -868,7 +868,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Box of Cheer"]
         },
         {
             "id": 368,
@@ -918,7 +918,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Box of Cheer"]
         },
         {
             "id": 375,
@@ -928,7 +928,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Box of Cheer"]
         },
         {
             "id": 376,
@@ -938,7 +938,7 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": []
+            "sources": ["Box of Cheer"]
         },
         {
             "id": 377,
@@ -948,7 +948,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Chicken", "Assorted Goodie Bag"]
+            "sources": ["Chicken", "Assorted Goodie Bag", "Aquamarine Chest"]
         },
         {
             "id": 378,
@@ -1731,7 +1731,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Clover Chest"]
         },
         {
             "id": 463,
@@ -1741,7 +1741,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Clover Chest"]
         },
         {
             "id": 464,
@@ -1751,7 +1751,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Clover Chest"]
         },
         {
             "id": 465,
@@ -1761,7 +1761,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Clover Chest"]
         },
         {
             "id": 466,
@@ -1771,7 +1771,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Pot O' Gold"]
         },
         {
             "id": 467,
@@ -1791,7 +1791,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Clover Chest"]
         },
         {
             "id": 469,
@@ -1831,7 +1831,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 100,
-            "sources": []
+            "sources": ["Egg Basket"]
         },
         {
             "id": 474,
@@ -1841,7 +1841,7 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": []
+            "sources": ["Egg Basket"]
         },
         {
             "id": 475,
@@ -1851,7 +1851,7 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": []
+            "sources": ["Egg Basket"]
         },
         {
             "id": 476,
@@ -1861,7 +1861,7 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": []
+            "sources": ["Egg Basket"]
         },
         {
             "id": 477,
@@ -1871,7 +1871,7 @@
             "rarity": "COMMON",
             "type": "TOOL",
             "value": 5,
-            "sources": []
+            "sources": ["Chicken"]
         },
         {
             "id": 478,
@@ -1953,7 +1953,11 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": [
+                "Red Chicken",
+                "Blue Chicken",
+                "Yellow Chicken"
+            ]
         },
         {
             "id": 485,

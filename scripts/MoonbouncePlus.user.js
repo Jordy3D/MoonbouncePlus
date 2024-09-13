@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.17.0
+// @version      0.17.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -119,6 +119,7 @@
 //          - Added a button to gather the information of all items in the inventory at once (disabled by default)
 // 0.17.0   - Added a link to the Moonbounce Wiki for each Source in the inventory
 //          - Added the ability to download the Source image when the Source image element is clicked
+// 0.17.1   - Add a speed setting for the Gather Inventory Information button for devices that can't handle the default speed
 //
 // ==/Changelog==
 
@@ -143,6 +144,7 @@ var userSettings = [
     { name: "Unknown Item Highlight", description: "Highlight items in the inventory that are not in the database", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
     { name: "Wiki Button", description: "Show the Wiki button in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
     { name: "Gather", description: "Show the Gather Inventory Information button in the inventory controls", type: "boolean", defaultValue: false, value: false, group: "Inventory" },
+    { name: "Gather Speed", description: "The speed at which the script gathers the inventory data (in milliseconds)", type: "number", defaultValue: 20, value: 20, min: 5, max: 50, group: "Inventory" },
 
     // Marketplace
     { name: "Copy Marketplace Data", description: "Show the Copy Marketplace Data button in the marketplace controls", type: "boolean", defaultValue: true, value: true, group: "Marketplace" },
@@ -785,22 +787,23 @@ async function gatherInventoryInformation() {
     let inventoryItems = inventory.querySelectorAll("button");
     let inventoryData = [];
 
+    let delay = getSettingValue("Gather Speed");
+
     for (let item of inventoryItems) {
-        await processItem(item, inventoryData);
+        await processItem(item, inventoryData, delay);
     }
 
     log("Inventory information gathered");
 
     // sort the inventory data by item id
     inventoryData.sort((a, b) => a.id - b.id);
-    
-    // wrap the data in an "items" array
-    inventoryData = { items: inventoryData };
 
-    copyToClipboard(JSON.stringify(inventoryData));
+    let inventoryDataString = JSON.stringify(inventoryData, (key, value) => value);
+
+    copyToClipboard(inventoryDataString);
 }
 
-function processItem(item, inventoryData) {
+function processItem(item, inventoryData, delay = 5) {
     return new Promise((resolve) => {
         setTimeout(() => {
             let uuid = getUUIDFromSrc(item.querySelector("img").src);
@@ -824,8 +827,8 @@ function processItem(item, inventoryData) {
 
                 inventoryData.push(itemInfo);
                 resolve();
-            }, 5); // Delay to ensure itemWindow is updated
-        }, 5); // Delay for each item
+            }, delay); // Delay to ensure itemWindow is updated
+        }, delay); // Delay for each item
     });
 }
 
