@@ -1013,7 +1013,7 @@ def update_readme():
     # strip the @version from the string
     script_version = re.search(r'\d+\.\d+\.\d+', script_version.group())
     script_version = 'v' + script_version.group()
-       
+    
     # find the shields.io Version badge
     readme_version = re.search(r'v\d+\.\d+\.\d+', readme)
     readme_version = readme_version.group()

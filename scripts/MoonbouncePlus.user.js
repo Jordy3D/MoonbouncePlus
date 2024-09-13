@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.17.2
+// @version      0.17.3
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -121,6 +121,8 @@
 //          - Added the ability to download the Source image when the Source image element is clicked
 // 0.17.1   - Add a speed setting for the Gather Inventory Information button for devices that can't handle the default speed
 // 0.17.2   - Fixed URLs breaking in chat messages (for now, anyway)
+// 0.17.3   - Added a button to gather the information of all recipes in the crafting page at once (disabled by default)
+//          - Attempted to minimise the number of times the script tries to download the item data (it's still not perfect)
 //
 // ==/Changelog==
 
@@ -145,6 +147,9 @@ var userSettings = [
     { name: "Wiki Button", description: "Show the Wiki button in the inventory controls", type: "boolean", defaultValue: true, value: true, group: "Inventory" },
     { name: "Gather", description: "Show the Gather Inventory Information button in the inventory controls", type: "boolean", defaultValue: false, value: false, group: "Inventory" },
     { name: "Gather Speed", description: "The speed at which the script gathers the inventory data (in milliseconds)", type: "number", defaultValue: 20, value: 20, min: 5, max: 50, group: "Inventory" },
+
+    // Crafting
+    { name: "Gather Recipes", description: "Show the Gather Recipe Information button in the crafting controls", type: "boolean", defaultValue: false, value: false, group: "Crafting" },
 
     // Marketplace
     { name: "Copy Marketplace Data", description: "Show the Copy Marketplace Data button in the marketplace controls", type: "boolean", defaultValue: true, value: true, group: "Marketplace" },
@@ -256,11 +261,15 @@ class InventoryItem {
     }
 }
 
+var loadingData = false;
 /**
  * Load the data from MoonbouncePlus.json file
  * @param {boolean} isLocal whether to load the data locally or from the web
  */
 function loadData(isLocal = false) {
+    if (loadingData) return;
+    loadingData = true;
+
     if (items != null && recipes != null) return;
 
     log("Loading data...");
@@ -295,6 +304,8 @@ function loadData(isLocal = false) {
         }
     };
     xhr.send();
+
+    loadingData = false;
 }
 
 /**
@@ -312,6 +323,12 @@ const targetSelector = [
     { name: "Source Item Name", selector: "._base_buawu_1" },
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "[class^='_stack_count_'" },
+
+    { name: "Crafting Sidebar", selector: ".j-fTc" },
+    { name: "Recipe Page Button Container", selector: "._base_11wdf_1._justify_center_11wdf_24" },
+    { name: "Recipe List Item", selector: ".xPWJy" },
+    { name: "Recipe Requirements Container", selector: ".WY4jc" },
+    { name: "Recipe Requirement Image", selector: ".a9szA" },
 
     { name: "Marketplace Container", selector: ".BLrCt" },
     { name: "Marketplace Controls", selector: ".t-IQf" },
@@ -332,6 +349,7 @@ const getTargetSelector = name => targetSelector.find(x => x.name == name).selec
 
 const targetURLs = [
     { name: "Inventory", url: "https://moonbounce.gg/u/@me/backpack" },
+    { name: "Crafting", url: "https://moonbounce.gg/u/@me/backpack/crafting" },
     { name: "Marketplace", url: "https://moonbounce.gg/u/@me/marketplace" },
     { name: "Settings", url: "https://moonbounce.gg/u/@me/settings" },
     { name: "MoonbouncePlus Settings", url: "https://moonbounce.gg/u/@me/settings?moonbounceplus" },
@@ -481,13 +499,10 @@ function checkSite() {
         if (getSettingValue("Auto-Refresh on Application Error")) checkForApplicationError();
 
         if (isTargetURL(getTargetURL("Inventory"), true)) {
-            loadData();
+            if (!loadingData) loadData();
 
-            // addCopyDetailstoItemImage();
             addInventorySidebarFeatures();
             if (getSettingValue("Gather")) addGatherInventoryInformationButton();
-
-            // if (getSettingValue("Wiki Button")) addWikiButton();
 
             if (getSettingValue("Ponder")) addPonderButton();
             if (getSettingValue("Appraise")) addAppraiseButton();
@@ -502,6 +517,11 @@ function checkSite() {
         } else if (isTargetURL(getTargetURL("Settings"), true)) {
             addLinkToMoonbouncePlusSettings();
             hijackSettingsPage();
+        }
+
+        if (isTargetURL(getTargetURL("Crafting"), true)) {
+
+            if (getSettingValue("Gather Recipes")) addGatherRecipeInformationButton();
         }
 
         addCustomCSS();
@@ -637,7 +657,7 @@ function addCopyDetailstoItemImage() {
             let pos = img.getBoundingClientRect();
             let imgCenter = pos.left + (pos.width / 2);
             floatingNotification("Item info copied to clipboard", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.bottom + 10 + "px", left: imgCenter + "px" });
-        
+
             return false;
         });
 
@@ -687,7 +707,7 @@ function addSourceWikiLinks() {
         // replace spaces and # with _
         name = name.replace(" ", "_");
         name = name.replace("#", "_");
-    
+
         // copy the element's class and replace it with an a element
         let link = document.createElement("a");
         link.href = `https://moonbounce.wiki/w/${name}`;
@@ -697,7 +717,7 @@ function addSourceWikiLinks() {
 
         // set the text decoration to none
         link.style.textDecoration = "none";
-    
+
         // replace the element with the link
         nameElement.replaceWith(link);
     }
@@ -719,14 +739,14 @@ function addSourceImageDownload() {
 
         let nameElement = source.querySelector(getTargetSelector("Source Item Name"));
         let name = nameElement.innerText;
-        
+
         // get the image URL from the button's child image
         let img = button.querySelector("img");
         let srcURL = img.src;
         // remove https://imagebucketmoonbounce-production.s3.amazonaws.com/sprites/ and /preview.png from the URL
         // to get the UUID of the item
         let uuid = srcURL.replace("https://imagebucketmoonbounce-production.s3.amazonaws.com/sprites/", "").replace("/preview.png", "");
-        
+
         // https://moonbounce.gg/images/fp/${item.uuid}/c/f/preview.png
         let imgURL = `https://moonbounce.gg/images/fp/${uuid}/c/f/preview.png`;
 
@@ -1290,6 +1310,167 @@ function sortInventory(method) {
     }
 }
 //#endregion
+
+
+//#region Crafting
+
+/**
+ * Add a button to gather recipe information
+ */
+function addGatherRecipeInformationButton() {
+    let craftingControls = document.querySelector(getTargetSelector("Crafting Sidebar"));
+    if (craftingControls == null) return;
+
+    let existingButton = document.querySelector("#bane-gather-recipe-info");
+    if (existingButton != null) return;
+
+    // check if the .UxlxP 's first child's text is "Recipes"
+    let controlWindow = craftingControls.querySelector(".UxlxP");
+    if (controlWindow == null || controlWindow.children[0].innerText != "Recipes") return;
+
+    // find the Recipe Page Button Container
+    let recipePageButtonContainer = craftingControls.querySelector(getTargetSelector("Recipe Page Button Container"));
+    if (recipePageButtonContainer == null) return;
+
+    // add a button to the Recipe Page Button Container
+    let button = document.createElement("button");
+    button.innerText = "Author";
+    button.id = "bane-gather-recipe-info";
+
+    button.addEventListener("click", function () {
+        gatherRecipeInformation();
+    });
+
+    recipePageButtonContainer.appendChild(button);
+
+    // add some CSS to the button
+    addCSS(`
+#bane-gather-recipe-info
+{
+  background-color: var(--background-color);
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  box-shadow: 0 1px 2px #1018280d;
+  border-radius: 8px;
+  transition: .2s;
+  
+  &:hover {
+    background: var(--background-color-hover);
+    border-color: var(--background-color-hover);
+  }
+}
+
+._base_11wdf_1._justify_center_11wdf_24
+{
+  max-height: 44px;
+  
+  button {
+    height: 100%;
+    box-sizing: border-box;
+  }
+}
+`, "gatherRecipeInformationButtonCSS");
+}
+
+/**
+ * Gather information about the recipes available.
+ */
+function gatherRecipeInformation() {
+    log("Gathering recipe information...");
+
+    class Recipe {
+        constructor(result, requirements) {
+            this.result = result;
+            this.requirements = requirements;
+        }
+    }
+
+    function getRecipesFromRecipePage() {
+        return new Promise((resolve) => {
+            let recipeItems = document.querySelectorAll(getTargetSelector("Recipe List Item"));
+            if (!recipeItems || recipeItems.length === 0) return resolve();
+
+            recipeItems.forEach(recipe => {
+                let result = recipe.children[0].children[1].children[0].innerText;
+                let requirementsContainer = recipe.querySelector(getTargetSelector("Recipe Requirements Container"));
+                if (!requirementsContainer) return;
+
+                let requirements = Array.from(requirementsContainer.querySelectorAll(getTargetSelector("Recipe Requirement Image")))
+                    .map(requirement => {
+                        let uuid = getUUIDFromSrc(requirement.src);
+                        return getItemFromUUID(uuid).name;
+                    });
+
+                allRecipes.push(new Recipe(result, requirements));
+            });
+
+            resolve();
+        });
+    }
+
+    let allRecipes = [];
+
+    let craftingControls = document.querySelector(getTargetSelector("Crafting Sidebar"));
+    if (!craftingControls) return;
+
+    let recipePageButtonContainer = craftingControls.querySelector(getTargetSelector("Recipe Page Button Container"));
+    if (!recipePageButtonContainer) return;
+
+    let buttons = recipePageButtonContainer.querySelectorAll("button");
+    if (buttons.length < 2) return;
+
+    let nextButton = buttons[1];
+    let firstButton = buttons[0];
+
+    function goBackToStart() {
+        return new Promise((resolve) => {
+            function clickUntilDisabled() {
+                if (!firstButton.disabled) {
+                    firstButton.click();
+                    setTimeout(clickUntilDisabled, 10); // Rapidly click every 10ms
+                } else {
+                    resolve();
+                }
+            }
+            clickUntilDisabled();
+        });
+    }
+
+    async function processRecipes() {
+        while (!nextButton.disabled) {
+            await getRecipesFromRecipePage();
+            await new Promise(resolve => setTimeout(resolve, 50)); // 50ms delay before clicking the next button
+            nextButton.click();
+            await new Promise(resolve => setTimeout(resolve, 50)); // 50ms delay before processing the next page
+        }
+    }
+
+    (async () => {
+        await goBackToStart();
+
+        if (!nextButton.disabled) {
+            await processRecipes();
+        }
+
+        await getRecipesFromRecipePage();
+
+        log("Recipe information gathered");
+
+        let recipeDataString = JSON.stringify(allRecipes, null, 2);
+        copyToClipboard(recipeDataString);
+
+        // spawn a notification at the bottom right of the screen
+        floatingNotification("Recipe information copied to clipboard", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px;", "bottom-right", true);
+    })();
+}
+
 
 //#region Moonbounce Portal
 
