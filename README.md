@@ -24,6 +24,8 @@
 -   YouTube videos embedded in chat!  
     <img src="https://github.com/user-attachments/assets/fbece47a-ee5d-40bb-9aa9-5956456d0136" width=300 style="border-radius: 15px">
 -   Quick access buttons to the Marketplace, Inventory, and Directory pages
+-   Chat Notifications when the main window is not in focus
+    -   Settings for controlling who to receive notifications from
 
 ### Moonbounce Site
 
