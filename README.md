@@ -72,10 +72,7 @@ It "takes over" the existing settings page in a way it doesn't expect, so you wi
 ## Installation
 
 1. Install a userscript manager for your browser. I recommend [Tampermonkey](https://www.tampermonkey.net/).
-2. Install the script by clicking 
-<a href="https://github.com/Jordy3D/MoonbouncePlus/raw/main/scripts/MoonbouncePlus.user.js">
-  <img src="https://img.shields.io/badge/Install-g.svg">
-</a>
+2. Install the script by clicking <a href="https://github.com/Jordy3D/MoonbouncePlus/raw/main/scripts/MoonbouncePlus.user.js"><img src="https://img.shields.io/badge/Install-g.svg"></a>
 3. After a refresh, the script should now be active on the Moonbounce website!
 
 ## Side Features
