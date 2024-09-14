@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.17.4
+// @version      0.18.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -124,6 +124,15 @@
 // 0.17.3   - Added a button to gather the information of all recipes in the crafting page at once (disabled by default)
 //          - Attempted to minimise the number of times the script tries to download the item data (it's still not perfect)
 // 0.17.4   - Fixed an issue with Recipe Gathering not working properly when an item is not in the data
+// 0.18.0   - Added hotkeys
+//              - Open Chat Key
+//              - Close Chat Key
+//          - Added movement key remapping
+//              - Up Key
+//              - Down Key
+//              - Left Key
+//              - Right Key
+//          - The above are still in testing and may not work as intended or may not work at all on some sites, browsers, or devices
 //
 // ==/Changelog==
 
@@ -165,6 +174,18 @@ var userSettings = [
     { name: "Chat Users Whitelist", description: "The users to receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
     { name: "Chat Users Blacklist", description: "The users to not receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
     { name: "Embed YouTube Videos", description: "Embed YouTube videos in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+
+    // Hotkeys
+    { name: "Enable Chat Hotkeys", description: "Enable hotkeys for the chat (note, currently the character needs to be typed directly below)", type: "boolean", defaultValue: true, value: true, group: "Hotkeys" },
+    { name: "Open Chat Key", description: "The hotkey to open the chat", type: "text", defaultValue: "/", value: "/", group: "Hotkeys" },
+    { name: "Close Chat Key", description: "The hotkey to close the chat", type: "text", defaultValue: "Escape", value: "Escape", group: "Hotkeys" },
+    
+    // Remap
+    { name: "Enable Key Remap", description: "Enable movement key remapping (note, currently the character needs to be typed directly below)", type: "boolean", defaultValue: true, value: true, group: "Remap" },
+    { name: "Up Key Remap", description: "Allows the chosen key to move the player up", type: "text", defaultValue: "W", value: "W", group: "Remap" },
+    { name: "Down Key Remap", description: "Allows the chosen key to move the player down", type: "text", defaultValue: "S", value: "S", group: "Remap" },
+    { name: "Left Key Remap", description: "Allows the chosen key to move the player left", type: "text", defaultValue: "A", value: "A", group: "Remap" },
+    { name: "Right Key Remap", description: "Allows the chosen key to move the player right", type: "text", defaultValue: "D", value: "D", group: "Remap" },
 
     // General
     { name: "Auto-Refresh on Application Error", description: "Automatically refresh the page when an application error occurs", type: "boolean", defaultValue: true, value: true, group: "General" },
@@ -540,6 +561,9 @@ function checkSite() {
         if (getSettingValue("OSRS Text Effects")) {
             observer = addMessageChecker(moonbouncePortal);
         }
+
+        if (getSettingValue("Enable Chat Hotkeys")) addChatHotkeys(moonbouncePortal);
+        if (getSettingValue("Enable Key Remap")) remapControls(moonbouncePortal);
 
         interceptMessageSend(moonbouncePortal);
 
@@ -2258,6 +2282,102 @@ function addMarketplaceButton(portal) {
     addMoonbouncePortalButton(button, portal);
 }
 //#endregion
+
+
+// Portal Hotkeys
+
+function addChatHotkeys(portal) {
+    if (portal.classList.contains("chat-hotkey-added")) return;
+
+    log("Adding chat hotkeys");
+    // add a class to the portal to show that the chat hotkey has been added
+    portal.classList.add("chat-hotkey-added");
+
+    // load the hotkey settings
+    var openChatKey = getSetting("Open Chat Key").value.toUpperCase();
+    var closeChatKey = getSetting("Close Chat Key").value.toUpperCase();
+
+    document.addEventListener("keydown", function (e) {
+        const key = e.key.toUpperCase();
+        if (key == openChatKey) {
+            log("Opening chat window");
+
+            let chatWindowCheck = portal.querySelector("#chat-container");
+            // if it's already there, it's open so return
+            if (chatWindowCheck != null) return;
+
+            let buttonContainer = findMoonbouncePortalButtons(portal);
+            let chatButton = buttonContainer.children[1].querySelector("button");
+            chatButton.click();
+
+            setTimeout(() => {
+                let chatWindow = portal.querySelector("#chat-container");
+
+                let chatInput = chatWindow.querySelector("input");
+                if (chatInput == null) return;
+
+                // focus on the chat input
+                chatInput.focus();
+            }, 100); // 100ms delay
+        }
+    });
+
+    document.addEventListener("keydown", function (e) {
+        const key = e.key.toUpperCase();
+        // if the escape key is pressed, close the chat window by clicking on the control bar's second child again
+        if (key == closeChatKey) {
+            log("Closing chat window");
+
+            // if there's no chat window, return
+            let chatWindow = portal.querySelector("#chat-container");
+            if (chatWindow == null) return;
+
+            let buttonContainer = findMoonbouncePortalButtons(portal);
+
+            let chatButton = buttonContainer.children[1].querySelector("button");
+            chatButton.click();
+        }
+    }, true); // Use capture phase
+}
+
+// Portal Remap
+
+function remapControls(portal) {
+    // if the portal already contains .remapped, return
+    if (portal.classList.contains("remapped")) return;
+
+    // add a class to the portal to show that it has been remapped
+    portal.classList.add("remapped");
+
+    // object to contain the mapping of keys to buttons
+    const keyMapping = {
+        [getSetting("Up Key Remap").value.toUpperCase()]: "ArrowUp",
+        [getSetting("Down Key Remap").value.toUpperCase()]: "ArrowDown",
+        [getSetting("Left Key Remap").value.toUpperCase()]: "ArrowLeft",
+        [getSetting("Right Key Remap").value.toUpperCase()]: "ArrowRight",
+    };
+
+    // common function to handle key events
+    function handleKeyEvent(e, eventType) {
+        const key = e.key.toUpperCase();
+
+        if (!keyMapping[key]) return;
+
+        // if the user is focused on an input field, don't remap the keys
+        if (document.activeElement.tagName === "INPUT") return;
+
+        // simulate the key event on the corresponding button
+        const event = new KeyboardEvent(eventType, { key: keyMapping[key] });
+        document.dispatchEvent(event);
+    }
+
+    // add event listeners to listen to the remap keys and press the corresponding button
+    document.addEventListener("keydown", (e) => handleKeyEvent(e, "keydown"));
+    document.addEventListener("keyup", (e) => handleKeyEvent(e, "keyup"));
+}
+
+
+
 //#endregion
 
 //#region Chat Notifications and Effects
@@ -2908,6 +3028,7 @@ function copyMarketplaceData() {
 
     floatingNotification("Marketplace data<br>copied to clipboard", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 }
+
 
 //#endregion
 
