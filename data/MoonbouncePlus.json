@@ -2962,6 +2962,16 @@
             "sources": ["Creator Crate"]
         },
         {
+            "id": 642,
+            "name": "Tattered Canvas",
+            "uuid": "9546e05b-f940-4d92-9c11-66de7d3e16e9",
+            "description": "This bolt of canvas appears to be old and ancient, and not in a valuable or pleasing way.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Creator Crate"]
+        },
+        {
             "id": 643,
             "name": "White Dye Powder",
             "uuid": "ee09ae5e-c463-400b-9a00-2fec73146890",

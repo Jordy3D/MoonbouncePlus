@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.17.3
+// @version      0.17.4
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -123,6 +123,7 @@
 // 0.17.2   - Fixed URLs breaking in chat messages (for now, anyway)
 // 0.17.3   - Added a button to gather the information of all recipes in the crafting page at once (disabled by default)
 //          - Attempted to minimise the number of times the script tries to download the item data (it's still not perfect)
+// 0.17.4   - Fixed an issue with Recipe Gathering not working properly when an item is not in the data
 //
 // ==/Changelog==
 
@@ -1405,7 +1406,14 @@ function gatherRecipeInformation() {
                 let requirements = Array.from(requirementsContainer.querySelectorAll(getTargetSelector("Recipe Requirement Image")))
                     .map(requirement => {
                         let uuid = getUUIDFromSrc(requirement.src);
-                        return getItemFromUUID(uuid).name;
+                        let item = getItemFromUUID(uuid);
+
+                        if (item == null) {
+                            log(`Unknown item with UUID: ${uuid}`);
+                            return "UNKNOWN ITEM";
+                        }
+
+                        return item.name;
                     });
 
                 allRecipes.push(new Recipe(result, requirements));

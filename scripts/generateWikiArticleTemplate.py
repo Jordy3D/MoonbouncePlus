@@ -480,6 +480,8 @@ def replace_template(template, item):
         new_template = replace_text(new_template, '<RECIPEBLOCK>', recipe_block)
     else:
         new_template = replace_text(new_template, '<RECIPEBLOCK>', '')
+        # replace three empty lines with one empty line
+        new_template = new_template.replace('\n\n\n', '\n')
     return new_template
 
 def check_if_in_marketplace(item_name, marketplace_items):
@@ -1013,7 +1015,7 @@ def update_readme():
     # strip the @version from the string
     script_version = re.search(r'\d+\.\d+\.\d+', script_version.group())
     script_version = 'v' + script_version.group()
-    
+
     # find the shields.io Version badge
     readme_version = re.search(r'v\d+\.\d+\.\d+', readme)
     readme_version = readme_version.group()
