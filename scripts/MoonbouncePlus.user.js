@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.18.0
+// @version      0.18.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -133,6 +133,7 @@
 //              - Left Key
 //              - Right Key
 //          - The above are still in testing and may not work as intended or may not work at all on some sites, browsers, or devices
+// 0.18.1   - Fixed the Open Chat Key not being ignored when an input is focused
 //
 // ==/Changelog==
 
@@ -2301,6 +2302,8 @@ function addChatHotkeys(portal) {
         const key = e.key.toUpperCase();
         if (key == openChatKey) {
             log("Opening chat window");
+
+            if (document.activeElement.tagName === "INPUT") return;
 
             let chatWindowCheck = portal.querySelector("#chat-container");
             // if it's already there, it's open so return
