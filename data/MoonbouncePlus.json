@@ -2851,6 +2851,16 @@
             "sources": []
         },
         {
+            "id": 605,
+            "name": "Brown Rabbit Mask",
+            "uuid": "e0d53c38-f178-43db-80a5-6850c1d29252",
+            "description": "Super soft, comfy, lightweight and breathable. It may or may have not been ripped from a child’s hands and dipped in chocolate milk.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": ["Orange Drawstring"]
+        },
+        {
             "id": 627,
             "name": "Water Shard",
             "uuid": "accab883-32c3-4a64-be8d-7496c7be3255",
