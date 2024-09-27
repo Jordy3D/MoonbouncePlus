@@ -84,7 +84,9 @@ This repo also contains a Python script to help generate wiki page template code
 -   Sometimes the script fails to download the data file before you click on something, causing the script to not work properly. If this happens, simply refresh the page and try again.
 -   The script may not work properly if the Moonbounce website is updated and the script is not updated to match it. If this happens, please open an issue on this repo.
 -   If XHR requests are blocked by your browser, the script will not work properly. Please ensure that XHR requests are enabled for the Moonbounce website.
-
+-   Some sites block parts of the script from running. So far I've noticed:  
+    -   Twitter (blocks MB+ logo from appearing in the action bar)
+    -   Twitter (blocks YouTube videos from being embedded in chat)
 ## To-Do
 
 -   [ ] Add a toggle for horizontal/vertical Moonbounce Portal button layout
