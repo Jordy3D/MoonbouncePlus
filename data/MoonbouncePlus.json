@@ -2256,6 +2256,16 @@
             "sources": []
         },
         {
+            "id": 531,
+            "name": "Green Space Mask",
+            "uuid": "91f23664-e4b0-4a5e-b802-ba3b77ad1552",
+            "description": "This mask is polarized, and helps you navigate around the spacewalk, and protects you from the sun… But don’t be afraid to go outside sometimes too 🙂",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
             "id": 533,
             "name": "Fuchsia Wizard Hat",
             "uuid": "b2bd3369-0551-43b4-b43e-664432c77431",
