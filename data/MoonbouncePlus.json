@@ -2841,6 +2841,26 @@
             "sources": []
         },
         {
+            "id": 594,
+            "name": "Dream Pop",
+            "uuid": "23736fee-2f7d-4f6a-b61d-0182dba61c68",
+            "description": "A beautiful swirly popsicle with strawberry on top, and blueberry on the bottom. Beautifully tart and still the perfect amount of sweetness.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": ["Lucky Bag", "Aquamarine Chest"]
+        },
+        {
+            "id": 595,
+            "name": "Pink Nautilus Shell",
+            "uuid": "37c51574-23ec-4015-8978-434c6ec13f7b",
+            "description": "Found deep on the sea floor, abandoned by its previous owner and ripe for the picking. Where do these things even come from?",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Lucky Bag", "Aquamarine Chest"]
+        },
+        {
             "id": 596,
             "name": "Earth Shard",
             "uuid": "e2628a47-2217-4514-935b-5af36c83e853",
@@ -3020,6 +3040,56 @@
             "type": "ACCESSORY",
             "value": 0,
             "sources": ["Creator Crate"]
+        },
+        {
+            "id": 649,
+            "name": "Old CRT",
+            "uuid": "ccf15ac6-4c1a-4b02-83f6-8657c685e03d",
+            "description": "People from retro game tournaments haul these all over the world. Sometimes 4k resolution and max refresh rate is NOT ideal for gaming.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": ["Lucky Bag", "Lucky Bag", "Lucky Bag"]
+        },
+        {
+            "id": 651,
+            "name": "Tech Blueprints",
+            "uuid": "09612cee-86cf-4626-8c8c-d697044b0048",
+            "description": "This blue paper has a diagram of bits and bots and chips and stuff of that nature. None of it makes any sense, it might as well be in a different language.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": ["Lucky Bag", "Lucky Bag", "Lucky Bag"]
+        },
+        {
+            "id": 654,
+            "name": "GameChip",
+            "uuid": "df530c6f-3861-4efa-9a4e-2926e452f3bd",
+            "description": "Access to any game in the palm of your hands. I wonder if I can hook this into something else?",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": ["Lucky Bag"]
+        },
+        {
+            "id": 656,
+            "name": "Candy Corn",
+            "uuid": "f6203209-7e27-4fd5-bb11-8002ab6f8875",
+            "description": "A handful of triangular treats that whisper sweet nothings... or are they ancient curses?",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": ["Lucky Bag", "Floating Eyeball"]
+        },
+        {
+            "id": 659,
+            "name": "Glowing Tombstone",
+            "uuid": "bdf3e2c5-7886-46fc-994b-d146c13179f6",
+            "description": "A miniature gravestone that emits an eerie light. The inscription changes when you're not looking.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Lucky Bag", "Floating Eyeball"]
         }
     ],
     "recipes": [
