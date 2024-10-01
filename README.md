@@ -23,6 +23,8 @@
 
 -   OSRS chat effects! Use most of the chat effects you're familiar with from OldSchool RuneScape!  
     <img src="https://github.com/Jordy3D/MoonbouncePlus/assets/19144524/33e1a56b-4c4f-462e-a7fd-794786b892f3" width=300 style="border-radius: 15px">
+    -    Colours: red, green, cyan, yellow, purple, flash1, flash2, flash3, glow1, glow2, glow3
+    -    Effects: wave, wave2, scroll, slide
 -   YouTube videos embedded in chat!  
     <img src="https://github.com/user-attachments/assets/fbece47a-ee5d-40bb-9aa9-5956456d0136" width=300 style="border-radius: 15px">
 -   Chat Notifications when the main window is not in focus
