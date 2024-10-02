@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.18.1
+// @version      0.18.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -134,6 +134,8 @@
 //              - Right Key
 //          - The above are still in testing and may not work as intended or may not work at all on some sites, browsers, or devices
 // 0.18.1   - Fixed the Open Chat Key not being ignored when an input is focused
+// 0.18.2   - Fixed the Marketplace data copy breaking for the Sponsored section
+//              - Also updated the output of the Sponsored section to be a little clearer about who the sponsor is and what type of entry it is
 //
 // ==/Changelog==
 
@@ -358,6 +360,8 @@ const targetSelector = [
     { name: "Marketplace Section", selector: ".FJbq-" },
     { name: "Marketplace Section Header", selector: "._text-xl_128i6_229" },
     { name: "Marketplace Section Item", selector: "._base_1ti9u_1" },
+    { name: "Marketplace Sponsored Section", selector: ".QpxP5" },
+    { name: "Marketplace Sponsored Section Type", selector: "._text-md_128i6_111._semibold_128i6_30" },
 
     { name: "Marketplace Item Rarity", selector: "[class^='_rarity_box']" },
     { name: "Marketplace Item Type", selector: ".eMjIv" },
@@ -2995,10 +2999,22 @@ function copyMarketplaceData() {
     let items = [];
 
     // find all the sections in the marketplace data
-    let sections = marketplaceData.querySelectorAll(getTargetSelector("Marketplace Section"));
+    let marketplaceSections = marketplaceData.querySelectorAll(getTargetSelector("Marketplace Section"));
+    let sponsoredMarketplaceSectons = marketplaceData.querySelectorAll(getTargetSelector("Marketplace Sponsored Section"));
+    let sections = [...marketplaceSections, ...sponsoredMarketplaceSectons];
     for (let section of sections) {
         // get the section name from the section header
-        let sectionName = section.querySelector(getTargetSelector("Marketplace Section Header")).innerText;
+        console.log(section);
+        let sectionName = section.querySelector(getTargetSelector("Marketplace Section Header"))?.innerText;
+        if (sectionName == null) continue;
+
+        // if there's a Marketplace Sponsored Section Type
+        let sponsoredSectionType = section.querySelector(getTargetSelector("Marketplace Sponsored Section Type"));
+        if (sponsoredSectionType != null) {
+            // add the type to the name like "Sponsored TYPE (sectionName)"
+            // this looks like: "Sponsored Items (Soup)"
+            sectionName = `Sponsored ${sponsoredSectionType.innerText} (${sectionName})`;
+        }
 
         // find all the items in the section
         let sectionItems = section.querySelectorAll(getTargetSelector("Marketplace Section Item"));
