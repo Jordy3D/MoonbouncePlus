@@ -2841,6 +2841,16 @@
             "sources": []
         },
         {
+            "id": 593,
+            "name": "Choco De-Lite",
+            "uuid": "95b692dd-ce72-4367-88ba-bc8dc172c903",
+            "description": "Crispy chocolate shell, with a cold vanilla ice cream. You can even taste the wooden stick in the middle!",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Lucky Bag", "Aquamarine Chest"]
+        },
+        {
             "id": 594,
             "name": "Dream Pop",
             "uuid": "23736fee-2f7d-4f6a-b61d-0182dba61c68",
