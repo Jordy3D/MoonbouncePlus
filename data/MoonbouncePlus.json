@@ -1796,7 +1796,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Lucky Bag"]
         },
         {
             "id": 468,
@@ -3703,6 +3703,48 @@
             "ingredients": ["Strawberry Milk", "Ice Cream"],
             "tools": ["Lighter"],
             "type": "Seasonal (Summer)"
+        },
+        {
+            "result": "GameChip",
+            "ingredients": ["Red Button", "Prismatic Dust", "Battery"],
+            "tools": [],
+            "type": "Competition"
+        },
+        {
+            "result": "Blue Save File",
+            "ingredients": ["Magnet", "Iron Plate", "Battery"],
+            "tools": [],
+            "type": "Competition"
+        },
+        {
+            "result": "Microchip",
+            "ingredients": ["Electricity", "Circuit", "Blue Save File"],
+            "tools": [],
+            "type": "Competition"
+        },
+        {
+            "result": "ERR Screen",
+            "ingredients": ["Gold Orb", "Microchip", "Old CRT"],
+            "tools": [],
+            "type": "Competition"
+        },
+        {
+            "result": "Broken Tower",
+            "ingredients": ["LED Lights", "ERR Screen", "Tech Blueprints"],
+            "tools": ["Hammer"],
+            "type": "Competition"
+        },
+        {
+            "result": "Basic Computer",
+            "ingredients": ["Electricity", "Battery", "Broken Tower"],
+            "tools": [],
+            "type": "Competition"
+        },
+        {
+            "result": "Complete Computer",
+            "ingredients": ["24k Clover Crown", "Basic Computer", "GameChip"],
+            "tools": ["Fairy Particles"],
+            "type": "Competition"
         }
     ],
     "marketplace": {
