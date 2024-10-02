@@ -2881,6 +2881,16 @@
             "sources": []
         },
         {
+            "id": 603,
+            "name": "Pastel Cluster",
+            "uuid": "dca8d523-da03-4b08-97be-39fb730296b8",
+            "description": "A rough and unpolished cluster. You can see the pastel pearlescent sheen shine through in the perfect light, but it could be way more presentable.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": ["Lucky Bag", "Aquamarine Chest"]
+        },
+        {
             "id": 605,
             "name": "Brown Rabbit Mask",
             "uuid": "e0d53c38-f178-43db-80a5-6850c1d29252",
@@ -2910,7 +2920,6 @@
             "value": 15,
             "sources": ["Aquamarine Chest"]
         },
-
         {
             "id": 633,
             "name": "Hazmask",
@@ -3040,6 +3049,16 @@
             "type": "ACCESSORY",
             "value": 0,
             "sources": ["Creator Crate"]
+        },
+        {
+            "id": 646,
+            "name": "Battery",
+            "uuid": "8106ad44-dca0-4cb4-b9d5-2bcee756d25d",
+            "description": "Imagine having the power of Zeus in your pocket… Yeah… Pretty intense right?",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": ["Lucky Bag", "Lucky Bag"]
         },
         {
             "id": 649,
