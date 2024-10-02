@@ -1641,6 +1641,16 @@
             "sources": []
         },
         {
+            "id": 448,
+            "name": "Red Button",
+            "uuid": "a64246ac-ad53-40ee-ac2e-28b626d9c921",
+            "description": "Inject drama into your pixel plotline, turning up the excitement with one click.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": ["Lucky Bag", "Lucky Bag"]
+        },
+        {
             "id": 449,
             "name": "Heart Charm",
             "uuid": "dde8e2f4-0aeb-4f0a-b5e0-4b1d8832ae56",
