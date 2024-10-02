@@ -204,11 +204,11 @@
             "id": 166,
             "name": "Pumpkin",
             "uuid": "dc00cd73-1366-48ad-85fe-88478be72750",
-            "description": "The MVP of the gourd world,  the pumpkin is the gourd that’s got game. Slice it,  dice it,  or carve it into spooky faces.",
+            "description": "The MVP of the gourd world, the pumpkin is the gourd that’s got game. Slice it, dice it, or carve it into spooky faces.",
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Lucky Bag", "Normal Candy Basket", "Floating Eyeball"]
         },
         {
             "id": 167,
@@ -1608,7 +1608,13 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Soup's Goodies", "Alien Food Pouch", "Disco Mats"]
+            "sources": [
+                "Lucky Bag",
+                "Disco Mats",
+                "Alien Food Pouch",
+                "Soup's Goodies",
+                "Dark Elemental Chest"
+            ]
         },
         {
             "id": 445,
@@ -1648,7 +1654,7 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 250,
-            "sources": ["Lucky Bag", "Lucky Bag"]
+            "sources": ["Lucky Bag"]
         },
         {
             "id": 449,
@@ -3078,7 +3084,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 0,
-            "sources": ["Lucky Bag", "Lucky Bag"]
+            "sources": ["Lucky Bag"]
         },
         {
             "id": 649,
@@ -3088,7 +3094,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 0,
-            "sources": ["Lucky Bag", "Lucky Bag", "Lucky Bag"]
+            "sources": ["Lucky Bag"]
         },
         {
             "id": 651,
@@ -3098,7 +3104,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 0,
-            "sources": ["Lucky Bag", "Lucky Bag", "Lucky Bag"]
+            "sources": ["Lucky Bag"]
         },
         {
             "id": 654,
