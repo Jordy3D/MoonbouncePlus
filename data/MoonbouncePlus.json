@@ -3162,6 +3162,16 @@
             "sources": []
         },
         {
+            "id": 664,
+            "name": "Black Cat Beanies",
+            "uuid": "23192907-3a30-4603-9a0e-1fad26d607ac",
+            "description": "A cozy hat with fuzzy cat ears. Wear it on Friday the 13th, and you might find yourself with unexpected feline abilities.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 665,
             "name": "Haunted Mask",
             "uuid": "66df7885-d68a-4326-87fc-d922a676f2d5",
