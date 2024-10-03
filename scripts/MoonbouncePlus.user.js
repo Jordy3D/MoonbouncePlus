@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.19.0
+// @version      0.19.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -139,6 +139,7 @@
 //              - Also updated the output of the Sponsored section to be a little clearer about who the sponsor is and what type of entry it is
 // 0.19.0   - Added basic support for Markdown in the chat (limited to the Chat Window for now)
 //              - Headers, Emphasis, and Code are supported (#, ##, ###, *, **, _, __, `, ~~)
+// 0.19.1   - Minor fix on markdown causing inappropriate spacing in some cases
 //
 // ==/Changelog==
 
@@ -1624,13 +1625,13 @@ function addMoonbouncePortalCSS(portal) {
     }`, "moonbouncePortalButtonCSS", portal);
 
     addCSS(`
-.message-text {
-    em, i, strong, b {
-        margin: 0 0.25em;
-    }
-
-    :first-child {
-        margin-left: 0;
+    .message-text {
+        em, i, strong, b {
+            margin: 0 0.25em;
+        }
+    > *:has(+*:not(p))
+    {
+        margin-right: 0 !important;
     }
 
 }`, "moonbouncePortalFixesCSS", portal);
