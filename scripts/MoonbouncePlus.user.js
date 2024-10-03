@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.18.2
+// @version      0.19.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -10,6 +10,7 @@
 // @grant        window.focus
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @require      https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.2/markdown-it.min.js
 // ==/UserScript==
 
 // ==Changelog==
@@ -136,6 +137,8 @@
 // 0.18.1   - Fixed the Open Chat Key not being ignored when an input is focused
 // 0.18.2   - Fixed the Marketplace data copy breaking for the Sponsored section
 //              - Also updated the output of the Sponsored section to be a little clearer about who the sponsor is and what type of entry it is
+// 0.19.0   - Added basic support for Markdown in the chat (limited to the Chat Window for now)
+//              - Headers, Emphasis, and Code are supported (#, ##, ###, *, **, _, __, `, ~~)
 //
 // ==/Changelog==
 
@@ -145,6 +148,7 @@
 // - Add more classes to find elements on the page (endless task)
 // - Provide common elements with custom selectors on the Moonbounce main site (endless task)
 //      - Or otherwise find a way to get the elements more automatically
+// - Improve the Markdown support in the chat so that OSRS effects don't override it
 //
 // ==/TODO==
 
@@ -396,6 +400,24 @@ const getTargetURL = name => targetURLs.find(x => x.name == name).url;
 
 var isWebDoc = typeof document !== 'undefined';
 
+const md = markdownit({
+    html: false, // Disable HTML tags in source
+    // linkify: true, // Autoconvert URL-like text to links
+    // typographer: true // Enable some language-neutral replacements + quotes beautification
+});
+
+// Enable only certain markdown tags
+md.enable([
+    'heading', // #, ##, ###, etc.
+    'emphasis', // *, **, _, __
+    // 'blockquote', // >
+    'code', // `code`
+    // 'fence', // ```code```
+    // 'list', // -, *, +, 1.
+    // 'link', // [text](url)
+    // 'image' // ![alt](url)
+]);
+
 if (isWebDoc) {                 // Actual Web Script
     init();
 }
@@ -500,6 +522,7 @@ else {                          // Local Debugging Script
 
 
 
+
 /**
  * Initialize the script and other initial functions
  */
@@ -508,6 +531,9 @@ function init() {
     var textCSSMain = 'font-size: 30px; font-weight: bold; text-shadow: -3px 0px 0px rgba(255, 0, 0, 1),3px 0px 0px rgba(8, 0, 255, 1);';
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
+
+    // write a test markdown string to the console
+    console.log(md.render('# Hello, *World*!'));
 
     // check the current site every second and page to see what functions to run
     window.refreshInterval = setInterval(() => {
@@ -1598,6 +1624,18 @@ function addMoonbouncePortalCSS(portal) {
     }`, "moonbouncePortalButtonCSS", portal);
 
     addCSS(`
+.message-text {
+    em, i, strong, b {
+        margin: 0 0.25em;
+    }
+
+    :first-child {
+        margin-left: 0;
+    }
+
+}`, "moonbouncePortalFixesCSS", portal);
+
+    addCSS(`
 /* 
 
 OSRS EFFECTS!!!!!!!
@@ -2447,7 +2485,13 @@ function interception(e, input) {
         }
     }
 
-    input.value = message;
+    mdText = md.render(message);
+    // remove the <p> tags from the start and end of the message
+    mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");
+
+    input.value = mdText;
+
+    // input.value = message;
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
     // mark the input as ready
