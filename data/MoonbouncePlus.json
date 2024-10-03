@@ -188,7 +188,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Normal Candy Basket", "Floating Eyeball"]
         },
         {
             "id": 101,
@@ -318,7 +318,12 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Framed Chest", "Disco Mats", "Normal Candy Basket"]
+            "sources": [
+                "Normal Candy Basket",
+                "Disco Mats",
+                "Framed Chest",
+                "Floating Eyeball"
+            ]
         },
         {
             "id": 178,
@@ -338,7 +343,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 100,
-            "sources": ["Framed Chest"]
+            "sources": ["Framed Chest", "Floating Eyeball"]
         },
         {
             "id": 180,
@@ -3135,6 +3140,26 @@
             "type": "MATERIAL",
             "value": 15,
             "sources": ["Lucky Bag", "Floating Eyeball"]
+        },
+        {
+            "id": 663,
+            "name": "Loose Brain Trucker",
+            "uuid": "e21530b8-812f-499d-bddb-99b9931b300f",
+            "description": "This cap holds more than just your head – a squishy pink brain peeks out from under the brim. It occasionally throbs with brilliant ideas.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 665,
+            "name": "Haunted Mask",
+            "uuid": "66df7885-d68a-4326-87fc-d922a676f2d5",
+            "description": "A sinister visage forged from dark metal, its surface rippling with shadowy tendrils. When worn, whispers of forgotten souls echo in your ears, and your own shadow seems to move of its own accord.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
         }
     ],
     "recipes": [
@@ -3378,6 +3403,35 @@
             "result": "Puff",
             "ingredients": ["Smooth Silk", "Skull Potion", "Shadow Essence"],
             "tools": ["Sewing Needle", "Witch's Cauldron"],
+            "type": "Seasonal (Halloween)"
+        },
+
+        {
+            "result": "Loose Brain Trucker",
+            "ingredients": ["Pumpkin", "Skull Potion", "Anatomical Heart"],
+            "tools": ["Craftsman Blade"],
+            "type": "Seasonal (Halloween)"
+        },
+        {
+            "result": "Grotesque Skull",
+            "ingredients": ["Monster Eye", "Candle", "Haunted Bone"],
+            "tools": ["Witch's Cauldron"],
+            "type": "Seasonal (Halloween)"
+        },
+        {
+            "result": "Black Cat Beanie",
+            "ingredients": [
+                "Black Kitten Ears",
+                "Strange Cloth",
+                "Glowing Tombstone"
+            ],
+            "tools": ["Sewing Needle", "Witch's Cauldron"],
+            "type": "Seasonal (Halloween)"
+        },
+        {
+            "result": "Haunted Mask",
+            "ingredients": ["Haunted Bone", "Iron Plate", "Candy Corn"],
+            "tools": ["Witch's Cauldron", "Hammer"],
             "type": "Seasonal (Halloween)"
         },
         {
