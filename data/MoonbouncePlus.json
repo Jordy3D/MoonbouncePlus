@@ -3142,6 +3142,16 @@
             "sources": ["Lucky Bag", "Floating Eyeball"]
         },
         {
+            "id": 660,
+            "name": "Grotesque Skull",
+            "uuid": "a049807f-59ee-4185-89ac-0ff2eae3cf97",
+            "description": "A twisted face frozen in a perpetual scream. Wear at your own risk – it might not want to come off.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 662,
             "name": "Gentlemans Topper",
             "uuid": "3db8a408-3e0d-42db-9c7a-f69835ef1cc4",
