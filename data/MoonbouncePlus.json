@@ -268,17 +268,17 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Normal Candy Basket"]
         },
         {
             "id": 173,
             "name": "Candle",
             "uuid": "7ad52efc-ab3d-40bd-8402-45bbffaf461c",
-            "description": "Wax wizardry? Nah,  just soft glows. It doesn't summon the sun,  it won’t light up a stadium,  but it’s still the champion of coziness. So dim the lights,  cue the candle.",
+            "description": "Wax wizardry? Nah, just soft glows. It doesn't summon the sun, it won’t light up a stadium, but it’s still the champion of coziness. So dim the lights, cue the candle.",
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Normal Candy Basket", "Old Candy Basket"]
         },
         {
             "id": 174,
@@ -3140,6 +3140,16 @@
             "type": "MATERIAL",
             "value": 15,
             "sources": ["Lucky Bag", "Floating Eyeball"]
+        },
+        {
+            "id": 662,
+            "name": "Gentlemans Topper",
+            "uuid": "3db8a408-3e0d-42db-9c7a-f69835ef1cc4",
+            "description": "A dapper top hat with impeccable manners. It tips itself to passersby, even when you're not wearing it.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": ["Old Candy Basket"]
         },
         {
             "id": 663,
