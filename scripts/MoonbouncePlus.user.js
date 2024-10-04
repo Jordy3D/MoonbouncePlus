@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.19.1
+// @version      0.20.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -140,6 +140,7 @@
 // 0.19.0   - Added basic support for Markdown in the chat (limited to the Chat Window for now)
 //              - Headers, Emphasis, and Code are supported (#, ##, ###, *, **, _, __, `, ~~)
 // 0.19.1   - Minor fix on markdown causing inappropriate spacing in some cases
+// 0.20.0   - Fix an issue with some sites blocking CSS injection (mostly affected YouTube, causing the extra buttons to break)
 //
 // ==/Changelog==
 
@@ -4155,6 +4156,10 @@ function copyToClipboard(text) {
     navigator.clipboard.writeText(text);
 }
 
+var escapeHTMLPolicy = trustedTypes.createPolicy("forceInner", {
+    createHTML: (to_escape) => to_escape
+})
+
 /**
  * Add CSS to the header of the page
  * @param {string} css the CSS to add
@@ -4169,7 +4174,7 @@ function addCSS(css, id, parent = document.head) {
 
     let style = document.createElement('style');
     style.id = id;
-    style.innerHTML = css;
+    style.innerHTML = escapeHTMLPolicy.createHTML(css);
     parent.appendChild(style);
 }
 
