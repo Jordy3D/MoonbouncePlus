@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.20.0
+// @version      0.20.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -141,6 +141,7 @@
 //              - Headers, Emphasis, and Code are supported (#, ##, ###, *, **, _, __, `, ~~)
 // 0.19.1   - Minor fix on markdown causing inappropriate spacing in some cases
 // 0.20.0   - Fix an issue with some sites blocking CSS injection (mostly affected YouTube, causing the extra buttons to break)
+// 0.20.1   - Fix the Markdown styling adding a p tag to the end of the message when it shouldn't
 //
 // ==/Changelog==
 
@@ -2487,7 +2488,7 @@ function interception(e, input) {
         }
     }
 
-    mdText = md.render(message);
+    mdText = md.render(message).trim();
     // remove the <p> tags from the start and end of the message
     mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");
 
