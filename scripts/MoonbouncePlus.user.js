@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.21.1
+// @version      0.21.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -147,6 +147,7 @@
 // 0.21.1   - For some reason the version check worked in testing but not live, so that should be fixed now
 //          - Reduced the number of times the script checks for the version
 //          - Reduced the number of times the script tries to create the Moonbounce Portal buttons
+// 0.21.2   - Implemented a check for if the current version is newer than the remote version to avoid the highlight showing when it shouldn't
 //
 // ==/Changelog==
 
@@ -194,7 +195,7 @@ var userSettings = [
     { name: "Enable Chat Hotkeys", description: "Enable hotkeys for the chat (note, currently the character needs to be typed directly below)", type: "boolean", defaultValue: true, value: true, group: "Hotkeys" },
     { name: "Open Chat Key", description: "The hotkey to open the chat", type: "text", defaultValue: "/", value: "/", group: "Hotkeys" },
     { name: "Close Chat Key", description: "The hotkey to close the chat", type: "text", defaultValue: "Escape", value: "Escape", group: "Hotkeys" },
-    
+
     // Remap
     { name: "Enable Key Remap", description: "Enable movement key remapping (note, currently the character needs to be typed directly below)", type: "boolean", defaultValue: true, value: true, group: "Remap" },
     { name: "Up Key Remap", description: "Allows the chosen key to move the player up", type: "text", defaultValue: "W", value: "W", group: "Remap" },
@@ -2269,6 +2270,8 @@ function addMoonbouncePlusButton(portal) {
     // check if there's a new version available and add a highlight to the button if there is
     checkNewVersionAvailable().then(isNewVersionAvailable => {
         if (isNewVersionAvailable) {
+            console.log("New version available!");
+
             button.classList.add("highlight");
             button.title = "New version available!";
         }
@@ -4172,13 +4175,31 @@ async function getRemoteVersion() {
     return versionLine ? versionLine.split(" ").pop() : null;
 }
 
+function isVersionHigher(current, remote) {
+    const currentParts = current.split('.').map(Number);
+    const remoteParts = remote.split('.').map(Number);
+
+    for (let i = 0; i < Math.max(currentParts.length, remoteParts.length); i++) {
+        const currentPart = currentParts[i] || 0;
+        const remotePart = remoteParts[i] || 0;
+
+        if (currentPart !== remotePart) {
+            return currentPart < remotePart;
+        }
+    }
+
+    return false;
+}
+
 async function checkNewVersionAvailable() {
     let currentVersion = GM_info.script.version.trim();
     let latestVersion = (remoteVersion == null ? await getRemoteVersion() : remoteVersion).trim();
 
+    console.log(`Current ${currentVersion} | Latest ${latestVersion} | Same? ${currentVersion == latestVersion}`);
+
     remoteVersion = latestVersion;
 
-    return currentVersion != latestVersion;
+    return isVersionHigher(currentVersion, latestVersion);
 }
 
 
