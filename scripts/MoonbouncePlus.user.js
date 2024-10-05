@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.21.0
+// @version      0.21.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -144,6 +144,9 @@
 // 0.20.1   - Fix the Markdown styling adding a p tag to the end of the message when it shouldn't
 // 0.21.0   - Added a highlight for the MB+ button when there's a new version available
 //          - Added a tooltip to the quick buttons to show where they go
+// 0.21.1   - For some reason the version check worked in testing but not live, so that should be fixed now
+//          - Reduced the number of times the script checks for the version
+//          - Reduced the number of times the script tries to create the Moonbounce Portal buttons
 //
 // ==/Changelog==
 
@@ -281,6 +284,8 @@ var recipes = null;
 var inventoryData = null;
 
 var moonbouncePortal = null;
+
+var remoteVersion = null;
 
 // define an inventory item object
 class InventoryItem {
@@ -536,9 +541,6 @@ function init() {
     var textCSSMain = 'font-size: 30px; font-weight: bold; text-shadow: -3px 0px 0px rgba(255, 0, 0, 1),3px 0px 0px rgba(8, 0, 255, 1);';
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
-
-    // write a test markdown string to the console
-    console.log(md.render('# Hello, *World*!'));
 
     // check the current site every second and page to see what functions to run
     window.refreshInterval = setInterval(() => {
@@ -2207,6 +2209,10 @@ function assignLabelsToPortalChildren(portal) {
  * Add buttons to the Moonbounce Portal to quickly access Moonbounce features
  */
 function addMoonbouncePortalButtons(portal) {
+    // if the portal already contains the moonbounce-plus-button-container, return
+    let existing = portal.querySelector("#moonbounce-plus-button-container");
+    if (existing != null) return;
+
     // add a button to go to the Moonbounce Plus GitHub Repository
     addMoonbouncePlusButton(portal);
 
@@ -2261,10 +2267,12 @@ function addMoonbouncePlusButton(portal) {
     });
 
     // check if there's a new version available and add a highlight to the button if there is
-    if (checkNewVersionAvailable()) {
-        button.classList.add("highlight");
-        button.title = "New version available!";
-    }
+    checkNewVersionAvailable().then(isNewVersionAvailable => {
+        if (isNewVersionAvailable) {
+            button.classList.add("highlight");
+            button.title = "New version available!";
+        }
+    });
 
     addMoonbouncePortalButton(button, portal);
 }
@@ -4155,24 +4163,21 @@ function error(message) {
  * Check the version of the script loaded and compare it to the version in the repository
  */
 async function getRemoteVersion() {
-    let url = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/scripts/MoonbouncePlus.user.js";
-    fetch(url)
-        .then(response => response.text())
-        .then(text => {
-            let lines = text.split("\n");
-            for (let line of lines) {
-                if (line.includes("@version")) {
-                    let version = line.split(" ").pop();
-                    return version;
-                }
-            }
-        });
+    const url = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/scripts/MoonbouncePlus.user.js";
+    const response = await fetch(url);
+    const text = await response.text();
+    const lines = text.split("\n").slice(0, 20);
+
+    const versionLine = lines.find(line => line.includes("@version"));
+    return versionLine ? versionLine.split(" ").pop() : null;
 }
 
-function checkNewVersionAvailable() {
-    let currentVersion = GM_info.script.version;
-    let latestVersion = getRemoteVersion();
-    
+async function checkNewVersionAvailable() {
+    let currentVersion = GM_info.script.version.trim();
+    let latestVersion = (remoteVersion == null ? await getRemoteVersion() : remoteVersion).trim();
+
+    remoteVersion = latestVersion;
+
     return currentVersion != latestVersion;
 }
 
