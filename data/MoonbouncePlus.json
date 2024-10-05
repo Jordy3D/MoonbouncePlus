@@ -3132,6 +3132,16 @@
             "sources": ["Lucky Bag", "Floating Eyeball"]
         },
         {
+            "id": 657,
+            "name": "Wicked Horns",
+            "uuid": "7348d1a8-2691-469f-aa1f-6838b57de643",
+            "description": "Curved and sharp, these horns pulse with an otherworldly energy. Are they a costume piece or a gateway to demonic power? (Made by User: Jesus)",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": ["Old Candy Basket"]
+        },
+        {
             "id": 659,
             "name": "Glowing Tombstone",
             "uuid": "bdf3e2c5-7886-46fc-994b-d146c13179f6",
