@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.20.1
+// @version      0.21.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -142,6 +142,8 @@
 // 0.19.1   - Minor fix on markdown causing inappropriate spacing in some cases
 // 0.20.0   - Fix an issue with some sites blocking CSS injection (mostly affected YouTube, causing the extra buttons to break)
 // 0.20.1   - Fix the Markdown styling adding a p tag to the end of the message when it shouldn't
+// 0.21.0   - Added a highlight for the MB+ button when there's a new version available
+//          - Added a tooltip to the quick buttons to show where they go
 //
 // ==/Changelog==
 
@@ -1624,6 +1626,10 @@ function addMoonbouncePortalCSS(portal) {
                 pointer-events: none;
             }
         }
+
+        .highlight {
+            background: linear-gradient(45deg, #f2be4470, #fff, #f2be4470) !important;
+        }
     }`, "moonbouncePortalButtonCSS", portal);
 
     addCSS(`
@@ -2254,6 +2260,12 @@ function addMoonbouncePlusButton(portal) {
         window.open("https://github.com/Jordy3D/MoonbouncePlus", "_blank");
     });
 
+    // check if there's a new version available and add a highlight to the button if there is
+    if (checkNewVersionAvailable()) {
+        button.classList.add("highlight");
+        button.title = "New version available!";
+    }
+
     addMoonbouncePortalButton(button, portal);
 }
 
@@ -2279,6 +2291,8 @@ function addBackpackButton(portal) {
         window.open("https://moonbounce.gg/u/@me/backpack", "_blank");
     });
 
+    button.title = "Backpack";
+
     addMoonbouncePortalButton(button, portal);
 }
 
@@ -2302,6 +2316,8 @@ function addDirectoryButton(portal) {
         window.open("https://moonbounce.gg/u/@me/directory", "_blank");
     });
 
+    button.title = "Directory";
+
     addMoonbouncePortalButton(button, portal);
 }
 
@@ -2324,6 +2340,8 @@ function addMarketplaceButton(portal) {
     button.addEventListener("click", function () {
         window.open("https://moonbounce.gg/u/@me/marketplace", "_blank");
     });
+
+    button.title = "Marketplace";
 
     addMoonbouncePortalButton(button, portal);
 }
@@ -4130,6 +4148,32 @@ function error(message) {
 
     // clear the style before the message
     console.error(tag, tagStyle, message);
+}
+
+
+/**
+ * Check the version of the script loaded and compare it to the version in the repository
+ */
+async function getRemoteVersion() {
+    let url = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/scripts/MoonbouncePlus.user.js";
+    fetch(url)
+        .then(response => response.text())
+        .then(text => {
+            let lines = text.split("\n");
+            for (let line of lines) {
+                if (line.includes("@version")) {
+                    let version = line.split(" ").pop();
+                    return version;
+                }
+            }
+        });
+}
+
+function checkNewVersionAvailable() {
+    let currentVersion = GM_info.script.version;
+    let latestVersion = getRemoteVersion();
+    
+    return currentVersion != latestVersion;
 }
 
 
