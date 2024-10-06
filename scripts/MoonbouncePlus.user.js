@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.21.2
+// @version      0.21.3
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -148,6 +148,8 @@
 //          - Reduced the number of times the script checks for the version
 //          - Reduced the number of times the script tries to create the Moonbounce Portal buttons
 // 0.21.2   - Implemented a check for if the current version is newer than the remote version to avoid the highlight showing when it shouldn't
+// 0.21.3   - Added a toggle for the Markdown support in the chat
+//          - Updated a few settings descriptions
 //
 // ==/Changelog==
 
@@ -184,20 +186,21 @@ var userSettings = [
     { name: "Moonbounce Portal Buttons", description: "Show the Moonbounce Portal quick-access buttons", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     // { name: "Use Moonbounce Portal CSS", description: "Show the Moonbounce Portal CSS", type: "boolean", defaultValue: true, value: true },
     { name: "OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true, group: "Portal" },
-    { name: "Declutter Chat Effects", description: "Encrypt the chat effects to make them less cluttered for non-MoonbouncePlus users. Note, encryption takes up characters in message character limit.", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Declutter Chat Effects", description: "Encrypt the chat effects to make them less cluttered for non-MoonbouncePlus users.\nNote, encryption takes up characters in message character limit.", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Chat Notifications", description: "Show notifications when a message is received in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Chat Notification Mode", description: "The users to receive chat notifications from", type: "select", defaultValue: "None", value: "None", options: ["None", "All", "Whitelist", "Blacklist"], group: "Portal" },
     { name: "Chat Users Whitelist", description: "The users to receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
     { name: "Chat Users Blacklist", description: "The users to not receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
     { name: "Embed YouTube Videos", description: "Embed YouTube videos in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Chat Markdown", description: "Enable Markdown conversion in the chat.\nNote, if your message is long enough it may cause your message to prematurely hit the character limit.", type: "boolean", defaultValue: true, value: true, group: "Portal" },
 
     // Hotkeys
-    { name: "Enable Chat Hotkeys", description: "Enable hotkeys for the chat (note, currently the character needs to be typed directly below)", type: "boolean", defaultValue: true, value: true, group: "Hotkeys" },
+    { name: "Enable Chat Hotkeys", description: "Enable hotkeys for the chat.\nNote, currently the character needs to be typed directly below", type: "boolean", defaultValue: true, value: true, group: "Hotkeys" },
     { name: "Open Chat Key", description: "The hotkey to open the chat", type: "text", defaultValue: "/", value: "/", group: "Hotkeys" },
     { name: "Close Chat Key", description: "The hotkey to close the chat", type: "text", defaultValue: "Escape", value: "Escape", group: "Hotkeys" },
 
     // Remap
-    { name: "Enable Key Remap", description: "Enable movement key remapping (note, currently the character needs to be typed directly below)", type: "boolean", defaultValue: true, value: true, group: "Remap" },
+    { name: "Enable Key Remap", description: "Enable movement key remapping. \nNote, currently the character needs to be typed directly below", type: "boolean", defaultValue: true, value: true, group: "Remap" },
     { name: "Up Key Remap", description: "Allows the chosen key to move the player up", type: "text", defaultValue: "W", value: "W", group: "Remap" },
     { name: "Down Key Remap", description: "Allows the chosen key to move the player down", type: "text", defaultValue: "S", value: "S", group: "Remap" },
     { name: "Left Key Remap", description: "Allows the chosen key to move the player left", type: "text", defaultValue: "A", value: "A", group: "Remap" },
@@ -2517,11 +2520,17 @@ function interception(e, input) {
         }
     }
 
-    mdText = md.render(message).trim();
-    // remove the <p> tags from the start and end of the message
-    mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");
+    let convertMarkdown = getSettingValue("Chat Markdown");
 
-    input.value = mdText;
+    if(convertMarkdown) {
+        mdText = md.render(message).trim();                                 // convert the message from markdown to HTML
+        mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");          // remove the <p> tags from the start and end of the message
+
+        input.value = mdText;
+    }
+    else {
+        input.value = message;
+    }
 
     // input.value = message;
     input.dispatchEvent(new Event("input", { bubbles: true }));
