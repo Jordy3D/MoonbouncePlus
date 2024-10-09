@@ -3142,6 +3142,16 @@
             "sources": ["Old Candy Basket"]
         },
         {
+            "id": 658,
+            "name": "Ratty Plush",
+            "uuid": "0947a524-71f7-4448-b5b6-f552b289cf16",
+            "description": "This adorable stuffed rat has suspiciously realistic eyes that seem to follow you. At night, you swear you hear tiny footsteps… ( Made by User: Jesus)",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": ["Old Candy Basket"]
+        },
+        {
             "id": 659,
             "name": "Glowing Tombstone",
             "uuid": "bdf3e2c5-7886-46fc-994b-d146c13179f6",
@@ -3183,7 +3193,7 @@
         },
         {
             "id": 664,
-            "name": "Black Cat Beanies",
+            "name": "Black Cat Beanie",
             "uuid": "23192907-3a30-4603-9a0e-1fad26d607ac",
             "description": "A cozy hat with fuzzy cat ears. Wear it on Friday the 13th, and you might find yourself with unexpected feline abilities.",
             "rarity": "RARE",
