@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.21.3
+// @version      0.22.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -150,6 +150,12 @@
 // 0.21.2   - Implemented a check for if the current version is newer than the remote version to avoid the highlight showing when it shouldn't
 // 0.21.3   - Added a toggle for the Markdown support in the chat
 //          - Updated a few settings descriptions
+// 0.22.0   - Stopped version checking spam when the page is in an unexpected state
+//          - Made the custom CSS textarea resize as the content grows (up to a point, may need to add a scroll bar at some point)
+//          - Added basic support for controller input (disabled by default)
+//              - Yes, really.
+//              - Movement is mapped to the left stick and the D-Pad
+//              - You can use the X button (Xbox) or Square button (PlayStation) to toggle the chat window
 //
 // ==/Changelog==
 
@@ -205,6 +211,10 @@ var userSettings = [
     { name: "Down Key Remap", description: "Allows the chosen key to move the player down", type: "text", defaultValue: "S", value: "S", group: "Remap" },
     { name: "Left Key Remap", description: "Allows the chosen key to move the player left", type: "text", defaultValue: "A", value: "A", group: "Remap" },
     { name: "Right Key Remap", description: "Allows the chosen key to move the player right", type: "text", defaultValue: "D", value: "D", group: "Remap" },
+
+    // Alternate Controls
+    { name: "Enable Controller", description: "Enable controller support", type: "boolean", defaultValue: false, value: false, group: "Alternate" },
+    // { name: "Enable On-Screen Controls", description: "Enable on-screen buttons for movement", type: "boolean", defaultValue: false, value: false, group: "Alternate Controls" },
 
     // General
     { name: "Auto-Refresh on Application Error", description: "Automatically refresh the page when an application error occurs", type: "boolean", defaultValue: true, value: true, group: "General" },
@@ -606,6 +616,8 @@ function checkSite() {
 
         if (getSettingValue("Enable Chat Hotkeys")) addChatHotkeys(moonbouncePortal);
         if (getSettingValue("Enable Key Remap")) remapControls(moonbouncePortal);
+
+        if (getSettingValue("Enable Controller")) addControllerSupport(moonbouncePortal);
 
         interceptMessageSend(moonbouncePortal);
 
@@ -2255,6 +2267,8 @@ function addMoonbouncePortalButton(button, portal = null) {
 /**
  * Add button to go to Moonbounce Plus GitHub Repository
  */
+var checked = false;
+
 function addMoonbouncePlusButton(portal) {
     let button = document.createElement("div");
     // button.innerText = "Moonbounce Plus";
@@ -2270,15 +2284,18 @@ function addMoonbouncePlusButton(portal) {
         window.open("https://github.com/Jordy3D/MoonbouncePlus", "_blank");
     });
 
-    // check if there's a new version available and add a highlight to the button if there is
-    checkNewVersionAvailable().then(isNewVersionAvailable => {
-        if (isNewVersionAvailable) {
-            console.log("New version available!");
+    if (!checked) {
+        // check if there's a new version available and add a highlight to the button if there is
+        checkNewVersionAvailable().then(isNewVersionAvailable => {
+            if (isNewVersionAvailable) {
+                console.log("New version available!");
 
-            button.classList.add("highlight");
-            button.title = "New version available!";
-        }
-    });
+                button.classList.add("highlight");
+                button.title = "New version available!";
+            }
+            checked = true;
+        });
+    }
 
     addMoonbouncePortalButton(button, portal);
 }
@@ -2456,6 +2473,164 @@ function remapControls(portal) {
     document.addEventListener("keyup", (e) => handleKeyEvent(e, "keyup"));
 }
 
+class ControllerInput {
+    constructor() {
+        this.buttonMappings = [
+            "A", "B", "X", "Y", "Left Bumper", "Right Bumper", "Left Trigger", "Right Trigger",
+            "Back", "Start", "Left Stick", "Right Stick", "D-Pad Up", "D-Pad Down", "D-Pad Left", "D-Pad Right",
+            "Home", "Touchpad"
+        ];
+        this.onButtonPress = null;
+        this.onButtonHeld = null;
+        this.onAnalogMove = null;
+
+        this.buttonStates = [];
+        this.currentlyPressed = new Set();
+
+        window.addEventListener("gamepadconnected", this.onGamepadConnected.bind(this));
+        window.addEventListener("gamepaddisconnected", this.onGamepadDisconnected.bind(this));
+    }
+
+    onGamepadConnected = (event) => {
+        this.gamepad = event.gamepad;
+        this.update();
+    }
+
+    onGamepadDisconnected = (event) => { console.log("Gamepad disconnected:", event.gamepad); }
+
+    setButtonPressCallback = (callback) => { this.onButtonPress = callback; }
+    setButtonHeldCallback = (callback) => { this.onButtonHeld = callback; }
+    setAnalogMoveCallback = (callback) => { this.onAnalogMove = callback; }
+
+    update() {
+        const gp = navigator.getGamepads()[this.gamepad.index];
+
+        // Check button presses
+        for (let i = 0; i < gp.buttons.length; i++) {
+            const buttonName = this.buttonMappings[i] || `Button ${i}`;
+            if (gp.buttons[i].pressed) {
+                if (this.onButtonPress && !this.buttonStates[i]) {
+                    this.onButtonPress(i, gp.buttons[i].value, buttonName);
+                    this.mimicKeyPress(buttonName, "keydown");
+                }
+                if (this.onButtonHeld)
+                    this.onButtonHeld(i, gp.buttons[i].value, buttonName);
+
+                this.buttonStates[i] = gp.buttons[i].value;
+            } else {
+                if (this.buttonStates[i])
+                    this.mimicKeyPress(buttonName, "keyup");
+
+                this.buttonStates[i] = null;
+            }
+        }
+
+        // Check analog stick movements
+        for (let i = 0; i < gp.axes.length; i += 2) {
+            const x = gp.axes[i].toFixed(2);
+            const y = gp.axes[i + 1].toFixed(2);
+            const stickName = i === 0 ? "Left Stick" : "Right Stick";
+            if (Math.abs(x) > 0.1 || Math.abs(y) > 0.1) {
+                if (this.onAnalogMove)
+                    this.onAnalogMove(i, x, y, stickName);
+
+                const horizontalDirection = x > 0.1 ? "ArrowRight" : x < -0.1 ? "ArrowLeft" : null;
+                const verticalDirection = y > 0.1 ? "ArrowDown" : y < -0.1 ? "ArrowUp" : null;
+
+                if (horizontalDirection && !this.currentlyPressed.has(horizontalDirection))
+                    this.mimicKeyPress(horizontalDirection, "keydown");
+
+                if (verticalDirection && !this.currentlyPressed.has(verticalDirection))
+                    this.mimicKeyPress(verticalDirection, "keydown");
+
+            } else {
+                if (this.currentlyPressed.has("ArrowDown"))
+                    this.mimicKeyPress("ArrowDown", "keyup");
+
+                if (this.currentlyPressed.has("ArrowUp"))
+                    this.mimicKeyPress("ArrowUp", "keyup");
+
+                if (this.currentlyPressed.has("ArrowRight"))
+                    this.mimicKeyPress("ArrowRight", "keyup");
+
+                if (this.currentlyPressed.has("ArrowLeft"))
+                    this.mimicKeyPress("ArrowLeft", "keyup");
+            }
+        }
+
+        requestAnimationFrame(this.update.bind(this));
+    }
+
+    mimicKeyPress(key, type = "keydown") {
+        const event = new KeyboardEvent(type, { key });
+        document.dispatchEvent(event);
+
+        if (type === "keydown")
+            this.currentlyPressed.add(key);
+        else if (type === "keyup")
+            this.currentlyPressed.delete(key);
+    }
+}
+
+
+function addControllerSupport(portal) {
+    // if the portal already contains .controller-support, return
+    if (portal.classList.contains("controller-support")) return;
+
+    // add a class to the portal to show that it has controller support
+    portal.classList.add("controller-support");
+
+    log("Adding controller support");
+
+    const controllerInput = new ControllerInput();
+
+    // Example custom function to move the box with the left stick by mimicking arrow key presses
+    controllerInput.setAnalogMoveCallback((index, x, y, name) => {
+        if (name === "Left Stick") {
+            const horizontalDirection = x > 0.1 ? "ArrowRight" : x < -0.1 ? "ArrowLeft" : null;
+            const verticalDirection = y > 0.1 ? "ArrowDown" : y < -0.1 ? "ArrowUp" : null;
+
+            if (horizontalDirection)
+                setTimeout(() => { controllerInput.mimicKeyPress(horizontalDirection); }, 10);
+
+            if (verticalDirection)
+                setTimeout(() => { controllerInput.mimicKeyPress(verticalDirection); }, 10);
+
+        }
+    });
+
+    // map the dpad to the arrow keys as well
+    controllerInput.setButtonHeldCallback((index, value, name) => {
+        const dPadMapping = { "D-Pad Up": "ArrowUp", "D-Pad Down": "ArrowDown", "D-Pad Left": "ArrowLeft", "D-Pad Right": "ArrowRight" };
+
+        if (!dPadMapping[name]) return;
+
+        setTimeout(() => { controllerInput.mimicKeyPress(dPadMapping[name]); }, 10);
+    });
+
+
+    // load the hotkey settings
+    var openChatKey = getSetting("Open Chat Key").value.toUpperCase();
+    var closeChatKey = getSetting("Close Chat Key").value.toUpperCase();
+
+    // map the X button to open or close the chat window
+    controllerInput.setButtonPressCallback((index, value, name) => {
+        if (name === "X") {
+            // The portal variable is accessible here
+            let chatWindow = portal.querySelector("#chat-container");
+
+            var event;
+            if (chatWindow == null)
+                event = new KeyboardEvent("keydown", { key: openChatKey });
+            else
+                event = new KeyboardEvent("keydown", { key: closeChatKey });
+
+            if (event != null)
+                document.dispatchEvent(event);
+
+        }
+    });
+}
 
 
 //#endregion
@@ -2522,7 +2697,7 @@ function interception(e, input) {
 
     let convertMarkdown = getSettingValue("Chat Markdown");
 
-    if(convertMarkdown) {
+    if (convertMarkdown) {
         mdText = md.render(message).trim();                                 // convert the message from markdown to HTML
         mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");          // remove the <p> tags from the start and end of the message
 
@@ -3583,6 +3758,16 @@ function spawnSettings(parent) {
                 break;
             case "textarea":
                 settingInput = createElement("textarea", { value: setting.value }, settingInputContainer);
+
+                // update the height of the textarea based on the content, to a maximum of 300px and a minimum of 100px
+                settingInput.addEventListener("input", function () {
+                    settingInput.style.height = "auto";
+                    settingInput.style.height = Math.min(settingInput.scrollHeight, 300) + "px";
+                });
+                settingInput.style.height = Math.min(settingInput.scrollHeight, 300) + "px";
+
+                if (setting.name == "Custom CSS") settingInput.style.fontFamily = "monospace";
+
                 break;
             default:
                 break;
@@ -4151,7 +4336,10 @@ function returnMessage(statement, trueMessage = "", falseMessage = "") {
     return statement;
 }
 
-
+/**
+ * Logs a message with a tag at the start
+ * @param {string} message the message to log
+ */
 function log(message) {
     // add a tag at the start of the message saying "MB+" in a div with white text, a black background, red left border and blue right border
     let tag = `%cMB+`;
@@ -4161,6 +4349,10 @@ function log(message) {
     console.log(tag, tagStyle, message);
 }
 
+/**
+ * Logs an error message with a tag at the start
+ * @param {string} message the message to log
+ */
 function error(message) {
     // add a tag at the start of the message saying "MB+" in a div with white text, a black background, red left border and blue right border
     let tag = `%cMB+`;
@@ -4184,6 +4376,17 @@ async function getRemoteVersion() {
     return versionLine ? versionLine.split(" ").pop() : null;
 }
 
+/**
+ * Check if the current version is higher than the remote version
+ * @param {string} current the current version
+ * @param {string} remote the remote version
+ * @returns a boolean if the current version is higher than the remote version
+ * 
+ * @example
+ * isVersionHigher("1.0.0", "0.9.9") // true
+ * isVersionHigher("1.0.0", "1.0.0") // false
+ * isVersionHigher("0.9.9", "1.0.0") // false
+ */
 function isVersionHigher(current, remote) {
     const currentParts = current.split('.').map(Number);
     const remoteParts = remote.split('.').map(Number);
@@ -4200,11 +4403,14 @@ function isVersionHigher(current, remote) {
     return false;
 }
 
+/**
+ * Check if a new version of the script is available and return a boolean if it is
+ */
 async function checkNewVersionAvailable() {
     let currentVersion = GM_info.script.version.trim();
     let latestVersion = (remoteVersion == null ? await getRemoteVersion() : remoteVersion).trim();
 
-    console.log(`Current ${currentVersion} | Latest ${latestVersion} | Same? ${currentVersion == latestVersion}`);
+    // console.log(`Current ${currentVersion} | Latest ${latestVersion} | Same? ${currentVersion == latestVersion}`);
 
     remoteVersion = latestVersion;
 
