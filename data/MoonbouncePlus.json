@@ -208,7 +208,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Lucky Bag", "Normal Candy Basket", "Floating Eyeball"]
+            "sources": ["Normal Candy Basket", "Floating Eyeball"]
         },
         {
             "id": 167,
@@ -1593,7 +1593,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Framed Chest", "Dusty Box"]
+            "sources": ["Lucky Bag", "Framed Chest", "Dusty Box"]
         },
         {
             "id": 443,
@@ -1639,7 +1639,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Lucky Bag"]
         },
         {
             "id": 447,
@@ -1649,7 +1649,7 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 250,
-            "sources": []
+            "sources": ["Lucky Bag"]
         },
         {
             "id": 448,
@@ -2869,7 +2869,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Lucky Bag", "Aquamarine Chest"]
+            "sources": ["Aquamarine Chest"]
         },
         {
             "id": 594,
@@ -2879,7 +2879,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Lucky Bag", "Aquamarine Chest"]
+            "sources": ["Aquamarine Chest"]
         },
         {
             "id": 595,
@@ -2889,7 +2889,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Lucky Bag", "Aquamarine Chest"]
+            "sources": ["Aquamarine Chest"]
         },
         {
             "id": 596,
@@ -2919,7 +2919,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Lucky Bag", "Aquamarine Chest"]
+            "sources": ["Aquamarine Chest"]
         },
         {
             "id": 605,
@@ -3119,7 +3119,7 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 0,
-            "sources": ["Lucky Bag"]
+            "sources": []
         },
         {
             "id": 656,
@@ -3129,7 +3129,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Lucky Bag", "Floating Eyeball"]
+            "sources": ["Floating Eyeball"]
         },
         {
             "id": 657,
@@ -3159,7 +3159,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Lucky Bag", "Floating Eyeball"]
+            "sources": ["Floating Eyeball"]
         },
         {
             "id": 660,
