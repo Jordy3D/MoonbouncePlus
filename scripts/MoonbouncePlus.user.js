@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.22.0
+// @version      0.22.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -156,6 +156,7 @@
 //              - Yes, really.
 //              - Movement is mapped to the left stick and the D-Pad
 //              - You can use the X button (Xbox) or Square button (PlayStation) to toggle the chat window
+// 0.22.1   - Fixed some Markdown HTML causing unnecessary line breaks
 //
 // ==/Changelog==
 
@@ -1654,6 +1655,7 @@ function addMoonbouncePortalCSS(portal) {
     .message-text {
         em, i, strong, b {
             margin: 0 0.25em;
+            display: contents;
         }
     > *:has(+*:not(p))
     {
@@ -2473,6 +2475,8 @@ function remapControls(portal) {
     document.addEventListener("keyup", (e) => handleKeyEvent(e, "keyup"));
 }
 
+// Controller Support
+
 class ControllerInput {
     constructor() {
         this.buttonMappings = [
@@ -2572,7 +2576,6 @@ class ControllerInput {
     }
 }
 
-
 function addControllerSupport(portal) {
     // if the portal already contains .controller-support, return
     if (portal.classList.contains("controller-support")) return;
@@ -2631,7 +2634,6 @@ function addControllerSupport(portal) {
         }
     });
 }
-
 
 //#endregion
 
