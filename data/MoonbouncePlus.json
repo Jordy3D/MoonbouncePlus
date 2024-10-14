@@ -3092,6 +3092,26 @@
             "sources": ["Lucky Bag"]
         },
         {
+            "id": 647,
+            "name": "Blue Save File",
+            "uuid": "1bc568f0-de99-4258-a72d-b0ae61ca8f6a",
+            "description": "Our buddy Clippy snagged this from his last job.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": []
+        },
+        {
+            "id": 648,
+            "name": "Microchip",
+            "uuid": "972d5aa9-0826-4fda-b1ca-4b5547a611d7",
+            "description": "The processing power of the Moon landing almost 60 years ago, all in a nice handheld package.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": []
+        },
+        {
             "id": 649,
             "name": "Old CRT",
             "uuid": "ccf15ac6-4c1a-4b02-83f6-8657c685e03d",
@@ -3100,6 +3120,16 @@
             "type": "MATERIAL",
             "value": 0,
             "sources": ["Lucky Bag"]
+        },
+        {
+            "id": 650,
+            "name": "ERR Screen",
+            "uuid": "19454f40-6e95-43ed-bd3b-db937b1d8bb4",
+            "description": "Everything is plugged in, turned on and configured… Right? It’s still not working for some reason and I don’t think this is the BIOS ?",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": []
         },
         {
             "id": 651,
@@ -3112,11 +3142,41 @@
             "sources": ["Lucky Bag"]
         },
         {
+            "id": 652,
+            "name": "Broken Tower",
+            "uuid": "e6fea23d-4606-42ca-a0d4-5b3fadd0927c",
+            "description": "Ok, first the error screen and. now this? What isn’t plugged in right? Oh wait, is it plugged in? Does the outlet have any power?",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": []
+        },
+        {
+            "id": 653,
+            "name": "Basic Computer",
+            "uuid": "d729b0fe-7eb9-48d2-b7e4-7aa01356e3df",
+            "description": "Ok FINALLY! It boots up and everything but for some reason it only has paint, notes, and pinball? why can’t I get anything cool on here.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": []
+        },
+        {
             "id": 654,
             "name": "GameChip",
             "uuid": "df530c6f-3861-4efa-9a4e-2926e452f3bd",
             "description": "Access to any game in the palm of your hands. I wonder if I can hook this into something else?",
             "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 0,
+            "sources": []
+        },
+        {
+            "id": 655,
+            "name": "Complete Computer",
+            "uuid": "678af42c-a671-4fa4-8b74-12d81cdeddf5",
+            "description": "Full of RGB this bad boy is future proofed for the next 5 years at LEAST. The specs on this thing are through the roof. I wonder if i can finally play flight simulator on this thing?",
+            "rarity": "LEGENDARY",
             "type": "MATERIAL",
             "value": 0,
             "sources": []
