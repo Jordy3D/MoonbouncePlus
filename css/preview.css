@@ -1,0 +1,132 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#controls {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#preview {
+    image-rendering: pixelated;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    gap: 1rem;
+}
+
+input {
+    margin-bottom: 1rem;
+}
+
+#previews {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    min-height: 200px;
+    min-width: 200px;
+    border: 1px solid #333;
+    border-radius: 5px;
+
+    padding: 0.5rem;
+}
+
+.offset-controls {
+    /* 3x2 grid */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+    padding-right: 1rem;
+    border-right: 1px solid #333;
+
+    input {
+        /* make each slider an up and down slider */
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+    }
+}
+
+/* canvas {
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 1rem;
+} */
+
+#image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    min-height: 200px;
+    min-width: 200px;
+    border: 1px solid #333;
+    border-radius: 5px;
+
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 5px;
+    image-rendering: pixelated;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 0.5rem;
+    }
+
+    input {
+        margin-bottom: 0.5rem;
+    }
+
+    #previews {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    canvas {
+        padding: 0.5rem;
+    }
+
+    #image-preview {
+        gap: 0.5rem;
+        min-height: 100px;
+        min-width: 100px;
+    }
+
+    img {
+        max-height: 100px;
+    }
+}

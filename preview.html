@@ -8,119 +8,9 @@
 
     <link rel="stylesheet" href="css/magic.css">
     <link rel="stylesheet" href="css/style.css">
-
-    <style>
-        /* a style for the main element */
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        #preview {
-            image-rendering: pixelated;
-        }
-
-        /* a style for the section element */
-        section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            background-color: #f4f4f4;
-            padding: 1rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
-
-            /* a style for the input element */
-            input {
-                margin-bottom: 1rem;
-            }
-
-            #previews {
-                display: flex;
-                gap: 1rem;
-            }
-
-            /* a style for the canvas element */
-            canvas {
-                border: 1px solid #333;
-                border-radius: 5px;
-                padding: 1rem;
-            }
-
-            /* a style for the image-preview element */
-            #image-preview {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 1rem;
-
-                min-height: 200px;
-                min-width: 200px;
-                border: 1px solid #333;
-                border-radius: 5px;
-
-                /* a style for the img element */
-                img {
-                    max-width: 100%;
-                    max-height: 200px;
-                    border-radius: 5px;
-
-                    image-rendering: pixelated;
-                }
-
-                /* a style for the div element */
-                div {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-            }
-        }
-
-        /* if the width gets below 600 */
-        @media (max-width: 600px) {
-            /* a style for the section element */
-            section {
-                padding: 0.5rem;
-
-                /* a style for the input element */
-                input {
-                    margin-bottom: 0.5rem;
-                }
-
-                #previews {
-                    flex-direction: column;
-                    gap: 0.5rem;
-                }
-
-                /* a style for the canvas element */
-                canvas {
-                    padding: 0.5rem;
-                }
-
-                /* a style for the image-preview element */
-                #image-preview {
-                    gap: 0.5rem;
-
-                    min-height: 100px;
-                    min-width: 100px;
-
-                    /* a style for the img element */
-                    img {
-                        max-height: 100px;
-                    }
-                }
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/preview.css">
 
     <script>
-        // a list of image files in the /image directory, the character's name, and the height offset of their hat
         var characters = [
             { file: 'image/character/Rollo.png', name: 'Rollo', hatOffset: 60, },
             { file: 'image/character/Devo.png', name: 'Devo', hatOffset: 44, },
@@ -135,17 +25,29 @@
 <body>
     <header></header>
     <main>
-        <!-- a section to drop an image into the page and a window to display that image on top of 6 characters-->
         <section>
             <div id="controls">
-                <input type="file" id="file" accept="image/*">
-                <!-- button to clear and redraw the characters -->
-                <!-- <button id="reset">Reset</button> -->
+                <div class="input-group">
+                    <input type="file" id="file" accept="image/*">
+                </div>
+                <div class="input-group">
+                    <label for="scale">Scale</label>
+                    <input type="range" id="scale" min="0.1" max="1.5" step="0.1" value="1">
+                </div>
             </div>
-            <!-- previews -->
             <div id="previews">
+                <div class="offset-controls">
+                    <!-- 6 sliders for each character offset -->
+                    <input type="range" id="rolloHatOffset" min="0" max="100" step="1" value="60">
+                    <input type="range" id="devoHatOffset" min="0" max="100" step="1" value="60">
+                    <input type="range" id="mrmanHatOffset" min="0" max="100" step="1" value="60">
+                    <input type="range" id="bumpyHatOffset" min="0" max="100" step="1" value="60">
+                    <input type="range" id="puffHatOffset" min="0" max="100" step="1" value="60">
+                    <input type="range" id="penguHatOffset" min="0" max="100" step="1" value="60">
+                </div>
                 <canvas id="preview"></canvas>
-                <div id="image-preview"></div>
+            </div>
+            <div id="image-preview"></div>
             </div>
         </section>
     </main>
@@ -153,44 +55,98 @@
     <footer></footer>
 
     <script>
-        // get the input elements
         const file = document.getElementById('file');
-        const reset = document.getElementById('reset');
-
-        // get the preview elements
+        const scale = document.getElementById('scale');
         const preview = document.getElementById('preview');
         const imagePreview = document.getElementById('image-preview');
 
-        // Define variables
+        // get all the hat offset sliders
+        const rolloHatOffset = document.getElementById('rolloHatOffset');
+        const devoHatOffset = document.getElementById('devoHatOffset');
+        const mrmanHatOffset = document.getElementById('mrmanHatOffset');
+        const bumpyHatOffset = document.getElementById('bumpyHatOffset');
+        const puffHatOffset = document.getElementById('puffHatOffset');
+        const penguHatOffset = document.getElementById('penguHatOffset');
+
+        // set the hat offset for each character to the stored value
+        getHatOffsets();
+
+        function getHatOffsets() {
+            rolloHatOffset.value = localStorage.getItem('rolloHatOffset') || characters[0].hatOffset;
+            devoHatOffset.value = localStorage.getItem('devoHatOffset') || characters[1].hatOffset;
+            mrmanHatOffset.value = localStorage.getItem('mrmanHatOffset') || characters[2].hatOffset;
+            bumpyHatOffset.value = localStorage.getItem('bumpyHatOffset') || characters[3].hatOffset;
+            puffHatOffset.value = localStorage.getItem('puffHatOffset') || characters[4].hatOffset;
+            penguHatOffset.value = localStorage.getItem('penguHatOffset') || characters[5].hatOffset;
+        
+            setHatOffsets();
+        }
+
+        function setHatOffsets() {
+            characters[0].hatOffset = rolloHatOffset.value;
+            characters[1].hatOffset = devoHatOffset.value;
+            characters[2].hatOffset = mrmanHatOffset.value;
+            characters[3].hatOffset = bumpyHatOffset.value;
+            characters[4].hatOffset = puffHatOffset.value;
+            characters[5].hatOffset = penguHatOffset.value;
+
+            localStorage.setItem('rolloHatOffset', rolloHatOffset.value);
+            localStorage.setItem('devoHatOffset', devoHatOffset.value);
+            localStorage.setItem('mrmanHatOffset', mrmanHatOffset.value);
+            localStorage.setItem('bumpyHatOffset', bumpyHatOffset.value);
+            localStorage.setItem('puffHatOffset', puffHatOffset.value);
+            localStorage.setItem('penguHatOffset', penguHatOffset.value);
+        }
+
+        // save the hat offset for each character to local storage
+        rolloHatOffset.addEventListener('input', function () {
+            setHatOffsets();
+            renderCharacters(drawItemImage);
+        });
+        devoHatOffset.addEventListener('input', function () {
+            setHatOffsets();
+            renderCharacters(drawItemImage);
+        });
+        mrmanHatOffset.addEventListener('input', function () {
+            setHatOffsets();
+            renderCharacters(drawItemImage);
+        });
+        bumpyHatOffset.addEventListener('input', function () {
+            setHatOffsets();
+            renderCharacters(drawItemImage);
+        });
+        puffHatOffset.addEventListener('input', function () {
+            setHatOffsets();
+            renderCharacters(drawItemImage);
+        });
+        penguHatOffset.addEventListener('input', function () {
+            setHatOffsets();
+            renderCharacters(drawItemImage);
+        });
+
+
         var verticalGap = 50;
         var horizontalGap = 20;
         var startHeight = 30;
         var characterSize = null;
-
         var characterPositions = [];
 
+        var characterImges = [];
+
         function setCanvasSize(width, height) {
-            // set the width and height of the canvas
             preview.width = width;
             preview.height = height;
         }
 
-
         function drawImageToCanvas(image, position, size, clear = false) {
-            // get the canvas context
             const context = preview.getContext('2d');
             if (clear) {
-                // clear the canvas
                 context.clearRect(0, 0, preview.width, preview.height);
             }
-
-            // if image = null, clear the canvas
             if (image === null) {
                 context.clearRect(position.x, position.y, size.width, size.height);
                 return;
             }
-
-            // draw the character to the canvas
             context.drawImage(image, position.x, position.y, size.width, size.height);
         }
 
@@ -198,112 +154,97 @@
             return Math.pow(2, Math.ceil(Math.log2(value)));
         }
 
-        function renderCharacters() {
-            // get the width and height of the preview element
+        function renderCharacters(then) {
+            // Clear the canvas
+            drawImageToCanvas(null, { x: 0, y: 0 }, { width: preview.width, height: preview.height }, true);
+
             var width = preview.width;
             var height = preview.height;
-
-            // Adjust the size calculation to account for the gaps
-            // There are 2 gaps horizontally and vertically, hence the -2 * gap
             var size = (Math.min(width - 2 * horizontalGap, height - 2 * verticalGap) / 3);
-            // round the characters to the nearest power of 2
             size = roundToPowerOfTwo(size);
-
             characterSize = size;
-
             startHeight = size;
 
-            for (let i = 0; i < characters.length; i++) {
-                // get the image object
-                const image = new Image();
-                image.src = characters[i].file;
-                image.onload = function () {
-                    // Adjust the x and y position to include the gap
+            if (characterImges.length === 0) {
+                console.log('Loading Character images for the first time');
+                for (let i = 0; i < characters.length; i++) {
+                    const image = new Image();
+                    image.src = characters[i].file;
+                    image.onload = function () {
+                        const x = (i % 3) * (size + horizontalGap);
+                        const y = Math.floor(i / 3) * (size + verticalGap) + startHeight;
+                        drawImageToCanvas(image, { x: x, y: y }, { width: size, height: size });
+                        characterPositions[i] = { x: x, y: y };
+                    };
+                    characterImges.push(image);
+                }
+            }
+            else {
+                console.log('Using cached Character images');
+                for (let i = 0; i < characters.length; i++) {
                     const x = (i % 3) * (size + horizontalGap);
                     const y = Math.floor(i / 3) * (size + verticalGap) + startHeight;
-
-                    // draw the image to the canvas
-                    drawImageToCanvas(image, { x: x, y: y }, { width: size, height: size });
-
+                    drawImageToCanvas(characterImges[i], { x: x, y: y }, { width: size, height: size });
                     characterPositions[i] = { x: x, y: y };
-                };
+                }
+            }
+
+            if (then) {
+                then();
             }
         }
 
-        // set the width and height of the canvas
         setCanvasSize(256, 256);
-
-        // call the renderCharacters function
         renderCharacters();
-
 
         file.addEventListener('click', function () {
             resetCanvas();
         });
 
+        scale.addEventListener('input', function () {
+            drawImageToCanvas(null, { x: 0, y: 0 }, { width: preview.width, height: preview.height }, true);
+            renderCharacters(drawItemImage);
+        });
 
-        // listen for the change event on the file input element
+        var image = new Image();
+
         file.addEventListener('change', function () {
-
-            // get the file object
             const fileObject = file.files[0];
-            // create a new FileReader object
             const reader = new FileReader();
 
-            // listen for the load event on the FileReader object
             reader.addEventListener('load', function () {
-                // create a new Image object
-                const image = new Image();
+                image = new Image();
                 image.addEventListener('load', function () {
-                    // resetCanvas();
-
-                    for (let i = 0; i < characters.length; i++) {
-                        const character = characters[i];                // Get the character object to reference for the hat offset
-                        const position = characterPositions[i];         // Get the character's position to draw the hat at the correct position
-                        const size = characterSize;                     // Get the character's size to draw the hat at the correct size
-
-                        // calculate the hat position based on the size of the character and its y position
-                        const hatPosCalculated = position.y - character.hatOffset;
-
-                        // draw the character to the canvas
-                        drawImageToCanvas(image, { x: position.x, y: hatPosCalculated }, { width: size, height: size });
-                    }
+                    drawItemImage();
                 });
-
-                // set the src of the Image object to the result of the FileReader object
                 image.src = reader.result;
 
-                // create a new Image object
                 const imagePreviewElement = new Image();
-                // set the src of the Image object to the result of the FileReader object
                 imagePreviewElement.src = reader.result;
-
-                // append the Image object to the image-preview element
                 imagePreview.innerHTML = '';
                 imagePreview.appendChild(imagePreviewElement);
             });
 
-            // read the file object as a data URL
             reader.readAsDataURL(fileObject);
         });
 
-        function resetCanvas() {
-            // clear the canvas
-            drawImageToCanvas(null, { x: 0, y: 0 }, { width: preview.width, height: preview.height }, true);
-
-            // call the renderCharacters function
-            renderCharacters();
-
-            // clear the image-preview element
-            imagePreview.innerHTML = '';
+        function drawItemImage() {
+            for (let i = 0; i < characters.length; i++) {
+                const character = characters[i];
+                const size = characterSize * scale.value;
+                const hatPosCalculated = {
+                    x: characterPositions[i].x + (characterSize / 2) - (size / 2),
+                    y: characterPositions[i].y - character.hatOffset * scale.value
+                };
+                drawImageToCanvas(image, { x: hatPosCalculated.x, y: hatPosCalculated.y }, { width: size, height: size });
+            }
         }
 
-
-        // listen for the click event on the reset button
-        reset.addEventListener('click', function () {
-            // call the resetCanvas function
-            resetCanvas();
-        });
+        function resetCanvas() {
+            drawImageToCanvas(null, { x: 0, y: 0 }, { width: preview.width, height: preview.height }, true);
+            renderCharacters();
+            imagePreview.innerHTML = '';
+        }
     </script>
 </body>
 
