@@ -2932,6 +2932,16 @@
             "sources": ["Orange Drawstring"]
         },
         {
+            "id": 606,
+            "name": "Perfect Pyramid",
+            "uuid": "77d32cba-14b2-4e6f-b090-294bd617b8f4",
+            "description": "You think you can see the future in this thing? We don’t know for sure but there’s something in there, and its more than just a rainbow and light, but that’s all we’ll tell you.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 612,
             "name": "Carrot Sprout",
             "uuid": "7ea8edc2-c792-4703-836b-42aef6523310",
@@ -3006,6 +3016,16 @@
             "name": "Holographic Leaf",
             "uuid": "4a72c50a-b30c-4988-9eb9-96f5601a4f87",
             "description": "A leaf with such a beautiful reflective sheen that makes it look like it’s straight out of a fairy tale.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Dark Elemental Chest"]
+        },
+        {
+            "id": 631,
+            "name": "Time-Warped Acorn",
+            "uuid": "07920b7b-d1ab-4572-9ec6-c2595b7c7c34",
+            "description": "This is the first part of the holographic tree’s life cycle. For some reason, scientists everywhere haven’t been able to find when this item is from",
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
