@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.22.2
+// @version      0.22.3
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -158,6 +158,7 @@
 //              - You can use the X button (Xbox) or Square button (PlayStation) to toggle the chat window
 // 0.22.1   - Fixed some Markdown HTML causing unnecessary line breaks
 // 0.22.2   - Update to catch up with Moonbounce changes
+// 0.22.3   - Update to catch up with Moonbounce changes (forgot the Settings page)
 //
 // ==/Changelog==
 
@@ -378,6 +379,8 @@ const targetSelector = [
     { name: "Source Item Name", selector: "._base_buawu_1" },
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "[class^='_stack_count_'" },
+
+    { name: "Setting Link Area", selector: "._base_b2hhm_1" },
 
     { name: "Crafting Sidebar", selector: ".j-fTc" },
     { name: "Recipe Page Button Container", selector: "._base_11wdf_1._justify_center_11wdf_24" },
@@ -3400,7 +3403,7 @@ function openWikiPage(itemName) {
 
 function addLinkToMoonbouncePlusSettings() {
     // find the ._base_q8l18_1 div
-    let settingsDiv = document.querySelector("._base_q8l18_1");
+    let settingsDiv = document.querySelector(getTargetSelector("Setting Link Area"));
     if (settingsDiv == null) return;
 
     // if the settingsDiv already has the moonbounce-plus-settings-link, return
