@@ -2862,6 +2862,16 @@
             "sources": []
         },
         {
+            "id": 592,
+            "name": "Blue Eye",
+            "uuid": "62847990-76ca-476d-8843-3619b68d8ff1",
+            "description": "You get the feeling your being watched, by a darting blue eye. We’ve got our eyes on you, but you’ve got your eye on everything else.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
             "id": 593,
             "name": "Choco De-Lite",
             "uuid": "95b692dd-ce72-4367-88ba-bc8dc172c903",
