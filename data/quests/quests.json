@@ -1,0 +1,514 @@
+[
+    {
+        "quest_id": "6522aa48-a80f-4e0f-829b-3e91c9340793",
+        "quest_name": "Black Market Dealings",
+        "quest_description": "Our buddy Jasper got banned from the marketplace for some nefarious dealings with the back end of the software. Something about him finding a bug in the system and it all went downhill from there. We were wondering if you could buy 5 Pastel Clusters from the marketplace and bring them back here. We\u2019ll make sure he pays you well.",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "collect",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "9235c622-a24c-457e-a65c-fa1952664891",
+                "item_name": "Pastel Cluster",
+                "quantity": 5
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "quest",
+                "recipe_name": null
+            },
+            {
+                "item_id": "dd74b032-122c-4480-b750-17aeaa9a8567",
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "recipe",
+                "recipe_name": "Pastel Shard"
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "c3e5c00a-5cd6-42e6-ace9-0136c4253695",
+        "quest_name": "Space Walkers",
+        "quest_description": "We just got a message from Nova, up at the space station about the new fashion that hasn\u2019t made its way to earth yet, a new space mask. Apparently she said it's made way better than the rest and has materials in it we haven't even seen before! All she needs is 2 Blue Space Masks, 2 Red Space Mask, a Hammer,  and 5 Polished Purple Gems.",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "8e1162d9-eb3e-4abb-8287-b676a66d8b39",
+                "item_name": "Polished Purple Gem",
+                "quantity": 5
+            },
+            {
+                "item_id": "b1097765-608b-4277-aa36-e975c22d519b",
+                "item_name": "Red Space Mask",
+                "quantity": 2
+            },
+            {
+                "item_id": "af57ae9f-ba10-4b44-bc1e-d587f046b7f2",
+                "item_name": "Blue Space Mask",
+                "quantity": 2
+            },
+            {
+                "item_id": "39a3da95-c308-4704-af7f-9fa92d24051d",
+                "item_name": "Hammer",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "afcfdb93-a790-475e-a402-b06d7383b61f",
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "recipe",
+                "recipe_name": "Purple Space Mask (D.)"
+            },
+            {
+                "item_id": "8186d55e-47a7-4237-ad53-8f55dd396b0a",
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "recipe",
+                "recipe_name": "Purple Space Mask (L.)"
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "35e1f2b3-1754-4a78-ab40-d823b7ac0e4c",
+        "quest_name": "Rex's Sundae Surprise",
+        "quest_description": "Rex is working on a new recipe\u2026 again. Usually they turn out in a disaster but we\u2019re friends so we might as well help him source all the stuff he needs. If you help him we\u2019ll pay you well, because we know Rex is struggling in the restaurant biz. Rex needs 20 Bananas, 15 Dream Pops,  2 Salt & Pepper shakers, and 1 Vinegar (no wonder his business is struggling, that sounds awful).",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "20f8fe02-26d8-40d7-932d-9ba8faef389f",
+                "item_name": "Banana",
+                "quantity": 20
+            },
+            {
+                "item_id": "2e7d9f2d-963c-4fae-abce-b1c936292cb2",
+                "item_name": "Ice Cream",
+                "quantity": 15
+            },
+            {
+                "item_id": "97010652-528c-48ca-a5f1-f4c61c6b89e0",
+                "item_name": "Salt & Pepper",
+                "quantity": 2
+            },
+            {
+                "item_id": "2cdf3b10-0e8d-44ba-9bb3-615cad92e80b",
+                "item_name": "Vinegar",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2000,
+                "reward_type": "currency",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "quest",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "c5f6fcf4-feac-4683-ae73-e072ab6c3862",
+        "quest_name": "Roxy's Rave",
+        "quest_description": "Roxy is throwing the biggest virtual rave ever, but she needs your help to make it truly spectacular! You\u2019ll need to find some leftover glowsticks from last years rave around the web, craft 5 speakers and 3 holographic disco balls, and buy 2 CD\u2019s from the marketplace",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "24daf089-422c-4551-8ba6-ffee7235e224",
+                "item_name": "2000's CD",
+                "quantity": 2
+            },
+            {
+                "item_id": "3d264a33-ca38-4222-a0ee-59141ec45d9e",
+                "item_name": "Blue Glowstick",
+                "quantity": 10
+            },
+            {
+                "item_id": "c047cef3-7fb4-453a-9818-70f60f8281e6",
+                "item_name": "MP3 Player",
+                "quantity": 5
+            },
+            {
+                "item_id": "f737acac-1e84-4900-a860-279d7733c374",
+                "item_name": "EarBudz",
+                "quantity": 5
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "af540253-7629-4fd4-a6ab-0cd8d5dbc394",
+                "item_name": "Heart Trucker",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": "e85e5cc7-6c4c-4a44-97d2-d0ab65deb6cc",
+                "item_name": "Bunny Ears",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 3000,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "e5f525c3-ca41-49f0-b5f3-f51e564fdc89",
+        "quest_name": "Sage's Seasonal Shift",
+        "quest_description": "Sage needs assistance in creating an item to switch the seasons around in Moonbounce. Collect 1 Perfect Pyramid, 5 Time-Warped Acorns, 3 Holographic Leaves and 2 Thermometers to help her activate the Season Switcher 3000.",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "a0ee1b90-2d6b-4312-9a14-2ae6442c7371",
+                "item_name": "Thermometer",
+                "quantity": 2
+            },
+            {
+                "item_id": "7c942d17-dff4-4169-9d52-ceef680e20ca",
+                "item_name": "Holographic Leaf",
+                "quantity": 3
+            },
+            {
+                "item_id": "2caf0097-7544-4be5-a381-7148cc28a063",
+                "item_name": "Time-Warped Acorn",
+                "quantity": 5
+            },
+            {
+                "item_id": "adacab8b-02da-47a1-b1b2-cdcc8fed6d6b",
+                "item_name": "Perfect Pyramid",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "ff29a828-5557-4857-9934-28c2a35fe888",
+                "item_name": "Dusty Hat",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2000,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "a6056079-8a77-42fe-8a88-e49346b0835c",
+        "quest_name": "Welcome To Moonbounce",
+        "quest_description": "Welcome to Moonbounce! We\u2019re super happy to have you around! We made this quest specifically for you to get a better lay of the land, and understand how some things work. For your first quest, hop into multiplayer wait for a chest to spawn and bring back a White Fabric.",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "collect",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "e78ad402-5c0b-442c-8f74-df4c7eeafb67",
+                "item_name": "White Fabric",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 3000,
+                "reward_type": "currency",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "quest",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "d1765313-c979-46ad-a011-90afe6bb52a3",
+        "quest_name": "Welcome to Moonbounce pt.2",
+        "quest_description": "Visit the marketplace and buy one slightly magic fruit, one empty vial, one white fabric and a needle and thread, and then pop over to the marketplace again to the recipes tab and buy the recipe for the wizard hat,  and craft it! Once you\u2019ve crafted the hat return back here for your reward!",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "collect",
+        "quest_tags": [],
+        "prerequisites": [
+            "a6056079-8a77-42fe-8a88-e49346b0835c"
+        ],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "4dff38a4-8f98-4edb-a554-3948926fbe57",
+                "item_name": "Wizard Hat",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "quest",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 500,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "7a699a23-f764-4137-a08a-44add5976a0c",
+        "quest_name": "Welcome to Moonbounce pt.3",
+        "quest_description": "Looks like your getting the hang of this! For the last part of the quest, enter multiplayer on youtube, and wait for the chicken chest to spawn. Follow it around and once its done bring back a chicken leg back here for your final reward.",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "fetch",
+        "quest_tags": [],
+        "prerequisites": [
+            "d1765313-c979-46ad-a011-90afe6bb52a3"
+        ],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "a93105ae-1a11-4b3f-9b7c-1c231694bb1f",
+                "item_name": "Candy Corn",
+                "quantity": 10
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "f426fcb1-0e7a-48ad-a8fe-f8fc42a66f74",
+                "item_name": "Pengu",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": "9132c4f5-ec77-4769-9a8d-75aea86954d4",
+                "item_name": "Bonnet Sprout",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2000,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "dcd72228-e317-4b1c-8de2-5f251dc8cd2b",
+        "quest_name": "Lazy Luna",
+        "quest_description": "Luna wants you to go and get some items for them across the web, because she can\u2019t bear to leave her bed. She is trying to make the most ultimate lazy day in history, fit with snacks drinks blankets and pillows. ( some assembly required). Can you bring back 50 feathers from anywhere,  10 crafted smooth silk, 6 sodas,  3 corn on the cobs and a lighter ( for popcorn of course ). ",
+        "quest_instance_type": "one_time",
+        "quest_quest_type": "fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "3bd48dec-e8b9-4a05-be3b-a33d32a41754",
+                "item_name": "Feather",
+                "quantity": 50
+            },
+            {
+                "item_id": "9d07f002-87b0-41b0-ad7c-16ef44da50e3",
+                "item_name": "Smooth Silk",
+                "quantity": 10
+            },
+            {
+                "item_id": "8dbded2a-f046-460f-8ee1-51653ceaaa52",
+                "item_name": "Tiki Drink",
+                "quantity": 6
+            },
+            {
+                "item_id": "91aeaa4b-870a-4e19-8d54-37a82edda046",
+                "item_name": "Corn on the Cob",
+                "quantity": 3
+            },
+            {
+                "item_id": "c56218c9-8f54-4d8b-a267-e3c695e54b6c",
+                "item_name": "Lighter",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "dbff64d6-5bd6-4723-bf44-85dfb9e6ecb2",
+                "item_name": "Lunar Overhead",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2500,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "953939b8-f349-4f3e-b357-4d994f079485",
+        "quest_name": "Zara\u2019s Bakery Biz",
+        "quest_description": "Zara has a bootleg bakery around the web. They couldn\u2019t get the permits, but all they had was a dream. Because of their recent stint in Moonjail because of the lack of permits, they are now barred from the farmers market and the regular marketplace. They need you to bring them a counterfeit permit, 10 Carrots, and 10 Prismatic Dusts for this new Carrot Cake Recipe.",
+        "quest_instance_type": "recurring",
+        "quest_quest_type": "fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": [
+            {
+                "cooldown_period_in_hours": 168
+            }
+        ],
+        "required_items": [
+            {
+                "item_id": "ed350802-5d65-45c2-9742-537f01d2d462",
+                "item_name": "Carrot",
+                "quantity": 10
+            },
+            {
+                "item_id": "df74a97e-c635-4d52-bcd5-67d1b0e46085",
+                "item_name": "Prismatic Dust",
+                "quantity": 10
+            },
+            {
+                "item_id": "8491a206-a5e2-4c56-8d1a-535892f7f7c3",
+                "item_name": "Counterfeit Permit 1",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "210d387c-4d1e-461c-9f7a-9199020c7aba",
+                "item_name": "Carrot Sprout",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2000,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    }
+]

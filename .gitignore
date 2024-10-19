@@ -11,3 +11,7 @@ images/
 encrypt.html
 scripts/scrap.user.js
 time.html
+data/quests/cleaned_quests.json
+data/quests/cleanquests.py
+data/quests/questsfull.json
+scripts/timer.user.js
