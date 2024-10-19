@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.22.1
+// @version      0.22.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -157,6 +157,7 @@
 //              - Movement is mapped to the left stick and the D-Pad
 //              - You can use the X button (Xbox) or Square button (PlayStation) to toggle the chat window
 // 0.22.1   - Fixed some Markdown HTML causing unnecessary line breaks
+// 0.22.2   - Update to catch up with Moonbounce changes
 //
 // ==/Changelog==
 
@@ -370,10 +371,10 @@ function loadData(isLocal = false) {
 const targetSelector = [
     { name: "Inventory", selector: ".cfWcg" },
     { name: "Inventory Controls", selector: ".S-h7a" },
-    { name: "Selected Item Window", selector: "._base_1xand_1" },
+    { name: "Selected Item Window", selector: "._base_10lw2_1 " },
     { name: "Selected Item Details", selector: "._base_awewl_1" },
     { name: "Source List Item", selector: ".mSsVp" },
-    { name: "Source Item Button", selector: "._base_17fa3_1._xs_17fa3_16" },
+    { name: "Source Item Button", selector: "._base_6g4pp_1._xs_6g4pp_16" },
     { name: "Source Item Name", selector: "._base_buawu_1" },
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "[class^='_stack_count_'" },
@@ -388,7 +389,7 @@ const targetSelector = [
     { name: "Marketplace Controls", selector: ".t-IQf" },
     { name: "Marketplace Section", selector: ".FJbq-" },
     { name: "Marketplace Section Header", selector: "._text-xl_128i6_229" },
-    { name: "Marketplace Section Item", selector: "._base_1ti9u_1" },
+    { name: "Marketplace Section Item", selector: "._base_18imw_1" },
     { name: "Marketplace Sponsored Section", selector: ".QpxP5" },
     { name: "Marketplace Sponsored Section Type", selector: "._text-md_128i6_111._semibold_128i6_30" },
 

@@ -2932,10 +2932,60 @@
             "sources": ["Orange Drawstring"]
         },
         {
+            "id": 612,
+            "name": "Carrot Sprout",
+            "uuid": "7ea8edc2-c792-4703-836b-42aef6523310",
+            "description": "It’s been 6 weeks since you checked out or watered your carrots, and somehow, one huge sprout is almost ready to be harvested, but the rest are sadly dead.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
+            "id": 618,
+            "name": "Counterfeit Permit 1",
+            "uuid": "0d1fd8ff-8981-47ff-8dd3-b3fe49900328",
+            "description": "This permit looks vaguely like the ones that have been distributed. If you look up close you can tell this was a shoddy job.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
+            "id": 621,
+            "name": "Green Scale",
+            "uuid": "44931e65-c974-4007-bb0b-5cbdf592f2fe",
+            "description": "Legend has it that crafty internet surfers use these to blend in with the vast ocean of web pages, dodging those pesky targeted ads like a pro.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Dark Elemental Chest"]
+        },
+        {
+            "id": 622,
+            "name": "Pink Scale",
+            "uuid": "b05c99e2-f18f-450f-a66f-63b366588077",
+            "description": "A glimmering gem from the digital deep! Just don't hoard too many—your avatar might start smelling fishy.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Dark Elemental Chest"]
+        },
+        {
             "id": 627,
             "name": "Water Shard",
             "uuid": "accab883-32c3-4a64-be8d-7496c7be3255",
             "description": "Whenever you touch this water shard, it starts to turn back into its natural liquid state. Its better to look and not to touch.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Dark Elemental Chest"]
+        },
+        {
+            "id": 628,
+            "name": "Fire Shard",
+            "uuid": "bd9582e2-4b62-48bd-8a2d-d149b4c91d83",
+            "description": "This shard is still hot to the touch. Taken deep from the fiery magma of an undisclosed location, this will imbue a certain elemental fire to your recipes",
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
@@ -2950,6 +3000,16 @@
             "type": "MATERIAL",
             "value": 15,
             "sources": ["Aquamarine Chest"]
+        },
+        {
+            "id": 630,
+            "name": "Holographic Leaf",
+            "uuid": "4a72c50a-b30c-4988-9eb9-96f5601a4f87",
+            "description": "A leaf with such a beautiful reflective sheen that makes it look like it’s straight out of a fairy tale.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Dark Elemental Chest"]
         },
         {
             "id": 633,
@@ -4057,21 +4117,6 @@
                 "cost": 2500
             },
             {
-                "name": "Purple Flower Pot",
-                "section": "Accessories",
-                "cost": 2500
-            },
-            {
-                "name": "Blue Flower Pot",
-                "section": "Accessories",
-                "cost": 2500
-            },
-            {
-                "name": "Red Flower Pot",
-                "section": "Accessories",
-                "cost": 2500
-            },
-            {
                 "name": "Wizard Hat",
                 "section": "Accessories",
                 "cost": 2500
@@ -4097,11 +4142,6 @@
                 "cost": 2500
             },
             {
-                "name": "Flower Crown",
-                "section": "Accessories",
-                "cost": 7500
-            },
-            {
                 "name": "Blue Space Mask",
                 "section": "Accessories",
                 "cost": 7500
@@ -4110,21 +4150,6 @@
                 "name": "Hard Hat",
                 "section": "Accessories",
                 "cost": 2500
-            },
-            {
-                "name": "Red Bonnet",
-                "section": "Accessories",
-                "cost": 1000
-            },
-            {
-                "name": "Purple Bonnet",
-                "section": "Accessories",
-                "cost": 1000
-            },
-            {
-                "name": "Blue Bonnet",
-                "section": "Accessories",
-                "cost": 1000
             },
             {
                 "name": "Coconut Drink",
@@ -4147,6 +4172,11 @@
                 "cost": 2500
             },
             {
+                "name": "SuperStarFish Blue",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
                 "name": "Flamingo Hat",
                 "section": "Accessories",
                 "cost": 2500
@@ -4155,6 +4185,46 @@
                 "name": "Floppy Sun Hat",
                 "section": "Accessories",
                 "cost": 1000
+            },
+            {
+                "name": "Blue Starfish",
+                "section": "Accessories",
+                "cost": 1000
+            },
+            {
+                "name": "Orange Starfish",
+                "section": "Accessories",
+                "cost": 1000
+            },
+            {
+                "name": "Blue Eye",
+                "section": "Accessories",
+                "cost": 7500
+            },
+            {
+                "name": "SuperStarFish Orange",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Haunted Mask",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Black Cat Beanie",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Grotesque Skull",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Loose Brain Trucker",
+                "section": "Accessories",
+                "cost": 2500
             },
             {
                 "name": "Smooth Silk",
@@ -4197,6 +4267,11 @@
                 "cost": 500
             },
             {
+                "name": "Magenta Potion (adv.)",
+                "section": "Materials",
+                "cost": 1000
+            },
+            {
                 "name": "Empty Coconut",
                 "section": "Materials",
                 "cost": 250
@@ -4207,6 +4282,26 @@
                 "cost": 2500
             },
             {
+                "name": "Orange Potion (adv.)",
+                "section": "Materials",
+                "cost": 2500
+            },
+            {
+                "name": "Perfect Pyramid",
+                "section": "Materials",
+                "cost": 2500
+            },
+            {
+                "name": "MP3 Player",
+                "section": "Materials",
+                "cost": 1000
+            },
+            {
+                "name": "Counterfeit Permit 1",
+                "section": "Materials",
+                "cost": 1000
+            },
+            {
                 "name": "Star Sickle",
                 "section": "Tools",
                 "cost": 5000
@@ -4215,6 +4310,11 @@
                 "name": "Sewing Needle",
                 "section": "Tools",
                 "cost": 250
+            },
+            {
+                "name": "Basic Crystal Ball",
+                "section": "Tools",
+                "cost": 1000
             }
         ]
     }
