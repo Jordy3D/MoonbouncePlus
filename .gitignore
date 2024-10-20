@@ -15,3 +15,5 @@ data/quests/cleaned_quests.json
 data/quests/cleanquests.py
 data/quests/questsfull.json
 scripts/timer.user.js
+*.mw
+*.lua
