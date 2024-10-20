@@ -353,7 +353,11 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": ["Framed Chest", "Normal Candy Basket"]
+            "sources": [
+                "Framed Chest",
+                "Normal Candy Basket",
+                "Old Candy Basket"
+            ]
         },
         {
             "id": 181,
@@ -1308,7 +1312,7 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": ["Old Candy Basket"]
         },
         {
             "id": 415,
@@ -1542,7 +1546,8 @@
                 "Soup's Goodies",
                 "Framed Chest",
                 "Alien Food Pouch",
-                "Potion Supplies"
+                "Potion Supplies",
+                "Floating Eyeball"
             ]
         },
         {
@@ -1553,7 +1558,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Dusty Box"]
+            "sources": ["Orange Drawstring", "Dusty Box"]
         },
         {
             "id": 439,
@@ -1603,7 +1608,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Framed Chest", "Dusty Box"]
+            "sources": ["Framed Chest", "Dusty Box", "Floating Eyeball"]
         },
         {
             "id": 444,
@@ -1897,7 +1902,7 @@
             "rarity": "COMMON",
             "type": "TOOL",
             "value": 5,
-            "sources": ["Chicken"]
+            "sources": ["Chicken", "Aquamarine Chest"]
         },
         {
             "id": 478,
@@ -2819,7 +2824,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Orange Drawstring"]
         },
         {
             "id": 588,
@@ -2849,7 +2854,7 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": ["Orange Drawstring"]
         },
         {
             "id": 591,
