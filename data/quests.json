@@ -3,8 +3,8 @@
         "quest_id": "6522aa48-a80f-4e0f-829b-3e91c9340793",
         "quest_name": "Black Market Dealings",
         "quest_description": "Our buddy Jasper got banned from the marketplace for some nefarious dealings with the back end of the software. Something about him finding a bug in the system and it all went downhill from there. We were wondering if you could buy 5 Pastel Clusters from the marketplace and bring them back here. We\u2019ll make sure he pays you well.",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "collect",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Collect",
         "quest_tags": [],
         "prerequisites": [],
         "availability": [
@@ -40,11 +40,11 @@
         "tags": []
     },
     {
-        "quest_id": "c3e5c00a-5cd6-42e6-ace9-0136c4253695",
-        "quest_name": "Space Walkers",
-        "quest_description": "We just got a message from Nova, up at the space station about the new fashion that hasn\u2019t made its way to earth yet, a new space mask. Apparently she said it's made way better than the rest and has materials in it we haven't even seen before! All she needs is 2 Blue Space Masks, 2 Red Space Mask, a Hammer,  and 5 Polished Purple Gems.",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "fetch",
+        "quest_id": "dcd72228-e317-4b1c-8de2-5f251dc8cd2b",
+        "quest_name": "Lazy Luna",
+        "quest_description": "Luna wants you to go and get some items for them across the web, because she can\u2019t bear to leave her bed. She is trying to make the most ultimate lazy day in history, fit with snacks drinks blankets and pillows. ( some assembly required). Can you bring back 50 feathers from anywhere,  10 crafted smooth silk, 6 sodas,  3 corn on the cobs and a lighter ( for popcorn of course ). ",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
         "quest_tags": [],
         "prerequisites": [],
         "availability": [
@@ -56,40 +56,45 @@
         "recurring": null,
         "required_items": [
             {
-                "item_id": "8e1162d9-eb3e-4abb-8287-b676a66d8b39",
-                "item_name": "Polished Purple Gem",
-                "quantity": 5
+                "item_id": "3bd48dec-e8b9-4a05-be3b-a33d32a41754",
+                "item_name": "Feather",
+                "quantity": 50
             },
             {
-                "item_id": "b1097765-608b-4277-aa36-e975c22d519b",
-                "item_name": "Red Space Mask",
-                "quantity": 2
+                "item_id": "9d07f002-87b0-41b0-ad7c-16ef44da50e3",
+                "item_name": "Smooth Silk",
+                "quantity": 10
             },
             {
-                "item_id": "af57ae9f-ba10-4b44-bc1e-d587f046b7f2",
-                "item_name": "Blue Space Mask",
-                "quantity": 2
+                "item_id": "8dbded2a-f046-460f-8ee1-51653ceaaa52",
+                "item_name": "Tiki Drink",
+                "quantity": 6
             },
             {
-                "item_id": "39a3da95-c308-4704-af7f-9fa92d24051d",
-                "item_name": "Hammer",
+                "item_id": "91aeaa4b-870a-4e19-8d54-37a82edda046",
+                "item_name": "Corn on the Cob",
+                "quantity": 3
+            },
+            {
+                "item_id": "c56218c9-8f54-4d8b-a267-e3c695e54b6c",
+                "item_name": "Lighter",
                 "quantity": 1
             }
         ],
         "rewards": [
             {
-                "item_id": "afcfdb93-a790-475e-a402-b06d7383b61f",
-                "item_name": null,
+                "item_id": "dbff64d6-5bd6-4723-bf44-85dfb9e6ecb2",
+                "item_name": "Lunar Overhead",
                 "quantity": 1,
-                "reward_type": "recipe",
-                "recipe_name": "Purple Space Mask (D.)"
+                "reward_type": "item",
+                "recipe_name": null
             },
             {
-                "item_id": "8186d55e-47a7-4237-ad53-8f55dd396b0a",
+                "item_id": null,
                 "item_name": null,
-                "quantity": 1,
-                "reward_type": "recipe",
-                "recipe_name": "Purple Space Mask (L.)"
+                "quantity": 2500,
+                "reward_type": "currency",
+                "recipe_name": null
             }
         ],
         "tags": []
@@ -98,8 +103,8 @@
         "quest_id": "35e1f2b3-1754-4a78-ab40-d823b7ac0e4c",
         "quest_name": "Rex's Sundae Surprise",
         "quest_description": "Rex is working on a new recipe\u2026 again. Usually they turn out in a disaster but we\u2019re friends so we might as well help him source all the stuff he needs. If you help him we\u2019ll pay you well, because we know Rex is struggling in the restaurant biz. Rex needs 20 Bananas, 15 Dream Pops,  2 Salt & Pepper shakers, and 1 Vinegar (no wonder his business is struggling, that sounds awful).",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "fetch",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
         "quest_tags": [],
         "prerequisites": [],
         "availability": [
@@ -153,8 +158,8 @@
         "quest_id": "c5f6fcf4-feac-4683-ae73-e072ab6c3862",
         "quest_name": "Roxy's Rave",
         "quest_description": "Roxy is throwing the biggest virtual rave ever, but she needs your help to make it truly spectacular! You\u2019ll need to find some leftover glowsticks from last years rave around the web, craft 5 speakers and 3 holographic disco balls, and buy 2 CD\u2019s from the marketplace",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "fetch",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
         "quest_tags": [],
         "prerequisites": [],
         "availability": [
@@ -215,8 +220,8 @@
         "quest_id": "e5f525c3-ca41-49f0-b5f3-f51e564fdc89",
         "quest_name": "Sage's Seasonal Shift",
         "quest_description": "Sage needs assistance in creating an item to switch the seasons around in Moonbounce. Collect 1 Perfect Pyramid, 5 Time-Warped Acorns, 3 Holographic Leaves and 2 Thermometers to help her activate the Season Switcher 3000.",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "fetch",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
         "quest_tags": [],
         "prerequisites": [],
         "availability": [
@@ -267,11 +272,66 @@
         "tags": []
     },
     {
+        "quest_id": "c3e5c00a-5cd6-42e6-ace9-0136c4253695",
+        "quest_name": "Space Walkers",
+        "quest_description": "We just got a message from Nova, up at the space station about the new fashion that hasn\u2019t made its way to earth yet, a new space mask. Apparently she said it's made way better than the rest and has materials in it we haven't even seen before! All she needs is 2 Blue Space Masks, 2 Red Space Mask, a Hammer,  and 5 Polished Purple Gems.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "8e1162d9-eb3e-4abb-8287-b676a66d8b39",
+                "item_name": "Polished Purple Gem",
+                "quantity": 5
+            },
+            {
+                "item_id": "b1097765-608b-4277-aa36-e975c22d519b",
+                "item_name": "Red Space Mask",
+                "quantity": 2
+            },
+            {
+                "item_id": "af57ae9f-ba10-4b44-bc1e-d587f046b7f2",
+                "item_name": "Blue Space Mask",
+                "quantity": 2
+            },
+            {
+                "item_id": "39a3da95-c308-4704-af7f-9fa92d24051d",
+                "item_name": "Hammer",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "afcfdb93-a790-475e-a402-b06d7383b61f",
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "recipe",
+                "recipe_name": "Purple Space Mask (D.)"
+            },
+            {
+                "item_id": "8186d55e-47a7-4237-ad53-8f55dd396b0a",
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "recipe",
+                "recipe_name": "Purple Space Mask (L.)"
+            }
+        ],
+        "tags": []
+    },
+    {
         "quest_id": "a6056079-8a77-42fe-8a88-e49346b0835c",
         "quest_name": "Welcome To Moonbounce",
         "quest_description": "Welcome to Moonbounce! We\u2019re super happy to have you around! We made this quest specifically for you to get a better lay of the land, and understand how some things work. For your first quest, hop into multiplayer wait for a chest to spawn and bring back a White Fabric.",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "collect",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Collect",
         "quest_tags": [],
         "prerequisites": [],
         "availability": [
@@ -310,8 +370,8 @@
         "quest_id": "d1765313-c979-46ad-a011-90afe6bb52a3",
         "quest_name": "Welcome to Moonbounce pt.2",
         "quest_description": "Visit the marketplace and buy one slightly magic fruit, one empty vial, one white fabric and a needle and thread, and then pop over to the marketplace again to the recipes tab and buy the recipe for the wizard hat,  and craft it! Once you\u2019ve crafted the hat return back here for your reward!",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "collect",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Collect",
         "quest_tags": [],
         "prerequisites": [
             "a6056079-8a77-42fe-8a88-e49346b0835c"
@@ -352,8 +412,8 @@
         "quest_id": "7a699a23-f764-4137-a08a-44add5976a0c",
         "quest_name": "Welcome to Moonbounce pt.3",
         "quest_description": "Looks like your getting the hang of this! For the last part of the quest, enter multiplayer on youtube, and wait for the chicken chest to spawn. Follow it around and once its done bring back a chicken leg back here for your final reward.",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "fetch",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
         "quest_tags": [],
         "prerequisites": [
             "d1765313-c979-46ad-a011-90afe6bb52a3"
@@ -398,71 +458,11 @@
         "tags": []
     },
     {
-        "quest_id": "dcd72228-e317-4b1c-8de2-5f251dc8cd2b",
-        "quest_name": "Lazy Luna",
-        "quest_description": "Luna wants you to go and get some items for them across the web, because she can\u2019t bear to leave her bed. She is trying to make the most ultimate lazy day in history, fit with snacks drinks blankets and pillows. ( some assembly required). Can you bring back 50 feathers from anywhere,  10 crafted smooth silk, 6 sodas,  3 corn on the cobs and a lighter ( for popcorn of course ). ",
-        "quest_instance_type": "one_time",
-        "quest_quest_type": "fetch",
-        "quest_tags": [],
-        "prerequisites": [],
-        "availability": [
-            {
-                "start_date": 1729288200,
-                "end_date": 0
-            }
-        ],
-        "recurring": null,
-        "required_items": [
-            {
-                "item_id": "3bd48dec-e8b9-4a05-be3b-a33d32a41754",
-                "item_name": "Feather",
-                "quantity": 50
-            },
-            {
-                "item_id": "9d07f002-87b0-41b0-ad7c-16ef44da50e3",
-                "item_name": "Smooth Silk",
-                "quantity": 10
-            },
-            {
-                "item_id": "8dbded2a-f046-460f-8ee1-51653ceaaa52",
-                "item_name": "Tiki Drink",
-                "quantity": 6
-            },
-            {
-                "item_id": "91aeaa4b-870a-4e19-8d54-37a82edda046",
-                "item_name": "Corn on the Cob",
-                "quantity": 3
-            },
-            {
-                "item_id": "c56218c9-8f54-4d8b-a267-e3c695e54b6c",
-                "item_name": "Lighter",
-                "quantity": 1
-            }
-        ],
-        "rewards": [
-            {
-                "item_id": "dbff64d6-5bd6-4723-bf44-85dfb9e6ecb2",
-                "item_name": "Lunar Overhead",
-                "quantity": 1,
-                "reward_type": "item",
-                "recipe_name": null
-            },
-            {
-                "item_id": null,
-                "item_name": null,
-                "quantity": 2500,
-                "reward_type": "currency",
-                "recipe_name": null
-            }
-        ],
-        "tags": []
-    },
-    {
         "quest_id": "953939b8-f349-4f3e-b357-4d994f079485",
         "quest_name": "Zara\u2019s Bakery Biz",
         "quest_description": "Zara has a bootleg bakery around the web. They couldn\u2019t get the permits, but all they had was a dream. Because of their recent stint in Moonjail because of the lack of permits, they are now barred from the farmers market and the regular marketplace. They need you to bring them a counterfeit permit, 10 Carrots, and 10 Prismatic Dusts for this new Carrot Cake Recipe.",
-        "quest_instance_type": "recurring",
-        "quest_quest_type": "fetch",
+        "quest_instance_type": "Recurring",
+        "quest_quest_type": "Fetch",
         "quest_tags": [],
         "prerequisites": [],
         "availability": [
