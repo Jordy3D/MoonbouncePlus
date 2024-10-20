@@ -2927,6 +2927,16 @@
             "sources": []
         },
         {
+            "id": 602,
+            "name": "Pastel Shard",
+            "uuid": "52d7ad9d-63b3-4e8d-885c-66c5ccd071f9",
+            "description": "A huge singular shard broken off a larger cluster, and polished to a shop keep's perfection. Useful for alchemy, glass adjacent items and many more magical purposes.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
             "id": 603,
             "name": "Pastel Cluster",
             "uuid": "dca8d523-da03-4b08-97be-39fb730296b8",
