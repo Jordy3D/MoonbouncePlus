@@ -2987,6 +2987,16 @@
             "sources": []
         },
         {
+            "id": 620,
+            "name": "Basic Crystal Ball",
+            "uuid": "32f8e22d-6eb4-4354-977f-93cd30104333",
+            "description": "Peer into the swirling mists of this budget-friendly fortune teller! Disclaimer: May predict your future as \"buffering\" or \"ad 1 of 5.\" Not our fault—blame those streaming sites!",
+            "rarity": "RARE",
+            "type": "TOOL",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 621,
             "name": "Green Scale",
             "uuid": "44931e65-c974-4007-bb0b-5cbdf592f2fe",
@@ -3484,44 +3494,26 @@
         },
         {
             "result": "Counterfeit Permit 1",
-            "ingredients": [
-                "White Fabric",
-                "Two Blue Coins",
-                "Vinyl Sheet"
-            ],
+            "ingredients": ["White Fabric", "Two Blue Coins", "Vinyl Sheet"],
             "tools": [],
             "type": ""
         },
         {
             "result": "Blue Starfish",
-            "ingredients": [
-                "Stardust",
-                "Water Shard",
-                "Pink Nautilus Shell"
-            ],
+            "ingredients": ["Stardust", "Water Shard", "Pink Nautilus Shell"],
             "tools": [],
             "type": ""
         },
         {
             "result": "Orange Starfish",
-            "ingredients": [
-                "Stardust",
-                "Fire Shard",
-                "Pink Nautilus Shell"
-            ],
+            "ingredients": ["Stardust", "Fire Shard", "Pink Nautilus Shell"],
             "tools": [],
             "type": ""
         },
         {
             "result": "Perfect Pyramid",
-            "ingredients": [
-                "Earth Shard",
-                "Water Shard",
-                "Fire Shard"
-            ],
-            "tools": [
-                "Fairy Particles"
-            ],
+            "ingredients": ["Earth Shard", "Water Shard", "Fire Shard"],
+            "tools": ["Fairy Particles"],
             "type": ""
         },
         {
@@ -3531,9 +3523,7 @@
                 "Perfect Pyramid",
                 "Anatomical Heart"
             ],
-            "tools": [
-                "Fairy Particles"
-            ],
+            "tools": ["Fairy Particles"],
             "type": ""
         },
         {
@@ -3544,14 +3534,8 @@
         },
         {
             "result": "Basic Crystal Ball",
-            "ingredients": [
-                "Perfect Pyramid",
-                "Pastel Shard"
-            ],
-            "tools": [
-                "Fairy Particles",
-                "Lighter"
-            ],
+            "ingredients": ["Perfect Pyramid", "Pastel Shard"],
+            "tools": ["Fairy Particles", "Lighter"],
             "type": ""
         },
         {

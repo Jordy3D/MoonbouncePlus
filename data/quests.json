@@ -40,6 +40,105 @@
         "tags": []
     },
     {
+        "quest_id": "c24639a9-6a20-4597-bf51-34eed481113b",
+        "quest_name": "Black Market Dealings PT. 3",
+        "quest_description": "Ok JASPER is really getting on our nerves now\u2026 He told us to tell you thanks for the Pastel Shards, but he needs something else ( no wonder he was banned from the marketplace) He needs you to get 4 Prismatic Dust, 4 Expert Potion Bottles, 1 crafted Orange Potion (adv.) and 1 Magenta Potion (adv.). We told him that this was the last straw and he can\u2019t ask for anything else.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [
+            "a91ea952-8424-42d9-a85b-867ce28926e5"
+        ],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "f46eee0b-7911-402c-999e-a4e0680b98e2",
+                "item_name": "Orange Potion (adv.)",
+                "quantity": 1
+            },
+            {
+                "item_id": "da02feb4-a01b-4911-aa37-114ae2b70599",
+                "item_name": "Expert Potion Bottle",
+                "quantity": 4
+            },
+            {
+                "item_id": "72055ffe-5dc3-43b8-b0e9-2570cfa8f896",
+                "item_name": "Magenta Potion (adv.)",
+                "quantity": 1
+            },
+            {
+                "item_id": "df74a97e-c635-4d52-bcd5-67d1b0e46085",
+                "item_name": "Prismatic Dust",
+                "quantity": 4
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "e40d9532-a582-4604-90eb-2e1ffb893135",
+                "item_name": "Towering Black Hat",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": "e741f62f-83f8-404b-9882-3a4a151b9ae8",
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "recipe",
+                "recipe_name": "Helm DM"
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2500,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "a91ea952-8424-42d9-a85b-867ce28926e5",
+        "quest_name": "Black Market Dealings PT.2",
+        "quest_description": "Jasper wanted to pass on his thanks for getting him those Pastel Clusters, but he says it\u2019s not exactly what he needed. He needs 5 Pastel Shards. He said something about the right person with the recipe can make them. We don\u2019t really know what he\u2019s planning to make with them, but we know he will pay well. Craft 5 Pastel Shards and bring them back here for your reward.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [
+            "6522aa48-a80f-4e0f-829b-3e91c9340793"
+        ],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "dd74b032-122c-4480-b750-17aeaa9a8567",
+                "item_name": "Pastel Shard",
+                "quantity": 5
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "quest",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
         "quest_id": "dcd72228-e317-4b1c-8de2-5f251dc8cd2b",
         "quest_name": "Lazy Luna",
         "quest_description": "Luna wants you to go and get some items for them across the web, because she can\u2019t bear to leave her bed. She is trying to make the most ultimate lazy day in history, fit with snacks drinks blankets and pillows. ( some assembly required). Can you bring back 50 feathers from anywhere,  10 crafted smooth silk, 6 sodas,  3 corn on the cobs and a lighter ( for popcorn of course ). ",
