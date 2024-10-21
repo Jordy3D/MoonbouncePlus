@@ -3483,6 +3483,78 @@
             "type": ""
         },
         {
+            "result": "Counterfeit Permit 1",
+            "ingredients": [
+                "White Fabric",
+                "Two Blue Coins",
+                "Vinyl Sheet"
+            ],
+            "tools": [],
+            "type": ""
+        },
+        {
+            "result": "Blue Starfish",
+            "ingredients": [
+                "Stardust",
+                "Water Shard",
+                "Pink Nautilus Shell"
+            ],
+            "tools": [],
+            "type": ""
+        },
+        {
+            "result": "Orange Starfish",
+            "ingredients": [
+                "Stardust",
+                "Fire Shard",
+                "Pink Nautilus Shell"
+            ],
+            "tools": [],
+            "type": ""
+        },
+        {
+            "result": "Perfect Pyramid",
+            "ingredients": [
+                "Earth Shard",
+                "Water Shard",
+                "Fire Shard"
+            ],
+            "tools": [
+                "Fairy Particles"
+            ],
+            "type": ""
+        },
+        {
+            "result": "Blue Eye",
+            "ingredients": [
+                "Polished Blue Gem",
+                "Perfect Pyramid",
+                "Anatomical Heart"
+            ],
+            "tools": [
+                "Fairy Particles"
+            ],
+            "type": ""
+        },
+        {
+            "result": "Pastel Shard",
+            "ingredients": ["Smooth Silk", "Pastel Cluster"],
+            "tools": ["Hammer"],
+            "type": ""
+        },
+        {
+            "result": "Basic Crystal Ball",
+            "ingredients": [
+                "Perfect Pyramid",
+                "Pastel Shard"
+            ],
+            "tools": [
+                "Fairy Particles",
+                "Lighter"
+            ],
+            "type": ""
+        },
+        {
             "result": "Bunny Ears",
             "ingredients": ["Carrot", "Chocolate Bunny", "Bunny Headband"],
             "tools": ["Vinegar"],
