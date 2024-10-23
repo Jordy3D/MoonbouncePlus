@@ -3027,6 +3027,16 @@
             "sources": []
         },
         {
+            "id": 617,
+            "name": "Purple Space Mask (D.)",
+            "uuid": "4bad796b-1312-4550-a2b1-bf77de1001dc",
+            "description": "One of Nova’s specialty recipes, given directly to you. Not available for sale anywhere! a dark metal base to keep you insulated when your far from the sun.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 1500,
+            "sources": []
+        },
+        {
             "id": 618,
             "name": "Counterfeit Permit 1",
             "uuid": "0d1fd8ff-8981-47ff-8dd3-b3fe49900328",

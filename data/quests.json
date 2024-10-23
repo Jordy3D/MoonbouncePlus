@@ -40,6 +40,41 @@
         "tags": []
     },
     {
+        "quest_id": "a91ea952-8424-42d9-a85b-867ce28926e5",
+        "quest_name": "Black Market Dealings PT.2",
+        "quest_description": "Jasper wanted to pass on his thanks for getting him those Pastel Clusters, but he says it\u2019s not exactly what he needed. He needs 5 Pastel Shards. He said something about the right person with the recipe can make them. We don\u2019t really know what he\u2019s planning to make with them, but we know he will pay well. Craft 5 Pastel Shards and bring them back here for your reward.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [
+            "6522aa48-a80f-4e0f-829b-3e91c9340793"
+        ],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "dd74b032-122c-4480-b750-17aeaa9a8567",
+                "item_name": "Pastel Shard",
+                "quantity": 5
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "quest",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
         "quest_id": "c24639a9-6a20-4597-bf51-34eed481113b",
         "quest_name": "Black Market Dealings PT. 3",
         "quest_description": "Ok JASPER is really getting on our nerves now\u2026 He told us to tell you thanks for the Pastel Shards, but he needs something else ( no wonder he was banned from the marketplace) He needs you to get 4 Prismatic Dust, 4 Expert Potion Bottles, 1 crafted Orange Potion (adv.) and 1 Magenta Potion (adv.). We told him that this was the last straw and he can\u2019t ask for anything else.",
@@ -98,41 +133,6 @@
                 "item_name": null,
                 "quantity": 2500,
                 "reward_type": "currency",
-                "recipe_name": null
-            }
-        ],
-        "tags": []
-    },
-    {
-        "quest_id": "a91ea952-8424-42d9-a85b-867ce28926e5",
-        "quest_name": "Black Market Dealings PT.2",
-        "quest_description": "Jasper wanted to pass on his thanks for getting him those Pastel Clusters, but he says it\u2019s not exactly what he needed. He needs 5 Pastel Shards. He said something about the right person with the recipe can make them. We don\u2019t really know what he\u2019s planning to make with them, but we know he will pay well. Craft 5 Pastel Shards and bring them back here for your reward.",
-        "quest_instance_type": "One-Time",
-        "quest_quest_type": "Fetch",
-        "quest_tags": [],
-        "prerequisites": [
-            "6522aa48-a80f-4e0f-829b-3e91c9340793"
-        ],
-        "availability": [
-            {
-                "start_date": 1729288200,
-                "end_date": 0
-            }
-        ],
-        "recurring": null,
-        "required_items": [
-            {
-                "item_id": "dd74b032-122c-4480-b750-17aeaa9a8567",
-                "item_name": "Pastel Shard",
-                "quantity": 5
-            }
-        ],
-        "rewards": [
-            {
-                "item_id": null,
-                "item_name": null,
-                "quantity": 1,
-                "reward_type": "quest",
                 "recipe_name": null
             }
         ],
@@ -248,6 +248,63 @@
                 "item_name": null,
                 "quantity": 1,
                 "reward_type": "quest",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "8519cef0-0ef9-466e-901b-3e26483970aa",
+        "quest_name": "Rex's Sundae Disaster",
+        "quest_description": "Ok so Rex is not doing so hot. No one liked his sundaes (shocker!) He wants to try again but with different ingredients. 10 Dream Pops, 3 Fruit Bowls, 2 Choco De-Lites, and 5 Peaches. He took out a loan from the Moonbank to keep his business alive just long enough to get these out there to the world.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [
+            "35e1f2b3-1754-4a78-ab40-d823b7ac0e4c"
+        ],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "22592f77-954b-4a0d-acd4-b816fec4c527",
+                "item_name": "Choco De-Lite",
+                "quantity": 2
+            },
+            {
+                "item_id": "091fffe9-e248-47d3-a4d2-8252e85bee91",
+                "item_name": "Dream Pop",
+                "quantity": 10
+            },
+            {
+                "item_id": "56188d0b-c7ec-4917-9dd6-0a41a4f8f2c8",
+                "item_name": "Kiwi Fruit",
+                "quantity": 5
+            },
+            {
+                "item_id": "07ea5461-b64d-4a44-a85c-5e30da21a19f",
+                "item_name": "Fruit Bowl",
+                "quantity": 3
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 1,
+                "reward_type": "quest",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 5000,
+                "reward_type": "currency",
                 "recipe_name": null
             }
         ],
