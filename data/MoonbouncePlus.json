@@ -3645,6 +3645,26 @@
             "type": ""
         },
         {
+            "result": "Purple Space Mask (L.)",
+            "ingredients": [
+                "Red Space Mask",
+                "Blue Space Mask",
+                "Polished Purple Gem"
+            ],
+            "tools": ["Star Sickle", "Fairy Particles", "Basic Crystal Ball"],
+            "type": ""
+        },
+        {
+            "result": "Purple Space Mask (D.)",
+            "ingredients": [
+                "Red Space Mask",
+                "Blue Space Mask",
+                "Polished Purple Gem"
+            ],
+            "tools": ["Star Sickle", "Lighter", "Basic Crystal Ball"],
+            "type": ""
+        },
+        {
             "result": "Bunny Ears",
             "ingredients": ["Carrot", "Chocolate Bunny", "Bunny Headband"],
             "tools": ["Vinegar"],

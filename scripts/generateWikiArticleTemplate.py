@@ -663,7 +663,7 @@ recipe_table_template = """
 !=
 ! colspan="3" | Ingredients
 !+
-! colspan="2" | Tools
+! colspan="3" | Tools
 <RECIPE_ROWS>
 |}"""
 
@@ -680,6 +680,7 @@ recipe_row_template = """
 |
 <TOOL1>
 <TOOL2>
+<TOOL3>
 """
 
 recipe_use_item_template = """\
@@ -751,8 +752,8 @@ def generate_recipe_table(recipes):
                 for i in range(3 - len(ingredient_sections)):
                     ingredient_sections.append("|")
                     
-            if len(tool_sections) < 2:
-                for i in range(2 - len(tool_sections)):
+            if len(tool_sections) < 3:
+                for i in range(3 - len(tool_sections)):
                     tool_sections.append("|")
                     
             new_row = replace_text(new_row, '<INGREDIENT1>', ingredient_sections[0])
@@ -760,7 +761,8 @@ def generate_recipe_table(recipes):
             new_row = replace_text(new_row, '<INGREDIENT3>', ingredient_sections[2])
             
             new_row = replace_text(new_row, '<TOOL1>', tool_sections[0])
-            new_row = replace_text(new_row, '<TOOL2>', tool_sections[1])            
+            new_row = replace_text(new_row, '<TOOL2>', tool_sections[1])
+            new_row = replace_text(new_row, '<TOOL3>', tool_sections[2])
             
             recipe_rows.append(new_row)
             
