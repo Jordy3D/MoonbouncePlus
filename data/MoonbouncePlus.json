@@ -2977,6 +2977,16 @@
             "sources": []
         },
         {
+            "id": 610,
+            "name": "MP3 Player",
+            "uuid": "a338a6a7-8ec1-4aba-a4b2-c03e0c35f173",
+            "description": "Jam packed and loaded with your favorite tunes. We snuck into the factory and made sure it had a little bit of everything for everyone.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 100,
+            "sources": []
+        },
+        {
             "id": 612,
             "name": "Carrot Sprout",
             "uuid": "7ea8edc2-c792-4703-836b-42aef6523310",
@@ -3005,6 +3015,16 @@
             "type": "MATERIAL",
             "value": 100,
             "sources": []
+        },
+        {
+            "id": 619,
+            "name": "EarBudz",
+            "uuid": "a7d253d3-dde8-4ad2-9fc2-85c15197efe6",
+            "description": "No wires, no worries. Ignore real-world notifications. Shhh, you're \"in a meeting.”",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Orange Drawstring"]
         },
         {
             "id": 620,
