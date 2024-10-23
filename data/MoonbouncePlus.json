@@ -2927,6 +2927,16 @@
             "sources": []
         },
         {
+            "id": 601,
+            "name": "Magenta Potion (beg.)",
+            "uuid": "6036a099-f0ac-4c30-9e17-c45b1086103d",
+            "description": "This simplistic potion looks a bit watered down and appears to have some additives, however it has an deep magenta color that makes the owner proud.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Orange Drawstring"]
+        },
+        {
             "id": 602,
             "name": "Pastel Shard",
             "uuid": "52d7ad9d-63b3-4e8d-885c-66c5ccd071f9",
@@ -2974,6 +2984,16 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
+            "sources": []
+        },
+        {
+            "id": 615,
+            "name": "SuperStarFish Blue",
+            "uuid": "e2549aa3-37f9-499e-8632-69fac82a5001",
+            "description": "This weird genetic mutation of a starfish popped out of the ocean crawling on all 5’s. It’s dark blue color is probably responsible for its survival, as it looks like a natural predator.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
             "sources": []
         },
         {
@@ -3536,6 +3556,52 @@
             "result": "Basic Crystal Ball",
             "ingredients": ["Perfect Pyramid", "Pastel Shard"],
             "tools": ["Fairy Particles", "Lighter"],
+            "type": ""
+        },
+        {
+            "result": "Orange Potion (adv.)",
+            "ingredients": [
+                "Expert Potion Bottle",
+                "Thermometer",
+                "Orange Potion (beg.)"
+            ],
+            "tools": ["Basic Crystal Ball"],
+            "type": ""
+        },
+        {
+            "result": "Magenta Potion (adv.)",
+            "ingredients": [
+                "Expert Potion Bottle",
+                "Thermometer",
+                "Magenta Potion (beg.)"
+            ],
+            "tools": ["Basic Crystal Ball"],
+            "type": ""
+        },
+        {
+            "result": "SuperStarFish Blue",
+            "ingredients": [
+                "Orange Starfish",
+                "Blue Starfish",
+                "Magenta Potion (beg.)"
+            ],
+            "tools": ["Watering Can"],
+            "type": ""
+        },
+        {
+            "result": "SuperStarFish Orange",
+            "ingredients": [
+                "Orange Starfish",
+                "Blue Starfish",
+                "Orange Potion (beg.)"
+            ],
+            "tools": ["Watering Can"],
+            "type": ""
+        },
+        {
+            "result": "MP3 Player",
+            "ingredients": ["Electricity", "Circuit", "EarBudz"],
+            "tools": [],
             "type": ""
         },
         {

@@ -649,7 +649,7 @@ def generate_wiki_articles(items, print_file_names=False):
                 os.makedirs(wiki_type_path)
             
             # write the new template to a file
-            with open(os.path.join(wiki_type_path, f'{item.name_formatted}.txt'), 'w', encoding='utf-8') as f:
+            with open(os.path.join(wiki_type_path, f'{item.name_formatted}.mw'), 'w', encoding='utf-8') as f:
                 f.write(new_template)
                 if print_file_names:
                     print(f'Writing {item.name} to file')
@@ -773,7 +773,7 @@ def generate_recipe_table(recipes):
         
     recipe_table = '\n\n\n'.join(recipe_type_tables)   
     
-    with open(os.path.join(script_dir, '..', 'wiki', 'recipes.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'recipes.mw'), 'w', encoding='utf-8') as f:
         f.write(recipe_table)
         
     print('Generated recipe table.')
@@ -813,13 +813,13 @@ def generate_page_tables(items):
     materials_table = replace_text(materials_table, '<ITEMS>', ''.join(materialItems))
     tools_table = replace_text(tools_table, '<ITEMS>', ''.join(toolItems))
     
-    with open(os.path.join(script_dir, '..', 'wiki', 'accessories-table.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'accessories-table.mw'), 'w', encoding='utf-8') as f:
         f.write(accessories_table)
         
-    with open(os.path.join(script_dir, '..', 'wiki', 'materials-table.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'materials-table.mw'), 'w', encoding='utf-8') as f:
         f.write(materials_table)
         
-    with open(os.path.join(script_dir, '..', 'wiki', 'tools-table.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'tools-table.mw'), 'w', encoding='utf-8') as f:
         f.write(tools_table)
         
     print('Generated page tables for accessories.')
@@ -862,13 +862,13 @@ def generate_cards_lists(items):
     material_card_body = replace_text(material_card_body, '<ITEMS>', ''.join(materialItems))
     tool_card_body = replace_text(tool_card_body, '<ITEMS>', ''.join(toolItems))
     
-    with open(os.path.join(script_dir, '..', 'wiki', 'accessories-cards.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'accessories-cards.mw'), 'w', encoding='utf-8') as f:
         f.write(accessory_card_body)
     
-    with open(os.path.join(script_dir, '..', 'wiki', 'materials-cards.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'materials-cards.mw'), 'w', encoding='utf-8') as f:
         f.write(material_card_body)
         
-    with open(os.path.join(script_dir, '..', 'wiki', 'tools-cards.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'tools-cards.mw'), 'w', encoding='utf-8') as f:
         f.write(tool_card_body)
         
     print('Generated accessory cards.')
@@ -954,7 +954,7 @@ def generate_loot_table_page(items):
         
     loot_table = replace_text(loot_table, '<CONTAINERS>', ''.join(containers))
     
-    with open(os.path.join(script_dir, '..', 'wiki', 'loot-table.txt'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(script_dir, '..', 'wiki', 'loot-table.mw'), 'w', encoding='utf-8') as f:
         f.write(loot_table)
         
     print('Generated loot table page.')
@@ -989,7 +989,7 @@ def generate_loot_source_pages(items):
                 
         new_template = replace_text(new_template, '<ITEMS>', ''.join(items_rows))
         
-        with open(os.path.join(sources_dir, f'{format_name(source.name)}.txt'), 'w', encoding='utf-8') as f:
+        with open(os.path.join(sources_dir, f'{format_name(source.name)}.mw'), 'w', encoding='utf-8') as f:
             f.write(new_template)
         
     print(f'Generated loot source pages for {len(sources) - 1} sources.')
