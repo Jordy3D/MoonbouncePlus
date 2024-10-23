@@ -2927,6 +2927,16 @@
             "sources": []
         },
         {
+            "id": 600,
+            "name": "Orange Potion (beg.)",
+            "uuid": "380d686a-b767-47c8-a1c0-3905a377064a",
+            "description": "This simplistic potion looks a bit watered down and appears to have some additives, however it has an orange color that makes the owner proud.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 15,
+            "sources": ["Orange Drawstring"]
+        },
+        {
             "id": 601,
             "name": "Magenta Potion (beg.)",
             "uuid": "6036a099-f0ac-4c30-9e17-c45b1086103d",
@@ -2994,6 +3004,16 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
+            "sources": []
+        },
+        {
+            "id": 614,
+            "name": "SuperStarFish Orange",
+            "uuid": "127b8067-076b-4fb9-91b1-e711cf89a611",
+            "description": "This weird genetic mutation of a starfish popped out of the ocean walking on all 5’s. It’s orange color is probably responsible for its survival.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
             "sources": []
         },
         {
