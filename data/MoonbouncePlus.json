@@ -3027,6 +3027,16 @@
             "sources": []
         },
         {
+            "id": 616,
+            "name": "Purple Space Mask (L.)",
+            "uuid": "7f42eab2-9b32-456e-b0fb-95c48bebdba7",
+            "description": "One of Nova’s specialty recipes, given directly to you. Not available for sale anywhere! a Light metal base to reflect sun away from you.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 1500,
+            "sources": []
+        },
+        {
             "id": 617,
             "name": "Purple Space Mask (D.)",
             "uuid": "4bad796b-1312-4550-a2b1-bf77de1001dc",

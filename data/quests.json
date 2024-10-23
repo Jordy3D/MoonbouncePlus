@@ -41,7 +41,7 @@
     },
     {
         "quest_id": "a91ea952-8424-42d9-a85b-867ce28926e5",
-        "quest_name": "Black Market Dealings PT.2",
+        "quest_name": "Black Market Dealings PT. 2",
         "quest_description": "Jasper wanted to pass on his thanks for getting him those Pastel Clusters, but he says it\u2019s not exactly what he needed. He needs 5 Pastel Shards. He said something about the right person with the recipe can make them. We don\u2019t really know what he\u2019s planning to make with them, but we know he will pay well. Craft 5 Pastel Shards and bring them back here for your reward.",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
@@ -141,7 +141,7 @@
     {
         "quest_id": "dcd72228-e317-4b1c-8de2-5f251dc8cd2b",
         "quest_name": "Lazy Luna",
-        "quest_description": "Luna wants you to go and get some items for them across the web, because she can\u2019t bear to leave her bed. She is trying to make the most ultimate lazy day in history, fit with snacks drinks blankets and pillows. ( some assembly required). Can you bring back 50 feathers from anywhere,  10 crafted smooth silk, 6 sodas,  3 corn on the cobs and a lighter ( for popcorn of course ). ",
+        "quest_description": "Luna wants you to go and get some items for them across the web, because she can\u2019t bear to leave her bed. She is trying to make the most ultimate lazy day in history, fit with snacks drinks blankets and pillows. (some assembly required). Can you bring back 50 Feathers from anywhere,  10 crafted Smooth Silk, 6 Tiki Drinks,  3 Corn on the Cobs and a Lighter ( for popcorn of course ). ",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
         "quest_tags": [],
@@ -201,7 +201,7 @@
     {
         "quest_id": "35e1f2b3-1754-4a78-ab40-d823b7ac0e4c",
         "quest_name": "Rex's Sundae Surprise",
-        "quest_description": "Rex is working on a new recipe\u2026 again. Usually they turn out in a disaster but we\u2019re friends so we might as well help him source all the stuff he needs. If you help him we\u2019ll pay you well, because we know Rex is struggling in the restaurant biz. Rex needs 20 Bananas, 15 Dream Pops,  2 Salt & Pepper shakers, and 1 Vinegar (no wonder his business is struggling, that sounds awful).",
+        "quest_description": "Rex is working on a new recipe\u2026 again. Usually they turn out in a disaster but we\u2019re friends so we might as well help him source all the stuff he needs. If you help him we\u2019ll pay you well, because we know Rex is struggling in the restaurant biz. Rex needs 20 Bananas, 15 Ice Creams,  2 Salt & Pepper shakers, and 1 Vinegar (no wonder his business is struggling, that sounds awful).",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
         "quest_tags": [],
@@ -256,7 +256,7 @@
     {
         "quest_id": "8519cef0-0ef9-466e-901b-3e26483970aa",
         "quest_name": "Rex's Sundae Disaster",
-        "quest_description": "Ok so Rex is not doing so hot. No one liked his sundaes (shocker!) He wants to try again but with different ingredients. 10 Dream Pops, 3 Fruit Bowls, 2 Choco De-Lites, and 5 Peaches. He took out a loan from the Moonbank to keep his business alive just long enough to get these out there to the world.",
+        "quest_description": "Ok so Rex is not doing so hot. No one liked his sundaes (shocker!) He wants to try again but with different ingredients. 10 Dream Pops, 3 Fruit Bowls, 2 Choco De-Lites, and 5 Kiwi Fruit. He took out a loan from the Moonbank to keep his business alive just long enough to get these out there to the world.",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
         "quest_tags": [],
@@ -313,7 +313,7 @@
     {
         "quest_id": "c5f6fcf4-feac-4683-ae73-e072ab6c3862",
         "quest_name": "Roxy's Rave",
-        "quest_description": "Roxy is throwing the biggest virtual rave ever, but she needs your help to make it truly spectacular! You\u2019ll need to find some leftover glowsticks from last years rave around the web, craft 5 speakers and 3 holographic disco balls, and buy 2 CD\u2019s from the marketplace",
+        "quest_description": "Roxy is throwing the biggest virtual rave ever, but she needs your help to make it truly spectacular! You\u2019ll need to find 10 Blue Glowsticks, and 5 Earbudz from last years rave around the web, craft 5 MP3 Players, and buy 2 2000's CDs from the marketplace.",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
         "quest_tags": [],
@@ -411,7 +411,7 @@
         ],
         "rewards": [
             {
-                "item_id": "ff29a828-5557-4857-9934-28c2a35fe888",
+                "item_id": "4ba25e64-c73c-449c-a253-a58ecdc0944d",
                 "item_name": "Dusty Hat",
                 "quantity": 1,
                 "reward_type": "item",
@@ -430,7 +430,7 @@
     {
         "quest_id": "c3e5c00a-5cd6-42e6-ace9-0136c4253695",
         "quest_name": "Space Walkers",
-        "quest_description": "We just got a message from Nova, up at the space station about the new fashion that hasn\u2019t made its way to earth yet, a new space mask. Apparently she said it's made way better than the rest and has materials in it we haven't even seen before! All she needs is 2 Blue Space Masks, 2 Red Space Mask, a Hammer,  and 5 Polished Purple Gems.",
+        "quest_description": "We just got a message from Nova, up at the space station about the new fashion that hasn\u2019t made its way to earth yet, a new space mask. Apparently she said it's made way better than the rest and has materials in it we haven't even seen before! All she needs is 2 Blue Space Masks, 2 Red Space Masks, a Hammer,  and 5 Polished Purple Gems.",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
         "quest_tags": [],
@@ -484,7 +484,7 @@
     },
     {
         "quest_id": "a6056079-8a77-42fe-8a88-e49346b0835c",
-        "quest_name": "Welcome To Moonbounce",
+        "quest_name": "Welcome to Moonbounce",
         "quest_description": "Welcome to Moonbounce! We\u2019re super happy to have you around! We made this quest specifically for you to get a better lay of the land, and understand how some things work. For your first quest, hop into multiplayer wait for a chest to spawn and bring back a White Fabric.",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Collect",
@@ -524,7 +524,7 @@
     },
     {
         "quest_id": "d1765313-c979-46ad-a011-90afe6bb52a3",
-        "quest_name": "Welcome to Moonbounce pt.2",
+        "quest_name": "Welcome to Moonbounce PT. 2",
         "quest_description": "Visit the marketplace and buy one slightly magic fruit, one empty vial, one white fabric and a needle and thread, and then pop over to the marketplace again to the recipes tab and buy the recipe for the wizard hat,  and craft it! Once you\u2019ve crafted the hat return back here for your reward!",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Collect",
@@ -566,8 +566,8 @@
     },
     {
         "quest_id": "7a699a23-f764-4137-a08a-44add5976a0c",
-        "quest_name": "Welcome to Moonbounce pt.3",
-        "quest_description": "Looks like your getting the hang of this! For the last part of the quest, enter multiplayer on youtube, and wait for the chicken chest to spawn. Follow it around and once its done bring back a chicken leg back here for your final reward.",
+        "quest_name": "Welcome to Moonbounce PT. 3",
+        "quest_description": "Looks like your getting the hang of this! For the last part of the quest, enter multiplayer on Youtube, and wait for the Floating Eye to spawn. Follow it around and once its done bring back ten Candy Corns for your final reward.",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
         "quest_tags": [],
