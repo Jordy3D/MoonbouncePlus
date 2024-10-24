@@ -3097,6 +3097,16 @@
             "sources": ["Dark Elemental Chest"]
         },
         {
+            "id": 626,
+            "name": "2000's CD",
+            "uuid": "26695388-3e2a-49da-891a-5674a34ca4d7",
+            "description": "Pump up the jam with this relic of the past. ( Ok its not really a relic, but when’s the last time you put one of these on?)",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 30,
+            "sources": []
+        },
+        {
             "id": 627,
             "name": "Water Shard",
             "uuid": "accab883-32c3-4a64-be8d-7496c7be3255",
@@ -4275,6 +4285,11 @@
                 "name": "Orange Wizard Hat",
                 "section": "Accessories",
                 "cost": 750
+            },
+            {
+                "name": "2000's CD",
+                "section": "Materials",
+                "cost": 250
             },
             {
                 "name": "Raw Moonstone",

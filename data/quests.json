@@ -311,6 +311,58 @@
         "tags": []
     },
     {
+        "quest_id": "e39c4a98-c9de-44aa-84f8-2e381eb602f4",
+        "quest_name": "Rex\u2019s Success!",
+        "quest_description": "Extra Extra read all about it! No seriously, read about how Rex turned his failing business into a well respected establishment, seemingly overnight! Thanks to your help, Rex\u2019s business will stay around for at least a bit longer. All you need to do for him is get him a lighter for his candles, 6 Tiki Drinks, and a Thermometer, so he can take a bubble bath and relax after all his hard work.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [
+            "8519cef0-0ef9-466e-901b-3e26483970aa"
+        ],
+        "availability": [
+            {
+                "start_date": 1729288200,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "c56218c9-8f54-4d8b-a267-e3c695e54b6c",
+                "item_name": "Lighter",
+                "quantity": 1
+            },
+            {
+                "item_id": "8dbded2a-f046-460f-8ee1-51653ceaaa52",
+                "item_name": "Tiki Drink",
+                "quantity": 6
+            },
+            {
+                "item_id": "a0ee1b90-2d6b-4312-9a14-2ae6442c7371",
+                "item_name": "Thermometer",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "2d3267a2-8c5d-40b6-b99d-7e52f0eeea95",
+                "item_name": "Mint Ice Cream Hat",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2000,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
         "quest_id": "c5f6fcf4-feac-4683-ae73-e072ab6c3862",
         "quest_name": "Roxy's Rave",
         "quest_description": "Roxy is throwing the biggest virtual rave ever, but she needs your help to make it truly spectacular! You\u2019ll need to find 10 Blue Glowsticks, and 5 Earbudz from last years rave around the web, craft 5 MP3 Players, and buy 2 2000's CDs from the marketplace.",
