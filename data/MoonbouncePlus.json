@@ -2967,6 +2967,16 @@
             "sources": ["Aquamarine Chest"]
         },
         {
+            "id": 604,
+            "name": "Rabbit Plush Mask",
+            "uuid": "22908fb4-8c11-46ae-af42-9be1d6d9119f",
+            "description": "Super soft, comfy, lightweight and breathable. It may or may have not been ripped from a child’s plush.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": ["Orange Drawstring"]
+        },
+        {
             "id": 605,
             "name": "Brown Rabbit Mask",
             "uuid": "e0d53c38-f178-43db-80a5-6850c1d29252",
@@ -3095,6 +3105,16 @@
             "type": "MATERIAL",
             "value": 15,
             "sources": ["Dark Elemental Chest"]
+        },
+        {
+            "id": 625,
+            "name": "Blue Glowstick",
+            "uuid": "e2cfa313-c2cd-46ab-bf30-896dab14aedd",
+            "description": "It has a little bit of its shine left, but you can tell its been through some parties.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": ["Orange Drawstring"]
         },
         {
             "id": 626,
@@ -4303,6 +4323,11 @@
             },
             {
                 "name": "Crumpled Metal",
+                "section": "Materials",
+                "cost": 100
+            },
+            {
+                "name": "Pastel Cluster",
                 "section": "Materials",
                 "cost": 100
             },
