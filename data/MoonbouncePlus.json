@@ -3756,7 +3756,7 @@
         },
         {
             "result": "Helm DM",
-            "requirements": ["Magenta Potion (adv.)", "Iron Plate", "Pink Scale"],
+            "ingredients": ["Magenta Potion (adv.)", "Iron Plate", "Pink Scale"],
             "tools": ["Hammer"],
             "type": ""
         },
