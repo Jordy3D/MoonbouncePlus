@@ -2927,6 +2927,16 @@
             "sources": []
         },
         {
+            "id": 598,
+            "name": "Magenta Potion (adv.)",
+            "uuid": "36f272f7-4c22-4636-bd6e-435cd80f7880",
+            "description": "Crafting this advanced potion shows that you truly understand the art of alchemy. This magenta potion has a faint aroma it smells of colors and looks of flavor.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 600,
             "name": "Orange Potion (beg.)",
             "uuid": "380d686a-b767-47c8-a1c0-3905a377064a",
