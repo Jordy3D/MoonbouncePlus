@@ -9,7 +9,8 @@ import time
 script_dir = os.path.dirname(__file__)
 data_path = os.path.join(script_dir, '..', 'data', 'MoonbouncePlus.json')
 
-recipes_enabled = False
+recipes_enabled = True
+usages_enabled = True
 timeout = 10
 
 #region Classes
@@ -148,6 +149,8 @@ Lorem Ipsum
 
 <RECIPEBLOCK>
 
+<USAGEBLOCK>
+
 == Trivia ==
 
 * Lorem Ipsum
@@ -174,6 +177,10 @@ The '''<NAME>''' is a [[Material]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
+
+<RECIPEBLOCK>
+
+<USAGEBLOCK>
 
 == Trivia ==
 
@@ -202,6 +209,10 @@ characterTemplate = """\
 == Appearance ==
 Lorem Ipsum
 
+<RECIPEBLOCK>
+
+<USAGEBLOCK>
+
 == Trivia ==
 
 * Lorem Ipsum
@@ -228,6 +239,10 @@ The '''<NAME>''' is a [[Tool]] in Moonbounce.
 
 == Appearance ==
 Lorem Ipsum
+
+<RECIPEBLOCK>
+
+<USAGEBLOCK>
 
 == Trivia ==
 
@@ -342,6 +357,14 @@ toolCardItemTemplate = """
 }}
 """
 
+card_template = """
+{{Card
+|title=<NAME>
+|image=<IMAGE>.png
+|linktarget=<NAMEHYPHENED>
+}}\
+"""
+
 #endregion
 
 #endregion
@@ -400,11 +423,8 @@ def replace_template(template, item):
     if len(item.sources) == 0:
         item.sources.append(Source('Nothing'))
     
-    
     foundin_string = ', '.join([source.name for source in item.sources])
     
-    
-          
     new_template = replace_text(new_template, '<FOUNDIN>', foundin_string)
 
     # check if the item has a recipe
@@ -415,73 +435,94 @@ def replace_template(template, item):
         recipe_block = f"== Recipe ==\n"
         
         table_format = """
-{| class="wikitable" style="text-align: center;"
-|-
 {ingredient_chunk}
-|-
-{tool_chunk}
-|}
+{tool_chunk}\
 """
 
-        ingredients_chunk = """\
-| colspan="3" | Ingredients
-|-
-| {ingredients_row}\
+        ingredients_chunk = """
+=== Ingredients ===
+<div class=\"card-container left-align\">\
+<ITEMS>
+</div>\
 """
 
         tool_chunk = """\
-| colspan="3" | Tools
-|-
-| {tools_row}
+=== Tools ===
+<div class=\"card-container left-align\">\
+<ITEMS>
+</div>\
 """
-        
+
         for recipe in recipes:
             if recipe.result == item.name:
-                ingredients_row_items = []
-                tools_row_items = []
-                ingredients_row_string = ""
-                tools_row_string = ""
-                
+                ingredients = []
+                tools = []
                 
                 for ingredient in recipe.ingredients:
-                    ingredient_image = f"[[File:{format_name(ingredient)}.png|50px|link={ingredient}]]"
-                    ingredients_row_items.append(f"{ingredient_image}<br>[[{ingredient}]]")
+                    ingredient_card = card_template
+                    ingredient_card = replace_text(ingredient_card, '<NAME>', ingredient)
+                    ingredient_card = replace_text(ingredient_card, '<IMAGE>', format_name(ingredient))
+                    ingredient_card = replace_text(ingredient_card, '<NAMEHYPHENED>', format_name(ingredient))
+                    ingredients.append(ingredient_card)
                     
                 for tool in recipe.tools:
-                    tool_image = f"[[File:{format_name(tool)}.png|50px]]"
-                    tools_row_items.append(f"{tool_image}<br>[[{tool}]]")
+                    tool_card = card_template
+                    tool_card = replace_text(tool_card, '<NAME>', tool)
+                    tool_card = replace_text(tool_card, '<IMAGE>', format_name(tool))
+                    tool_card = replace_text(tool_card, '<NAMEHYPHENED>', format_name(tool))
+                    tools.append(tool_card)
                     
-                # if there are less than 3 ingredients, add empty cells to the row
-                if len(ingredients_row_items) < 3:
-                    for i in range(3 - len(ingredients_row_items)):
-                        ingredients_row_items.append("")
-                if len(tools_row_items) < 3:
-                    for i in range(3 - len(tools_row_items)):
-                        tools_row_items.append("")
-                
-                ingredients_row_string = " || ".join(ingredients_row_items)
-                
-                # Replace the placeholders in the ingredient and tool chunks
-                ingredients_chunk = replace_text(ingredients_chunk, '{ingredients_row}', ingredients_row_string)
-                table_format = replace_text(table_format, '{ingredient_chunk}', ingredients_chunk)
-
-                # if there's no tools, then hide the tools row
-                if len(tools_row_items) != 0:
-                    tools_row_string = " || ".join(tools_row_items)            
-                    tool_chunk = replace_text(tool_chunk, '{tools_row}', tools_row_string)
-                
-                    # Replace the placeholders in the table format
-                    table_format = replace_text(table_format, '{tool_chunk}', tool_chunk)
+                if len(ingredients) == 0:
+                    ingredients_chunk = ''
                 else:
-                    table_format = replace_text(table_format, '{tool_chunk}', "")
+                    ingredients_chunk = replace_text(ingredients_chunk, '<ITEMS>', ''.join(ingredients))
+                    
+                if len(tools) == 0:
+                    tool_chunk = ''
+                else:
+                    tool_chunk = replace_text(tool_chunk, '<ITEMS>', ''.join(tools))
+                
+                table_format = replace_text(table_format, '{ingredient_chunk}', ingredients_chunk)
+                table_format = replace_text(table_format, '{tool_chunk}', tool_chunk)
                 
                 recipe_block += table_format
         
         new_template = replace_text(new_template, '<RECIPEBLOCK>', recipe_block)
     else:
         new_template = replace_text(new_template, '<RECIPEBLOCK>', '')
-        # replace three empty lines with one empty line
-        new_template = new_template.replace('\n\n\n', '\n')
+    
+    if usages_enabled:
+        # check if the item has a usage (a recipe that uses it)
+        usages = []
+        for recipe in recipes:
+            if item.name in recipe.ingredients:
+                usages.append(recipe)
+            if item.name in recipe.tools:
+                usages.append(recipe)
+
+        if len(usages) > 0:
+            usage_block = f"== Used In ==\n"
+            
+            usage_block += "<div class=\"card-container left-align\">"
+            
+            for usage in usages:
+                usage_card = card_template
+                usage_card = replace_text(usage_card, '<NAME>', usage.result)
+                usage_card = replace_text(usage_card, '<IMAGE>', format_name(usage.result))
+                usage_card = replace_text(usage_card, '<NAMEHYPHENED>', format_name(usage.result))
+                usage_block += usage_card
+                
+            usage_block += "</div>"
+                
+            new_template = replace_text(new_template, '<USAGEBLOCK>', usage_block)
+        else:
+            new_template = replace_text(new_template, '<USAGEBLOCK>', '')
+    else:
+        new_template = replace_text(new_template, '<USAGEBLOCK>', '')
+            
+    # remove all multiple empty lines
+    new_template = re.sub(r'\n{3,}', '\n\n', new_template)
+    
     return new_template
 
 def check_if_in_marketplace(item_name, marketplace_items):
@@ -602,6 +643,9 @@ def load_data(data_path):
 #region Generating Wiki Data
 def generate_wiki_articles(items, print_file_names=False):
     """Generate the wiki articles for the items in the items list."""
+    
+    print(f'Generating wiki articles. Recipes: {recipes_enabled}, Usages: {usages_enabled}')    
+    
     for item in items:
         new_template = ''
         type_path = ''
