@@ -3007,6 +3007,16 @@
             "sources": []
         },
         {
+            "id": 611,
+            "name": "Thermometer",
+            "uuid": "15c6c55b-0988-4f59-a0a9-f9dc4e7413b7",
+            "description": "A non-mercury, food safe thermometer, perfect for cooking or distinct alchemy.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": ["Aquamarine Chest"]
+        },
+        {
             "id": 612,
             "name": "Carrot Sprout",
             "uuid": "7ea8edc2-c792-4703-836b-42aef6523310",
