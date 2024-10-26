@@ -8,6 +8,7 @@ import time
 # Initialize the path to the JSON file
 script_dir = os.path.dirname(__file__)
 data_path = os.path.join(script_dir, '..', 'data', 'MoonbouncePlus.json')
+marketplace_data_path = os.path.join(script_dir, '..', 'data', 'marketplace.json')
 
 recipes_enabled = True
 usages_enabled = True
@@ -581,7 +582,7 @@ def download_images(items):
 #region Main functions
 
 #region Loading Data
-def load_data(data_path):
+def load_data(data_path, marketplace_data_path):
     """Load the data from the specified JSON file and populate the items and recipes lists."""
     
     # Initialize the lists to store the items, recipes, and sources
@@ -594,12 +595,16 @@ def load_data(data_path):
     # Load the data from the JSON file
     with open(data_path, 'r', encoding='utf-8') as f:
         data = json.load(f)  
+        
+    # load the marketplace data from the JSON file
+    with open(marketplace_data_path, 'r', encoding='utf-8') as f:
+        marketplace_data = json.load(f)
     
     # load the marketplace items and recipes
-    for item in data['marketplace']['items']:
+    for item in marketplace_data['marketplace']['items']:
         mp_item = MarketplaceItem(item['name'], item['section'], item['cost'], item.get('info', None))
         marketplace_items.append(mp_item)
-    for recipe in data['marketplace']['recipes']:
+    for recipe in marketplace_data['marketplace']['recipes']:
         mp_recipe = MarketplaceItem(recipe['name'], recipe['section'], recipe['cost'], recipe.get('info', None))
         marketplace_recipes.append(mp_recipe)
         
@@ -1083,7 +1088,7 @@ def update_readme():
 
 if __name__ == '__main__':
     # Initialize the lists to store the items, recipes, and sources
-    items, recipes, sources = load_data(data_path)
+    items, recipes, sources = load_data(data_path, marketplace_data_path)
     
     print(f'Loaded {len(items)} items and {len(recipes)} recipes.')
     print(f'Loaded {len(sources)} sources.')
