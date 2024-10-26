@@ -3017,6 +3017,16 @@
             "sources": []
         },
         {
+            "id": 607,
+            "name": "Towering Black Hat",
+            "uuid": "4c4c33cd-e968-4c7d-9f1c-8105de8cad6b",
+            "description": "This super huge hat ( possibly a repurposed witch’s hat?) towers over you and looks like its about to fall over.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 610,
             "name": "MP3 Player",
             "uuid": "a338a6a7-8ec1-4aba-a4b2-c03e0c35f173",
@@ -3756,7 +3766,11 @@
         },
         {
             "result": "Helm DM",
-            "ingredients": ["Magenta Potion (adv.)", "Iron Plate", "Pink Scale"],
+            "ingredients": [
+                "Magenta Potion (adv.)",
+                "Iron Plate",
+                "Pink Scale"
+            ],
             "tools": ["Hammer"],
             "type": ""
         },
