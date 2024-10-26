@@ -3117,6 +3117,16 @@
             "sources": ["Dark Elemental Chest"]
         },
         {
+            "id": 623,
+            "name": "Mint Ice Cream Hat",
+            "uuid": "7e7b203f-ec51-4764-813a-563b3657b259",
+            "description": "Rex's creations usually are pretty... interesting. This mint chocolate chip ice cream hat is no different.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": []
+        },
+        {
             "id": 625,
             "name": "Blue Glowstick",
             "uuid": "e2cfa313-c2cd-46ab-bf30-896dab14aedd",
