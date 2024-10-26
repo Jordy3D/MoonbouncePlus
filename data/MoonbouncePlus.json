@@ -2937,6 +2937,16 @@
             "sources": []
         },
         {
+            "id": 599,
+            "name": "Orange Potion (adv.)",
+            "uuid": "aac8531c-0703-40d2-beba-5bfe2e6d87c0",
+            "description": "Crafting this advanced potion shows that you truly understand the art of alchemy. This orange potion has a pumpkin and sparkly aroma.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 600,
             "name": "Orange Potion (beg.)",
             "uuid": "380d686a-b767-47c8-a1c0-3905a377064a",
