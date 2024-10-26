@@ -3755,6 +3755,12 @@
             "type": ""
         },
         {
+            "result": "Helm DM",
+            "requirements": ["Magenta Potion (adv.)", "Iron Plate", "Pink Scale"],
+            "tools": ["Hammer"],
+            "type": ""
+        },
+        {
             "result": "Bunny Ears",
             "ingredients": ["Carrot", "Chocolate Bunny", "Bunny Headband"],
             "tools": ["Vinegar"],
