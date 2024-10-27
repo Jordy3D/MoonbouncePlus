@@ -3545,6 +3545,16 @@
             "type": "ACCESSORY",
             "value": 250,
             "sources": []
+        },
+        {
+            "id": 669,
+            "name": "Lil Reaper",
+            "uuid": "62796f13-78e2-4c6e-9fa8-1841e6b8f928",
+            "description": "A freaky little fella to hang on top of your head. He may or may not be stealing a little of your life energy.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 0,
+            "sources": []
         }
     ],
     "recipes": [
