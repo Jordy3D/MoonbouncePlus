@@ -3027,6 +3027,16 @@
             "sources": []
         },
         {
+            "id": 608,
+            "name": "Helmet DM",
+            "uuid": "da5d74bc-0d83-4f0f-a5ae-c59a44e4f435",
+            "description": "This is just one of the haunted helmet’s we’ve found scattered across the battlegrounds of the internet. This dark magenta helm carries weird spiritual energy.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
             "id": 610,
             "name": "MP3 Player",
             "uuid": "a338a6a7-8ec1-4aba-a4b2-c03e0c35f173",
