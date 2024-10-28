@@ -3547,6 +3547,16 @@
             "sources": []
         },
         {
+            "id": 667,
+            "name": "Dusty Hat",
+            "uuid": "a3f1e5e4-84a4-4f43-8a1a-3d11e7c64b7e",
+            "description": "This hat is filled to the brim with dust.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
             "id": 669,
             "name": "Lil Reaper",
             "uuid": "62796f13-78e2-4c6e-9fa8-1841e6b8f928",
