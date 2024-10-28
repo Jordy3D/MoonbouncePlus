@@ -211,9 +211,6 @@ p {
         color: white;
     }
 
-
-    
-
     .type.pill {
         background-color: hsl(var(--typeColour));
     }

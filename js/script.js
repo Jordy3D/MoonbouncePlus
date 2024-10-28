@@ -5,15 +5,24 @@ var moonbounceData = null;
 var items = [];
 
 var dataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/MoonbouncePlus.json";
+var marketplateDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/marketplace.json";
 
 // fetch the data from the URL
 fetch(dataURL)
     .then(response => response.json())
     .then(data => {
         moonbounceData = data;
-        // console.log(moonbounceData);
-        // call the function to display the data
-        displayData();
+
+        // fetch the marketplace data
+        fetch(marketplateDataURL)
+            .then(response => response.json())
+            .then(data => {
+                moonbounceData.marketplace = data.marketplace;
+                console.log("Data loaded: ", moonbounceData);
+                // console.log(moonbounceData);
+                // call the function to display the data
+                displayData();
+            })
     })
     .catch(error => {
         console.error("Error fetching data: ", error);
@@ -121,7 +130,8 @@ function displayData() {
             let typeElement = itemElement.querySelector(".type");
             let valueElement = itemElement.querySelector(".value");
 
-            nameElement.textContent = `${item.name} #${item.id}`;
+            // create two spans for the name and id, to name the item "#id name"
+            nameElement.innerHTML = `<span class="id">#${item.id}</span> ${item.name}`;
             descriptionElement.textContent = item.description;
             rarityElement.textContent = item.rarity;
             typeElement.textContent = item.type;
@@ -235,7 +245,7 @@ function searchItems() {
         const type = item.getAttribute("data-type").toLowerCase();
 
         if (name.includes(searchValue) || id.includes(searchValue) || rarity.includes(searchValue) || type.includes(searchValue)) {
-            item.style.display = "block";
+            item.style.display = "flex";
         } else {
             item.style.display = "none";
         }
