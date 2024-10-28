@@ -4,11 +4,15 @@ import re
 import requests
 import time
 
+# import Quests from ../quests/quests.py
+import quests
+
         
 # Initialize the path to the JSON file
 script_dir = os.path.dirname(__file__)
 data_path = os.path.join(script_dir, '..', 'data', 'MoonbouncePlus.json')
 marketplace_data_path = os.path.join(script_dir, '..', 'data', 'marketplace.json')
+quests_data_path = os.path.join(script_dir, '..', 'quests', 'cleaned_quests.json')
 
 recipes_enabled = True
 usages_enabled = True
@@ -87,6 +91,7 @@ class Source:
         self.name = name
         self.name_formatted = format_name(name)
         self.drops = []
+        self.is_quest = False
         
     def __str__(self):
         return f'{self.name}'
@@ -129,7 +134,7 @@ type_to_types_dict = {
 
 #region Item Page Templates
 
-accessoryTemplate = """\
+itemPageTemplate = """\
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -137,47 +142,21 @@ accessoryTemplate = """\
 | rarity = <RARITY>
 | type = <TYPE>
 | description = <DESCRIPTION>
-| diffuse_value = <VALUE> MP
+| diffuse_value = <VALUE>
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
 | found_in = <FOUNDIN>
 }}
 
-The '''<NAME>''' is an [[Accessory]] in Moonbounce.
+The '''<NAME>''' is a [[<TYPE>]] in Moonbounce.
 
-== Appearance ==
-Lorem Ipsum
+== Description ==
 
-<RECIPEBLOCK>
+<DESCRIPTION>
 
-<USAGEBLOCK>
+== Found In ==
 
-== Trivia ==
-
-* Lorem Ipsum
-
-== Gallery ==
-
-Placeholder
-"""
-
-materialTemplate = """\
-{{Infobox
-| name = <NAME>
-| item_no = #<ID>
-| image = <NAMEHYPHENED>.png
-| rarity = <RARITY>
-| type = <TYPE>
-| description = <DESCRIPTION>
-| diffuse_value = <VALUE> MP
-| drops = <DROPS>
-| craftable = <HAS_RECIPE>
-| found_in = <FOUNDIN>
-}}
-The '''<NAME>''' is a [[Material]] in Moonbounce.
-
-== Appearance ==
-Lorem Ipsum
+<FOUNDINBLOCK>
 
 <RECIPEBLOCK>
 
@@ -200,19 +179,27 @@ characterTemplate = """\
 | rarity = <RARITY>
 | type = <TYPE>
 | description = <DESCRIPTION>
-| diffuse_value = <VALUE> MP
+| diffuse_value = <VALUE>
 | drops = <DROPS>
 | craftable = <HAS_RECIPE>
 | found_in = <FOUNDIN>
 }}
-'''<NAME>''' is a [[Character]] in Moonbounce.
+
+'''<NAME>''' is a [[<TYPE>]] in Moonbounce.
+
+== Description ==
+
+<DESCRIPTION>
 
 == Appearance ==
-Lorem Ipsum
+
+Placeholder
+
+== Found In ==
+
+<FOUNDINBLOCK>
 
 <RECIPEBLOCK>
-
-<USAGEBLOCK>
 
 == Trivia ==
 
@@ -223,36 +210,6 @@ Lorem Ipsum
 Placeholder
 """
 
-toolTemplate = """\
-{{Infobox
-| name = <NAME>
-| item_no = #<ID>
-| image = <NAMEHYPHENED>.png
-| rarity = <RARITY>
-| type = <TYPE>
-| description = <DESCRIPTION>
-| diffuse_value = <VALUE> MP
-| drops = <DROPS>
-| craftable = <HAS_RECIPE>
-| found_in = <FOUNDIN>
-}}
-The '''<NAME>''' is a [[Tool]] in Moonbounce.
-
-== Appearance ==
-Lorem Ipsum
-
-<RECIPEBLOCK>
-
-<USAGEBLOCK>
-
-== Trivia ==
-
-* Lorem Ipsum
-
-== Gallery ==
-
-Placeholder
-"""
 #endregion
 
 #region Main Page Templates
@@ -400,132 +357,6 @@ def format_name(name):
     
     return new_name
 
-def replace_template(template, item):
-    """Replace the placeholders in the template with the actual data."""
-    new_template = template
-    new_template = replace_text(new_template, '<NAME>', item.name)
-    new_template = replace_text(new_template, '<ID>', item.id)
-    
-    new_template = replace_text(new_template, '<NAMEHYPHENED>', item.name_formatted)
-    
-    new_template = replace_text(new_template, '<RARITY>', item.rarity)
-    new_template = replace_text(new_template, '<TYPE>', item.type)
-    new_template = replace_text(new_template, '<DESCRIPTION>', item.description)
-    if item.value == 0 or item.value == None:
-        new_template = replace_text(new_template, '<VALUE>', 'Cannot be Diffused for')
-    else:
-        new_template = replace_text(new_template, '<VALUE>', item.value)
-    # if the source is an empty array, then set DROPS to No
-    if len(item.sources) == 0:
-        new_template = replace_text(new_template, '<DROPS>', 'No')
-    else:
-        new_template = replace_text(new_template, '<DROPS>', 'Yes')
-    
-    if len(item.sources) == 0:
-        item.sources.append(Source('Nothing'))
-    
-    foundin_string = ', '.join([source.name for source in item.sources])
-    
-    new_template = replace_text(new_template, '<FOUNDIN>', foundin_string)
-
-    # check if the item has a recipe
-    item_has_recipe = has_recipe(item.name)
-    new_template = replace_text(new_template, '<HAS_RECIPE>', item_has_recipe)
-    
-    if item_has_recipe == 'Yes' and recipes_enabled:
-        recipe_block = f"== Recipe ==\n"
-        
-        table_format = """
-{ingredient_chunk}
-{tool_chunk}\
-"""
-
-        ingredients_chunk = """
-=== Ingredients ===
-<div class=\"card-container left-align\">\
-<ITEMS>
-</div>\
-"""
-
-        tool_chunk = """\
-=== Tools ===
-<div class=\"card-container left-align\">\
-<ITEMS>
-</div>\
-"""
-
-        for recipe in recipes:
-            if recipe.result == item.name:
-                ingredients = []
-                tools = []
-                
-                for ingredient in recipe.ingredients:
-                    ingredient_card = card_template
-                    ingredient_card = replace_text(ingredient_card, '<NAME>', ingredient)
-                    ingredient_card = replace_text(ingredient_card, '<IMAGE>', format_name(ingredient))
-                    ingredient_card = replace_text(ingredient_card, '<NAMEHYPHENED>', format_name(ingredient))
-                    ingredients.append(ingredient_card)
-                    
-                for tool in recipe.tools:
-                    tool_card = card_template
-                    tool_card = replace_text(tool_card, '<NAME>', tool)
-                    tool_card = replace_text(tool_card, '<IMAGE>', format_name(tool))
-                    tool_card = replace_text(tool_card, '<NAMEHYPHENED>', format_name(tool))
-                    tools.append(tool_card)
-                    
-                if len(ingredients) == 0:
-                    ingredients_chunk = ''
-                else:
-                    ingredients_chunk = replace_text(ingredients_chunk, '<ITEMS>', ''.join(ingredients))
-                    
-                if len(tools) == 0:
-                    tool_chunk = ''
-                else:
-                    tool_chunk = replace_text(tool_chunk, '<ITEMS>', ''.join(tools))
-                
-                table_format = replace_text(table_format, '{ingredient_chunk}', ingredients_chunk)
-                table_format = replace_text(table_format, '{tool_chunk}', tool_chunk)
-                
-                recipe_block += table_format
-        
-        new_template = replace_text(new_template, '<RECIPEBLOCK>', recipe_block)
-    else:
-        new_template = replace_text(new_template, '<RECIPEBLOCK>', '')
-    
-    if usages_enabled:
-        # check if the item has a usage (a recipe that uses it)
-        usages = []
-        for recipe in recipes:
-            if item.name in recipe.ingredients:
-                usages.append(recipe)
-            if item.name in recipe.tools:
-                usages.append(recipe)
-
-        if len(usages) > 0:
-            usage_block = f"== Used In ==\n"
-            
-            usage_block += "<div class=\"card-container left-align\">"
-            
-            for usage in usages:
-                usage_card = card_template
-                usage_card = replace_text(usage_card, '<NAME>', usage.result)
-                usage_card = replace_text(usage_card, '<IMAGE>', format_name(usage.result))
-                usage_card = replace_text(usage_card, '<NAMEHYPHENED>', format_name(usage.result))
-                usage_block += usage_card
-                
-            usage_block += "</div>"
-                
-            new_template = replace_text(new_template, '<USAGEBLOCK>', usage_block)
-        else:
-            new_template = replace_text(new_template, '<USAGEBLOCK>', '')
-    else:
-        new_template = replace_text(new_template, '<USAGEBLOCK>', '')
-            
-    # remove all multiple empty lines
-    new_template = re.sub(r'\n{3,}', '\n\n', new_template)
-    
-    return new_template
-
 def check_if_in_marketplace(item_name, marketplace_items):
     """Check if the item is in the marketplace."""
     for mp_item in marketplace_items:
@@ -576,7 +407,187 @@ def download_images(items):
         #     print(f'{item.name} already exists.')
             
     print('Downloaded images.')
+
 #endregion
+
+def replace_template(template, item):
+    """Replace the placeholders in the template with the actual data."""
+    new_template = template
+    new_template = replace_text(new_template, '<NAME>', item.name)
+    new_template = replace_text(new_template, '<ID>', item.id)
+    
+    new_template = replace_text(new_template, '<NAMEHYPHENED>', item.name_formatted)
+    
+    new_template = replace_text(new_template, '<RARITY>', item.rarity)
+    new_template = replace_text(new_template, '<TYPE>', item.type)
+    new_template = replace_text(new_template, '<DESCRIPTION>', item.description)
+    
+    value_string = f'{item.value} MP' if item.value != None else 'Cannot be Diffused'
+    new_template = replace_text(new_template, '<VALUE>', value_string)
+    
+    # if the source is an empty array, then set DROPS to No
+    drops_string = 'No' if len(item.sources) == 0 else 'Yes'
+    new_template = replace_text(new_template, '<DROPS>', drops_string)
+    
+    if len(item.sources) == 0:
+        item.sources.append(Source('Nothing'))
+    
+    foundin_string = ', '.join([source.name for source in item.sources])
+    new_template = replace_text(new_template, '<FOUNDIN>', foundin_string)
+    
+    # check if the item is a quest reward
+    rewarding_quest = None
+    for quest in quest_data:
+        if item.name in [item.item_name for item in quest.rewards]:
+            rewarding_quest = quest.quest_name
+            break
+        
+    if rewarding_quest != None:
+        print(f'(#{item.id}) {item.name} is a reward from {rewarding_quest}')
+        quest_source = Source(rewarding_quest)
+        quest_source.is_quest = True
+        item.sources.append(quest_source)
+    
+    if item.sources[0].name == 'Nothing' and len(item.sources) == 1:
+        if item.type == 'Character':
+            foundin_block = "This character cannot be obtained as a drop."
+        else:
+            foundin_block = "This item cannot be obtained as a drop."
+    else:
+        foundin_block = "<div class=\"card-container left-align\">"
+        
+        for source in item.sources:
+            # if the source is nothing, skip it
+            if source.name == 'Nothing':
+                continue
+            
+            source_card = card_template
+            source_card = replace_text(source_card, '<NAME>', source.name)
+            if source.is_quest:
+                source_card = replace_text(source_card, '<IMAGE>', 'Quest')
+                source_card = replace_text(source_card, '<NAMEHYPHENED>', format_name(source.name))
+            else:
+                source_card = replace_text(source_card, '<IMAGE>', format_name(source.name))
+                source_card = replace_text(source_card, '<NAMEHYPHENED>', format_name(source.name))
+            foundin_block += source_card
+        
+        foundin_block += "\n</div>"
+    
+    new_template = replace_text(new_template, '<FOUNDINBLOCK>', foundin_block)
+    
+    # check if the item has a recipe
+    item_has_recipe = has_recipe(item.name)
+    new_template = replace_text(new_template, '<HAS_RECIPE>', item_has_recipe)
+    
+    if recipes_enabled:
+        recipe_block = "== Recipe ==\n\n"
+        
+        if item_has_recipe == 'Yes':
+            for recipe in recipes:
+                if recipe.result == item.name:
+                    
+                    recipe_block += "=== Ingredients ===\n\n"
+                    recipe_block += "<div class=\"card-container left-align\">"
+        
+                    for ingredient in recipe.ingredients:
+                        ingredient_card = card_template
+                        ingredient_card = replace_text(ingredient_card, '<NAME>', ingredient)
+                        ingredient_card = replace_text(ingredient_card, '<IMAGE>', format_name(ingredient))
+                        ingredient_card = replace_text(ingredient_card, '<NAMEHYPHENED>', format_name(ingredient))
+                        recipe_block += ingredient_card
+                        
+                    recipe_block += "\n</div>\n\n"
+                    
+                    if len(recipe.tools) > 0:
+                        recipe_block += "=== Tools ===\n\n"
+                        recipe_block += "<div class=\"card-container left-align\">"
+                    
+                        for tool in recipe.tools:
+                            tool_card = card_template
+                            tool_card = replace_text(tool_card, '<NAME>', tool)
+                            tool_card = replace_text(tool_card, '<IMAGE>', format_name(tool))
+                            tool_card = replace_text(tool_card, '<NAMEHYPHENED>', format_name(tool))
+                            recipe_block += tool_card
+                            
+                        recipe_block += "\n</div>"
+                        
+        elif item_has_recipe == 'No':
+            if item.type == 'Character':
+                recipe_block += "This character cannot be crafted."
+            else:
+                recipe_block += "This item cannot be crafted."
+    else:
+        recipe_block = ""
+        
+    new_template = replace_text(new_template, '<RECIPEBLOCK>', recipe_block)
+    
+
+    # create a list of recipes and quests that use the item
+    
+    if usages_enabled:
+        usage_block = f"== Used In ==\n\n"
+        
+        # check if the item has a usage (a recipe that uses it)
+        used_recipes = []
+        used_quests = []
+        
+        for recipe in recipes:
+            if item.name in recipe.ingredients:
+                used_recipes.append(recipe)
+            if item.name in recipe.tools:
+                used_recipes.append(recipe)
+                
+        for quest in quest_data:
+            for required_item in quest.required_items:
+                if item.name == required_item.item_name:
+                    used_quests.append(quest)
+        
+        has_usages = False
+        if len(used_recipes) > 0 or len(used_quests) > 0:
+            has_usages = True
+
+        if has_usages:
+            if len(used_recipes) > 0:
+                usage_block += "=== Recipes ===\n\n"
+                
+                usage_block += "<div class=\"card-container left-align\">"
+                
+                for recipe in used_recipes:
+                    usage_card = card_template
+                    usage_card = replace_text(usage_card, '<NAME>', recipe.result)
+                    usage_card = replace_text(usage_card, '<IMAGE>', format_name(recipe.result))
+                    usage_card = replace_text(usage_card, '<NAMEHYPHENED>', format_name(recipe.result))
+                    usage_block += usage_card
+                    
+                usage_block += "\n</div>\n\n"
+            
+            if len(used_quests) > 0:
+                usage_block += "=== Quests ===\n\n"
+                
+                usage_block += "<div class=\"card-container left-align\">"
+                
+                for quest in used_quests:
+                    usage_card = card_template
+                    usage_card = replace_text(usage_card, '<NAME>', quest.quest_name)
+                    usage_card = replace_text(usage_card, '<IMAGE>', 'Quest')
+                    usage_card = replace_text(usage_card, '<NAMEHYPHENED>', format_name(quest.quest_name))
+                    usage_block += usage_card
+                    
+                usage_block += "</div>"
+                
+            new_template = replace_text(new_template, '<USAGEBLOCK>', usage_block)
+        else:
+            usage_block += "This item is not used in any recipes or quests."
+    else:
+        usage_block = ""
+        
+    new_template = replace_text(new_template, '<USAGEBLOCK>', usage_block)
+            
+    # remove all multiple empty lines
+    new_template = re.sub(r'\n{3,}', '\n\n', new_template)
+    
+    return new_template
+
 
 
 #region Main functions
@@ -656,12 +667,12 @@ def generate_wiki_articles(items, print_file_names=False):
         type_path = ''
         valid = False
         
+        new_template = itemPageTemplate
+        
         if item.type.lower() == 'accessory':
-            new_template = accessoryTemplate
             type_path = 'accessories'
             valid = True
         elif item.type.lower() == 'material':
-            new_template = materialTemplate
             type_path = 'materials'
             valid = True
         elif item.type.lower() == 'character':
@@ -669,7 +680,6 @@ def generate_wiki_articles(items, print_file_names=False):
             type_path = 'characters'
             valid = True
         elif item.type.lower() == 'tool':
-            new_template = toolTemplate
             type_path = 'tools'
             valid = True
         else:
@@ -677,18 +687,11 @@ def generate_wiki_articles(items, print_file_names=False):
             # # TEMPORARILY CREATE THE ITEM AS IF IT WERE AN ACCESSORY
             # new_template = accessoryTemplate
             # type_path = 'unknown'
-            # valid = True            
-            
-        # print any items with 4 or more sources
-        # if len(item.sources) >= 4:
-        #     print(f'{item.name} has {len(item.sources)} sources.')
+            # valid = True
             
         if valid == True:
             # replace the placeholders with the actual data
             new_template = replace_template(new_template, item)
-                
-            # check if the item has a recipe
-            new_template = replace_text(new_template, '<HAS_RECIPE>', has_recipe(item.name))
 
             # Construct the path to the appropriate directory one level up from the script
             wiki_type_path = os.path.join(script_dir, '..', 'wiki', type_path)
@@ -1089,6 +1092,9 @@ def update_readme():
 if __name__ == '__main__':
     # Initialize the lists to store the items, recipes, and sources
     items, recipes, sources = load_data(data_path, marketplace_data_path)
+    
+    # load quests from the JSON file
+    quest_data = quests.load_quests(quests_data_path)
     
     print(f'Loaded {len(items)} items and {len(recipes)} recipes.')
     print(f'Loaded {len(sources)} sources.')
