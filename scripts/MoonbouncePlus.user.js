@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.22.3
+// @version      0.22.4
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -159,6 +159,7 @@
 // 0.22.1   - Fixed some Markdown HTML causing unnecessary line breaks
 // 0.22.2   - Update to catch up with Moonbounce changes
 // 0.22.3   - Update to catch up with Moonbounce changes (forgot the Settings page)
+// 0.22.4   - Added a toggle to disable the seasonal CSS effects on the Moonbounce site
 //
 // ==/Changelog==
 
@@ -223,6 +224,9 @@ var userSettings = [
     { name: "Auto-Refresh on Application Error", description: "Automatically refresh the page when an application error occurs", type: "boolean", defaultValue: true, value: true, group: "General" },
     { name: "Update Refresh Rate", description: "The rate at which the script checks the current site (in milliseconds)", type: "number", defaultValue: 1000, value: 1000, min: 100, max: 10000, group: "General" },
     { name: "Notification Duration", description: "The duration of the floating notification (in milliseconds)", type: "number", defaultValue: 2000, value: 2000, min: 500, max: 10000, group: "General" },
+
+    // Moonbounce Site
+    { name: "Disable Seasonal Effects", description: "Disable the seasonal effects on the Moonbounce site", type: "boolean", defaultValue: false, value: false, group: "Moonbounce" },
 
     // Custom CSS
     { name: "Custom CSS", description: "Custom CSS for MoonbouncePlus", type: "textarea", defaultValue: "", value: "", group: "Custom" },
@@ -576,6 +580,8 @@ function checkSite() {
     // Stuff specifically for Moonbounce
     if (isOnMoonbounceSite) {
         if (getSettingValue("Auto-Refresh on Application Error")) checkForApplicationError();
+
+        if (getSettingValue("Disable Seasonal Effects")) disableSeasonalEffects();
 
         if (isTargetURL(getTargetURL("Inventory"), true)) {
             if (!loadingData) loadData();
@@ -3908,6 +3914,13 @@ function checkForApplicationError() {
 }
 
 //#endregion
+
+//#region Disable Seasonal Effects
+
+function disableSeasonalEffects() {
+    // if the body has any class, remove it. If the body has no class, do nothing
+    if (document.body.classList.length > 0) document.body.classList = "";
+}
 
 //#endregion
 
