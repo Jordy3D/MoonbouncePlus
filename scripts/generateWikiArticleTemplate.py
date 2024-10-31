@@ -129,6 +129,15 @@ type_to_types_dict = {
     "character": "Characters",
     "tool": "Tools",
 }
+
+# Reference to rarity order
+rarity_order = {
+    "common": 1,
+    "uncommon": 2,
+    "rare": 3,
+    "legendary": 4,
+    "mythic": 5
+}
     
 #region Templates
 
@@ -319,6 +328,15 @@ card_template = """
 {{Card
 |title=<NAME>
 |image=<IMAGE>.png
+|linktarget=<NAMEHYPHENED>
+}}\
+"""
+
+rarity_card_template = """
+{{Card
+|title=<NAME>
+|image=<NAMEHYPHENED>.png
+|rarity=<RARITY>
 |linktarget=<NAMEHYPHENED>
 }}\
 """
@@ -963,6 +981,23 @@ loot_table_item_template = """\
 | <DIFFUSE>
 """
 
+loot_table_card_container_template = """\
+== <CONTAINER> ==
+
+{| class="wikitable sortable mw-collapsible" style="width: 100%"
+|+ [[File:<CONTAINERHYPHEN>.png|frameless|80x80px|link=<CONTAINER>]] Loot Table
+<CARDS>\
+|}
+
+"""
+
+loot_table_card_card_container_template = """\
+|-
+| <div class="card-container">\
+<ITEMS>
+</div>
+"""
+
 loot_source_page_template = """\
 {{Infobox
 | name = <NAME>
@@ -971,42 +1006,81 @@ loot_source_page_template = """\
 }}The <NAME> is a [[Loot Source]] in Moonbounce.
 
 == Loot Table ==
-{| class="wikitable sortable" style="min-width: 300px;"
-| Item
-| Rarity
-| Diffuse
-<ITEMS>\
-|}
+
+<div class="card-container left-align">\
+<ITEMS>
+</div>
 """
+
 
 
 def generate_loot_table_page(items):
     """Generate the loot table page for the items in the items list based on their sources."""
+    # loot_table = loot_table_template
+    # loot_card_template = rarity_card_template
+    # containers = []
+    
+    # for source in sources:
+    #     new_container = loot_table_container_template
+    #     new_container = replace_text(new_container, '<CONTAINER>', source.name)
+    #     new_container = replace_text(new_container, '<CONTAINERHYPHEN>', format_name(source.name))
+        
+    #     items_rows = []
+        
+    #     for item in items:
+    #         if source in item.sources:
+    #             new_item = loot_card_template
+    #             new_item = replace_text(new_item, '<NAME>', item.name)
+    #             new_item = replace_text(new_item, '<RARITY>', item.rarity)
+    #             if item.value == 0 or item.value == None:
+    #                 new_item = replace_text(new_item, '<DIFFUSE>', 'Cannot be diffused')
+    #             else:
+    #                 new_item = replace_text(new_item, '<DIFFUSE>', f'{item.value} MP')
+    #             items_rows.append(new_item)
+                
+    #     new_container = replace_text(new_container, '<ITEMS>', ''.join(items_rows))
+    #     containers.append(new_container)
+        
+    # loot_table = replace_text(loot_table, '<CONTAINERS>', ''.join(containers))
+    
+    # with card container instead of table
     loot_table = loot_table_template
+    loot_card_template = rarity_card_template
     containers = []
     
     for source in sources:
-        new_container = loot_table_container_template
+        # if the source is the marketplace, skip it
+        if source.name == 'Marketplace':
+            continue
+        
+        new_container = loot_table_card_container_template
         new_container = replace_text(new_container, '<CONTAINER>', source.name)
         new_container = replace_text(new_container, '<CONTAINERHYPHEN>', format_name(source.name))
         
         items_rows = []
         
-        for item in items:
+        # sort items by rarity, then by name
+        sorted_items = sorted(items, key=lambda x: (rarity_order[x.rarity.lower()], x.name))
+        
+        for item in sorted_items:
             if source in item.sources:
-                new_item = loot_table_item_template
-                new_item = replace_text(new_item, '<NAME>', item.name.replace('?', '-') )
+                new_item = loot_card_template
+                new_item = replace_text(new_item, '<NAME>', item.name)
                 new_item = replace_text(new_item, '<RARITY>', item.rarity)
-                if item.value == 0 or item.value == None:
-                    new_item = replace_text(new_item, '<DIFFUSE>', 'Cannot be diffused')
+                # if the item's name is P?t Ch?ck?n, replace the name with Pet Chicken
+                if item.name == 'P?t Ch?ck?n':
+                    new_item = replace_text(new_item, '<NAMEHYPHENED>', 'Pet_Chicken')
                 else:
-                    new_item = replace_text(new_item, '<DIFFUSE>', f'{item.value} MP')
+                    new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
                 items_rows.append(new_item)
+                
+        # merge item_rows into loot_table_card_card_container_template
+        new_container = replace_text(new_container, '<CARDS>', loot_table_card_card_container_template)
                 
         new_container = replace_text(new_container, '<ITEMS>', ''.join(items_rows))
         containers.append(new_container)
         
-    loot_table = replace_text(loot_table, '<CONTAINERS>', ''.join(containers))
+    loot_table = replace_text(loot_table, '<CONTAINERS>', ''.join(containers))    
     
     with open(os.path.join(script_dir, '..', 'wiki', 'loot-table.mw'), 'w', encoding='utf-8') as f:
         f.write(loot_table)
@@ -1030,15 +1104,16 @@ def generate_loot_source_pages(items):
         
         items_rows = []
         
-        for item in items:
+        # sort items by rarity, then by name
+        sorted_items = sorted(items, key=lambda x: (rarity_order[x.rarity.lower()], x.name))        
+        
+        for item in sorted_items:
             if source in item.sources:
-                new_item = loot_table_item_template
+                new_item = rarity_card_template
                 new_item = replace_text(new_item, '<NAME>', item.name)
                 new_item = replace_text(new_item, '<RARITY>', item.rarity)
-                if item.value == 0 or item.value == None:
-                    new_item = replace_text(new_item, '<DIFFUSE>', 'Cannot be diffused')
-                else:
-                    new_item = replace_text(new_item, '<DIFFUSE>', f'{item.value} MP')
+                new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
+                
                 items_rows.append(new_item)
                 
         new_template = replace_text(new_template, '<ITEMS>', ''.join(items_rows))
