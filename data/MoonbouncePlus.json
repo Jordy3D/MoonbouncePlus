@@ -3567,6 +3567,16 @@
             "sources": []
         },
         {
+            "id": 668,
+            "name": "Frankie",
+            "uuid": "18350f6b-83b3-4c18-9692-5326865f0cf8",
+            "description": "frankie test",
+            "rarity": "RARE",
+            "type": "CHARACTER",
+            "value": null,
+            "sources": []
+        },
+        {
             "id": 669,
             "name": "Lil Reaper",
             "uuid": "62796f13-78e2-4c6e-9fa8-1841e6b8f928",
