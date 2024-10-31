@@ -12,7 +12,7 @@ import quests
 script_dir = os.path.dirname(__file__)
 data_path = os.path.join(script_dir, '..', 'data', 'MoonbouncePlus.json')
 marketplace_data_path = os.path.join(script_dir, '..', 'data', 'marketplace.json')
-quests_data_path = os.path.join(script_dir, '..', 'quests', 'cleaned_quests.json')
+quests_data_path = os.path.join(script_dir, '..', 'data', 'quests.json')
 
 recipes_enabled = True
 usages_enabled = True
@@ -591,7 +591,7 @@ def replace_template(template, item):
                     usage_card = replace_text(usage_card, '<NAMEHYPHENED>', format_name(quest.quest_name))
                     usage_block += usage_card
                     
-                usage_block += "</div>"
+                usage_block += "\n</div>"
                 
             new_template = replace_text(new_template, '<USAGEBLOCK>', usage_block)
         else:

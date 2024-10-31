@@ -17,3 +17,5 @@ time.html
 *.mw
 *.lua
 /quests
+
+__pycache__

@@ -1,5 +1,6 @@
 # open quests.json and remove a series of fields from each quest
 
+import os
 import json
 
 quests = []
@@ -65,6 +66,7 @@ class QuestRequiredItem:
     def __str__(self):
         return f"{self.item_name} x{self.quantity}"
 
+
 quest_mp_sizes = {
     500: "Small",
     2000: "Medium",
@@ -72,6 +74,7 @@ quest_mp_sizes = {
     3000: "Large",
     5000: "Large",
 }
+
 
 class QuestReward:
     def __init__(
@@ -144,7 +147,7 @@ def load_quests(input_file):
             new_quest.quest_description = quest["quest_description"]
             new_quest.quest_instance_type = quest["quest_instance_type"]
             new_quest.quest_quest_type = quest["quest_quest_type"]
-            
+
             new_quest.quest_tags = quest["quest_tags"]
 
             # if prerequisites is not an empty list
@@ -154,14 +157,16 @@ def load_quests(input_file):
 
             # find the start_date and end_date values in the availability list
             new_quest.availability = (
-                quest["availability"]["start"],
-                quest["availability"]["end"],
+                quest["availability"][0]["start_date"],
+                quest["availability"][0]["end_date"],
             )
 
-            new_quest.recurring = quest['recurring']
-            if quest['recurring']:
-                new_quest.recurring_cooldown = quest['recurring_cooldown']
-                
+            new_quest.recurring = quest["recurring"]
+            if quest["recurring"]:
+                new_quest.recurring_cooldown = quest["recurring"][0][
+                    "cooldown_period_in_hours"
+                ]
+
             if quest["required_items"]:
                 # get the item_id, quantity, and item_name values from the required_items list
                 required_items = []
@@ -287,6 +292,7 @@ reward_card_template = """\
 }}
 """
 
+
 # the prerequisites, required_items, and rewards fields are lists of dictionaries
 # the prerequisites should find the quest name from the quest_id
 # the required_items should list the item name and quantity
@@ -304,15 +310,11 @@ def convert_to_mediawiki(obj):
 
         required_items = []
         for item in obj.required_items:
-            required_items.append(
-                f"{item.item_name} x{item.quantity}"
-            )
+            required_items.append(f"{item.item_name} x{item.quantity}")
 
         rewards = []
         for reward in obj.rewards:
-            rewards.append(
-                f"{reward.get_clean_name()}"
-            )
+            rewards.append(f"{reward.get_clean_name()}")
 
         return quest_template.format(
             quest_name=obj.quest_name,
@@ -334,39 +336,47 @@ def convert_to_mediawiki(obj):
 def create_quest_pages(quests):
     for quest in quests:
         page = ""
-        
+
         # replace the placeholders in the quest_page_template with the quest values
         page = quest_page_template.replace("<QUEST>", convert_to_mediawiki(quest))
         page = page.replace("<NAME>", quest.quest_name)
         page = page.replace("<INSTANCE_TYPE>", quest.quest_instance_type)
         page = page.replace("<QUEST_TYPE>", quest.quest_quest_type)
         page = page.replace("<DESCRIPTION>", quest.quest_description)
-        
+
         if quest.prerequisites:
             prerequisites = "== Prerequisites ==\n\n"
             for prerequisite in quest.prerequisites:
-                
-                prereq_quest = next((q for q in quests if q.quest_id == prerequisite), None)
-                
+
+                prereq_quest = next(
+                    (q for q in quests if q.quest_id == prerequisite), None
+                )
+
                 prerequisites += f"* [[{prereq_quest.quest_name}]]\n"
             page = page.replace("<PREREQUISITES>", prerequisites)
         else:
             page = page.replace("<PREREQUISITES>", "")
-            
+
         if quest.required_items:
             required_items = "== Required Items ==\n\n"
             required_items += '<div class="card-container left-align">\n'
             for item in quest.required_items:
                 # these are always items
-                required_items += reward_card_template.replace("<NAME>", f"{item.item_name} x{item.quantity}")
-                required_items = required_items.replace("<NAMEHYPHENED>", f"{item.item_name.replace(' ', '_')}")
-                required_items = required_items.replace("<IMAGE>", f"{item.item_name.replace(' ', '_')}")
+                required_items += reward_card_template.replace(
+                    "<NAME>", f"{item.item_name} x{item.quantity}"
+                )
+                required_items = required_items.replace(
+                    "<NAMEHYPHENED>", f"{item.item_name.replace(' ', '_')}"
+                )
+                required_items = required_items.replace(
+                    "<IMAGE>", f"{item.item_name.replace(' ', '_')}"
+                )
             required_items += "</div>"
-                
+
             page = page.replace("<REQUIRED>", required_items)
         else:
             page = page.replace("<REQUIRED>", "")
-            
+
         if quest.rewards:
             rewards = "== Rewards ==\n\n"
             rewards += '<div class="card-container left-align">\n'
@@ -374,13 +384,21 @@ def create_quest_pages(quests):
                 # if the reward is an item
                 if reward.reward_type == "item":
                     rewards += reward_card_template.replace("<NAME>", reward.item_name)
-                    rewards = rewards.replace("<NAMEHYPHENED>", reward.item_name.replace(" ", "_"))
-                    rewards = rewards.replace("<IMAGE>", reward.item_name.replace(" ", "_"))
-                    
+                    rewards = rewards.replace(
+                        "<NAMEHYPHENED>", reward.item_name.replace(" ", "_")
+                    )
+                    rewards = rewards.replace(
+                        "<IMAGE>", reward.item_name.replace(" ", "_")
+                    )
+
                 # if the reward is a recipe
                 elif reward.reward_type == "recipe":
-                    rewards += reward_card_template.replace("<NAME>", f"{reward.recipe_name} Recipe")
-                    rewards = rewards.replace("<NAMEHYPHENED>", f"{reward.recipe_name}_Recipe")
+                    rewards += reward_card_template.replace(
+                        "<NAME>", f"{reward.recipe_name} Recipe"
+                    )
+                    rewards = rewards.replace(
+                        "<NAMEHYPHENED>", f"{reward.recipe_name}_Recipe"
+                    )
                     rewards = rewards.replace("<IMAGE>", f"Recipe_Sheet")
                 # if the reward is a quest
                 elif reward.reward_type == "quest":
@@ -396,44 +414,60 @@ def create_quest_pages(quests):
                         if reward.quantity <= key:
                             currency_size = quest_mp_sizes[key]
                             break
-                    
-                    rewards += reward_card_template.replace("<NAME>", f"{reward.quantity} MP")
-                    rewards = rewards.replace("<NAMEHYPHENED>", 'Quests')
+
+                    rewards += reward_card_template.replace(
+                        "<NAME>", f"{reward.quantity} MP"
+                    )
+                    rewards = rewards.replace("<NAMEHYPHENED>", "Quests")
                     rewards = rewards.replace("<IMAGE>", f"MP_{currency_size}")
                 else:
                     rewards += reward_card_template.replace("<NAME>", "Unknown Reward")
                     rewards = rewards.replace("<NAMEHYPHENED>", "Quests")
                     rewards = rewards.replace("<IMAGE>", "Quest.png")
             rewards += "</div>"
-            
+
             page = page.replace("<REWARDS>", rewards)
         else:
             page = page.replace("<REWARDS>", "")
-            
+
         # remove any multiple newlines
         while "\n\n\n" in page:
             page = page.replace("\n\n\n", "\n")
+            
+        # make the quests folder if it doesn't exist
+        if not os.path.exists("wiki/quests"):
+            os.makedirs("wiki/quests")
 
         # save the pages in the data/quests/pages folder
-        with open(f"quests/pages/{quest.quest_name}.mw", "w", encoding="utf-8") as f:
+        with open(f"wiki/quests/{quest.quest_name}.mw", "w", encoding="utf-8") as f:
             f.write(page)
-
 
 
 def sort_quests(quests):
     # sort the quests by quest_name, but adjust the order so that the quests with prerequisites come after the quests they require
     sorted_quests = []
     # first, sort the quests by quest_name and put in only the quests with no prerequisites
-    sorted_quests += sorted([quest for quest in quests if not quest.prerequisites], key=lambda x: x.quest_name)
+    sorted_quests += sorted(
+        [quest for quest in quests if not quest.prerequisites],
+        key=lambda x: x.quest_name,
+    )
     # then, add the quests with prerequisites after the quests they require
     for quest in quests:
         if quest.prerequisites:
             # find the index of the prerequisite quest
-            index = next((i for i, q in enumerate(sorted_quests) if q.quest_id == quest.prerequisites[0]), None)
+            index = next(
+                (
+                    i
+                    for i, q in enumerate(sorted_quests)
+                    if q.quest_id == quest.prerequisites[0]
+                ),
+                None,
+            )
             # insert the quest after the prerequisite quest
             sorted_quests.insert(index + 1, quest)
-            
+
     return sorted_quests
+
 
 def print_quests_with_deeper_bullets(quests):
     print("== Quest List ==")
@@ -442,20 +476,22 @@ def print_quests_with_deeper_bullets(quests):
         bullet = "*"
         quest_name = quest.quest_name
         current_quest = quest
-        
+
         while current_quest.prerequisites:
             bullet += "*"
-            current_quest = next((q for q in quests if q.quest_id == current_quest.prerequisites[0]), None)
-        
+            current_quest = next(
+                (q for q in quests if q.quest_id == current_quest.prerequisites[0]),
+                None,
+            )
+
         print(f"{bullet} [[{quest_name}]]")
 
 
 if __name__ == "__main__":
 
-
     # clean_quests("quests/questsfull.json", "quests/cleaned_quests.json")
-    quests = load_quests("quests/cleaned_quests.json")
-    
+    quests = load_quests("data/quests.json")
+
     # sort the quests
     quests = sort_quests(quests)
 
@@ -469,15 +505,15 @@ if __name__ == "__main__":
 
     with open("data/quests.json", "w", encoding="utf-8") as f:
         json.dump(quest_object, f, indent=4)
-        
+
     # save the Quests to a new MediaWiki file called quests.mw
     quest_object = [convert_to_mediawiki(quest) for quest in quests]
-    
-    with open("quests/quests.mw", "w", encoding="utf-8") as f:
+
+    with open("wiki/quests.mw", "w", encoding="utf-8") as f:
         for quest in quest_object:
             f.write(quest + "\n\n")
-            
+
     # create the individual quest pages
     create_quest_pages(quests)
-    
+
     print_quests_with_deeper_bullets(quests)
