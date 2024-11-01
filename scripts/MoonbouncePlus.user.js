@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.22.4
+// @version      0.22.5
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -160,6 +160,7 @@
 // 0.22.2   - Update to catch up with Moonbounce changes
 // 0.22.3   - Update to catch up with Moonbounce changes (forgot the Settings page)
 // 0.22.4   - Added a toggle to disable the seasonal CSS effects on the Moonbounce site
+// 0.22.5   - Update to catch up with Moonbounce changes
 //
 // ==/Changelog==
 
@@ -379,7 +380,7 @@ const targetSelector = [
     { name: "Selected Item Window", selector: "._base_10lw2_1 " },
     { name: "Selected Item Details", selector: "._base_awewl_1" },
     { name: "Source List Item", selector: ".mSsVp" },
-    { name: "Source Item Button", selector: "._base_6g4pp_1._xs_6g4pp_16" },
+    { name: "Source Item Button", selector: "._base_z2tvu_1._xs_z2tvu_16" },
     { name: "Source Item Name", selector: "._base_buawu_1" },
     { name: "Diffuse Value", selector: ".WVOcs" },
     { name: "Stack Size", selector: "[class^='_stack_count_'" },

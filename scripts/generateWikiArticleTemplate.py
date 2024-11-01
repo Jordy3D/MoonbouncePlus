@@ -157,7 +157,7 @@ itemPageTemplate = """\
 | found_in = <FOUNDIN>
 }}
 
-The '''<NAME>''' is a [[<TYPE>]] in Moonbounce.
+The '''<NAME>''' is <AAN> [[<TYPE>]] in Moonbounce.
 
 == Description ==
 
@@ -689,9 +689,11 @@ def generate_wiki_articles(items, print_file_names=False):
         
         if item.type.lower() == 'accessory':
             type_path = 'accessories'
+            new_template = new_template.replace('<AAN>', 'an')
             valid = True
         elif item.type.lower() == 'material':
             type_path = 'materials'
+            new_template = new_template.replace('<AAN>', 'a')
             valid = True
         elif item.type.lower() == 'character':
             new_template = characterTemplate
@@ -699,6 +701,7 @@ def generate_wiki_articles(items, print_file_names=False):
             valid = True
         elif item.type.lower() == 'tool':
             type_path = 'tools'
+            new_template = new_template.replace('<AAN>', 'a')
             valid = True
         else:
             print(f'Uncaught Item type: {item.type} for {item.name}')
