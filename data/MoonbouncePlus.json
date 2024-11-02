@@ -3517,6 +3517,16 @@
             "sources": []
         },
         {
+            "id": 661,
+            "name": "Lavahat",
+            "uuid": "b32ecd95-040b-42c8-8b5d-516c305353f8",
+            "description": "A cap that bubbles and flows like molten rock. Surprisingly cool to the touch, but leaves ashy residue wherever you go.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": []
+        },
+        {
             "id": 662,
             "name": "Gentlemans Topper",
             "uuid": "3db8a408-3e0d-42db-9c7a-f69835ef1cc4",
