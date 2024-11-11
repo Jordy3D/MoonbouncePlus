@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.22.5
+// @version      0.23.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -161,6 +161,12 @@
 // 0.22.3   - Update to catch up with Moonbounce changes (forgot the Settings page)
 // 0.22.4   - Added a toggle to disable the seasonal CSS effects on the Moonbounce site
 // 0.22.5   - Update to catch up with Moonbounce changes
+// 0.23.0   - Finally added the option for the vertical Moonbounce Portal buttons
+//              - Toggleable in the settings
+//          - Finally added the dark mode for the Chat Window
+//              - Follows the user Prefers Color Scheme setting, override will be added later
+//          - Added a character counter to the Chat Window
+//              - Should auto-calculate based on used Markdown (OSRS effects are largely untested)
 //
 // ==/Changelog==
 
@@ -195,6 +201,7 @@ var userSettings = [
 
     // Portal
     { name: "Moonbounce Portal Buttons", description: "Show the Moonbounce Portal quick-access buttons", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Vertical Portal Buttons", description: "Show the Moonbounce Portal quick-access buttons vertically", type: "boolean", defaultValue: false, value: false, group: "Portal" },
     // { name: "Use Moonbounce Portal CSS", description: "Show the Moonbounce Portal CSS", type: "boolean", defaultValue: true, value: true },
     { name: "OSRS Text Effects", description: "Show the OSRS text effects in the chat window", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Declutter Chat Effects", description: "Encrypt the chat effects to make them less cluttered for non-MoonbouncePlus users.\nNote, encryption takes up characters in message character limit.", type: "boolean", defaultValue: true, value: true, group: "Portal" },
@@ -618,6 +625,7 @@ function checkSite() {
     if (moonbouncePortal != null) {                                 // If the portal's found, run the Moonbounce Portal functions
 
         if (getSettingValue("Moonbounce Portal Buttons")) addMoonbouncePortalButtons(moonbouncePortal);
+        if (getSettingValue("Vertical Portal Buttons")) addVerticalPortalButtons(moonbouncePortal);
 
         addMoonbouncePortalCSS(moonbouncePortal);
         assignCustomSelectorsToPortalElements(moonbouncePortal);
@@ -632,6 +640,7 @@ function checkSite() {
         if (getSettingValue("Enable Controller")) addControllerSupport(moonbouncePortal);
 
         interceptMessageSend(moonbouncePortal);
+        addCharacterCount(moonbouncePortal);
 
         addCustomCSS("portal", moonbouncePortal);
     }
@@ -1577,7 +1586,7 @@ function gatherRecipeInformation() {
  */
 function addMoonbouncePortalCSS(portal) {
     addCSS(`
-#moonbounce-plus-button-container {
+[id*="moonbounce-root-container"], #moonbounce-plus-button-container {
     --background-color: white;
     --background-color-2: #F8F9FA;
     --background-color-3: #F1F3F5;
@@ -1594,7 +1603,7 @@ function addMoonbouncePortalCSS(portal) {
 }
 
 @media (prefers-color-scheme: dark) {
-    #moonbounce-plus-button-container {
+    [id*="moonbounce-root-container"], #moonbounce-plus-button-container {
         --background-color: #131317;
         --background-color-2: #23262f;
         --background-color-3: #1a1a22;
@@ -1957,7 +1966,7 @@ OSRS EFFECTS!!!!!!!
 }
 
 
-  `, "osrsEffectsCSS", portal);
+`, "osrsEffectsCSS", portal);
 
     addCSS(`
 .bane-banner {
@@ -2062,6 +2071,135 @@ OSRS EFFECTS!!!!!!!
     color: var(--text-color);
   }
 }`, "mbpEmbedCSS", portal);
+
+
+    addCSS(`
+/* Dark Buttons */
+._base_1htaw_1._secondary_1htaw_22._base_1htaw_1._secondary_1htaw_22,
+._base_1isu7_1._show_1isu7_11 {
+    background: var(--background-color-3);
+    border-color: var(--text-color);
+    box-shadow: none !important;
+}
+
+/* Dark Chat */
+._base_1jhq3_1 {
+    background: var(--background-color);
+    opacity: 1;
+
+    ::-webkit-scrollbar { width: 10px; border-radius: 0; }
+    ::-webkit-scrollbar-track { background: var(--background-color); border-radius: 0; }
+    ::-webkit-scrollbar-thumb { background: #E0E0E0; }
+    ::-webkit-scrollbar-thumb:hover { background: #252525; }
+    ::-webkit-scrollbar-corner { background: #0000; }
+
+    ._line_18nkb_99 {
+        height: 1px;
+        opacity: 0.5;
+    }
+
+    [class*="_middle_"] {
+        background: var(--background-color-3);
+        color: var(--text-color);
+        
+        [class*="_message"] {
+            color: var(--text-color);
+        }
+        
+        ._base_1pfp4_1 {
+            background: var(--background-color-2);
+        }
+    }
+
+    [class*="display_name"],
+    ._button_eftbh_1._quaternary_eftbh_53 {
+        color: var(--text-color);
+    }
+
+    ._button_eftbh_1._tertiary_eftbh_36 {
+        color: #2566FE;
+        
+        &:not(:has([class*="neutral"])) {
+            background: var(--background-color-3);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    ._base_bkmm0_1 {
+        background: var(--background-color);
+        
+        [class*="chat"] {
+            background: var(--background-color-3);
+            border: none;
+        
+            input {
+                color: var(--text-color);
+            }
+        }
+        
+        ._base_1yb9m_1._secondary_1yb9m_16 {
+            fill: var(--fill-icon);
+        }
+    }
+
+    path[fill="#353945"] {
+        fill: var(--fill-icon);
+    }
+}
+`, "darkChatCSS", portal);
+
+    addCSS(`
+div[label="MBP.CONTROLS"].vertical {
+    /* Vertical Portal Buttons */ 
+    #button-control-bar
+    {
+        flex-direction: column;
+
+        ._frame_1htaw_72 { order: -1; }
+
+        #moonbounce-plus-button-container {
+            order: 0;
+
+            flex-direction: inherit;
+            margin-bottom: 1em;
+        }
+
+        > div:first-child {
+            order: 9000;
+
+            overflow: hidden;
+
+            transition: height 200ms ease-in-out;
+            width: 50px;
+            flex-direction: column;
+
+            &:hover
+            {
+                height: 80px; 
+                border-radius: 30px 30px 15px 15px;
+            }
+            
+            div {
+                display: block;
+                text-align: center;
+                padding: 0;
+            }
+        }
+    }
+
+    /* Position Chat Beside Buttons */
+    > div
+    {    
+        #button-control-bar + div
+        {
+            top: 0px !important;
+            left: 70px;
+        }
+    }
+}
+`, "verticalPortalButtonsCSS", portal);
+
 }
 
 
@@ -2080,6 +2218,7 @@ function assignCustomSelectorsToPortalElements(portal) {
         { name: "Button Control Bar", selector: "._base_11wdf_1._nowrap_11wdf_12._justify_start_11wdf_21._align_center_11wdf_42._content_normal_11wdf_60", id: "button-control-bar", class: "" },
         { name: "Chat Container", selector: "._base_1jhq3_1", id: "chat-container", class: null },
         { name: "Chat Window", selector: "._base_1jhq3_1 ._content_1jhq3_13", id: "chat-window", class: null },
+        { name: "Chat Input Section", selector: "._base_l2cub_1._small_l2cub_14:has(._base_bkmm0_1)", id: "chat-input-section", class: null },
         { name: "Message Feed", selector: "#chat-window [class*='_middle_']", id: "message-feed", class: null },
         { name: "Message", selector: "#message-feed > div", id: null, class: "message", all: true },
         { name: "Message Content", selector: ".message .message_row", id: null, class: "message-content", all: true },
@@ -2249,6 +2388,16 @@ function addMoonbouncePortalButtons(portal) {
     addDirectoryButton(portal);
     addBackpackButton(portal);
     addMarketplaceButton(portal);
+}
+
+/**
+ * Add the .vertical class to div[label="MBP.CONTROLS"] to allow for vertical portal buttons
+ */
+function addVerticalPortalButtons(portal) {
+    let controls = portal.querySelector("[label='MBP.CONTROLS']");
+    if (controls == null) return;
+
+    controls.classList.add("vertical");
 }
 
 /**
@@ -2650,6 +2799,65 @@ function addControllerSupport(portal) {
 
 //#region Chat Notifications and Effects
 
+//#region Character Count Display
+
+var characterCountDisplay = null;
+
+function addCharacterCount(portal) {
+    // if the portal already contains #character-count, return
+    if (portal.querySelector("#character-count") != null) return;
+
+    // create a new div for the character count
+    let characterCount = document.createElement("div");
+    characterCount.id = "character-count";
+    characterCount.classList.add("empty");
+
+    // add the character count to the chat input
+    let chatWindow = portal.querySelector("#chat-window");
+    if (chatWindow == null) return;
+
+    let chatInputSection = chatWindow.querySelector("#chat-input-section");
+    if (chatInputSection == null) return;
+
+    let chatInput = chatWindow.querySelector("input");
+    if (chatInput == null) return;
+
+    chatInput.addEventListener("input", function () {
+        let count = convertMessageToFinal(chatInput.value).length;
+        characterCount.innerText = count + "/100";
+        characterCount.classList.remove("empty");
+
+        if (count > 100)
+            characterCount.style.color = "red";
+        else
+            characterCount.style.color = "var(--text-color)";
+    });
+
+    chatInputSection.appendChild(characterCount);
+
+    characterCountDisplay = characterCount;
+
+    // add styling to the character count
+    addCSS(`
+#character-count {
+    position: absolute;
+    right: 0;
+    background: var(--background-color);
+    transform: translateY(-100%);
+    /* border: 2px solid var(--content-text-color); */
+    color: var(--text-color);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    padding: 0.25em 0.5em;
+    width: fit-content;
+
+    &.empty {
+        display: none;
+    }
+}
+`, "characterCountCSS", portal);
+}
+
 //#region Encrypt/Decrypt message effects 
 function interceptMessageSend(portal) {
     let chatWindow = portal.querySelector("#chat-window");
@@ -2723,8 +2931,45 @@ function interception(e, input) {
     // input.value = message;
     input.dispatchEvent(new Event("input", { bubbles: true }));
 
+    // reset the character count
+    if (characterCountDisplay != null) {
+        characterCountDisplay.classList.add("empty");
+        characterCountDisplay.innerText = "";
+    }
+
     // mark the input as ready
     input.classList.add("intercepted");
+}
+
+function convertMessageToFinal(message) {
+    let finalMessage = message;
+    // check the setting for Declutter Chat Effects
+    let declutter = getSetting("Declutter Chat Effects").value;
+    if (declutter) {
+        // decrypt the necessart parts of the message from whitespace
+        // parse every effect tag and : in the message
+
+        // find every effect tag in the message
+        for (let effect of effectTags) {
+            // find the effect name and : and replace it with the encrypted version
+            // if the effect name is red, replace red: with the encrypted version
+            let regex = new RegExp(encryptToWhitespace(effect.name + ":"), "g");
+            if (regex.test(finalMessage)) {
+                finalMessage = finalMessage.replace(regex, effect.name + ":");
+            }
+        }
+    }
+
+    let convertMarkdown = getSettingValue("Chat Markdown");
+
+    if (convertMarkdown) {
+        mdText = md.render(message).trim();                                 // convert the message from markdown to HTML
+        mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");          // remove the <p> tags from the start and end of the message
+
+        finalMessage = mdText;
+    }
+
+    return finalMessage;
 }
 
 const whiteSpaceChars = [
