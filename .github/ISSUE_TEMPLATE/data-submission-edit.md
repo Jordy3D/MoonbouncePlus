@@ -1,5 +1,5 @@
 ---
-name: Data Submission/Edit Template
+name: Data Submission/Edit
 about: This template is for the submission of data, or the edition of existing data
   that may be outdated or incorrect.
 title: 'Data: [ITEM NAME]'
