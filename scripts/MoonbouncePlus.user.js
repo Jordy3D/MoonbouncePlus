@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.23.0
+// @version      0.24.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -167,6 +167,8 @@
 //              - Follows the user Prefers Color Scheme setting, override will be added later
 //          - Added a character counter to the Chat Window
 //              - Should auto-calculate based on used Markdown (OSRS effects are largely untested)
+// 0.24.0   - Okay, I think I finally fixed the version check and highlight. I hope.
+//              - Added a popup notification when the script is loaded and a new version is available
 //
 // ==/Changelog==
 
@@ -580,6 +582,8 @@ function init() {
 }
 
 var observer = null;
+var checkedVersion = false;
+var newVersionExists = false;
 
 function checkSite() {
     var currentURL = window.location.href;
@@ -623,6 +627,17 @@ function checkSite() {
     // Stuff for the Moonbounce Portal, which can be on any site
     moonbouncePortal = findMoonbouncePortal();                      // Attempt to find the portal once
     if (moonbouncePortal != null) {                                 // If the portal's found, run the Moonbounce Portal functions
+
+        if (!checkedVersion) {
+            log("Checking for new version");
+            // checkNewVersionAvailable returns a promise, so we need to wait for it to resolve
+            checkNewVersionAvailable().then(isNewVersionAvailable => {
+                if (isNewVersionAvailable) {
+                    newVersionExists = true;
+                }
+            });
+            checkedVersion = true;
+        }
 
         if (getSettingValue("Moonbounce Portal Buttons")) addMoonbouncePortalButtons(moonbouncePortal);
         if (getSettingValue("Vertical Portal Buttons")) addVerticalPortalButtons(moonbouncePortal);
@@ -2446,17 +2461,16 @@ function addMoonbouncePlusButton(portal) {
         window.open("https://github.com/Jordy3D/MoonbouncePlus", "_blank");
     });
 
-    if (!checked) {
-        // check if there's a new version available and add a highlight to the button if there is
-        checkNewVersionAvailable().then(isNewVersionAvailable => {
-            if (isNewVersionAvailable) {
-                console.log("New version available!");
+    if (newVersionExists)
+    {
+        button.classList.add("highlight");
+        button.title = "New version available!";
 
-                button.classList.add("highlight");
-                button.title = "New version available!";
-            }
-            checked = true;
-        });
+        // show a popup notification at the bottom right of the screen
+        let mbStyle = "background-color: #000; color: #fff; padding: 5px 10px; border-radius: 5px;";
+        mbStyle += "border-left: 5px solid #FF0000; border-right: 5px solid #0095FF;";
+
+        floatingNotification("MoonbouncePlus update available!", 500, mbStyle, "bottom-right", true, portal);
     }
 
     addMoonbouncePortalButton(button, portal);
@@ -4298,7 +4312,7 @@ function findMoonbouncePortalButtons(portal = null) {
 
     // find the buttons
     let buttons = buttonParent.querySelector(getTargetSelector("Moonbounce Portal Button Container"));
-    if (returnMessage(buttons == null, "Could not find Moonbounce Portal buttons")) return;
+    // if (returnMessage(buttons == null, "Could not find Moonbounce Portal buttons")) return;
 
     return buttons;
 }
@@ -4736,7 +4750,7 @@ function addCSS(css, id, parent = document.head) {
  * @param {string} css the CSS styles for the notification
  * @param {string} position the position of the notification (top, top-right, top-left, bottom, bottom-right, bottom-left, center, position: absolute)
  */
-function floatingNotification(message, duration = 3000, css = "", position = "top", deleteExisting = false) {
+function floatingNotification(message, duration = 3000, css = "", position = "top", deleteExisting = false, parent = document.body) {
 
     if (deleteExisting) {
         let existingNotifications = document.querySelectorAll(".floating-notification");
@@ -4794,7 +4808,7 @@ function floatingNotification(message, duration = 3000, css = "", position = "to
             break;
     }
 
-    document.body.appendChild(notification);
+    parent.appendChild(notification);
 
     setTimeout(() => {
         notification.style.opacity = 0;
