@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.24.1
+// @version      0.24.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -170,6 +170,7 @@
 // 0.24.0   - Okay, I think I finally fixed the version check and highlight. I hope.
 //              - Added a popup notification when the script is loaded and a new version is available
 // 0.24.1   - Add hover text to the MoonbouncePlus button to show the current version of the script
+// 0.24.2   - Fixed update popup breaking because I forgot YouTube (and other sites) are a pain and need their HTML Policy to be escaped
 //
 // ==/Changelog==
 
@@ -4762,7 +4763,7 @@ function floatingNotification(message, duration = 3000, css = "", position = "to
     }
 
     let notification = document.createElement("div");
-    notification.innerHTML = message;
+    notification.innerHTML = escapeHTMLPolicy.createHTML(message);
     notification.style.cssText = css;
     notification.style.position = "fixed";
     notification.style.zIndex = 100000;
