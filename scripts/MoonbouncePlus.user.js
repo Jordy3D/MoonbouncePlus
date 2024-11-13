@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.24.0
+// @version      0.24.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -169,6 +169,7 @@
 //              - Should auto-calculate based on used Markdown (OSRS effects are largely untested)
 // 0.24.0   - Okay, I think I finally fixed the version check and highlight. I hope.
 //              - Added a popup notification when the script is loaded and a new version is available
+// 0.24.1   - Add hover text to the MoonbouncePlus button to show the current version of the script
 //
 // ==/Changelog==
 
@@ -583,6 +584,7 @@ function init() {
 
 var observer = null;
 var checkedVersion = false;
+var currentVersion = GM_info.script.version.trim();
 var newVersionExists = false;
 
 function checkSite() {
@@ -2460,6 +2462,8 @@ function addMoonbouncePlusButton(portal) {
     button.addEventListener("click", function () {
         window.open("https://github.com/Jordy3D/MoonbouncePlus", "_blank");
     });
+
+    button.title = "Moonbounce Plus v" + currentVersion;
 
     if (newVersionExists)
     {
@@ -4686,7 +4690,6 @@ function isVersionHigher(current, remote) {
  * Check if a new version of the script is available and return a boolean if it is
  */
 async function checkNewVersionAvailable() {
-    let currentVersion = GM_info.script.version.trim();
     let latestVersion = (remoteVersion == null ? await getRemoteVersion() : remoteVersion).trim();
 
     // console.log(`Current ${currentVersion} | Latest ${latestVersion} | Same? ${currentVersion == latestVersion}`);
