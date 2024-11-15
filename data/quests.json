@@ -1,5 +1,38 @@
 [
     {
+        "quest_id": "21aeaf1b-4b57-4861-a705-675b9b001982",
+        "quest_name": "And What Army?",
+        "quest_description": "We heard rumors of a war starting soon, and everything is set to go\u2026 Except one thing\u2026 The fashion! Craft and collect 5 Blue Capes for a handsome reward.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1731686400,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "ed69fa68-5294-42c7-a301-68fd893421d1",
+                "item_name": "Blue Cape",
+                "quantity": 5
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 5000,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
         "quest_id": "6522aa48-a80f-4e0f-829b-3e91c9340793",
         "quest_name": "Black Market Dealings",
         "quest_description": "Our buddy Jasper got banned from the marketplace for some nefarious dealings with the back end of the software. Something about him finding a bug in the system and it all went downhill from there. We were wondering if you could buy 5 Pastel Clusters from the marketplace and bring them back here. We\u2019ll make sure he pays you well.",
@@ -530,6 +563,61 @@
                 "quantity": 1,
                 "reward_type": "recipe",
                 "recipe_name": "Purple Space Mask (L.)"
+            }
+        ],
+        "tags": []
+    },
+    {
+        "quest_id": "d98cec03-476a-4611-a825-90eb63ca3393",
+        "quest_name": "Swamp Lords",
+        "quest_description": "The old lords are asking the friends of the swamp-god to search out for four items littered around the internet bogs. These items are the Crafted Blue Cape, and the Crafted Tortuous Ornament, as well as the found Mini Mole and Silver Faceguard. I wonder what they have planned for this? Maybe make a very well dressed mole that's in a bit of pain? Who knows, but they are relying on you to complete this quest.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Collect",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1731686400,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "fdf16f99-a737-447a-abc1-f81b9b7f8e45",
+                "item_name": "Silver Faceguard",
+                "quantity": 1
+            },
+            {
+                "item_id": "a16e5730-0389-41c3-8e32-e7924ba8a7e0",
+                "item_name": "Mini Mole",
+                "quantity": 1
+            },
+            {
+                "item_id": "ed69fa68-5294-42c7-a301-68fd893421d1",
+                "item_name": "Blue Cape",
+                "quantity": 1
+            },
+            {
+                "item_id": "7a2b2f7b-0f8e-4fb3-add0-6fd7ed39762a",
+                "item_name": "Tortuous Ornament",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "23cfa51e-a694-4f23-ba3d-7d31ba96e0ea",
+                "item_name": "Dark Faceguard",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 2500,
+                "reward_type": "currency",
+                "recipe_name": null
             }
         ],
         "tags": []

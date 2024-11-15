@@ -3595,6 +3595,26 @@
             "type": "ACCESSORY",
             "value": 0,
             "sources": []
+        },
+        {
+            "id": 671,
+            "name": "Mini Mole",
+            "uuid": "ddb896cf-bd26-4611-9417-c4cd8ae42af3",
+            "description": "A 1 : 100 exact replica of a giant mole! This little guy fits snug on your head and will never slip off.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": ["Settled's Satchel"]
+        },
+        {
+            "id": 673,
+            "name": "Tortuous Ornament",
+            "uuid": "e0d1ffaa-5319-44de-a8a2-63e16f486e0b",
+            "description": "An immense pressure of torture emanates from this ornament.",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 100,
+            "sources": []
         }
     ],
     "recipes": [
@@ -4228,6 +4248,18 @@
             "ingredients": ["Haunted Bone", "Skull Potion"],
             "tools": ["Witch's Cauldron"],
             "type": "Partnership (Framed)"
+        },
+        {
+            "result": "Tortuous Ornament",
+            "ingredients": ["Nebula Orb", "Gold Orb", "Pastel Shard"],
+            "tools": ["Hammer"],
+            "type": "Partnership (Settled)"
+        },
+        {
+            "result": "Blue Cape",
+            "ingredients": ["White Fabric", "Strange Cloth", "Blue Dye Powder"],
+            "tools": ["Sewing Needle"],
+            "type": "Partnership (Settled)"
         },
         {
             "result": "Dragon Helm",

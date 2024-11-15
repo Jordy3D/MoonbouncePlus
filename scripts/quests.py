@@ -437,6 +437,9 @@ def create_quest_pages(quests):
         # make the quests folder if it doesn't exist
         if not os.path.exists("wiki/quests"):
             os.makedirs("wiki/quests")
+            
+        # remove ? from the quest name
+        quest.quest_name = quest.quest_name.replace("?", "")
 
         # save the pages in the data/quests/pages folder
         with open(f"wiki/quests/{quest.quest_name}.mw", "w", encoding="utf-8") as f:
