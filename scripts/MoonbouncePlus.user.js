@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.25.0
+// @version      0.25.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -175,6 +175,8 @@
 //          - Stopped Markdownit, the HTML Policy, and the message observer from being loaded before proper initialization
 //          - Stopped MB+ loading in some somepages where it shouldn't (such as YouTube Embeds, Recaptcha, etc)
 //          - Stopped (I hope) the script from trying to load the data multiple times
+// 0.25.1   - Fix chat hotkey not working on some sites
+//          - Stopped logging to the console when chat is opened and closed
 //
 // ==/Changelog==
 
@@ -341,6 +343,7 @@ var remoteVersion = null;
 // Support Elements
 var escapeHTMLPolicy = null;
 var messageObserver = null;
+var observer = null; // This shouldn't be needed, testing for now
 
 // "Constants"
 var md;
@@ -2631,7 +2634,7 @@ function addChatHotkeys(portal) {
     document.addEventListener("keydown", function (e) {
         const key = e.key.toUpperCase();
         if (key == openChatKey) {
-            log("Opening chat window");
+            // log("Opening chat window");
 
             if (document.activeElement.tagName === "INPUT") return;
 
@@ -2659,7 +2662,7 @@ function addChatHotkeys(portal) {
         const key = e.key.toUpperCase();
         // if the escape key is pressed, close the chat window by clicking on the control bar's second child again
         if (key == closeChatKey) {
-            log("Closing chat window");
+            // log("Closing chat window");
 
             // if there's no chat window, return
             let chatWindow = portal.querySelector("#chat-container");
