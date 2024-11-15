@@ -1272,7 +1272,7 @@
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
-            "sources": ["Red Loot Bag", "Heart Box"]
+            "sources": ["Red Loot Bag", "Heart Box", "Floating Eyeball"]
         },
         {
             "id": 410,
