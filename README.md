@@ -3,7 +3,7 @@
   <img src="https://github.com/Jordy3D/MoonbouncePlus/blob/main/assets/MoonbouncePlus.png" height=100>
   <p>A userscript that adds a few features to the Moonbounce website and experience.</p>
 
-  <img src="https://img.shields.io/badge/MB+-v0.24.2-blue.svg">
+  <img src="https://img.shields.io/badge/MB+-v0.25.0-blue.svg">
   <a href="https://github.com/Jordy3D/MoonbouncePlus/raw/main/scripts/MoonbouncePlus.user.js">
     <img src="https://img.shields.io/badge/Install-g.svg">
   </a>

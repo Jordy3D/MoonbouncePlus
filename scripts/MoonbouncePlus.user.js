@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.24.2
+// @version      0.25.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -171,6 +171,10 @@
 //              - Added a popup notification when the script is loaded and a new version is available
 // 0.24.1   - Add hover text to the MoonbouncePlus button to show the current version of the script
 // 0.24.2   - Fixed update popup breaking because I forgot YouTube (and other sites) are a pain and need their HTML Policy to be escaped
+// 0.25.0   - Shuffled around a few variable definitions into the same block to make it easier to find them
+//          - Stopped Markdownit, the HTML Policy, and the message observer from being loaded before proper initialization
+//          - Stopped MB+ loading in some somepages where it shouldn't (such as YouTube Embeds, Recaptcha, etc)
+//          - Stopped (I hope) the script from trying to load the data multiple times
 //
 // ==/Changelog==
 
@@ -289,6 +293,9 @@ function loadSettings() {
         }
     }
 
+    refreshRate = getSettingValue("Update Refresh Rate");
+    notificationDuration = getSettingValue("Notification Duration");
+
     log("Settings loaded!");
 }
 
@@ -304,21 +311,46 @@ function loadSettings() {
 // ██████╔╝██║  ██║   ██║   ██║  ██║
 // ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
 
-loadSettings();
-
-var refreshRate = getSettingValue("Update Refresh Rate");
-var notificationDuration = getSettingValue("Notification Duration");
-
+//#region Variables
+// Logo
 const mbpLogo = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/assets/MoonbouncePlus.png"
 
+// States
+var hasInitialized = false;
+var loadingData = false;
+
+// Settings
+var refreshRate = null;
+var notificationDuration = null;
+
+// Data
 var items = null;
 var recipes = null;
-
 var inventoryData = null;
 
+// Elements
 var moonbouncePortal = null;
+var characterCountDisplay = null;
 
+// Version Check
+var checkedVersion = false;
+var newVersionExists = false;
+var currentVersion = null;
 var remoteVersion = null;
+
+// Support Elements
+var escapeHTMLPolicy = null;
+var messageObserver = null;
+
+// "Constants"
+var md;
+
+// Blacklist
+const siteBlacklist = [
+    "https://www.google.com/recaptcha/api2/",
+    "https://www.youtube.com/embed/",
+]
+//#endregion
 
 // define an inventory item object
 class InventoryItem {
@@ -333,7 +365,6 @@ class InventoryItem {
     }
 }
 
-var loadingData = false;
 /**
  * Load the data from MoonbouncePlus.json file
  * @param {boolean} isLocal whether to load the data locally or from the web
@@ -445,26 +476,11 @@ const getTargetURL = name => targetURLs.find(x => x.name == name).url;
 
 var isWebDoc = typeof document !== 'undefined';
 
-const md = markdownit({
-    html: false, // Disable HTML tags in source
-    // linkify: true, // Autoconvert URL-like text to links
-    // typographer: true // Enable some language-neutral replacements + quotes beautification
-});
-
-// Enable only certain markdown tags
-md.enable([
-    'heading', // #, ##, ###, etc.
-    'emphasis', // *, **, _, __
-    // 'blockquote', // >
-    'code', // `code`
-    // 'fence', // ```code```
-    // 'list', // -, *, +, 1.
-    // 'link', // [text](url)
-    // 'image' // ![alt](url)
-]);
-
 if (isWebDoc) {                 // Actual Web Script
-    init();
+    // check if the script is running on a site that is blacklisted (this will typically be a recaptcha page or other subpage)
+    if (siteBlacklist.some(x => window.location.href.includes(x))) return;
+
+    if (!hasInitialized) init();
 }
 else {                          // Local Debugging Script
     // import the local data/MoonbouncePlus.json file
@@ -559,9 +575,9 @@ else {                          // Local Debugging Script
         console.log(ingredientString);
     }
 
-    // calculateBestValueCraft();
+    calculateBestValueCraft();
     // printIDs();
-    displayItems();
+    // displayItems();
 }
 
 
@@ -577,16 +593,59 @@ function init() {
     var textCSSSub = 'font-size: 15px; font-weight: bold;';
     console.log(`%cMoonbouncePlus%c${GM_info.script.version}\nby Bane`, textCSSMain, textCSSSub);
 
+    loadSettings();
+
+    currentVersion = GM_info.script.version.trim();
+
+    md = markdownit({
+        html: false, // Disable HTML tags in source
+        // linkify: true, // Autoconvert URL-like text to links
+        // typographer: true // Enable some language-neutral replacements + quotes beautification
+    });
+
+    // Enable only certain markdown tags
+    md.enable([
+        'heading', // #, ##, ###, etc.
+        'emphasis', // *, **, _, __
+        // 'blockquote', // >
+        'code', // `code`
+        // 'fence', // ```code```
+        // 'list', // -, *, +, 1.
+        // 'link', // [text](url)
+        // 'image' // ![alt](url)
+    ]);
+
+    escapeHTMLPolicy = trustedTypes.createPolicy("forceInner", {
+        createHTML: (to_escape) => to_escape
+    })
+
+    messageObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            // log("New message detected");
+            // this will either grab the parent message feed if the target is a child of it, or the message feed itself if that is what changed (such as on the first message sent)
+            let messageFeed = mutation.target.closest("#message-feed") || mutation.target.querySelector("[class*='_middle_']");
+            if (messageFeed == null) return;
+
+            // if the mutation parent matches the selector [class*='_middle_'], handle the new message from a new author
+            if (mutation.target.matches("[class*='_middle_']"))
+                handleNewMessageNewAuthor(mutation);
+            else if (mutation.target.matches("[class*='_message_']"))
+                handleNewMessageSameAuthor(mutation);
+            else
+                handleNewMessageFromScratch(mutation);
+
+            // add stale class to the message feed
+            messageFeed.classList.remove("fresh");
+        });
+    });
+
     // check the current site every second and page to see what functions to run
     window.refreshInterval = setInterval(() => {
         checkSite();
     }, refreshRate);
-}
 
-var observer = null;
-var checkedVersion = false;
-var currentVersion = GM_info.script.version.trim();
-var newVersionExists = false;
+    hasInitialized = true;
+}
 
 function checkSite() {
     var currentURL = window.location.href;
@@ -599,7 +658,10 @@ function checkSite() {
         if (getSettingValue("Disable Seasonal Effects")) disableSeasonalEffects();
 
         if (isTargetURL(getTargetURL("Inventory"), true)) {
-            if (!loadingData) loadData();
+            if (!loadingData) {
+                loadData();
+                loadingData = true;
+            }
 
             addInventorySidebarFeatures();
             if (getSettingValue("Gather")) addGatherInventoryInformationButton();
@@ -727,19 +789,13 @@ function addCopyDetailstoItemImage() {
         addCSS(`
 .item-uuid-event
 {
-  cursor: pointer;
-  user-select: none;
-  
-  transition: transform 100ms ease-in-out;
-  
-  &:hover
-  {
-    transform: scale(1.05);
-  }
-  &:active
-  {
-    transform: scale(0.96);
-  }
+    cursor: pointer;
+    user-select: none;
+    
+    transition: transform 100ms ease-in-out;
+    
+    &:hover { transform: scale(1.05); }
+    &:active { transform: scale(0.96); }
 }
         `, "copyDetailsToItemCSS");
     }
@@ -1429,7 +1485,6 @@ function sortInventory(method) {
 }
 //#endregion
 
-
 //#region Crafting
 
 /**
@@ -1595,6 +1650,7 @@ function gatherRecipeInformation() {
         floatingNotification("Recipe information copied to clipboard", notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px;", "bottom-right", true);
     })();
 }
+//#endregion
 
 
 //#region Moonbounce Portal
@@ -2466,8 +2522,7 @@ function addMoonbouncePlusButton(portal) {
 
     button.title = "Moonbounce Plus v" + currentVersion;
 
-    if (newVersionExists)
-    {
+    if (newVersionExists) {
         button.classList.add("highlight");
         button.title = "New version available!";
 
@@ -2819,8 +2874,6 @@ function addControllerSupport(portal) {
 //#region Chat Notifications and Effects
 
 //#region Character Count Display
-
-var characterCountDisplay = null;
 
 function addCharacterCount(portal) {
     // if the portal already contains #character-count, return
@@ -3221,27 +3274,6 @@ function handleNewMessageFromScratch(mutation) {
     // handle the new message
     let newMessage = handleNewMessage(messageTarget, messageTextElement);
 }
-
-let messageObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        // log("New message detected");
-        // this will either grab the parent message feed if the target is a child of it, or the message feed itself if that is what changed (such as on the first message sent)
-        let messageFeed = mutation.target.closest("#message-feed") || mutation.target.querySelector("[class*='_middle_']");
-        if (messageFeed == null) return;
-
-        // if the mutation parent matches the selector [class*='_middle_'], handle the new message from a new author
-        if (mutation.target.matches("[class*='_middle_']"))
-            handleNewMessageNewAuthor(mutation);
-        else if (mutation.target.matches("[class*='_message_']"))
-            handleNewMessageSameAuthor(mutation);
-        else
-            handleNewMessageFromScratch(mutation);
-
-        // add stale class to the message feed
-        messageFeed.classList.remove("fresh");
-    });
-});
-
 
 // add a checker on the #message-feed to check for new messages and log them
 function addMessageChecker(portal) {
@@ -4724,10 +4756,6 @@ function downloadFile(url, filename, logMessage = false) {
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text);
 }
-
-var escapeHTMLPolicy = trustedTypes.createPolicy("forceInner", {
-    createHTML: (to_escape) => to_escape
-})
 
 /**
  * Add CSS to the header of the page
