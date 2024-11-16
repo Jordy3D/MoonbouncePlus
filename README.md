@@ -91,7 +91,6 @@ This repo also contains a Python script to help generate wiki page template code
     -   Twitter (blocks YouTube videos from being embedded in chat)
 ## To-Do
 
--   [ ] Add a toggle for horizontal/vertical Moonbounce Portal button layout
 -   [ ] Add transparent mode to the Moonbounce Portal (ie: buttons and chat)
 -   [ ] Add transparency and/or size options to the item drop notification
 
