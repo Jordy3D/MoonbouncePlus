@@ -108,7 +108,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": ["Rock Collection"]
+            "sources": ["Rock Collection", "Settled's Satchel"]
         },
         {
             "id": 68,
@@ -1598,7 +1598,12 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Lucky Bag", "Framed Chest", "Dusty Box"]
+            "sources": [
+                "Lucky Bag",
+                "Framed Chest",
+                "Dusty Box",
+                "Settled's Satchel"
+            ]
         },
         {
             "id": 443,
@@ -1608,7 +1613,12 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": ["Framed Chest", "Dusty Box", "Floating Eyeball"]
+            "sources": [
+                "Framed Chest",
+                "Dusty Box",
+                "Floating Eyeball",
+                "Settled's Satchel"
+            ]
         },
         {
             "id": 444,
@@ -1922,7 +1932,7 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": ["Blue Chicken", "Settled's Satchel"]
         },
         {
             "id": 480,
@@ -3597,6 +3607,16 @@
             "sources": []
         },
         {
+            "id": 670,
+            "name": "Silver Faceguard",
+            "uuid": "e8acc1ea-fed4-431c-99b8-d94d7cec1999",
+            "description": "A beautifully crafted faceguard made of the finest metal, and a tinge of blood.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": ["Settled's Satchel"]
+        },
+        {
             "id": 671,
             "name": "Mini Mole",
             "uuid": "ddb896cf-bd26-4611-9417-c4cd8ae42af3",
@@ -3607,6 +3627,16 @@
             "sources": ["Settled's Satchel"]
         },
         {
+            "id": 672,
+            "name": "Blue Cape",
+            "uuid": "67c9d6f2-7906-4fde-86f3-dca3da5d1885",
+            "description": "A thick blue cape procured from the finest haberdashery.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": []
+        },
+        {
             "id": 673,
             "name": "Tortuous Ornament",
             "uuid": "e0d1ffaa-5319-44de-a8a2-63e16f486e0b",
@@ -3614,6 +3644,16 @@
             "rarity": "COMMON",
             "type": "ACCESSORY",
             "value": 100,
+            "sources": []
+        },
+        {
+            "id": 674,
+            "name": "Dark Faceguard",
+            "uuid": "0fd26216-8e41-4b8b-b703-93cba0091d9a",
+            "description": "An absurdly dark force is coming from this faceguard. Made of metals never before seen, and worn by old, but not forgiving lords.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
             "sources": []
         }
     ],
