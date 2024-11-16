@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.25.1
+// @version      0.25.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -177,6 +177,7 @@
 //          - Stopped (I hope) the script from trying to load the data multiple times
 // 0.25.1   - Fix chat hotkey not working on some sites
 //          - Stopped logging to the console when chat is opened and closed
+// 0.25.2   - Fixed YouTube blocking the OSRS chat effects and video embedding
 //
 // ==/Changelog==
 
@@ -3179,7 +3180,7 @@ function parseMessage(messageText) {
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
     if (parsedMessage != messageText.innerText) {
-        messageText.innerHTML = parsedMessage;
+        messageText.innerHTML = escapeHTMLPolicy.createHTML(messageText.innerText);
     }
 }
 
@@ -3206,7 +3207,7 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
     if (parsedMessage != newMessage) {
-        messageTextElement.innerHTML = parsedMessage;
+        messageTextElement.innerHTML = escapeHTMLPolicy.createHTML(parsedMessage);
     }
 
     if (chatReload) return true;
@@ -4122,7 +4123,7 @@ function getPageMetas(url) {
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     let parser = new DOMParser();
-                    let doc = parser.parseFromString(xhr.responseText, "text/html");
+                    let doc = parser.parseFromString(escapeHTMLPolicy.createHTML(xhr.responseText), "text/html");
 
                     let metaElements = doc.querySelectorAll("meta");
                     // get every <link> element with an itemprop attribute and a content attribute or an itemprop attribute and a href attribute
