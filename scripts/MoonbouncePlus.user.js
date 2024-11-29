@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.25.2
+// @version      0.25.3
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -178,6 +178,7 @@
 // 0.25.1   - Fix chat hotkey not working on some sites
 //          - Stopped logging to the console when chat is opened and closed
 // 0.25.2   - Fixed YouTube blocking the OSRS chat effects and video embedding
+// 0.25.3   - Fixed previously sent OSRS chat messages not displaying when chat is closed and reopened
 //
 // ==/Changelog==
 
@@ -451,6 +452,11 @@ const targetSelector = [
     { name: "Marketplace Item Type", selector: ".eMjIv" },
     { name: "Marketplace Item Details", selector: ".GPrFb" },
 
+    { name: "Quest Entry Container", selector: ".E1TG2" },
+    { name: "Quest Entry", selector: ".sakeh" },
+    { name: "Quest Title", selector: ".pp5PL" },
+    { name: "Quest Requirement", selector: ".yV9VV" },
+
     { name: "Moonbounce Portal", selector: "[id='MOONBOUNCE.PORTAL']" },
     { name: "Moonbounce Extension Container", selector: "[id*='moonbounce-ext-container']" },
     { name: "Moonbounce Portal Root Container", selector: "[id*='moonbounce-root-container']" },
@@ -463,6 +469,7 @@ const targetURLs = [
     { name: "Crafting", url: "https://moonbounce.gg/u/@me/backpack/crafting" },
     { name: "Marketplace", url: "https://moonbounce.gg/u/@me/marketplace" },
     { name: "Settings", url: "https://moonbounce.gg/u/@me/settings" },
+    { name: "Quests", url: "https://moonbounce.gg/u/@me/adventure" },
     { name: "MoonbouncePlus Settings", url: "https://moonbounce.gg/u/@me/settings?moonbounceplus" },
 ]
 const getTargetURL = name => targetURLs.find(x => x.name == name).url;
@@ -683,6 +690,9 @@ function checkSite() {
         } else if (isTargetURL(getTargetURL("Settings"), true)) {
             addLinkToMoonbouncePlusSettings();
             hijackSettingsPage();
+        } else if (isTargetURL(getTargetURL("Quests"), true)) {
+            // add Quest stuff here
+            addQuestControlBar();
         }
 
         if (isTargetURL(getTargetURL("Crafting"), true)) {
@@ -1108,6 +1118,7 @@ function addInventoryControlBar() {
 }
 //#endregion
 
+
 //#region Pondering
 /**
  * Add a Ponder button to the inventory controls that checks if any recipes can be crafted with the items in the inventory.
@@ -1206,6 +1217,7 @@ function checkRecipes() {
 }
 //#endregion
 
+
 //#region Unknown Items
 /**
  * Highlight items in the inventory that are not in the database
@@ -1265,6 +1277,7 @@ function highlightUnknownItems() {
 `, "highlightUnknownItemsCSS");
 }
 //#endregion
+
 
 //#region Appraisal
 /**
@@ -1336,6 +1349,7 @@ function evaluateInventory() {
     floatingNotification(appraisalMessage, notificationDuration, "background-color: #333; color: #fff; padding: 5px 10px; border-radius: 5px; transform: translateX(-50%);", { top: pos.top + "px", left: pos.left + "px" }, true);
 }
 //#endregion
+
 
 //#region Sorting Inventory
 
@@ -1488,6 +1502,7 @@ function sortInventory(method) {
     }
 }
 //#endregion
+
 
 //#region Crafting
 
@@ -2875,6 +2890,7 @@ function addControllerSupport(portal) {
 
 //#endregion
 
+
 //#region Chat Notifications and Effects
 
 //#region Character Count Display
@@ -2933,6 +2949,7 @@ function addCharacterCount(portal) {
 }
 `, "characterCountCSS", portal);
 }
+//#endregion
 
 //#region Encrypt/Decrypt message effects 
 function interceptMessageSend(portal) {
@@ -3180,7 +3197,7 @@ function parseMessage(messageText) {
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
     if (parsedMessage != messageText.innerText) {
-        messageText.innerHTML = escapeHTMLPolicy.createHTML(messageText.innerText);
+        messageText.innerHTML = escapeHTMLPolicy.createHTML(parsedMessage);
     }
 }
 
@@ -3505,6 +3522,7 @@ function splitTextIntoSpans(text) {
 
 //#endregion
 
+
 //#region Copy Marketplace Data
 
 /**
@@ -3624,6 +3642,7 @@ function copyMarketplaceData() {
 
 //#endregion
 
+
 //#region Wiki Button on Items
 
 /**
@@ -3705,6 +3724,7 @@ function openWikiPage(itemName) {
 
 
 //#endregion
+
 
 //#region Settings Page
 
@@ -4098,6 +4118,7 @@ function spawnSettings(parent) {
 
 //#endregion
 
+
 //#region Custom CSS
 
 function addCustomCSS(name = "", parent = document.body) {
@@ -4112,6 +4133,190 @@ function addCustomCSS(name = "", parent = document.body) {
 
     addCSS(customCSS, `customCSS${name}`, parent);
 }
+//#endregion
+
+
+//#region Quests
+
+function addQuestControlBar() {
+    // find the quest log
+    let questLog = document.querySelector(getTargetSelector("Quest Entry Container"));
+    if (questLog == null) return;
+
+    questLog = questLog.parentElement;
+
+    // if the quest log already has the bane-quest-controls, return
+    let existingControls = questLog.querySelector("#bane-quest-controls");
+    if (existingControls != null) return;
+
+    // create a new div with the id "bane-quest-controls" and append it to the quest log
+    let controls = createElement("div", { id: "bane-quest-controls" }, questLog);
+
+    // // create a new button in the controls div
+    // let button = createElement("button", { textContent: "Test" }, controls);
+
+    // // add an event listener to the button
+    // button.addEventListener("click", function () {
+    //     // show a floatin gnotification with the text "Test"
+    //     floatingNotification("Test", notificationDuration);
+    // });
+
+    // move the controls to the second child of the quest log
+    questLog.insertBefore(controls, questLog.children[1]);
+
+    // TEMP: add the quest tools
+    addQuestSortSelect();
+
+    // add some CSS to the button
+    addCSS(`
+#bane-quest-controls {
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+
+    button
+    {
+        background-color: var(--background-color);
+        border: 2px solid var(--border-color);
+        color: var(--text-color);
+
+        cursor: pointer;
+            
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 16px;
+        gap: 8px;
+        box-shadow: 0 1px 2px #1018280d;
+        border-radius: 8px;
+        transition: .2s;
+        
+        &:hover
+        {
+            background: var(--background-color-hover);
+            border-color: var(--background-color-hover);
+        }
+    }
+
+    select {
+        
+        background-color: var(--background-color);
+        border: 2px solid var(--border-color);
+        color: var(--text-color);
+
+        display: flex;
+        padding: 8px;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 8px;
+        cursor: pointer;
+        
+        margin-left: auto !important;
+    }
+}`, "questControlsCSS");
+}
+
+
+const questSortingMethods = [
+    { name: "Default", value: "default", method: (a, b) => 0 },
+    // sort by name (ascending), name (descending), number of requirements (ascending), number of requirements (descending), and number of the same quest (ascending), number of the same quest (descending)
+    // note, name needs to take into account the quest number, so a quest line may look like Quest -> Quest PT.2 -> Quest PT.3
+    { name: "Name (A-Z)", value: "name-asc", method: (a, b) => sortName(a, b) },
+    { name: "Name (Z-A)", value: "name-desc", method: (a, b) => sortName(b, a) },
+    { name: "Requirements (Low-High)", value: "requirements-asc", method: (a, b) => sortRequirements(a, b) },
+    { name: "Requirements (High-Low)", value: "requirements-desc", method: (a, b) => sortRequirements(b, a) },
+    // { name: "Same Quest (Low-High)", value: "same-asc", method: (a, b) => sortSameQuest(a, b) },
+    // { name: "Same Quest (High-Low)", value: "same-desc", method: (a, b) => sortSameQuest(b, a) },
+]
+
+function sortName(a, b) {
+    return a.name.localeCompare(b.name);
+}
+
+function sortRequirements(a, b) {
+    return a.requirements - b.requirements;
+}
+
+
+class MiniQuest {
+    // contains the quest name and number of requirements
+    constructor(name, requirements, element) {
+        this.name = name;
+        this.requirements = requirements;
+        this.element = element;
+    }
+}
+
+
+function addQuestSortSelect() {
+    // find the quest log
+    let questEntries = document.querySelector(getTargetSelector("Quest Entry Container"));
+    if (questEntries == null) return;
+
+    // find the bane-quest-controls
+    let questControls = document.querySelector("#bane-quest-controls");
+    if (questControls == null) return;
+
+    // if the quest controls already has the bane-quest-sort-select, return
+    let existingSelect = questControls.querySelector("#bane-quest-sort-select");
+    if (existingSelect != null) return;
+
+    // create a new select in the quest controls
+    let select = createElement("select", { id: "bane-quest-sort-select" }, questControls);
+
+    // create an option for each sorting method
+    for (let method of questSortingMethods) {
+        let option = createElement("option", { textContent: method.name, value: method.value }, select);
+    }
+
+    // add an event listener to the select
+    select.addEventListener("change", function () {
+        sortQuests(select.value);
+    });
+}
+
+function sortQuests(method) {
+    // find the quest log
+    let questEntries = document.querySelector(getTargetSelector("Quest Entry Container"));
+    if (questEntries == null) return;
+
+    // find all the quest entries
+    let entries = questEntries.querySelectorAll(getTargetSelector("Quest Entry"));
+    if (entries == null) return;
+
+    // create an array of MiniQuest objects
+    let quests = [];
+    for (let entry of entries) {
+        let name = entry.querySelector(getTargetSelector("Quest Title")).innerText;
+        let requirements = entry.querySelectorAll(getTargetSelector("Quest Requirement")).length;
+
+        name = name.replace("PT. ", "PT.");         // Workaround for inconsistent quest names
+
+        quests.push(new MiniQuest(name, requirements, entry));
+    }
+
+    // sort the quests based on the method
+    let sortingMethod = questSortingMethods.find(x => x.value == method);
+    quests.sort(sortingMethod.method);
+
+    // if the sorting method is the default, remove the flex order from each quest entry
+    if (sortingMethod.value == "default") {
+        for (let i = 0; i < quests.length; i++) {
+            quests[i].element.style.removeProperty("order");
+        }
+        return;
+    }
+
+    // add a flex order to each quest entry based on the sorted position that it should be in
+    for (let i = 0; i < quests.length; i++) {
+        quests[i].element.style.order = i;
+    }
+}
+
+
 //#endregion
 
 // function to take a URL and return an array of meta elements and other relevant information
@@ -4197,6 +4402,7 @@ function getPageMetas(url) {
 // Usage
 // getPageMetas("https://music.youtube.com/watch?v=LjBhDSgZPCo&si=7zqZ3C6juqVnPA8D").then(metas => console.log(metas)).catch(error => console.error(error));
 
+
 //#region Refresh on Application Error
 
 function checkForApplicationError() {
@@ -4215,6 +4421,7 @@ function checkForApplicationError() {
 }
 
 //#endregion
+
 
 //#region Disable Seasonal Effects
 
