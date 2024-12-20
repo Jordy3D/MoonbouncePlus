@@ -4118,6 +4118,30 @@
             ]
         },
         {
+            "id": 684,
+            "name": "Holiday Lights Crown",
+            "uuid": "36919112-e9d2-43c3-9422-ad64f2b88777",
+            "description": "When you want to be the human equivalent of holiday cheer. Battery life not included.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 15,
+            "sources": [
+                "Blizzard Box"
+            ]
+        },
+        {
+            "id": 685,
+            "name": "North Pole",
+            "uuid": "3eb40892-900b-43d8-922c-7983c0e01cc6",
+            "description": "First place in the \"Most Extra Holiday Accessory\" category. Way more reliable than your phone's GPS (but only points to candy canes and cookie shops).",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 30,
+            "sources": [
+                "Blizzard Box"
+            ]
+        },
+        {
             "id": 686,
             "name": "Snowglobe Hat",
             "uuid": "fae32fba-5400-4fbf-8890-3b35c96a2ab7",
