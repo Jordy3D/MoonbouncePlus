@@ -87,9 +87,19 @@
                 "cost": 750
             },
             {
+                "name": "Blueberry Bon Bon",
+                "section": "Materials",
+                "cost": 300
+            },
+            {
                 "name": "Two Gold Coins",
                 "section": "Materials",
                 "cost": 100
+            },
+            {
+                "name": "Kiwi Bon Bon",
+                "section": "Materials",
+                "cost": 900
             },
             {
                 "name": "Two Blue Coins",
@@ -107,6 +117,16 @@
                 "cost": 300
             },
             {
+                "name": "Strawberry Bon Bon",
+                "section": "Materials",
+                "cost": 600
+            },
+            {
+                "name": "Stardust",
+                "section": "Materials",
+                "cost": 50
+            },
+            {
                 "name": "Slightly Magical Fruit",
                 "section": "Materials",
                 "cost": 50
@@ -115,6 +135,11 @@
                 "name": "Prismatic Dust",
                 "section": "Materials",
                 "cost": 500
+            },
+            {
+                "name": "Witch's Cauldron",
+                "section": "Tools",
+                "cost": 100
             },
             {
                 "name": "Sewing Needle",
@@ -135,11 +160,6 @@
                 "name": "Craftsman Blade",
                 "section": "Tools",
                 "cost": 100
-            },
-            {
-                "name": "Witch's Cauldron",
-                "section": "Tools",
-                "cost": 100
             }
         ],
         "recipes": [
@@ -147,6 +167,16 @@
                 "name": "Mr. Man",
                 "section": "Characters",
                 "cost": 2500
+            },
+            {
+                "name": "Santa Hat",
+                "section": "Accessories",
+                "cost": 7500
+            },
+            {
+                "name": "Red Gift Cap",
+                "section": "Accessories",
+                "cost": 250
             },
             {
                 "name": "Wizard Hat",
@@ -172,6 +202,16 @@
                 "name": "3-D Glasses",
                 "section": "Accessories",
                 "cost": 2500
+            },
+            {
+                "name": "Blue Gift Cap",
+                "section": "Accessories",
+                "cost": 2500
+            },
+            {
+                "name": "Green Gift Cap",
+                "section": "Accessories",
+                "cost": 1000
             },
             {
                 "name": "Blue Space Mask",
@@ -244,18 +284,8 @@
                 "cost": 2500
             },
             {
-                "name": "Black Cat Beanie",
-                "section": "Accessories",
-                "cost": 2500
-            },
-            {
-                "name": "Grotesque Skull",
-                "section": "Accessories",
-                "cost": 2500
-            },
-            {
-                "name": "Loose Brain Trucker",
-                "section": "Accessories",
+                "name": "Mystical Ornament",
+                "section": "Materials",
                 "cost": 2500
             },
             {
@@ -292,6 +322,11 @@
                 "name": "Iron Plate",
                 "section": "Materials",
                 "cost": 1000
+            },
+            {
+                "name": "Perfect Snowflake",
+                "section": "Materials",
+                "cost": 2500
             },
             {
                 "name": "Polished Moonstone",
@@ -351,3 +386,5 @@
         ]
     }
 }
+
+

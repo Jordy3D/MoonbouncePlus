@@ -172,8 +172,63 @@
         "tags": []
     },
     {
+        "quest_id": "02abd293-be43-4891-803f-50ff7cbd451e",
+        "quest_name": "CTRL Dr. Swellman's Fuel ",
+        "quest_description": "CTRL just dropped a deal on us! Collect these 4 special CTRL items from https://drinkctrl.com/ to complete the quest and get a limited time complete CTRL Meal Shake with a 15% off code in its description!",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1733896800,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "35070b9d-d38e-4cbb-8991-54fe60c5fc1f",
+                "item_name": "Plain Milk Carton",
+                "quantity": 1
+            },
+            {
+                "item_id": "3ff02e08-8a17-44c0-b3f9-9a03cf0a5540",
+                "item_name": "Clover Charm",
+                "quantity": 1
+            },
+            {
+                "item_id": "f1977bad-e061-4bc2-b406-ba8a44ea7e90",
+                "item_name": "Stuffed Cookie",
+                "quantity": 1
+            },
+            {
+                "item_id": "fce5fa68-151e-4874-826d-092cc13de481",
+                "item_name": "Shaker Bottle",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "7d6b7cc8-49d9-4c73-a0e5-89add7fed109",
+                "item_name": "Dr. Swellman's Shake",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            },
+            {
+                "item_id": null,
+                "item_name": null,
+                "quantity": 5000,
+                "reward_type": "currency",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
         "quest_id": "90e22b01-83ab-4c93-a6dd-2c679e64fc74",
-        "quest_name": "CTRL Your Fuel",
+        "quest_name": "CTRL Idyl's Fuel ",
         "quest_description": "CTRL just dropped a deal on us! Collect these 4 special CTRL items from https://drinkctrl.com/ to complete the quest and get a limited time complete CTRL Meal Shake with a 15% off code in its description!",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Collect",
@@ -211,7 +266,7 @@
         "rewards": [
             {
                 "item_id": "f59d099e-62b7-46e9-a3be-50eb2d895945",
-                "item_name": "Meal Shake",
+                "item_name": "Idyl's Shake",
                 "quantity": 1,
                 "reward_type": "item",
                 "recipe_name": null
