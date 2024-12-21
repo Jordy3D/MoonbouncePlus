@@ -2556,6 +2556,16 @@
             "sources": []
         },
         {
+            "id": 532,
+            "name": "Gold Space Mask",
+            "uuid": "e51e9547-0add-42df-bc61-d37a74d82b6e",
+            "description": "The luxury option amongst masks. Flex your wealth by equipping a mask made out of almost pure gold.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
             "id": 533,
             "name": "Fuchsia Wizard Hat",
             "uuid": "b2bd3369-0551-43b4-b43e-664432c77431",
