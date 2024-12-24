@@ -1419,7 +1419,7 @@
             "id": 409,
             "name": "Anatomical Heart",
             "uuid": "2aa56c3f-5e74-4cc5-80bb-62670557a1ea",
-            "description": "When we said you steal everyone's hearts away, we didn't mean it literally",
+            "description": "When we said you steal everyone's hearts away, we didn't mean it literally.",
             "rarity": "RARE",
             "type": "MATERIAL",
             "value": 30,
@@ -1760,7 +1760,7 @@
             "id": 441,
             "name": "Blue Lens",
             "uuid": "eb0e939b-2fb1-4528-93ef-e68fc6288815",
-            "description": "Dive into a sea of virtual blues",
+            "description": "Dive into a sea of virtual blues.",
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
@@ -1777,7 +1777,6 @@
             "type": "MATERIAL",
             "value": 15,
             "sources": [
-                "Lucky Bag",
                 "Framed Chest",
                 "Dusty Box",
                 "Settled's Satchel"
@@ -1939,7 +1938,7 @@
             "id": 460,
             "name": "Four Leaf Clover",
             "uuid": "8c86913e-c567-48bd-878c-dd2631455ae1",
-            "description": "A rare clover we picked out from a big wide open patch of flowers, fit with lucky soil through and through",
+            "description": "A rare clover we picked out from a big wide open patch of flowers, filled with lucky soil through and through.",
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
@@ -2497,7 +2496,7 @@
             "id": 509,
             "name": "Beaver Plushie",
             "uuid": "ad9e342d-b28c-4f6d-8d71-3ccdc0ce4e22",
-            "description": "Ethically sourced beavers only. We’re not monsters",
+            "description": "Ethically sourced beavers only. We’re not monsters.",
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 250,
@@ -3157,7 +3156,7 @@
             "id": 589,
             "name": "Blue Starfish",
             "uuid": "b383d8c7-2ced-4251-aed7-43bf7e6c4998",
-            "description": "This cute fella wants to be as close to you as possible. Is it malicious? we don’t know, all we know is that he's blue and he’s kinda cute.",
+            "description": "This cute fella wants to be as close to you as possible. Is it malicious? We don’t know. All we know is that he's blue and he’s kinda cute.",
             "rarity": "COMMON",
             "type": "ACCESSORY",
             "value": 15,
@@ -3189,7 +3188,7 @@
             "id": 592,
             "name": "Blue Eye",
             "uuid": "62847990-76ca-476d-8843-3619b68d8ff1",
-            "description": "You get the feeling your being watched, by a darting blue eye. We’ve got our eyes on you, but you’ve got your eye on everything else.",
+            "description": "You get the feeling you're being watched by a darting blue eye. We’ve got our eyes on you, but you’ve got your eye on everything else.",
             "rarity": "LEGENDARY",
             "type": "ACCESSORY",
             "value": 500,
@@ -3621,7 +3620,7 @@
             "id": 635,
             "name": "J1mbo's Santa Cap",
             "uuid": "b4d47897-0bdd-44f8-a93d-c172ff782933",
-            "description": "The holidays only come once a year (or do they?). Take a seat on Sa1nt N1cks lap and tell him everything you want for this “holiday” season.",
+            "description": "The holidays only come once a year (or do they?). Take a seat on Sa1nt N1ck's lap and tell him everything you want for this “holiday” season.",
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
@@ -3633,7 +3632,7 @@
             "id": 636,
             "name": "Farmer J1m's Hat",
             "uuid": "8d0b73d8-d562-4bb2-9291-886f9e97c99d",
-            "description": "Farming runs got you down? Pop on this stylish farmer hat and let the world know that your on a crop run.",
+            "description": "Farming runs got you down? Pop on this stylish farmer hat and let the world know that you're on a crop run!",
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
@@ -3881,7 +3880,7 @@
             "id": 658,
             "name": "Ratty Plush",
             "uuid": "0947a524-71f7-4448-b5b6-f552b289cf16",
-            "description": "This adorable stuffed rat has suspiciously realistic eyes that seem to follow you. At night, you swear you hear tiny footsteps… ( Made by User: Jesus)",
+            "description": "This adorable stuffed rat has suspiciously realistic eyes that seem to follow you. At night, you swear you hear tiny footsteps… (Made by User: Jesus)",
             "rarity": "LEGENDARY",
             "type": "ACCESSORY",
             "value": 100,
@@ -4186,6 +4185,38 @@
             "sources": [
                 "Blizzard Box"
             ]
+        },
+        {
+            "id": 689,
+            "name": "Abyssoft's Shake",
+            "uuid": "75d9d827-e550-4643-b913-162ed2417dde",
+            "description": "You got a complete meal shake! Go to CTRL’s website below and use [the code] at checkout for 15% off your order!",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": []
+        },
+        {
+            "id": 690,
+            "name": "Abyssoft's Supreme Shake",
+            "uuid": "70a9c42f-b87b-4516-8e37-cbdc97a67858",
+            "description": "You got a complete meal shake! Go to CTRL’s website below and use [the code] at checkout for 20% off your order!",
+            "rarity": "LEGENDARY",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": [
+                "CTRL Capsule"
+            ]
+        },
+        {
+            "id": 692,
+            "name": "Sipho's Shake",
+            "uuid": "bd934dbe-9a34-409b-8e67-7b9d64c2050c",
+            "description": "You got a complete meal shake! Go to CTRL’s website below and use [the code] at checkout for 15% off your order!",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": []
         }
     ],
     "recipes": [
