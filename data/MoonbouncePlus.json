@@ -4081,6 +4081,18 @@
             "sources": []
         },
         {
+            "id": 678,
+            "name": "Idyl's Supreme Shake",
+            "uuid": "ad4feabd-36d3-480e-b723-b89577b16633",
+            "description": "You got a complete supreme meal shake! Go to CTRL’s website below and use [the code] at checkout for 20% off your order!",
+            "rarity": "LEGENDARY",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": [
+                "CTRL Capsule"
+            ]
+        },
+        {
             "id": 679,
             "name": "Dr. Swellman's Shake",
             "uuid": "c1259cea-5e02-41cb-bc07-8ef94dbf7800",
@@ -4202,6 +4214,18 @@
             "uuid": "70a9c42f-b87b-4516-8e37-cbdc97a67858",
             "description": "You got a complete meal shake! Go to CTRL’s website below and use [the code] at checkout for 20% off your order!",
             "rarity": "LEGENDARY",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": [
+                "CTRL Capsule"
+            ]
+        },
+        {
+            "id": 691,
+            "name": "Sipho's Supreme Shake",
+            "uuid": "e9cad7f2-cb43-44d5-a04a-599837eb49a4",
+            "description": "You got a complete meal shake! Go to CTRL’s website below and use [the code] at checkout for 20% off your order!",
+            "rarity": "RARE",
             "type": "MATERIAL",
             "value": 500,
             "sources": [
