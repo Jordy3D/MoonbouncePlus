@@ -4103,6 +4103,18 @@
             "sources": []
         },
         {
+            "id": 680,
+            "name": "Dr. Swellman's Supreme Shake",
+            "uuid": "eebad1cb-65e6-4940-8233-347d67ae252b",
+            "description": "You got a complete supreme meal shake! Go to CTRL’s website below and use [the code] at checkout for 20% off your order!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": [
+                "CTRL Capsule"
+            ]
+        },
+        {
             "id": 681,
             "name": "Reindeer Antlers 2.0",
             "uuid": "dec3390b-9d01-4de4-866b-6ce969131c4e",
