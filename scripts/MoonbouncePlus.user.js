@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.25.3
+// @version      0.26.0
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -179,6 +179,9 @@
 //          - Stopped logging to the console when chat is opened and closed
 // 0.25.2   - Fixed YouTube blocking the OSRS chat effects and video embedding
 // 0.25.3   - Fixed previously sent OSRS chat messages not displaying when chat is closed and reopened
+// 0.26.0   - Added the ability to quickly link to the Moonbounce Wiki for items detected in the chat
+//              - Hotlinking automatically detects items in the chat and links to the Moonbounce Wiki (off by default)
+//              - Quicklinking allows you to wrap an item name in square brackets to link to the Moonbounce Wiki (on by default)
 //
 // ==/Changelog==
 
@@ -223,6 +226,8 @@ var userSettings = [
     { name: "Chat Users Blacklist", description: "The users to not receive chat notifications from (Display Name, separated with commas)", type: "text", defaultValue: "", value: "", group: "Portal" },
     { name: "Embed YouTube Videos", description: "Embed YouTube videos in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
     { name: "Chat Markdown", description: "Enable Markdown conversion in the chat.\nNote, if your message is long enough it may cause your message to prematurely hit the character limit.", type: "boolean", defaultValue: true, value: true, group: "Portal" },
+    { name: "Wiki Hotlink", description: "Enable hotlinking to the Moonbounce Wiki for items automatically detected in the chat", type: "boolean", defaultValue: false, value: false, group: "Portal" },
+    { name: "Wiki Quicklink", description: "Enable quicklinking to the Moonbounce Wiki for items wrapped in [square brackets] in the chat", type: "boolean", defaultValue: true, value: true, group: "Portal" },
 
     // Hotkeys
     { name: "Enable Chat Hotkeys", description: "Enable hotkeys for the chat.\nNote, currently the character needs to be typed directly below", type: "boolean", defaultValue: true, value: true, group: "Hotkeys" },
@@ -716,6 +721,15 @@ function checkSite() {
                 }
             });
             checkedVersion = true;
+        }
+
+        // TODO: Add toggle to disable the item hotlinks
+        // load data in order to allow for hotlinks to the wiki for detected elements
+        if (getSettingValue("Wiki Hotlink") || getSettingValue("Wiki Quicklink")) {
+            if (!loadingData) {
+                loadData();
+                loadingData = true;
+            }
         }
 
         if (getSettingValue("Moonbounce Portal Buttons")) addMoonbouncePortalButtons(moonbouncePortal);
@@ -1766,7 +1780,7 @@ function addMoonbouncePortalCSS(portal) {
 
     addCSS(`
     .message-text {
-        em, i, strong, b {
+        em, i, strong, b, span, a {
             margin: 0 0.25em;
             display: contents;
         }
@@ -3178,8 +3192,18 @@ function parseChatMessages(portal) {
 function parseMessage(messageText) {
     if (messageText.classList.contains("checked")) return;
 
-    // if the message contains no link, :, or any of the whitespace characters, return
-    let needsParsing = messageText.innerText.includes(":") || messageText.innerText.includes("http") || whiteSpaceChars.some(char => messageText.innerText.includes(char));
+    let needsParsing = false;
+    const messageTextContent = messageText.innerText;
+
+    if (getSettingValue("Wiki Hotlink") ||                                          // Hotlink detection
+        messageTextContent.includes(":") ||                                         // Effect tag detection
+        messageTextContent.includes("http") ||                                      // Embedded link detection
+        (messageTextContent.includes("[") && messageTextContent.includes("]")) ||   // Quicklink detection
+        whiteSpaceChars.some(char => messageTextContent.includes(char)))            // Text encryption detection
+    {
+        needsParsing = true;
+    }
+
     if (!needsParsing) return;
 
     // add the class "checked" to the message
@@ -3196,6 +3220,10 @@ function parseMessage(messageText) {
 
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
+
+    // Look for an instance of an item name in the message
+    parsedMessage = parseForItem(parsedMessage);
+
     if (parsedMessage != messageText.innerText) {
         messageText.innerHTML = escapeHTMLPolicy.createHTML(parsedMessage);
     }
@@ -3223,11 +3251,17 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
 
     // try and parse the message to see if it has an effect tag
     parsedMessage = parseForOSRS(parsedMessage);
+
+    // Look for an instance of an item name in the message
+    parsedMessage = parseForItem(parsedMessage);
+
     if (parsedMessage != newMessage) {
         messageTextElement.innerHTML = escapeHTMLPolicy.createHTML(parsedMessage);
     }
 
     if (chatReload) return true;
+
+    //#region Send Notification
 
     // send a notification with the message based on the user's settings
     let notificationMode = getSetting("Chat Notification Mode").value;
@@ -3258,6 +3292,8 @@ function handleNewMessage(messageTarget, messageTextElement, chatReload = false)
     }
 
     return true;
+
+    //#endregion
 }
 
 function handleNewMessageSameAuthor(mutation) {
@@ -3440,6 +3476,51 @@ function parseForOSRS(message) {
     // add a class called .rs-[tag] to the message as by surrounding it with an rs tag
     let wrappedMessage = `<rs class="${classesToAdd.join(" ")}">${parsedMessage}</rs>`;
     return wrappedMessage;
+}
+
+function parseForItem(message) {
+    let parsedMessage = message;
+    
+    let hotlinkEnabled = getSettingValue("Wiki Hotlink");
+    let quicklinkEnabled = getSettingValue("Wiki Quicklink");
+
+    if (!hotlinkEnabled && !quicklinkEnabled) return parsedMessage;
+
+    // let hotlinkRegex = /(\b<ITEM>)/g;
+    // let quicklinkRegex = /(\[.*?\])/g;
+
+    // look for an item name in the message, such as Banana
+    // if an item name is found, replace it with a link to the item on the wiki
+    for (let item of items) {
+        // let regex = new RegExp(`\\b${item.name}\\b`, "gi");
+
+        // set up tests for hotlink and quicklink depending on what's enabled
+        let hotlinkRegex = new RegExp(`\\b${item.name}\\b`, "gi");
+        let quicklinkRegex = new RegExp(`\\[${item.name}\\]`, "gi");
+
+        if (hotlinkEnabled && hotlinkRegex.test(parsedMessage)) {
+            log(`Found item: ${item.name}. Hotlinking...`);
+            let itemName = item.name;
+            let formattedName = itemName.replace(/ /g, "_");        // replace spaces with underscores
+            formattedName = formattedName.replace(/'/g, "%27");     // replace apostrophes with %27
+            formattedName = formattedName.replace(/\?/g, "%3F");    // replace question marks with %3F
+            let wikiURL = `https://moonbounce.wiki/w/${formattedName}`;
+
+            parsedMessage = parsedMessage.replace(hotlinkRegex, `<a href="${wikiURL}" target="_blank">${itemName}</a>`);
+        }
+        if (quicklinkEnabled && quicklinkRegex.test(parsedMessage)) {
+            log(`Found item: ${item.name}. Quicklinking...`);
+            let itemName = item.name;
+            let formattedName = itemName.replace(/ /g, "_");        // replace spaces with underscores
+            formattedName = formattedName.replace(/'/g, "%27");     // replace apostrophes with %27
+            formattedName = formattedName.replace(/\?/g, "%3F");    // replace question marks with %3F
+            let wikiURL = `https://moonbounce.wiki/w/${formattedName}`;
+
+            parsedMessage = parsedMessage.replace(quicklinkRegex, `<a href="${wikiURL}" target="_blank">${itemName}</a>`);
+        }
+    }
+
+    return parsedMessage;
 }
 
 function parseForYouTube(messageTextElement) {
