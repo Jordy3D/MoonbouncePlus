@@ -173,7 +173,7 @@
     },
     {
         "quest_id": "e671498e-e536-44b2-8b2e-afeb32d2b145",
-        "quest_name": "CTRL Abyssoft's Fuel ",
+        "quest_name": "CTRL Abyssoft's Fuel",
         "quest_description": "CTRL just dropped a deal on us! Collect these 4 special CTRL items from https://drinkctrl.com/ to complete the quest and get a limited time complete CTRL Meal Shake with a 15% off code in its description!",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
@@ -228,7 +228,7 @@
     },
     {
         "quest_id": "02abd293-be43-4891-803f-50ff7cbd451e",
-        "quest_name": "CTRL Dr. Swellman's Fuel ",
+        "quest_name": "CTRL Dr. Swellman's Fuel",
         "quest_description": "CTRL just dropped a deal on us! Collect these 4 special CTRL items from https://drinkctrl.com/ to complete the quest and get a limited time complete CTRL Meal Shake with a 15% off code in its description!",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Fetch",
@@ -283,7 +283,7 @@
     },
     {
         "quest_id": "90e22b01-83ab-4c93-a6dd-2c679e64fc74",
-        "quest_name": "CTRL Idyl's Fuel ",
+        "quest_name": "CTRL Idyl's Fuel",
         "quest_description": "CTRL just dropped a deal on us! Collect these 4 special CTRL items from https://drinkctrl.com/ to complete the quest and get a limited time complete CTRL Meal Shake with a 15% off code in its description!",
         "quest_instance_type": "One-Time",
         "quest_quest_type": "Collect",
