@@ -3445,7 +3445,9 @@
         },
         {
             "name": "Lazy Luna",
-            "trivia": [],
+            "trivia": [
+                "* At the time of the quest's release, the quest asked you to get \"6 sodas\", but the actual requirement was 6 [[Tiki Drink|Tiki Drinks]]."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -3453,7 +3455,9 @@
         },
         {
             "name": "Rex's Sundae Surprise",
-            "trivia": [],
+            "trivia": [
+                "* At the time of the quest's release, the quest asked you to get [[Dream Pop|Dream Pops]], but the actual requirement was [[Ice Cream]]."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -3477,7 +3481,9 @@
         },
         {
             "name": "Roxy's Rave",
-            "trivia": [],
+            "trivia": [
+                "* At the time of the quest's release, the quest asked you to craft 5 speakers and 3 holographic disco balls, but the actual requirements were 10 [[Blue Glowstick|Blue Glowsticks]], 5 [[MP3 Player|MP3 Players]], and 5 [[EarBudz]]."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -3528,7 +3534,9 @@
         },
         {
             "name": "Welcome to Moonbounce PT. 3",
-            "trivia": [],
+            "trivia": [
+                "* At the time of the quest's release, the quest asked you to get [[Chicken Leg|Chicken Legs]] from the Living Chicken Chest, but the actual requirement was [[Candy Corn]]."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
