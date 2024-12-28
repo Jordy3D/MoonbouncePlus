@@ -25,6 +25,8 @@ class Quest:
         required_items=None,
         rewards=None,
         tags=None,
+        trivia=None,
+        promo=None,
     ):
         self.quest_id = quest_id
         self.quest_name = quest_name
@@ -39,6 +41,9 @@ class Quest:
         self.required_items = required_items if required_items is not None else []
         self.rewards = rewards if rewards is not None else []
         self.tags = tags if tags is not None else []
+
+        self.trivia = trivia
+        self.promo = promo
 
     def __str__(self):
         output = f"{self.quest_name}"  # ({self.quest_id})'
@@ -136,6 +141,13 @@ def clean_quests(input_file, output_file):
 
 
 def load_quests(input_file):
+
+    # load the wiki data
+    with open("data/wiki_data.json", "r", encoding="utf-8") as f:
+        wiki_data = json.load(f)
+
+    wiki_data = wiki_data["quests"]
+
     with open(input_file, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -196,6 +208,16 @@ def load_quests(input_file):
                 new_quest.rewards = rewards
 
             new_quest.tags = quest["tags"]
+
+            # add the trivia and promo fields
+            # find the quest with the matching name
+            wiki_quest = next(
+                (q for q in wiki_data if q["name"] == new_quest.quest_name.strip()),
+                None,
+            )
+            if wiki_quest:
+                new_quest.trivia = wiki_quest["trivia"]
+                new_quest.promo = wiki_quest["promo"]
 
             quests.append(new_quest)
 
@@ -258,7 +280,9 @@ def convert_to_json(obj):
         return obj
 
 
-quest_template = """{{{{Quest
+quest_template = """\
+[[Category:Quests]]<PROMOCATEGORY>
+{{{{Quest
 |name={quest_name}
 |description={quest_description}
 |instance_type={quest_instance_type}
@@ -343,6 +367,11 @@ def create_quest_pages(quests):
         page = page.replace("<INSTANCE_TYPE>", quest.quest_instance_type)
         page = page.replace("<QUEST_TYPE>", quest.quest_quest_type)
         page = page.replace("<DESCRIPTION>", quest.quest_description)
+
+        # replace the <PROMOCATEGORY> placeholder with the promo category
+        is_promo = quest.promo
+        promo_category = "[[Category:Promos]]" if is_promo else ""
+        page = page.replace("<PROMOCATEGORY>", "[[Category:Promos]]")
 
         if quest.prerequisites:
             prerequisites = "== Prerequisites ==\n\n"
@@ -430,14 +459,20 @@ def create_quest_pages(quests):
         else:
             page = page.replace("<REWARDS>", "")
 
+        if quest.trivia:
+            trivia = "== Trivia ==\n\n"
+            trivia += "\n".join(quest.trivia)
+
+            page += trivia
+
         # remove any multiple newlines
         while "\n\n\n" in page:
             page = page.replace("\n\n\n", "\n")
-            
+
         # make the quests folder if it doesn't exist
         if not os.path.exists("wiki/quests"):
             os.makedirs("wiki/quests")
-            
+
         # remove ? from the quest name
         quest.quest_name = quest.quest_name.replace("?", "")
 

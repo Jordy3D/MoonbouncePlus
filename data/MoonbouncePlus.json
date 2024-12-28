@@ -1779,7 +1779,8 @@
             "sources": [
                 "Framed Chest",
                 "Dusty Box",
-                "Settled's Satchel"
+                "Settled's Satchel",
+                "Lucky Bag"
             ]
         },
         {
@@ -4998,7 +4999,8 @@
             "result": "Snowman Toy",
             "ingredients": [
                 "Perfect Snowflake",
-                "Carrot"
+                "Carrot",
+                "Branch"
             ],
             "tools": [
                 "Fairy Particles"

@@ -51,6 +51,13 @@ class Item:
         self.sources = sources
         self.uuid = uuid
         
+        self.promo = False
+        self.trivia = []
+        self.categories = None
+        
+        self.gallery = []
+        self.appearance = None
+        
         self.name_formatted = format_name(name)
         
     def __str__(self):
@@ -93,6 +100,10 @@ class Source:
         self.drops = []
         self.is_quest = False
         
+        self.promo = False
+        self.trivia = []
+        self.categories = None
+        
     def __str__(self):
         return f'{self.name}'
 
@@ -128,6 +139,7 @@ type_to_types_dict = {
     "material": "Materials",
     "character": "Characters",
     "tool": "Tools",
+    "unknown": "Unknown"
 }
 
 # Reference to rarity order
@@ -144,6 +156,7 @@ rarity_order = {
 #region Item Page Templates
 
 itemPageTemplate = """\
+[[Category:<TYPES>]][[Category:Items]][[Category:<RARITY>]]<PROMOCATEGORY><EXTRACATEGORIES>
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -173,14 +186,17 @@ The '''<NAME>''' is <AAN> [[<TYPE>]] in Moonbounce.
 
 == Trivia ==
 
-* Lorem Ipsum
+<TRIVIATEXT>
 
 == Gallery ==
 
-Placeholder
+<gallery>
+<NAMEHYPHENED>.png | <NAME> item sprite
+</gallery>
 """
 
 characterTemplate = """\
+[[Category:Character]][[Category:Items]][[Category:<RARITY>]]<PROMOCATEGORY>
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -200,9 +216,7 @@ characterTemplate = """\
 
 <DESCRIPTION>
 
-== Appearance ==
-
-Placeholder
+<APPEARANCEBODY>
 
 == Found In ==
 
@@ -212,11 +226,14 @@ Placeholder
 
 == Trivia ==
 
-* Lorem Ipsum
+<TRIVIATEXT>
 
 == Gallery ==
 
-Placeholder
+<gallery>
+<NAMEHYPHENED>.png | <NAME> item sprite
+<GALLERYITEMS>
+</gallery>
 """
 
 #endregion
@@ -275,6 +292,24 @@ toolsPageTableItemTemplate = """
 |<RARITY>
 |-"""
 
+
+characterPageTableTemplate = """\
+== Alternative Sortable Table ==
+{| class="wikitable sortable mw-collapsible mw-collapsed"
+|+
+!Preview
+!Name
+!Rarity
+|-<ITEMS>
+|}
+"""
+
+characterPageTableItemTemplate = """
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px|link=<NAME>]]
+|[[<NAME>]]
+|<RARITY>
+|-"""
+
 #endregion
 
 #region Main Page Card Templates
@@ -308,8 +343,7 @@ materialCardItemTemplate = """
 }}
 """
 
-
-toolCardBodyTemplte = """\
+toolCardBodyTemplate = """\
 == Tool List ==
 <div class="card-container">
 <ITEMS>
@@ -323,6 +357,25 @@ toolCardItemTemplate = """
 |linktarget=<NAMEHYPHENED>
 }}
 """
+
+characterCardBodyTemplate = """\
+== Character List ==
+<div class="card-container">
+<ITEMS>
+</div>"""
+
+characterCardItemTemplate = """
+{{Character Card
+|name=<NAME>
+|image=<NAME>.png
+|rarity=<RARITY>
+|description=<DESCRIPTION>
+<HAS_RECIPE>
+|linktarget=<NAMEHYPHENED>
+|number=<ID>
+}}
+"""
+
 
 card_template = """
 {{Card
@@ -369,7 +422,11 @@ def has_recipe(item):
 
 def format_name(name):
     new_name = name.replace(" ", "_")
-    new_name = new_name.replace("?", "-")
+    
+    # only replace the name's ? with - if it's P?t Ch?ck?n
+    if name == "P?t Ch?ck?n":
+        new_name = new_name.replace("?", "-")
+    
     # remove #
     new_name = new_name.replace("#", "")
     
@@ -438,7 +495,14 @@ def replace_template(template, item):
     
     new_template = replace_text(new_template, '<RARITY>', item.rarity)
     new_template = replace_text(new_template, '<TYPE>', item.type)
+    new_template = replace_text(new_template, '<TYPES>', type_to_types_dict[item.type.lower()])
     new_template = replace_text(new_template, '<DESCRIPTION>', item.description)
+    
+    new_template = replace_text(new_template, '<PROMOCATEGORY>', '[[Category:Promos]]' if item.promo else '')
+    categories = ''
+    if item.categories:
+        categories = ''.join([f'[[Category:{category}]]' for category in item.categories])
+    new_template = replace_text(new_template, '<EXTRACATEGORIES>', categories)
     
     value_string = f'{item.value} MP' if item.value != None else 'Cannot be Diffused'
     new_template = replace_text(new_template, '<VALUE>', value_string)
@@ -600,6 +664,24 @@ def replace_template(template, item):
         usage_block = ""
         
     new_template = replace_text(new_template, '<USAGEBLOCK>', usage_block)
+    
+    # replace the trivia text with the actual trivia or "Lorem upsum" if there is none
+    trivia_text = '* Lorem ipsum'
+    if len(item.trivia) > 0:
+        trivia_text = '\n'.join(item.trivia)
+    new_template = replace_text(new_template, '<TRIVIATEXT>', trivia_text)
+    
+    # replace the gallery items with the actual gallery items or an empty string if there are none
+    gallery_items = ''
+    if len(item.gallery) > 0:
+        gallery_items = '\n'.join(item.gallery)
+    new_template = replace_text(new_template, '<GALLERYITEMS>', gallery_items)
+    
+    # replace the appearance body with the actual appearance or an empty string if there is none
+    appearance_body = ''
+    if item.appearance:
+        appearance_body = "== Appearance ==\n\n" + item.appearance
+    new_template = replace_text(new_template, '<APPEARANCEBODY>', appearance_body)
             
     # remove all multiple empty lines
     new_template = re.sub(r'\n{3,}', '\n\n', new_template)
@@ -613,6 +695,12 @@ def replace_template(template, item):
 #region Loading Data
 def load_data(data_path, marketplace_data_path):
     """Load the data from the specified JSON file and populate the items and recipes lists."""
+    
+    with open("data/wiki_data.json", "r", encoding="utf-8") as f:
+        wiki_data = json.load(f)
+        
+    wiki_item_data = wiki_data['items']
+    wiki_source_data = wiki_data['sources']
     
     # Initialize the lists to store the items, recipes, and sources
     items = []
@@ -649,6 +737,14 @@ def load_data(data_path, marketplace_data_path):
             source = next((s for s in sources if s.name == source_name), None)              # Try and find the source in the sources list
             if not source:                                                                  # If it doesn't exist...
                 source = Source(source_name)                                                # Create a new source
+                
+                # find the source in the wiki data
+                wiki_source = next((s for s in wiki_source_data if s['name'] == source_name), None)
+                if wiki_source:
+                    source.promo = wiki_source['promo']
+                    source.trivia = wiki_source['trivia']
+                    source.categories = ['categories']
+                
                 sources.append(source)                                                      # Add it to the sources list
             item_sources.append(source)                                                     # Add the source to the item_sources list   
             source.drops.append(item['name'])                                               # Add the item to the source's drops list
@@ -656,8 +752,19 @@ def load_data(data_path, marketplace_data_path):
         # check if the item is in the marketplace
         if check_if_in_marketplace(item['name'], marketplace_items):
             item_sources.append(marketplace_source)
+            
+        new_item = Item(item['id'], item['name'], item['description'], item['type'], item['value'], item['rarity'], item_sources, item['uuid'])
         
-        items.append(Item(item['id'], item['name'], item['description'], item['type'], item['value'], item['rarity'], item_sources, item['uuid']))
+        # check if the item is a promo item
+        wiki_item = next((i for i in wiki_item_data if i['name'] == item['name']), None)
+        if wiki_item:
+            new_item.trivia = wiki_item['trivia']
+            new_item.promo = wiki_item['promo']
+            new_item.categories = wiki_item['categories']
+            new_item.gallery = wiki_item['gallery']
+            new_item.appearance = wiki_item['appearance']
+        
+        items.append(new_item)
         
     # Go through the recipes in the JSON file and create a new Recipe object for each one
     for recipe in data['recipes']:
@@ -706,8 +813,8 @@ def generate_wiki_articles(items, print_file_names=False):
         else:
             print(f'Uncaught Item type: {item.type} for {item.name}')
             # # TEMPORARILY CREATE THE ITEM AS IF IT WERE AN ACCESSORY
-            # new_template = accessoryTemplate
             # type_path = 'unknown'
+            # new_template = new_template.replace('<AAN>', 'an')
             # valid = True
             
         if valid == True:
@@ -859,34 +966,35 @@ def generate_page_tables(items):
     accessories_table = accessoriesPageTableTemplate
     materials_table = materialsPageTableTemplate
     tools_table = toolsPageTableTemplate
-    accesoryItems = []
-    materialItems = []
-    toolItems = []
+    characters_table = characterPageTableTemplate
+    
+    item_templates = {
+        'accessory': accessoriesPageTableItemTemplate,
+        'material': materialsPageTableItemTemplate,
+        'tool': toolsPageTableItemTemplate,
+        'character': characterPageTableItemTemplate
+    }
+    
+    item_lists = {
+        'accessory': [],
+        'material': [],
+        'tool': [],
+        'character': []
+    }
     
     for item in items:
-        if item.type.lower() == 'accessory':
-            new_item = accessoriesPageTableItemTemplate
+        item_type = item.type.lower()
+        if item_type in item_templates:
+            new_item = item_templates[item_type]
             new_item = replace_text(new_item, '<NAME>', item.name)
             new_item = replace_text(new_item, '<RARITY>', item.rarity)
             new_item = replace_text(new_item, '<NAMEFORMATTED>', format_name(item.name))
-            accesoryItems.append(new_item)
-        if item.type.lower() == 'material':
-            new_item = materialsPageTableItemTemplate
-            new_item = replace_text(new_item, '<NAME>', item.name)
-            new_item = replace_text(new_item, '<RARITY>', item.rarity)
-            new_item = replace_text(new_item, '<NAMEFORMATTED>', format_name(item.name))
-            materialItems.append(new_item)
-        if item.type.lower() == 'tool':
-            new_item = toolsPageTableItemTemplate
-            new_item = replace_text(new_item, '<NAME>', item.name)
-            new_item = replace_text(new_item, '<RARITY>', item.rarity)
-            new_item = replace_text(new_item, '<NAMEFORMATTED>', format_name(item.name))
-            toolItems.append(new_item)
-        
-    
-    accessories_table = replace_text(accessories_table, '<ITEMS>', ''.join(accesoryItems))
-    materials_table = replace_text(materials_table, '<ITEMS>', ''.join(materialItems))
-    tools_table = replace_text(tools_table, '<ITEMS>', ''.join(toolItems))
+            item_lists[item_type].append(new_item)
+                
+    accessories_table = replace_text(accessories_table, '<ITEMS>', ''.join(item_lists['accessory']))
+    materials_table = replace_text(materials_table, '<ITEMS>', ''.join(item_lists['material']))
+    tools_table = replace_text(tools_table, '<ITEMS>', ''.join(item_lists['tool']))
+    characters_table = replace_text(characters_table, '<ITEMS>', ''.join(item_lists['character']))
     
     with open(os.path.join(script_dir, '..', 'wiki', 'accessories-table.mw'), 'w', encoding='utf-8') as f:
         f.write(accessories_table)
@@ -897,9 +1005,13 @@ def generate_page_tables(items):
     with open(os.path.join(script_dir, '..', 'wiki', 'tools-table.mw'), 'w', encoding='utf-8') as f:
         f.write(tools_table)
         
+    with open(os.path.join(script_dir, '..', 'wiki', 'characters-table.mw'), 'w', encoding='utf-8') as f:
+        f.write(characters_table)
+        
     print('Generated page tables for accessories.')
     print('Generated page tables for materials.')
     print('Generated page tables for tools.')
+    print('Generated page tables for characters.')
 
 
 def generate_cards_lists(items):
@@ -910,32 +1022,52 @@ def generate_cards_lists(items):
     material_card_body = materialCardBodyTemplate
     materialItems = []
 
-    tool_card_body = toolCardBodyTemplte
+    tool_card_body = toolCardBodyTemplate
     toolItems = []
     
-    for item in items:
-        if item.type.lower() == 'accessory':
-            new_item = accessoryCardItemTemplate
-            new_item = replace_text(new_item, '<NAME>', item.name)
-            new_item = replace_text(new_item, '<RARITY>', item.rarity.lower())
-            new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
-            accessoryItems.append(new_item)
-        if item.type.lower() == 'material':
-            new_item = materialCardItemTemplate
-            new_item = replace_text(new_item, '<NAME>', item.name)
-            new_item = replace_text(new_item, '<RARITY>', item.rarity.lower())
-            new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
-            materialItems.append(new_item)
-        if item.type.lower() == 'tool':
-            new_item = toolCardItemTemplate
-            new_item = replace_text(new_item, '<NAME>', item.name)
-            new_item = replace_text(new_item, '<RARITY>', item.rarity.lower())
-            new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
-            toolItems.append(new_item)
+    character_card_body = characterCardBodyTemplate
+    characterItems = []
     
+    item_templates = {
+        'accessory': (accessoryCardItemTemplate, accessoryItems),
+        'material': (materialCardItemTemplate, materialItems),
+        'tool': (toolCardItemTemplate, toolItems),
+        'character': (characterCardItemTemplate, characterItems)
+    }
+    
+    for item in items:
+        item_type = item.type.lower()
+        if item_type in item_templates:
+            template, item_list = item_templates[item_type]
+            new_item = replace_text(template, '<NAME>', item.name)
+            new_item = replace_text(new_item, '<RARITY>', item.rarity.lower())
+            new_item = replace_text(new_item, '<NAMEHYPHENED>', format_name(item.name))
+            
+            if item_type == 'character':
+                new_item = replace_text(new_item, '<DESCRIPTION>', item.description)
+                new_item = replace_text(new_item, '<ID>', item.id)
+                
+                # find a recipe that creates the character
+                for recipe in recipes:
+                    if recipe.result == item.name:
+                        new_item = replace_text(new_item, '<HAS_RECIPE>', '|craftable=Yes')
+                        break
+                else:
+                    new_item = replace_text(new_item, '<HAS_RECIPE>', '')
+                    
+
+            item_list.append(new_item)
+            
+    # get all the characters from the item list to sort the generated cards by id
+    characters = [item for item in items if item.type.lower() == 'character']
+    characters.sort(key=lambda x: int(x.id))
+    # sort each generated card by the id of the character
+    characterItems = [item for character in characters for item in characterItems if character.name in item]
+            
     accessory_card_body = replace_text(accessory_card_body, '<ITEMS>', ''.join(accessoryItems))
     material_card_body = replace_text(material_card_body, '<ITEMS>', ''.join(materialItems))
     tool_card_body = replace_text(tool_card_body, '<ITEMS>', ''.join(toolItems))
+    character_card_body = replace_text(character_card_body, '<ITEMS>', ''.join(characterItems))
     
     with open(os.path.join(script_dir, '..', 'wiki', 'accessories-cards.mw'), 'w', encoding='utf-8') as f:
         f.write(accessory_card_body)
@@ -946,9 +1078,13 @@ def generate_cards_lists(items):
     with open(os.path.join(script_dir, '..', 'wiki', 'tools-cards.mw'), 'w', encoding='utf-8') as f:
         f.write(tool_card_body)
         
+    with open(os.path.join(script_dir, '..', 'wiki', 'characters-cards.mw'), 'w', encoding='utf-8') as f:
+        f.write(character_card_body)
+        
     print('Generated accessory cards.')
     print('Generated material cards.')
     print('Generated tool cards.')
+    print('Generated character cards.')
 
 # template is
 # Containers
@@ -1002,6 +1138,7 @@ loot_table_card_card_container_template = """\
 """
 
 loot_source_page_template = """\
+[[Category:Loot Sources]]<PROMOCATEGORY><EXTRACATEGORIES>
 {{Infobox
 | name = <NAME>
 | image = <NAMEHYPHENED>.png
@@ -1105,6 +1242,13 @@ def generate_loot_source_pages(items):
         new_template = replace_text(new_template, '<NAME>', source.name)
         new_template = replace_text(new_template, '<NAMEHYPHENED>', format_name(source.name))
         
+        new_template = replace_text(new_template, '<PROMOCATEGORY>', '[[Category:Promos]]' if source.promo else '')
+        
+        extra_categories = ''
+        if source.categories:
+            extra_categories = ''.join([f'[[Category:{category}]]' for category in source.categories])
+        new_template = replace_text(new_template, '<EXTRACATEGORIES>', extra_categories)
+        
         items_rows = []
         
         # sort items by rarity, then by name
@@ -1120,6 +1264,12 @@ def generate_loot_source_pages(items):
                 items_rows.append(new_item)
                 
         new_template = replace_text(new_template, '<ITEMS>', ''.join(items_rows))
+        
+        # add trivia to the source page
+        trivia_text = ''
+        if source.trivia:
+            trivia_text = '\n== Trivia ==\n\n' + '\n'.join(source.trivia)
+            new_template += trivia_text
         
         with open(os.path.join(sources_dir, f'{format_name(source.name)}.mw'), 'w', encoding='utf-8') as f:
             f.write(new_template)
@@ -1166,6 +1316,7 @@ def update_readme():
 
 #endregion
 
+#endregion
 
 if __name__ == '__main__':
     # Initialize the lists to store the items, recipes, and sources
@@ -1176,6 +1327,12 @@ if __name__ == '__main__':
     
     print(f'Loaded {len(items)} items and {len(recipes)} recipes.')
     print(f'Loaded {len(sources)} sources.')
+    
+    # print the number of each type of item in the items list
+    print(f'Accessories: {len([item for item in items if item.type == "Accessory"])}')
+    print(f'Materials: {len([item for item in items if item.type == "Material"])}')
+    print(f'Tools: {len([item for item in items if item.type == "Tool"])}')
+    print(f'Characters: {len([item for item in items if item.type == "Character"])}')
     
     generate_wiki_articles(items)
     

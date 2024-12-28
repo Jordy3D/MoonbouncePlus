@@ -1,0 +1,3903 @@
+{
+    "items": [
+        {
+            "name": "Rollo",
+            "trivia": [
+                "* Rollo is instantly unlocked when you join Moonbounce for the first time.",
+                "* Rollo was sourced from [https://grafxkid.itch.io/sprite-pack-1 GrafxKid's Sprite Pack 1]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [
+                "File:Rollo.gif|Walking Animation"
+            ],
+            "appearance": "Rollo comes in different colorways. These are some of the available colorways you can choose from:\n[[File:Colorways.png|frameless|500x500px]]"
+        },
+        {
+            "name": "Devo",
+            "trivia": [
+                "* Devo was sourced from [https://grafxkid.itch.io/sprite-pack-1 GrafxKid's Sprite Pack 1]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [
+                "File:Devo.gif | Walking Animation"
+            ],
+            "appearance": "Devo comes in different colorways. These will be displayed here soon."
+        },
+        {
+            "name": "Pengu",
+            "trivia": [
+                "* Pengu was sourced from [https://grafxkid.itch.io/sprite-pack-6 GrafxKid's Sprite Pack 6]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [
+                "File:Idle.gif|Idle Animation",
+                "File:Victory.gif|Victory Animation",
+                "File:Wddling.gif|Walking Animation",
+                "File:Swimming.gif|Swimming Animation",
+                "File:Penguinbelly.gif|Sliding Animation"
+            ],
+            "appearance": "Pengu comes in different colorways. These are some of the available colorways you can choose from:\n[[File:Penguins colored.png|frameless|500x500px]]"
+        },
+        {
+            "name": "Empty Bottle",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Speckled Egg",
+            "trivia": [
+                "* Used to be found inside an [Assorted Goodie Bag]."
+            ],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Two Blue Coins",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Two Gold Coins",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "White Fabric",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Wizard Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Smooth Silk",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Uncut Nebula",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Nebula Orb",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Crumpled Metal",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Gem",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Slightly Magical Fruit",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Minor Magic Potion",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Stardust",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Starlight Alloy",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Monster Eye",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Plain Milk Carton",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pumpkin",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Jack-O-Lantern",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cute-O-Lantern",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Happy-O-Lantern",
+            "trivia": [
+                "* During the 2023 Halloween event the '''Happy-O-Lantern''' had the lowest drop rate in the Jack-O-Lantern series out of all four Jack-O-Lantern items ([[Cute-O-Lantern|Cute]], [[Jack-O-Lantern|Jack]], [[Mean-O-Lantern|Mean]] and '''Happy''')."
+            ],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mean-O-Lantern",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Spooky Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Skull",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Candle",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Craftsman Blade",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sewing Needle",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Witch's Hat",
+            "trivia": [
+                "* The Witch's Hat is one of the only items above the standard dimensions for an accessory. According to rumours, this is because the staff were still deciding on whether high definition items have a place in Moonbounce at the time of creating it."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Haunted Bone",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Witch's Cauldron",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Skull Potion",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shadow Essence",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Old Thread",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Puff",
+            "trivia": [
+                "* Puff was sourced from [https://grafxkid.itch.io/sprite-pack-4 GrafxKid's Sprite Pack 4].",
+                "* Puff is the first event exclusive item in Moonbounce. It was available during the Halloween event in 2023.",
+                "* Puff is the favorite character of the user and Wiki team member [[User:Bane|Bane]]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": "Puff comes in different colorways. These will be displayed here soon."
+        },
+        {
+            "name": "Star Sickle",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Turtle Shell",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Strawberry Milk",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Gem",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Olive",
+            "trivia": [
+                "* Olive was sourced from [https://grafxkid.itch.io/sprite-pack-1 GrafxKid's Sprite Pack 1]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [
+                "File:Olive_Walk.gif|Walking Animation"
+            ],
+            "appearance": "Olive comes in different colorways. These will be displayed here soon."
+        },
+        {
+            "name": "Gold Bow",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pink Bow",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Top Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Top Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Space Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Space Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Polished Red Gem",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Polished Blue Gem",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Hammer",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Snowball (small)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Snowball (large)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Frosty Tree",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Turkey Dinner",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cup of Cocoa",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Ornament",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Gift Cap",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Ornament",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pink Stocking",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Stocking",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Perfect Snowflake",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mystical Ornament",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Ornament",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tree Star",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holiday Magic Orb",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Twinkling Lights",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Kiwi Bon Bon",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Winter Tree",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Snowy Tree",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Decorated Tree",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Perfect Tree",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fruit Cake",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Candy Cane",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Bow",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Bow",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Plate of Cookies",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Naked Gingerbread",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Frosted Gingerbread",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Baked Cookie",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Frosted Cookie",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Strawberry Bon Bon",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holly Cake",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blueberry Bon Bon",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Santa Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rudolph's Nose",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fairy Particles",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Stocking",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Snowman Toy",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rudolph Toy",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Gift Cap",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Gift Cap",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Present",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Present",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Present",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Carrot",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Branch",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "New Years Hat",
+            "trivia": [
+                "* This item sprite specifically shows 2024. It is unknown if this will be updated in the future, or new items will be added for each year."
+            ],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tiny Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tiny Tiara",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Party Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Party Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Party Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Elite Party Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Star Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Halo Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bowler Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Antenna Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Flying Saucer",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Minicorn Horn",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rabbit Hole Ears",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mr. Man",
+            "trivia": [
+                "* Mr. Man was sourced from [https://grafxkid.itch.io/sprite-pack-1 GrafxKid's Sprite Pack 1].",
+                "* Mr. Man was originally an event exclusive Item (like [[Puff]] for Halloween), but the items needed to craft him were then moved into Year-Long containers."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": "Devo comes in different colorways. These will be displayed here soon."
+        },
+        {
+            "name": "Bumpy",
+            "trivia": [
+                "* Bumpy was sourced from [https://grafxkid.itch.io/sprite-pack-1 GrafxKid's Sprite Pack 1].",
+                "* This item was available as a Daily Reward on Day 14 of Oddities and Rarities.",
+                "** It returned as a Daily Reward on Day 12 It's Freakin' Fall!"
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": "Bumpy comes in different colorways. These will be displayed here soon."
+        },
+        {
+            "name": "Lantern Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Yin Yang",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Firecracker",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fortune",
+            "trivia": [
+                "* The number sequence on the fortune (1, 6, 7, 13), is a [https://en.wikipedia.org/wiki/Constant-recursive_sequence constant-recursive sequence]. Adding two numbers together gives the next number in the sequence. A more popular example of this is the Fibonacci sequence."
+            ],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lucky Coin",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dragon Egg Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Trucker",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Headband",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Stack",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shiny Heart",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Tophat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Emblem",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Anatomical Heart",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Golden Heart",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mini Heart",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Coin",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Black Kitten Ears",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Kitten Ears",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lavender Wizard Hat",
+            "trivia": [
+                "* Previously obtainable from daily rewards. It is unknown when, or if, it is returning.",
+                "* The user [[user:Óraithe|Óraithe]] obtained this hat around a month before it was out due to it being in the shop for a few minutes."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lunar Trucker",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holy Trucker",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sprout Trucker",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Bonnet",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Bonnet",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Bonnet",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Flower Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "3-D Glasses",
+            "trivia": [
+                "* Moonbounce user [[User:Óraithe|Óraithe]] suggested this description to one of the developers, [[Team|Grant]]. What it originally was is now forgotten."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Robin Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Robin Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Hard Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bonnet Sprout",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pengu Plushie",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Flower Pot",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Flower Pot",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Flower Pot",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fertilizer",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Garden Pot",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Garden Shovel",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Watering Can",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Iron Plate",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Vinyl Sheet",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Prismatic Dust",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Lens",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Lens",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gold Orb",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Strange Cloth",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Electricity",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "LED Lights",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Magnet",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Circuit",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Button",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Charm",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Balloon Charm",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gold Charm",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Moon Charm",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pile O' Coins",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Clover Charm",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Four Leaf Clover",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lucky Fungus",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "St. Paddy's Top Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Quad Luck Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Paddy's Gnome Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Wee Lucky Topper",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pot O' Gold Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "24k Clover Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shamrock Bowler",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Coin Cap",
+            "trivia": [
+                "* The Coin Cap first appeared in Day 1 of the Awesome August Daily Reward cycle."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bunny Ears",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Chocolate Bunny",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bunny Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sparkle Egg Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Split Egg Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Striped Egg Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Vinegar",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bunny Headband",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Dye Powder",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Dye Powder",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Yellow Dye Powder",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Golden Egg",
+            "trivia": [
+                "* The '''Golden Egg''' is the second rarest item to come out of the [[Living Chicken Chest]], coming after the [[Pet Chicken]]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Plain Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Plain Split Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Bunny Ears",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Bunny Ears",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Bunny Ears",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Yellow Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Split Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Split Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Split Egg",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Wooden Spoon",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bunny Plushie",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Josh's Support Tincture",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Josh's Discord Brew",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Empty Potion Bottle",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Twisted Pengu Collectible",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Brown Wizard Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Wizard_hat Wizard hat] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Wizard Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Wizard_hat Wizard hat] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Creme De Wizard Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Wizard_hat Wizard hat] from Old School RuneScape.",
+                "** More specifically, it appears to be the [https://oldschool.runescape.wiki/w/Cream_hat Cream hat]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "OG Wizzy Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Wizard_hat Wizard hat] from Old School RuneScape.",
+                "** More specifically, it appears to be the [https://oldschool.runescape.wiki/w/Blue_wizard_hat Blue wizard hat]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mithril Helmet",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Mithril_med_helm Mithril med helm] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Steel Med",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Steel_med_helm Steel med helm] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Beaver Plushie",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Beaver Beaver pet] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Solar Overhead",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lunar Overhead",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rose Wizard Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Wizard Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Space Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gold Space Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fuchsia Wizard Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Amber Wizard Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "White Kitten Ears",
+            "trivia": [
+                "* Previously obtainable from a Daily Reward. It is unknown if or when it will return."
+            ],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Zerk Helm",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@AlienFoodage Alien Food].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Berserker_helm Berserker helm] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pie Dish",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@AlienFoodage Alien Food].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Pie_dish Pie dish] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bucket of Magic Glue",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@AlienFoodage Alien Food].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Magic_glue Magic glue] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holy Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Wooden Plank",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Winged Helm",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Settledrs Settled].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Helm_of_neitiznot Helm of Neitiznot] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Zerk Mask",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@FramedYT Framed].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Berserker_helm Berserker helm] from Old School RuneScape and the Iron Helmet from The Elder Scrolls V: Skyrim."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gold Spellcap",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@FramedYT Framed].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Blue_wizard_hat_(g) Blue wizard hat (g)] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Status Skull",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Settledrs Settled].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Skull_(status) Skull status effect] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Feather",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gold Thread",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Banana Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@SoupRS Soup].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Banana_hat Banana hat] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dragon Helm",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@SoupRS Soup].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Dragon_med_helm Dragon med helm] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bowl of Soup",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@SoupRS Soup]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Halo",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@SoupRS Soup].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Saradomin_halo Saradomin halo] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Flame Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@SoupRS Soup]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Salt & Pepper",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lighter",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Soup Can",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Banana",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Raw Moonstone",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Polished Moonstone",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Wooden Log",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fries Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Burger Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mermaid Tiara",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Safari Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Floppy Sun Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fruit Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sparkler",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "4th Firework Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Ice Cream Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Flamingo Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tiki Drink",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Coconut Drink",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Empty Coconut",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sliced Coconut",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Corn on the Cob",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Watermelon Slice",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Ice Cream",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Strawberry Milk Carton",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fruit Bowl",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pineapple",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Kiwi Fruit",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Swimmers Goggles",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Hot Dog Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Chicken Leg",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Earthworm",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "P?t Ch?ck?n",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Polished Purple Gem",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Starfish",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Starfish",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cup o' Cola",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Protective Helmet",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Eye",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Choco De-Lite",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dream Pop",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pink Nautilus Shell",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Earth Shard",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Expert Potion Bottle",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Magenta Potion (adv.)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Potion (adv.)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Potion (beg.)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Magenta Potion (beg.)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pastel Shard",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pastel Cluster",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rabbit Plush Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Brown Rabbit Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Perfect Pyramid",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Towering Black Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Helmet DM",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "MP3 Player",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Thermometer",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Carrot Sprout",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "SuperStarFish Orange",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "SuperStarFish Blue",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Space Mask (L.)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Space Mask (D.)",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Counterfeit Permit 1",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "EarBudz",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Basic Crystal Ball",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Green Scale",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pink Scale",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mint Ice Cream Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Glowstick",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "2000's CD",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Water Shard",
+            "trivia": [
+                "* This item was available as a Daily Reward on Day 7 of Prequinox Pieces"
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fire Shard",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Peach",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holographic Leaf",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Time-Warped Acorn",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Hazmask",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Gudi Gudi]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Slime Green Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Gudi Gudi]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "J1mbo's Santa Cap",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@J1mmy J1mmy]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Farmer J1m's Hat",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@J1mmy J1mmy]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shiny Glasses",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@J1mmy J1mmy].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Half_moon_spectacles Half moon spectacles] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Purple Heandant",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@J1mmy J1mmy].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Amulet_of_glory Amulet of glory] from Old School RuneScape.",
+                "** More specifically, it appears to be the [https://oldschool.runescape.wiki/w/Dragonstone_amulet_(u) Dragonstone amulet (u)], which is the base item used to create the Amulet of glory."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gary's Grog",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@J1mmy J1mmy]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tribal Mask",
+            "trivia": [
+                "* This item was part of a promo with [https://www.youtube.com/@CEngineer C Engineer].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Tribal_mask Tribal Mask] from Old School RuneScape, specifically the [https://oldschool.runescape.wiki/w/Tribal_mask_(combat) Combat variant]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Twisted Branch",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tattered Canvas",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "White Dye Powder",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dragonforce Mask",
+            "trivia": [
+                "* This item was part of a promo with [https://www.youtube.com/@CEngineer C Engineer].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Dragon_full_helm Dragon Full Helm] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Elder Hat",
+            "trivia": [
+                "* This item was part of a promo with [https://www.youtube.com/@CEngineer C Engineer].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Ancestral_hat Ancestral hat] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Battery",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Save File",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Microchip",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Old CRT",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "ERR Screen",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tech Blueprints",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Broken Tower",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Basic Computer",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "GameChip",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Complete Computer",
+            "trivia": [
+                "* This item was released as part of the Starforge PC giveaway event.",
+                "** Consuming it granted the user a chance to win a custom Starforge PC."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Candy Corn",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Wicked Horns",
+            "trivia": [
+                "* The Ratty Plush was designed by [[User:Frkl|ok22222]]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Ratty Plush",
+            "trivia": [
+                "* The Ratty Plush was designed by [[User:Frkl|ok22222]]."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Glowing Tombstone",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Grotesque Skull",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lavahat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gentlemans Topper",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Loose Brain Trucker",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Black Cat Beanie",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Haunted Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dusty Hat",
+            "trivia": [
+                "* When the item was first added as a Quest reward, its image was the image for the [[Dusty Box]]. After it was updated to replace the image, a broken image was displayed instead."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Frankie",
+            "trivia": [
+                "* Was available as a Daily Reward on Day 1 of It's Alive!"
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": "Frankie comes in different colorways. These will be displayed here soon."
+        },
+        {
+            "name": "Lil Reaper",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Silver Faceguard",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Settledrs Settled].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Justiciar_faceguard Justiciar Faceguard] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mini Mole",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Settledrs Settled].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Baby_mole Baby Mole pet] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Cape",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Settledrs Settled]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tortuous Ornament",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Settledrs Settled].",
+                "* This item is a reference to the [https://oldschool.runescape.wiki/w/Amulet_of_torture Amulet of Torture] from Old School RuneScape."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dark Faceguard",
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@Settledrs Settled]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shaker Bottle",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl]"
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Stuffed Cookie",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl]"
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Idyl's Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@IdylOnTV Idyl].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Idyl's Supreme Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@IdylOnTV Idyl].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dr. Swellman's Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@DoctorSwellman DoctorSwellman].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dr. Swellman's Supreme Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@DoctorSwellman DoctorSwellman].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki.",
+                "* When the item was initially released, it accidentally had its rarity set to COMMON and its type set to UNKNOWN."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Reindeer Antlers 2.0",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Snowman Plushie",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holly Hairclip",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holiday Lights Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "North Pole",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Snowglobe Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gingerbread Plushie",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Nutcracker Plushie",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Abyssoft's Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@Abyssoft Abyssoft].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Abyssoft's Supreme Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@Abyssoft Abyssoft].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sipho's Supreme Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@SiphoSauce Sipho].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sipho's Shake",
+            "trivia": [
+                "* This item was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@SiphoSauce Sipho].",
+                "* There is a code in the actual item Description, but to add to the fun of getting the item it was omitted from the Wiki."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        }
+    ],
+    "quests": [
+        {
+            "name": "And What Army?",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Black Market Dealings",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Black Market Dealings PT. 2",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Black Market Dealings PT. 3",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "CTRL Abyssoft's Fuel",
+            "trivia": [
+                "* This quest was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@Abyssoft Abyssoft]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "CTRL Dr. Swellman's Fuel",
+            "trivia": [
+                "* This quest was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@DoctorSwellman DoctorSwellman]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "CTRL Idyl's Fuel",
+            "trivia": [
+                "* This quest was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@IdylOnTV Idyl]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "CTRL Sipho's Fuel",
+            "trivia": [
+                "* This quest was part of a promo with [https://drinkctrl.com/ Ctrl] and [https://www.youtube.com/@SiphoSauce Sipho]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lazy Luna",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rex's Sundae Surprise",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rex's Sundae Disaster",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rex’s Success!",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Roxy's Rave",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sage's Seasonal Shift",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Space Walkers",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Swamp Lords",
+            "trivia": [
+                "* This quest was released as part of a promo with [https://www.youtube.com/@Settledrs Settled].",
+                "* This quest is a reference to Settled's [https://www.youtube.com/playlist?list=PLWiMc19-qaA3u1ZawZQIKAh0BknPvoK8a Swampletics] series."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Welcome to Moonbounce",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Welcome to Moonbounce PT. 2",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Welcome to Moonbounce PT. 3",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Zara’s Bakery Biz",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        }
+    ],
+    "sources": [
+        {
+            "name": "Alien Food Pouch",
+            "trivia": [
+                "* This loot source was released as part of a promo with [https://www.youtube.com/@AlienFoodage Alien Food]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Aquamarine Chest",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Assorted Goodie Bag",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blizzard Box",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Chicken",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Loot Crate",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Box of Cheer",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "CTRL Capsule",
+            "trivia": [
+                "* This loot source was released as part of a promo with [https://drinkctrl.com/ Ctrl].",
+                "* This appeared exclusively on [https://drinkctrl.com/ CTRL's website]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Chicken",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Clover Chest",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cookie Crate",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Creator Crate",
+            "trivia": [
+                "* This loot source was released as part of a promo with several content creators."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dark Elemental Chest",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Disco Mats",
+            "trivia": [
+                "* Disco Mats were once exclusive to YouTube, but now sometimes show up elsewhere."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Dusty Box",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Egg Basket",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Floating Eyeball",
+            "trivia": [
+                "* This loot source replaces the Living Chicken Chest during Halloween."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Framed Chest",
+            "trivia": [
+                "* This loot source was released as part of a promo with [https://www.youtube.com/@FramedYT Framed]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Heart Box",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Holiday Decorations",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "JoshIsn't Crate",
+            "trivia": [
+                "* This loot source was released as part of a promo with [https://www.youtube.com/@JoshIsnt Josh Isn't Gaming]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Living Chicken Chest",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Lucky Bag",
+            "trivia": [
+                "* This loot source was released as part of a promo with Starforge."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Normal Candy Basket",
+            "trivia": [
+                "* This loot source shares a sprite with the Old Candy Basket."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Old Candy Basket",
+            "trivia": [
+                "* This loot source shares a sprite with the Normal Candy Basket."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Orange Drawstring",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pot O' Gold",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Potion Supplies",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Chicken",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Red Loot Bag",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Rock Collection",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Settled's Satchel",
+            "trivia": [
+                "* This loot source was released as part of a promo with [https://www.youtube.com/@Settledrs Settled]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Snow Crate",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Soup's Goodies",
+            "trivia": [
+                "* This loot source was released as part of a promo with [https://www.youtube.com/@SoupRS Soup]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Special Present",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Spring Leaves",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Style Crate #1",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Summery Gifts",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Yellow Chicken",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        }
+    ]
+}
