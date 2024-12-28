@@ -327,7 +327,7 @@
             "promo": false,
             "categories": [],
             "gallery": [],
-            "appearance": "Puff comes in different colorways. These will be displayed here soon."
+            "appearance": "Puff comes in different colorways. Below are the available colorways you can choose from:\n\n[[File:Puff_Colorways.png|frameless|500x500px]]"
         },
         {
             "name": "Star Sickle",
@@ -2632,7 +2632,9 @@
         },
         {
             "name": "Helmet DM",
-            "trivia": [],
+            "trivia": [
+                "* At the time of release, the Recipe called the item '''Helm DM''', while the item itself is called the '''Helmet DM'''."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -3077,7 +3079,9 @@
         },
         {
             "name": "Lavahat",
-            "trivia": [],
+            "trivia": [
+                "* This item was available as a Daily Reward on Day 4 of It's Alive!"
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
