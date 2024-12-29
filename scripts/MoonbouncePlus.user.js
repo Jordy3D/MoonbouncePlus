@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.26.0
+// @version      0.26.1
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -182,6 +182,8 @@
 // 0.26.0   - Added the ability to quickly link to the Moonbounce Wiki for items detected in the chat
 //              - Hotlinking automatically detects items in the chat and links to the Moonbounce Wiki (off by default)
 //              - Quicklinking allows you to wrap an item name in square brackets to link to the Moonbounce Wiki (on by default)
+// 0.26.1   - Stopped the script from trying to run continuously in iframes
+//          - Added a button to go to your Quests on the Moonbounce Portal
 //
 // ==/Changelog==
 
@@ -194,6 +196,9 @@
 // - Improve the Markdown support in the chat so that OSRS effects don't override it
 //
 // ==/TODO==
+
+// early escape if it detects that it is running in an i-frame
+if (window.self !== window.top) return;
 
 //#region Settings
 
@@ -2495,6 +2500,7 @@ function addMoonbouncePortalButtons(portal) {
     addDirectoryButton(portal);
     addBackpackButton(portal);
     addMarketplaceButton(portal);
+    addQuestButton(portal);
 }
 
 /**
@@ -2642,6 +2648,31 @@ function addMarketplaceButton(portal) {
     });
 
     button.title = "Marketplace";
+
+    addMoonbouncePortalButton(button, portal);
+}
+
+/**
+ * Add a button to go straight to the quest page
+ * https://moonbounce.gg/u/@me/adventure
+ */
+function addQuestButton(portal) {
+    let button = document.createElement("div");
+    button.id = "quest-button";
+
+    // add the quest icon to the button
+    let path = "M19 0C19.7956 0 20.5587 0.316071 21.1213 0.87868C21.6839 1.44129 22 2.20435 22 3V5H20V17C20 17.7956 19.6839 18.5587 19.1213 19.1213C18.5587 19.6839 17.7956 20 17 20H3C2.20435 20 1.44129 19.6839 0.87868 19.1213C0.31607 18.5587 0 17.7956 0 17V15H16V17C16 17.2449 16.09 17.4813 16.2527 17.6644C16.4155 17.8474 16.6397 17.9643 16.883 17.993L17 18C17.2449 18 17.4813 17.91 17.6644 17.7473C17.8474 17.5845 17.9643 17.3603 17.993 17.117L18 17V13H2V3C2 2.20435 2.31607 1.44129 2.87868 0.87868C3.44129 0.316071 4.20435 0 5 0H19Z";
+    let fill = "#808080";
+
+    let svg = createSvgElement(20, 20, path, fill);
+    button.appendChild(svg);
+
+    // add an event listener to the button
+    button.addEventListener("click", function () {
+        window.open("https://moonbounce.gg/u/@me/adventure", "_blank");
+    });
+
+    button.title = "Quest";
 
     addMoonbouncePortalButton(button, portal);
 }
