@@ -192,6 +192,7 @@ The '''<NAME>''' is <AAN> [[<TYPE>]] in Moonbounce.
 
 <gallery>
 <NAMEHYPHENED>.png | <NAME> item sprite
+<GALLERYITEMS>
 </gallery>
 """
 
