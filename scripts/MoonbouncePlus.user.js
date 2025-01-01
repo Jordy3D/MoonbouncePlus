@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Moonbounce Plus
 // @namespace    Bane
-// @version      0.26.1
+// @version      0.26.2
 // @description  A few handy tools for Moonbounce
 // @author       Bane
 // @match        *://*/*
@@ -184,6 +184,10 @@
 //              - Quicklinking allows you to wrap an item name in square brackets to link to the Moonbounce Wiki (on by default)
 // 0.26.1   - Stopped the script from trying to run continuously in iframes
 //          - Added a button to go to your Quests on the Moonbounce Portal
+// 0.26.2   - Fixed OSRS effects with spaces between them being decoded incorrectly
+//          - Fixed quotes taking up too many characters in the chat (turning from " to &quot;)
+//          - Fixed the OSRS Scroll effect still being visible at the start and end of the animation
+//          - Removed a few Markdown effects that were causing issues with the chat
 //
 // ==/Changelog==
 
@@ -624,16 +628,21 @@ function init() {
         // typographer: true // Enable some language-neutral replacements + quotes beautification
     });
 
-    // Enable only certain markdown tags
+    // Enable certain markdown tags
     md.enable([
-        'heading', // #, ##, ###, etc.
-        'emphasis', // *, **, _, __
-        // 'blockquote', // >
-        'code', // `code`
-        // 'fence', // ```code```
-        // 'list', // -, *, +, 1.
-        // 'link', // [text](url)
-        // 'image' // ![alt](url)
+        'heading',      // #, ##, ###, etc.
+        'emphasis',     // *, **, _, __
+        'code',         // `code`
+    ]);
+
+    // Disable other markdown tags
+    md.disable([
+        'smartquotes',
+        'list',         // -, *, +, 1.
+        'blockquote',   // >
+        'fence',        // ```code```
+        'link',         // [text](url)
+        'image'         // ![alt](url)
     ]);
 
     escapeHTMLPolicy = trustedTypes.createPolicy("forceInner", {
@@ -2015,14 +2024,14 @@ OSRS EFFECTS!!!!!!!
 /* scroll from the right to the left, stopping in the middle for a bit */
 @keyframes scroll {
     0%, 10% {
-        transform: translateX(110%);
+        transform: translateX(calc(100% + 10px));
     }
     30%, 70% {
         transform: translateX(0%);
     }
   
     90%, 100%{
-      transform: translatex(-100%);
+      transform: translatex(calc(-100% - 10px));
     }
 }
 
@@ -3057,10 +3066,7 @@ function interception(e, input) {
     let convertMarkdown = getSettingValue("Chat Markdown");
 
     if (convertMarkdown) {
-        mdText = md.render(message).trim();                                 // convert the message from markdown to HTML
-        mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");          // remove the <p> tags from the start and end of the message
-
-        input.value = mdText;
+        input.value = renderMarkdown(message);
     }
     else {
         input.value = message;
@@ -3089,9 +3095,7 @@ function convertMessageToFinal(message) {
 
         // find every effect tag in the message
         for (let effect of effectTags) {
-            // find the effect name and : and replace it with the encrypted version
-            // if the effect name is red, replace red: with the encrypted version
-            let regex = new RegExp(encryptToWhitespace(effect.name + ":"), "g");
+            let regex = new RegExp(`${effect.name}:\\s*`, "g");
             if (regex.test(finalMessage)) {
                 finalMessage = finalMessage.replace(regex, effect.name + ":");
             }
@@ -3101,13 +3105,26 @@ function convertMessageToFinal(message) {
     let convertMarkdown = getSettingValue("Chat Markdown");
 
     if (convertMarkdown) {
-        mdText = md.render(message).trim();                                 // convert the message from markdown to HTML
-        mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");          // remove the <p> tags from the start and end of the message
-
-        finalMessage = mdText;
+        finalMessage = renderMarkdown(message);
     }
 
     return finalMessage;
+}
+
+function renderMarkdown(message) {
+    let mdText = md.render(message).trim();                             // convert the message from markdown to HTML
+    mdText = mdText.replace(/^<p>/, "").replace(/<\/p>$/, "");          // remove the <p> tags from the start and end of the message
+    // replace &quot; with "
+    mdText = mdText.replace(/&quot;/g, "\"");
+
+    // if any of the whitesoace characters are followed by a space, remove the space
+    // this stops it being incorrectly treated as a whiteSpaceChar for the encryption
+    whiteSpaceChars.forEach(char => {
+        let regex = new RegExp(`${char}\\s`, "g");
+        mdText = mdText.replace(regex, char);
+    });
+
+    return mdText;
 }
 
 const whiteSpaceChars = [
@@ -3511,7 +3528,7 @@ function parseForOSRS(message) {
 
 function parseForItem(message) {
     let parsedMessage = message;
-    
+
     let hotlinkEnabled = getSettingValue("Wiki Hotlink");
     let quicklinkEnabled = getSettingValue("Wiki Quicklink");
 

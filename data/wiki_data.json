@@ -899,7 +899,9 @@
         },
         {
             "name": "Elite Party Hat",
-            "trivia": [],
+            "trivia": [
+                "* The Elite Party Hat was added for the birthday of a prominent community member (and founder of the Moonbounce Wiki), Lune"
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -2069,16 +2071,21 @@
         },
         {
             "name": "Holy Crown",
-            "trivia": [],
-            "promo": false,
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@AlienFoodage Alien Food].",
+                "* This item is likely a reference to the [https://oldschool.runescape.wiki/w/Holy_symbol Holy symbol] from Old School RuneScape."
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
         },
         {
             "name": "Wooden Plank",
-            "trivia": [],
-            "promo": false,
+            "trivia": [
+                "* This item was released as part of a promo with [https://www.youtube.com/@AlienFoodage Alien Food]."
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
@@ -2302,7 +2309,9 @@
         },
         {
             "name": "Sparkler",
-            "trivia": [],
+            "trivia": [
+                "* This item was available as a Daily Reward on Day 1 of Hello Summer!."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
