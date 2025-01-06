@@ -981,7 +981,7 @@
             "trivia": [
                 "* Bumpy was sourced from [https://grafxkid.itch.io/sprite-pack-1 GrafxKid's Sprite Pack 1].",
                 "* This item was available as a Daily Reward on Day 14 of Oddities and Rarities.",
-                "** It returned as a Daily Reward on Day 12 It's Freakin' Fall!"
+                "** Returned on Day 12 It's Freakin' Fall!"
             ],
             "promo": false,
             "categories": [],
@@ -1165,7 +1165,7 @@
         {
             "name": "Lavender Wizard Hat",
             "trivia": [
-                "* Previously obtainable from daily rewards. It is unknown when, or if, it is returning.",
+                "* Previously obtainable as a Daily Reward. It is unknown if or when it will return.",
                 "* The user [[user:Óraithe|Óraithe]] obtained this hat around a month before it was out due to it being in the shop for a few minutes."
             ],
             "promo": false,
@@ -1268,12 +1268,16 @@
             "trivia": [],
             "promo": false,
             "categories": [],
-            "gallery": [],
+            "gallery": [
+                "BonnetSproutExample.png | A user with an orange [[Rollo]] character wearing a Bonnet Sprout."
+            ],
             "appearance": ""
         },
         {
             "name": "Pengu Plushie",
-            "trivia": [],
+            "trivia": [
+                "* Previously obtainable as a Daily Reward. It is unknown if or when it will return."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -1472,6 +1476,16 @@
             "appearance": ""
         },
         {
+            "name": "Golden Horseshoe",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
             "name": "Pile O' Coins",
             "trivia": [],
             "promo": false,
@@ -1486,6 +1500,16 @@
             "trivia": [],
             "promo": false,
             "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Horseshoe Charm",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "Unverified"
+            ],
             "gallery": [],
             "appearance": ""
         },
@@ -1576,7 +1600,7 @@
         {
             "name": "Coin Cap",
             "trivia": [
-                "* The Coin Cap first appeared in Day 1 of the Awesome August Daily Reward cycle."
+                "* This item was available as a Daily Reward on Day 1 of Awesome August."
             ],
             "promo": false,
             "categories": [],
@@ -1707,7 +1731,9 @@
             "name": "Plain Split Egg",
             "trivia": [],
             "promo": false,
-            "categories": [],
+            "categories": [
+                "Unverified"
+            ],
             "gallery": [],
             "appearance": ""
         },
@@ -1978,7 +2004,10 @@
         },
         {
             "name": "Rose Wizard Hat",
-            "trivia": [],
+            "trivia": [
+                "* Previously obtainable as a Daily Reward.",
+                "** Returned on Day 4 of Full-on Fall"
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -1994,7 +2023,11 @@
         },
         {
             "name": "Green Space Mask",
-            "trivia": [],
+            "trivia": [
+                "* Previously obtainable as a Daily Reward.",
+                "** Returned on Day 10 of Full-on Fall",
+                "** Returned on Day 10 of Daily December"
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -2027,7 +2060,7 @@
         {
             "name": "White Kitten Ears",
             "trivia": [
-                "* Previously obtainable from a Daily Reward. It is unknown if or when it will return."
+                "* Previously obtainable as a Daily Reward. It is unknown if or when it will return."
             ],
             "promo": false,
             "categories": [
@@ -2245,7 +2278,9 @@
         },
         {
             "name": "Polished Moonstone",
-            "trivia": [],
+            "trivia": [
+                "* Originally diffused for 200 MP"
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -2433,7 +2468,9 @@
         },
         {
             "name": "Swimmers Goggles",
-            "trivia": [],
+            "trivia": [
+                "* Previously obtainable as a Daily Reward.",
+                "** Returned on Day 7 of Full-On Fall."],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -3056,7 +3093,9 @@
                 "* The Ratty Plush was designed by [[User:Frkl|ok22222]]."
             ],
             "promo": false,
-            "categories": [],
+            "categories": [
+                "User-Designed Items"
+            ],
             "gallery": [],
             "appearance": ""
         },
@@ -3066,7 +3105,9 @@
                 "* The Ratty Plush was designed by [[User:Frkl|ok22222]]."
             ],
             "promo": false,
-            "categories": [],
+            "categories": [
+                "User-Designed Items"
+            ],
             "gallery": [],
             "appearance": ""
         },
@@ -3141,7 +3182,7 @@
         {
             "name": "Frankie",
             "trivia": [
-                "* Was available as a Daily Reward on Day 1 of It's Alive!"
+                "* This item was available as a Daily Reward on Day 1 of It's Alive!"
             ],
             "promo": false,
             "categories": [],

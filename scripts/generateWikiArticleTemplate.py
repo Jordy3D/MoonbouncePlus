@@ -744,7 +744,7 @@ def load_data(data_path, marketplace_data_path):
                 if wiki_source:
                     source.promo = wiki_source['promo']
                     source.trivia = wiki_source['trivia']
-                    source.categories = ['categories']
+                    source.categories = wiki_source['categories']
                 
                 sources.append(source)                                                      # Add it to the sources list
             item_sources.append(source)                                                     # Add the source to the item_sources list   
@@ -1247,6 +1247,8 @@ def generate_loot_source_pages(items):
         
         extra_categories = ''
         if source.categories:
+            print(f'{source.name} has categories: {source.categories}')
+            
             extra_categories = ''.join([f'[[Category:{category}]]' for category in source.categories])
         new_template = replace_text(new_template, '<EXTRACATEGORIES>', extra_categories)
         
