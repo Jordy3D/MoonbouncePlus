@@ -1911,6 +1911,16 @@
             ]
         },
         {
+            "id": 454,
+            "name": "Golden Horseshoe",
+            "uuid": "",
+            "description": "Our buddy won a championship game of horseshoes and donated his plaque to us",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
+        },
+        {
             "id": 455,
             "name": "Pile O' Coins",
             "uuid": "98cecc3a-c788-41b9-8b1d-536038bba39a",
@@ -1934,6 +1944,16 @@
                 "Pot O' Gold",
                 "CTRL Capsule"
             ]
+        },
+        {
+            "id": 459,
+            "name": "Horseshoe Charm",
+            "uuid": "",
+            "description": "Perfect for a game of horseshoes, and might put you in the winning with the extra luck it brings",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": []
         },
         {
             "id": 460,
@@ -5147,7 +5167,7 @@
             "type": "Seasonal (Spring)"
         },
         {
-            "result": "Gold Horseshoe",
+            "result": "Golden Horseshoe",
             "ingredients": [
                 "Gold Charm",
                 "Lucky Coin",
