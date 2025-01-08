@@ -89,10 +89,10 @@ This repo also contains a Python script to help generate wiki page template code
 -   Some sites block parts of the script from running. So far I've noticed:  
     -   Twitter (blocks MB+ logo from appearing in the action bar)
     -   Twitter (blocks YouTube videos from being embedded in chat)
+-   If your chat has been open for a while, your character may become stuttery when you try to move. For now, just reloading the tab will fix that.
 ## To-Do
 
--   [ ] Add transparent mode to the Moonbounce Portal (ie: buttons and chat)
--   [ ] Add transparency and/or size options to the item drop notification
+-   [ ] Fix performance issue with chat effect scanning.
 
 ## Changelog
 
