@@ -992,9 +992,7 @@
             "name": "Lantern Hat",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1012,9 +1010,7 @@
             "name": "Firecracker",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1024,9 +1020,7 @@
                 "* The number sequence on the fortune (1, 6, 7, 13), is a [https://en.wikipedia.org/wiki/Constant-recursive_sequence constant-recursive sequence]. Adding two numbers together gives the next number in the sequence. A more popular example of this is the Fibonacci sequence."
             ],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1034,9 +1028,7 @@
             "name": "Lucky Coin",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1044,9 +1036,7 @@
             "name": "Dragon Egg Hat",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1600,7 +1590,8 @@
         {
             "name": "Coin Cap",
             "trivia": [
-                "* This item was available as a Daily Reward on Day 1 of Awesome August."
+                "* This item was available as a Daily Reward on Day 1 of Awesome August.",
+                "** Returned on Day 10 of So Long '24!"
             ],
             "promo": false,
             "categories": [],
@@ -2470,7 +2461,8 @@
             "name": "Swimmers Goggles",
             "trivia": [
                 "* Previously obtainable as a Daily Reward.",
-                "** Returned on Day 7 of Full-On Fall."],
+                "** Returned on Day 7 of Full-On Fall."
+            ],
             "promo": false,
             "categories": [],
             "gallery": [],
@@ -3701,9 +3693,7 @@
             "name": "Cookie Crate",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },

@@ -1321,17 +1321,21 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": [
+                "Cookie Crate"
+            ]
         },
         {
             "id": 400,
             "name": "Fortune",
             "uuid": "a9c9c70d-7037-4d50-9a40-9a143eae5a4d",
-            "description": "A fortune to bring you luck for the new year. Lucky Numbers:  1, 6, 7, 13",
+            "description": "A fortune to bring you luck for the new year. Lucky Numbers: 1, 6, 7, 13",
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": [
+                "Cookie Crate"
+            ]
         },
         {
             "id": 401,
@@ -1341,7 +1345,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": [
+                "Cookie Crate"
+            ]
         },
         {
             "id": 402,
@@ -1351,7 +1357,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 0,
-            "sources": []
+            "sources": [
+                "Cookie Crate"
+            ]
         },
         {
             "id": 403,
