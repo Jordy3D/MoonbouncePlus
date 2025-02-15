@@ -1052,9 +1052,7 @@
             "name": "Heart Headband",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1072,9 +1070,7 @@
             "name": "Shiny Heart",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1082,9 +1078,7 @@
             "name": "Heart Tophat",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1092,9 +1086,7 @@
             "name": "Heart Emblem",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1110,9 +1102,7 @@
             "name": "Golden Heart",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1120,9 +1110,7 @@
             "name": "Mini Heart",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1130,9 +1118,7 @@
             "name": "Heart Coin",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -3414,6 +3400,70 @@
             "categories": [],
             "gallery": [],
             "appearance": ""
+        },
+        {
+            "name": "Fallen Star",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Asteroid Dust",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Mirror",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Magic Mirror",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Silver Heart",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Gold Heart",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cupid's Heart",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cursor",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
         }
     ],
     "quests": [
@@ -3767,9 +3817,7 @@
             "name": "Heart Box",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },

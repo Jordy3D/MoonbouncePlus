@@ -186,7 +186,8 @@
             "type": "MATERIAL",
             "value": 5,
             "sources": [
-                "Soup's Goodies"
+                "Soup's Goodies",
+                "Heart Box"
             ]
         },
         {
@@ -1381,7 +1382,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 100,
-            "sources": []
+            "sources": [
+                "Heart Box"
+            ]
         },
         {
             "id": 405,
@@ -1411,7 +1414,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": [
+                "Heart Box"
+            ]
         },
         {
             "id": 408,
@@ -1421,7 +1426,9 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": [
+                "Heart Crate"
+            ]
         },
         {
             "id": 409,
@@ -1445,7 +1452,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": [
+                "Heart Box"
+            ]
         },
         {
             "id": 411,
@@ -1455,7 +1464,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": [
+                "Heart Crate"
+            ]
         },
         {
             "id": 412,
@@ -1465,7 +1476,9 @@
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": [
+                "Heart Crate"
+            ]
         },
         {
             "id": 414,
@@ -1749,7 +1762,8 @@
             "sources": [
                 "Soup's Goodies",
                 "Potion Supplies",
-                "Dusty Box"
+                "Dusty Box",
+                "Heart Crate"
             ]
         },
         {
@@ -4279,6 +4293,98 @@
             "uuid": "bd934dbe-9a34-409b-8e67-7b9d64c2050c",
             "description": "You got a complete meal shake! Go to CTRL’s website below and use [the code] at checkout for 15% off your order!",
             "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 500,
+            "sources": []
+        },
+        {
+            "id": 693,
+            "name": "Fallen Star",
+            "uuid": "c057faf3-643c-408d-b8b1-a00558987185",
+            "description": "Caught taking a nosedive after one too many browser refreshes. At least it didn't get a 404 on the way down",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": [
+                "Pink Backpack"
+            ]
+        },
+        {
+            "id": 694,
+            "name": "Asteroid Dust",
+            "uuid": "bdcbf4a3-07c4-4cb2-b176-c34c1920238f",
+            "description": "Just space's way of subtweeting meteors. Proves even celestial bodies have drama in their orbit.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 75,
+            "sources": [
+                "Pink Backpack"
+            ]
+        },
+        {
+            "id": 695,
+            "name": "Mirror",
+            "uuid": "e5fa3f35-02e2-4704-a5dd-ed00046d8e7d",
+            "description": "For when you need to check if your pixels are having a good hair day. Warning: Reflection may be more aesthetic than it appears.",
+            "rarity": "UNCOMMON",
+            "type": "MATERIAL",
+            "value": 75,
+            "sources": [
+                "Pink Backpack"
+            ]
+        },
+        {
+            "id": 696,
+            "name": "Magic Mirror",
+            "uuid": "ebe8a676-aaf0-4518-8592-205a04d701cc",
+            "description": "Transforms your pixels into perfection. A real-time preview of your chronically online self.",
+            "rarity": "RARE",
+            "type": "TOOL",
+            "value": 200,
+            "sources": []
+        },
+        {
+            "id": 697,
+            "name": "Silver Heart",
+            "uuid": "e01ab6ce-d990-4d76-b4a6-4ed4c13a92f0",
+            "description": "When a regular heart reaction just doesn't cut it anymore. Like getting verified but for your feelings.",
+            "rarity": "RARE",
+            "type": "MATERIAL",
+            "value": 2500,
+            "sources": [
+                "Pink Backpack"
+            ]
+        },
+        {
+            "id": 698,
+            "name": "Gold Heart",
+            "uuid": "58216864-a224-4d83-8e3c-7710f358eab9",
+            "description": "The pinnacle of pixel prestige in these extremely online times. Your browser history says 'chronically online' but your heart says 'extremely valuable.'",
+            "rarity": "LEGENDARY",
+            "type": "MATERIAL",
+            "value": 5000,
+            "sources": [
+                "Pink Backpack"
+            ]
+        },
+        {
+            "id": 699,
+            "name": "Cupid's Heart",
+            "uuid": "bae1aa7f-94a5-4c5e-b26e-4fd0ad39a3d6",
+            "description": "The kind of rare that makes even verified accounts jealous. Touch grass? We're too busy being the 0.01% of internet royalty.",
+            "rarity": "MYTHIC",
+            "type": "MATERIAL",
+            "value": 7500,
+            "sources": [
+                "Pink Backpack"
+            ]
+        },
+        {
+            "id": 700,
+            "name": "Cursor",
+            "uuid": "742b5fa7-e317-44d0-9244-370472ec0183",
+            "description": "The original pointer child of the internet. Been clicking since before clicking was cool. Now that's what we call vintage web surfing.",
+            "rarity": "LEGENDARY",
             "type": "MATERIAL",
             "value": 500,
             "sources": []
