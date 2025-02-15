@@ -5598,7 +5598,7 @@
                 "Battery"
             ],
             "tools": [],
-            "type": "Competition"
+            "type": "Competition (Starforge)"
         },
         {
             "result": "Blue Save File",
@@ -5608,7 +5608,7 @@
                 "Battery"
             ],
             "tools": [],
-            "type": "Competition"
+            "type": "Competition (Starforge)"
         },
         {
             "result": "Microchip",
@@ -5618,7 +5618,7 @@
                 "Blue Save File"
             ],
             "tools": [],
-            "type": "Competition"
+            "type": "Competition (Starforge)"
         },
         {
             "result": "ERR Screen",
@@ -5628,7 +5628,7 @@
                 "Old CRT"
             ],
             "tools": [],
-            "type": "Competition"
+            "type": "Competition (Starforge)"
         },
         {
             "result": "Broken Tower",
@@ -5640,7 +5640,7 @@
             "tools": [
                 "Hammer"
             ],
-            "type": "Competition"
+            "type": "Competition (Starforge)"
         },
         {
             "result": "Basic Computer",
@@ -5650,7 +5650,7 @@
                 "Broken Tower"
             ],
             "tools": [],
-            "type": "Competition"
+            "type": "Competition (Starforge)"
         },
         {
             "result": "Complete Computer",
@@ -5662,7 +5662,29 @@
             "tools": [
                 "Fairy Particles"
             ],
-            "type": "Competition"
+            "type": "Competition (Starforge)"
+        },
+        {
+            "result": "Magic Mirror",
+            "ingredients": [
+                "Stardust",
+                "Fallen Star",
+                "Mirror"
+            ],
+            "tools": [],
+            "type": "Competition (Nitro)"
+        },
+        {
+            "result": "Cursor",
+            "ingredients": [
+                "Prismatic Dust",
+                "Fallen Star",
+                "Asteroid Dust"
+            ],
+            "tools": [
+                "Magic Mirror"
+            ],
+            "type": "Competition (Nitro)"
         }
     ]
 }
