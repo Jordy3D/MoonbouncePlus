@@ -1,106 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MoonbouncePlus Wiki</title>
-    <link rel="stylesheet" href="css/magic.css" />
-    <link rel="stylesheet" href="css/themes.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MoonbouncePlus Wiki</title>
+        <link rel="stylesheet" href="css/magic.css" />
+        <link rel="stylesheet" href="css/themes.css" />
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/wiki.css" />
-    <style>
-        .wiki-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 10px 0;
-        }
-        
-        .card-container.left-align {
-            justify-content: flex-start;
-        }
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/wiki.css" />
+        <style>
+            .wiki-content {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
 
-        gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 10px 0;
-        }
+            .card-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin: 10px 0;
+            }
 
-        .item-card {
-            display: inline-block;
-            border: 1px solid #ccc;
-            padding: 0.5em;
-            text-align: center;
-            width: 150px;
-            background: #fff;
-            transition: transform 0.2s;
-        }
+            .card-container.left-align {
+                justify-content: flex-start;
+            }
 
-        .item-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .card-image img {
-            max-width: 100px;
-            height: auto;
-        }
-
-        .card-title {
-            margin-top: 0.5em;
-        }
-
-        .card-title a {
-            text-decoration: none;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <h1><a href="index.html">MoonbouncePlus Wiki</a></h1>
-            <div class="search-container">
-                <input type="text" 
-                       id="header-search" 
-                       class="search-input" 
-                       placeholder="Search items, sources..." />
-                <div id="search-results" class="search-results"></div>
+            gallery {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <h1><a href="index.html">MoonbouncePlus Wiki</a></h1>
+                <div class="search-container">
+                    <input
+                        type="text"
+                        id="header-search"
+                        class="search-input"
+                        placeholder="Search items, sources..."
+                    />
+                    <div id="search-results" class="search-results"></div>
+                </div>
             </div>
-        </div>
-    </header>
-    <main id="wiki-content">
-        <!-- Content will be inserted here -->
-    </main>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-text">
-                <p>Created by <a href="https://github.com/Jordy3D/">Jordy3D</a></p>
-                <p>View the source code on <a href="https://github.com/Jordy3D/MoonbouncePlus">GitHub</a></p>
+        </header>
+        <main id="wiki-content">
+            <!-- Content will be inserted here -->
+        </main>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>
+                        Created by
+                        <a href="https://github.com/Jordy3D/">Jordy3D</a>
+                    </p>
+                    <p>
+                        View the source code on
+                        <a href="https://github.com/Jordy3D/MoonbouncePlus"
+                            >GitHub</a
+                        >
+                    </p>
+                </div>
+                <div class="theme-selector">
+                    <select id="themeSelect" onchange="setTheme(this.value)">
+                        <option value="theme-light">Light Theme</option>
+                        <option value="theme-dark">Dark Theme</option>
+                        <option value="theme-fire">Fire Theme</option>
+                        <option value="theme-water">Water Theme</option>
+                        <option value="theme-air">Air Theme</option>
+                        <option value="theme-earth">Earth Theme</option>
+                    </select>
+                    <button onclick="cycleTheme()">Cycle Theme</button>
+                </div>
             </div>
-            <div class="theme-selector">
-                <select id="themeSelect" onchange="setTheme(this.value)">
-                    <option value="theme-light">Light Theme</option>
-                    <option value="theme-dark">Dark Theme</option>
-                    <option value="theme-fire">Fire Theme</option>
-                    <option value="theme-water">Water Theme</option>
-                    <option value="theme-air">Air Theme</option>
-                    <option value="theme-earth">Earth Theme</option>
-                </select>
-                <button onclick="cycleTheme()">Cycle Theme</button>
-            </div>
-        </div>
-    </footer>
-    <script src="js/config.js"></script>
-    <script src="js/wiki.js"></script>
-    <script src="js/search.js"></script>
-</body>
+        </footer>
+        <script src="js/config.js"></script>
+        <script src="js/wiki.js"></script>
+        <script src="js/search.js"></script>
+    </body>
 </html>

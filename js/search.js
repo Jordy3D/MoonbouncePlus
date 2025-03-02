@@ -2,22 +2,15 @@ class SearchBar {
     constructor() {
         this.searchInput = document.getElementById('header-search');
         this.resultsContainer = document.getElementById('search-results');
+        this.isWikiPage = window.location.pathname.includes('wiki.html');
         this.setupEventListeners();
-
-        // Debug initial data state
-        const data = window.moonbounceData || window.combinedData;
-        // console.log('Initial data state:', {
-        //     moonbounceData: !!window.moonbounceData,
-        //     combinedData: !!window.combinedData,
-        //     data: data
-        // });
     }
 
     setupEventListeners() {
         // Directly bind the methods to maintain 'this' context
         this.searchInput.addEventListener('input', this.handleSearch.bind(this));
         this.searchInput.addEventListener('focus', this.handleSearch.bind(this));
-        
+
         document.addEventListener('click', (e) => {
             if (!this.searchInput.contains(e.target) && !this.resultsContainer.contains(e.target)) {
                 this.hideResults();
@@ -27,10 +20,9 @@ class SearchBar {
 
     handleSearch() {
         const query = this.searchInput.value.toLowerCase();
-        // Make sure we have data before searching
+        // Check both possible data sources
         const data = window.moonbounceData || window.combinedData;
         if (!data?.items) {
-            // console.warn('No data available for search');
             return;
         }
 
@@ -41,10 +33,8 @@ class SearchBar {
 
         const results = this.searchAllContent(query);
         if (results.length > 0) {
-            // console.log(`Found ${results.length} results for "${query}"`);
             this.displayResults(results);
         } else {
-            // console.log(`No results found for "${query}"`);
             this.hideResults();
         }
     }
@@ -52,14 +42,13 @@ class SearchBar {
     searchAllContent(query) {
         const results = [];
         const data = window.moonbounceData || window.combinedData || {};
-        
+
         // Search items
         if (data.items) {
             data.items.forEach(item => {
                 const nameMatch = item.name.toLowerCase().includes(query);
                 const idMatch = `#${item.id}`.includes(query);
                 if (nameMatch || idMatch) {
-                    // console.log('Found matching item:', item.name);
                     results.push({
                         type: 'item',
                         name: item.name,
@@ -75,7 +64,6 @@ class SearchBar {
         if (data.sources) {
             data.sources.forEach(source => {
                 if (source.name.toLowerCase().includes(query)) {
-                    // console.log('Found matching source:', source.name);
                     results.push({
                         type: 'source',
                         name: source.name
@@ -93,19 +81,21 @@ class SearchBar {
             return;
         }
 
+        const baseUrl = this.isWikiPage ? '' : 'wiki.html';
+
         const html = results.map(result => {
             if (result.type === 'item') {
                 return `
-                    <a href="wiki.html?q=${encodeURIComponent(result.name)}" 
+                    <a href="${baseUrl}?q=${encodeURIComponent(result.name)}" 
                        class="search-result-item ${result.rarity.toLowerCase()}">
                         <img src="images/${result.itemType.toLowerCase()}/${result.name.replace(/ /g, '_')}.webp" 
                              alt="${result.name}" />
-                        <span> ${result.name}</span>
+                        <span>${result.name}</span>
                     </a>
                 `;
             }
             return `
-                <a href="wiki.html?q=${encodeURIComponent(result.name)}" 
+                <a href="${baseUrl}?q=${encodeURIComponent(result.name)}" 
                    class="search-result-item">
                     <img src="images/sources/${result.name.replace(/ /g, '_')}.webp" 
                          alt="${result.name}" />
@@ -121,18 +111,20 @@ class SearchBar {
     showResults() {
         if (this.resultsContainer.innerHTML) {
             this.resultsContainer.style.display = 'block';
-            // console.log('Showing results');
         }
     }
 
     hideResults() {
         this.resultsContainer.style.display = 'none';
-        // console.log('Hiding results');
     }
 }
 
-// Remove polling approach and only use event-based initialization
+// Initialize search when data is loaded from either source
 window.addEventListener('loadData', () => {
-    // console.log('Data loaded, initializing search');
     new SearchBar();
 });
+
+// Also initialize if moonbounceData is already available (for index.html)
+if (window.moonbounceData) {
+    new SearchBar();
+}

@@ -60,7 +60,7 @@ async function loadAllData() {
     }
 }
 
-loadAllData();
+config.loadAllData(() => displayWikiPage(searchQuery));
 
 function formatText(text) {
     if (!text) return '';
@@ -71,7 +71,7 @@ function formatText(text) {
 const pageTypes = [
     {
         type: 'item',
-        check: (name) => findItem(name),
+        check: (name) => combinedData?.items && findItem(name),
         display: (name) => {
             const item = findItem(name);
             if (item) displayItemPage(item);
@@ -80,7 +80,7 @@ const pageTypes = [
     },
     {
         type: 'source',
-        check: (name) => findSource(name),
+        check: (name) => combinedData?.sources && findSource(name),
         display: (name) => {
             const source = findSource(name);
             if (source) displaySourcePage(source);
@@ -97,7 +97,7 @@ const pageTypes = [
     },
     {
         type: 'collection',
-        check: (name) => ['Items', 'Material', 'Tool', 'Accessory', 'Character'].includes(name),
+        check: (name) => combinedData?.items && ['Items', 'Material', 'Tool', 'Accessory', 'Character'].includes(name),
         display: displayCollectionPage
     }
 ];
@@ -221,21 +221,24 @@ function displaySourcePage(source) {
     if (sections.filter) initializeFilters();
 }
 
-// Add category handlers
+// Update category handlers with better error checking
 const categoryHandlers = {
     'Loot Source': () => {
-        return (combinedData.sources || []).map(source => ({
+        if (!combinedData?.sources) return [];
+        return combinedData.sources.map(source => ({
             type: 'source',
             name: source.name
         }));
     },
     'Quests': () => {
-        return (combinedData.quests || []).map(quest => ({
+        if (!combinedData?.quests) return [];
+        return combinedData.quests.map(quest => ({
             type: 'quest',
             name: quest.name
         }));
     },
     'default': (category) => {
+        if (!combinedData?.items) return [];
         return combinedData.items.filter(item =>
             item.rarity.toLowerCase() === category.toLowerCase() ||
             item.type.toLowerCase() === category.toLowerCase()
@@ -254,24 +257,29 @@ function displayCategoryPage(category) {
         // Get handler for this category or use default
         const handler = categoryHandlers[category] || categoryHandlers.default;
         const items = category.toLowerCase() === 'items'
-            ? combinedData.items
+            ? (combinedData?.items || [])
             : handler(category);
 
         const sections = pageSections.category;
         const wikiContent = document.getElementById('wiki-content');
 
+        // Only generate items HTML if we have items
+        const itemsHtml = items.length > 0
+            ? items.map(item => generateCategoryCard(item)).join('\n')
+            : '<p>No items found in this category.</p>';
+
         wikiContent.innerHTML = `
             ${sections.title ? `<h1>${category} Category</h1>` : ''}
             ${sections.description ? generateCategoryDescription(category) : ''}
-            ${sections.filter ? generateFilterControls() : ''}
+            ${sections.filter && items.length > 0 ? generateFilterControls() : ''}
             ${sections.items ? `
                 <div class="category-card-container" id="filtered-items">
-                    ${items.map(item => generateCategoryCard(item)).join('\n')}
+                    ${itemsHtml}
                 </div>
             ` : ''}
         `;
 
-        if (sections.filter) initializeFilters();
+        if (sections.filter && items.length > 0) initializeFilters();
     } catch (error) {
         console.error("Category page error:", error);
         showErrorMessage("Failed to load category page");
@@ -289,32 +297,41 @@ function generateCategoryDescription(category) {
 }
 
 function generateCategoryCard(item) {
+    if (!item?.name) return ''; // Skip invalid items
+
     let imagePath = item.name.replace(/ /g, '_').replace(/#/g, '-').replace(/\?/g, '-');
-    // replace # with %23
     let linkName = item.name.replace(/#/g, '%23');
+
+    // Add data attributes for sorting
+    const cardAttrs = `
+        data-name="${item.name}"
+        data-id="${item.id || 0}"
+        data-rarity="${item.rarity || 'UNKNOWN'}"
+        data-type="${item.type || ''}"
+        data-value="${item.value || 0}"
+    `;
 
     switch (item.type) {
         case 'source':
             return `
-                <div class="card">
+                <div class="card" ${cardAttrs}>
                     <div class="card-title">
                         <a href="?q=${linkName}">${item.name}</a>
                     </div>
                     <div class="card-image">
                         <a href="?q=${linkName}">
-                            <img src="images/sources/${imagePath}.webp"
-                                 alt="${item.name}" />
+                            <img src="images/sources/${imagePath}.webp" alt="${item.name}" />
                         </a>
                     </div>
                 </div>
             `;
         case 'quest':
             return `
-                <div class="card quest">
+                <div class="card quest" ${cardAttrs}>
                     <div class="card-title">
                         <a href="?q=${linkName}">${item.name}</a>
                     </div>
-                    <div class="card-info">Reward: ${item.reward}</div>
+                    <div class="card-info">Reward: ${item.reward || ''}</div>
                 </div>
             `;
         default:
@@ -633,15 +650,13 @@ function findWikiInfo(name) {
 
     // If not found in items, try sources
     return combinedData.wiki.sources?.find(source =>
-        source.name.toLowerCase() === name.toLowerCase()
-    );
+        source.name.toLowerCase() === name.toLowerCase());
 }
 
 function findSource(name) {
     if (!name || !combinedData.sources) return null;
     return combinedData.sources.find(source =>
-        source.name.toLowerCase() === name.toLowerCase()
-    );
+        source.name.toLowerCase() === name.toLowerCase());
 }
 
 function findItemsByCategory(category) {
@@ -789,12 +804,19 @@ function generateCardFromName(name, showRarity = false) {
     const rarity = formatText(item.rarity);
     const rarityClass = rarity.toLowerCase();
 
-    // create card image path
-    // replace # and ? with - and replace spaces with _
     let imagePath = item.name.replace(/ /g, '_').replace(/#/g, '-').replace(/\?/g, '-');
 
+    // Add data attributes for sorting
+    const cardAttrs = `
+        data-name="${item.name}"
+        data-id="${item.id || 0}"
+        data-rarity="${item.rarity || 'UNKNOWN'}"
+        data-type="${item.type || ''}"
+        data-value="${item.value || 0}"
+    `;
+
     return `
-        <div class="card ${rarityClass}">
+        <div class="card ${rarityClass}" ${cardAttrs}>
             <div class="card-title">
                 <a href="?q=${name}">${name}</a>
             </div>
@@ -836,13 +858,9 @@ function generateFilterControls() {
         <div class="filter-controls">
             <input type="text" id="item-search" placeholder="Search items..." class="search-input">
             <select id="sort-by" class="sort-select">
-                <option value="id">ID</option>
-                <option value="name">Name (A-Z)</option>
-                <option value="name-desc">Name (Z-A)</option>
-                <option value="rarity">Rarity (Common-Mythic)</option>
-                <option value="rarity-desc">Rarity (Mythic-Common)</option>
-                <option value="value">Value (Low-High)</option>
-                <option value="value-desc">Value (High-Low)</option>
+                ${config.sortingMethods.map(method =>
+        `<option value="${method.name}">${method.name}</option>`
+    ).join('\n')}
             </select>
         </div>
     `;
@@ -880,36 +898,18 @@ function updateFilters() {
     });
 
     // Sort
-    cards.sort((a, b) => {
-        const cardA = a.querySelector('.card-title a');
-        const cardB = b.querySelector('.card-title a');
-        const nameA = cardA.textContent;
-        const nameB = cardB.textContent;
-        const itemA = findItem(nameA);
-        const itemB = findItem(nameB);
+    const sortMethod = config.sortingMethods.find(method => method.name === sortValue);
+    if (sortMethod) {
+        cards.sort((a, b) => sortMethod.method.call(config, a, b));
 
-        switch (sortValue) {
-            case 'id':
-                return (itemA?.id || 0) - (itemB?.id || 0);
-            case 'name':
-                return nameA.localeCompare(nameB);
-            case 'name-desc':
-                return nameB.localeCompare(nameA);
-            case 'rarity':
-                return getRarityValue(itemA?.rarity) - getRarityValue(itemB?.rarity);
-            case 'rarity-desc':
-                return getRarityValue(itemB?.rarity) - getRarityValue(itemA?.rarity);
-            case 'value':
-                return (itemA?.value || 0) - (itemB?.value || 0);
-            case 'value-desc':
-                return (itemB?.value || 0) - (itemA?.value || 0);
-            default:
-                return 0;
+        // Remove all cards
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
         }
-    });
 
-    // Reorder cards without removing them
-    cards.forEach(card => container.appendChild(card));
+        // Add them back in sorted order
+        cards.forEach(card => container.appendChild(card));
+    }
 }
 
 function showErrorMessage(message = "An error occurred") {
@@ -923,3 +923,35 @@ function showErrorMessage(message = "An error occurred") {
         </div>
     `;
 }
+
+// Load data and handle loading/errors
+config.loadAllData((data) => {
+    combinedData = data;
+    displayWikiPage(searchQuery);
+}).catch(error => {
+    console.error("Error loading data:", error);
+    showErrorMessage("Failed to load required data");
+});
+
+// Wait for both DOM and data before initializing
+async function initWiki() {
+    try {
+        // Load data first
+        combinedData = await config.loadAllData();
+
+        // Now that we have data, we can safely display the page
+        if (searchQuery) {
+            displayWikiPage(searchQuery);
+        } else {
+            showErrorMessage("No page specified");
+        }
+    } catch (error) {
+        console.error("Error loading data:", error);
+        showErrorMessage("Failed to load required data");
+    }
+}
+
+// Remove old loadAllData and config.loadAllData calls
+document.addEventListener('DOMContentLoaded', initWiki);
+
+// ...rest of existing code...
