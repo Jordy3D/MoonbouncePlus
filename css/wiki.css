@@ -29,12 +29,12 @@
         border-radius: 5px;
         margin-bottom: 10px;
     }
-    
+
     .infobox-row {
         display: flex;
         margin-bottom: 5px;
         position: relative;
-    
+
         &::after {
             content: "";
             display: block;
@@ -42,9 +42,10 @@
             left: 8px;
             right: 0;
             bottom: 0px;
-            border-bottom: 1px solid var(--infobox-color, var(--primary-color, #2f76ff));
+            border-bottom: 1px solid
+                var(--infobox-color, var(--primary-color, #2f76ff));
         }
-    
+
         .infobox-label {
             font-weight: bold;
             width: 100px;
@@ -55,16 +56,16 @@
             border-radius: 8px;
             border-bottom-right-radius: 0;
         }
-        
+
         .infobox-value {
             flex-grow: 1;
             padding: 3px 5px;
         }
-    }    
+    }
 }
 
 .infobox::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: var(--card-fade);
@@ -102,7 +103,7 @@
             text-decoration: none;
         }
     }
-    
+
     .card-image {
         text-align: center;
 
@@ -117,7 +118,7 @@
             image-rendering: pixelated;
         }
     }
-    
+
     .card-rarity {
         background: var(--card-color, var(--primary-color));
         color: var(--bg-color, white);
@@ -152,7 +153,11 @@
         --card-fade: var(--mythicFadeColour);
     }
 
-    &.common, &.uncommon, &.rare, &.legendary, &.mythic {
+    &.common,
+    &.uncommon,
+    &.rare,
+    &.legendary,
+    &.mythic {
         .card-title {
             a {
                 color: white;
@@ -168,7 +173,8 @@ body.theme-dark .infobox {
     --text-color: #ffffff;
 }
 
-.card, .infobox {
+.card,
+.infobox {
     position: relative;
 }
 
@@ -208,7 +214,7 @@ body.theme-dark .infobox {
 .trivia-list {
     list-style: none;
     padding-left: 1rem;
-    
+
     li {
         margin-bottom: 0.5rem;
     }
@@ -217,7 +223,7 @@ body.theme-dark .infobox {
         list-style: none;
         padding-left: 1.5rem;
         margin-top: 0.25rem;
-        
+
         li {
             margin-bottom: 0.25rem;
             color: var(--text-color);
@@ -225,9 +231,6 @@ body.theme-dark .infobox {
         }
     }
 }
-
-
-
 
 /* Mobile adjustments */
 @media (max-width: 800px) {
@@ -275,6 +278,14 @@ body.theme-dark .infobox {
         .footer-links {
             display: flex;
             gap: 1rem;
+        }
+    }
+}
+
+.welcome-content {
+    .wiki-stats {
+        h2 {
+            margin: 0 !important;
         }
     }
 }

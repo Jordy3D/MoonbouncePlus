@@ -104,7 +104,7 @@ const pageTypes = [
 
 function displayWikiPage(searchQuery) {
     if (!searchQuery) {
-        showErrorMessage("No page specified");
+        displayWelcomePage();
         return;
     }
 
@@ -117,6 +117,62 @@ function displayWikiPage(searchQuery) {
     }
 
     showErrorMessage(`"${searchQuery}" not found`);
+}
+
+function displayWelcomePage() {
+    updatePageTitle('Welcome');
+    const wikiContent = document.getElementById('wiki-content');
+    
+    const stats = {
+        items: combinedData?.items?.length || 0,
+        sources: combinedData?.sources?.length || 0,
+        recipes: combinedData?.recipes?.length || 0
+    };
+
+    wikiContent.innerHTML = `
+        <div class="welcome-page">
+            <h1>Welcome to the MoonbouncePlus Wiki</h1>
+            
+            <div class="welcome-content">
+                <p>This wiki contains information about items, sources, and recipes in Moonbounce.</p>
+                
+                <div class="wiki-stats">
+                    <h2>Quick Stats</h2>
+                    <ul>
+                        <li><a href="?q=Category:Items">${stats.items} Items</a></li>
+                        <li><a href="?q=Category:Loot Source">${stats.sources} Sources</a></li>
+                        <li>${stats.recipes} Recipes</li>
+                    </ul>
+                </div>
+
+                <div class="browse-categories">
+                    <h2>Browse by Category</h2>
+                    <div class="category-links">
+                        <div class="category-section">
+                            <h3>Rarities</h3>
+                            <ul>
+                                <li><a href="?q=Category:Common">Common Items</a></li>
+                                <li><a href="?q=Category:Uncommon">Uncommon Items</a></li>
+                                <li><a href="?q=Category:Rare">Rare Items</a></li>
+                                <li><a href="?q=Category:Legendary">Legendary Items</a></li>
+                                <li><a href="?q=Category:Mythic">Mythic Items</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="category-section">
+                            <h3>Types</h3>
+                            <ul>
+                                <li><a href="?q=Material">Materials</a></li>
+                                <li><a href="?q=Tool">Tools</a></li>
+                                <li><a href="?q=Accessory">Accessories</a></li>
+                                <li><a href="?q=Character">Characters</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 // Page section configuration
@@ -940,11 +996,7 @@ async function initWiki() {
         combinedData = await config.loadAllData();
 
         // Now that we have data, we can safely display the page
-        if (searchQuery) {
-            displayWikiPage(searchQuery);
-        } else {
-            showErrorMessage("No page specified");
-        }
+        displayWikiPage(searchQuery);
     } catch (error) {
         console.error("Error loading data:", error);
         showErrorMessage("Failed to load required data");
@@ -953,5 +1005,48 @@ async function initWiki() {
 
 // Remove old loadAllData and config.loadAllData calls
 document.addEventListener('DOMContentLoaded', initWiki);
+
+// Add welcome page styles
+const welcomeStyles = document.createElement('style');
+welcomeStyles.textContent = `
+    .welcome-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .wiki-stats {
+        margin: 2rem 0;
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background: var(--card-fade);
+    }
+
+    .wiki-stats ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+        gap: 2rem;
+    }
+
+    .category-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 1rem 0;
+    }
+
+    .category-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .category-links li {
+        margin: 0.5rem 0;
+    }
+`;
+document.head.appendChild(welcomeStyles);
 
 // ...rest of existing code...
