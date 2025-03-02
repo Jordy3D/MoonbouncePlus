@@ -7,4 +7,4 @@ data/combineJson.py
 data/import.json
 data/MoonbouncePlus_bak.json
 
-images/
+images/*.py

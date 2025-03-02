@@ -1,16 +1,17 @@
 :root {
-    --commonColour: 142, 43%, 54%;
-    --uncommonColour: 223, 99%, 61%;
-    --rareColour: 263, 70%, 68%;
-    --legendaryColour: 15, 81%, 54%;
-    --mythicColour: 194, 85%, 62%;
+    /* Base rarity colors */
+    --commonColour: hsl(142, 43%, 54%);
+    --uncommonColour: hsl(223, 99%, 61%);
+    --rareColour: hsl(263, 70%, 68%);
+    --legendaryColour: hsl(15, 81%, 54%);
+    --mythicColour: hsl(194, 85%, 62%);
 
-    /* versions of the colours just a little off from white */
-    --commonFadeColour: 142, 43%, 95%;
-    --uncommonFadeColour: 223, 99%, 95%;
-    --rareFadeColour: 263, 70%, 95%;
-    --legendaryFadeColour: 15, 81%, 95%;
-    --mythicFadeColour: 194, 85%, 95%;
+    /* Fade versions are now transparent */
+    --commonFadeColour: hsla(142, 43%, 54%, 0.1);
+    --uncommonFadeColour: hsla(223, 99%, 61%, 0.1);
+    --rareFadeColour: hsla(263, 70%, 68%, 0.1);
+    --legendaryFadeColour: hsla(15, 81%, 54%, 0.1);
+    --mythicFadeColour: hsla(194, 85%, 62%, 0.1);
 
     --accessoryColour: 15, 81%, 54%;
     --materialColour: 194, 85%, 62%;
@@ -26,19 +27,27 @@
         sans-serif;
 }
 
-
 /*Dark Scrollbar*/
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #fff0; }
-::-webkit-scrollbar-thumb { background: #222; }
-::-webkit-scrollbar-thumb:hover { background: #252525; }
-::-webkit-scrollbar-corner { background: #0000; }
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #fff0;
+}
+::-webkit-scrollbar-thumb {
+    background: #222;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #252525;
+}
+::-webkit-scrollbar-corner {
+    background: #0000;
+}
 
 html {
     scroll-behavior: smooth;
 
     width: 100%;
-
 }
 
 body {
@@ -47,33 +56,36 @@ body {
     padding: 0;
 
     width: 100%;
+    background-color: var(--bg-color, white);
+    color: var(--text-color, #333);
 }
 
-header, footer {
-    background-color: #333;
-    color: white;
+header,
+footer {
+    background-color: var(--primary-color, #333);
+    color: var(--bg-color, white);
     padding: 1rem;
     text-align: center;
 
     width: 100%;
 
     a {
-        color: #58BD7D;
-        text-decoration: none;
+        color: var(--bg-color);
+        font-weight: bold;
     }
 
     .footer-text {
         display: flex;
         justify-content: center;
         gap: 10px;
-    
     }
 }
 
 main {
     padding: 1rem;
 
-    max-width: 1000px;
+    width: 100%;
+    max-width: min(80vw, 1000px);
     margin: 0 auto;
 }
 
@@ -81,9 +93,32 @@ main {
     margin: 0 auto;
     width: 80%;
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: var(--card-fade, #f0f0f0);
     border-radius: 10px;
     margin-bottom: 20px;
+    border: 1px solid var(--border-color, #ddd);
+}
+
+/* Update description box styling */
+.description-card {
+    margin: 0 auto 2rem;
+    width: 100%;
+    max-width: 800px;
+    padding: 1.5rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    p {
+        /* margin-bottom: 1rem; */
+        line-height: 1.5;
+        text-align: center;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 h1 {
@@ -92,7 +127,8 @@ h1 {
 
 h2 {
     margin-bottom: 1rem;
-    font-size: 2rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
 }
 
 .group-header {
@@ -129,18 +165,34 @@ p {
     margin: 0;
 }
 
+/* Update items container to use grid */
 #items {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1rem;
-    justify-content: space-evenly;
+    width: 100%;
+
+    > .item {
+        margin: 0 auto;
+    }
+}
+
+.category-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    width: 100%;
+
+    > .card {
+        margin: 0 auto;
+    }
 }
 
 .item {
     --rarityColour: var(--commonColour);
     --rarityFadeColour: var(--commonFadeColour);
     --typeColour: var(--materialColour);
-    
+
     display: flex;
     flex-direction: column;
 
@@ -203,6 +255,10 @@ p {
     .rarity.pill,
     .name {
         background-color: hsl(var(--rarityColour));
+
+        a {
+            color: inherit;
+        }
     }
 
     .type {
@@ -213,6 +269,107 @@ p {
 
     .type.pill {
         background-color: hsl(var(--typeColour));
+    }
+
+    .details {
+        flex: 1;
+        border-radius: 0 0 5px 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+
+        /* Update background to use fade color */
+        background: var(--card-fade);
+    }
+
+    .name {
+        padding: 0.5rem;
+        /* Update text color to use background color */
+        color: var(--bg-color);
+        border-radius: 5px 5px 0 0;
+        background: var(--card-color);
+    }
+
+    .rarity.pill,
+    .type.pill {
+        /* Update pill text colors to use background color */
+        color: var(--bg-color);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+    }
+
+    .rarity.pill {
+        background: var(--card-color);
+    }
+
+    .type.pill {
+        background: hsl(var(--typeColour));
+    }
+
+    /* Update color inheritance for rarity classes */
+    &.common {
+        --card-color: var(--commonColour);
+        --card-fade: var(--commonFadeColour);
+    }
+
+    &.uncommon {
+        --card-color: var(--uncommonColour);
+        --card-fade: var(--uncommonFadeColour);
+    }
+
+    &.rare {
+        --card-color: var(--rareColour);
+        --card-fade: var(--rareFadeColour);
+    }
+
+    &.legendary {
+        --card-color: var(--legendaryColour);
+        --card-fade: var(--legendaryFadeColour);
+    }
+
+    &.mythic {
+        --card-color: var(--mythicColour);
+        --card-fade: var(--mythicFadeColour);
+    }
+}
+
+/* Update item cards to use rarity colors */
+.item {
+    background: var(--bg-color);
+    border: 2px solid var(--card-color, var(--border-color));
+
+    .name {
+        background: var(--card-color, var(--primary-color));
+    }
+
+    .rarity.pill {
+        background: var(--card-color, var(--primary-color));
+    }
+
+    &.common {
+        --card-color: var(--commonColour);
+        --card-fade: var(--commonFadeColour);
+    }
+
+    &.uncommon {
+        --card-color: var(--uncommonColour);
+        --card-fade: var(--uncommonFadeColour);
+    }
+
+    &.rare {
+        --card-color: var(--rareColour);
+        --card-fade: var(--rareFadeColour);
+    }
+
+    &.legendary {
+        --card-color: var(--legendaryColour);
+        --card-fade: var(--legendaryFadeColour);
+    }
+
+    &.mythic {
+        --card-color: var(--mythicColour);
+        --card-fade: var(--mythicFadeColour);
     }
 }
 
@@ -225,13 +382,17 @@ p {
 .details {
     flex: 1;
     border-radius: 0 0 5px 5px;
-    
+
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
-    
-    background: linear-gradient(to bottom right, white 50%, hsl(var(--rarityFadeColour)) 50%);
+
+    background: linear-gradient(
+        to bottom right,
+        white 50%,
+        hsl(var(--rarityFadeColour)) 50%
+    );
 
     .pill-details {
         display: grid;
@@ -268,11 +429,33 @@ p {
     }
 }
 
+/* Add general link styling */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: filter 0.2s ease;
 
+    &:hover {
+        filter: brightness(1.1);
+    }
+
+    &.external-link {
+        position: relative;
+
+        &::after {
+            content: " ↗";
+            font-size: 0.6em;
+            margin-left: 0.25em;
+
+            position: absolute;
+            top: 0;
+            right: -1.5em;
+        }
+    }
+}
 
 /* Mobile styling */
 @media (max-width: 800px) {
-
     body {
         font-size: 20px;
     }
@@ -288,8 +471,9 @@ p {
     .group-header {
         display: grid;
 
-        grid-template-areas: "h2 select"
-                             "input input";
+        grid-template-areas:
+            "h2 select"
+            "input input";
 
         gap: 10px;
 
@@ -299,7 +483,8 @@ p {
             grid-area: h2;
         }
 
-        select, input {
+        select,
+        input {
             font-size: 2rem;
             height: 50px;
             width: 100%;
@@ -321,5 +506,184 @@ p {
 
     .item {
         max-width: 100%;
+    }
+
+    #items {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .category-card-container {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+
+    /* ...rest of existing mobile styles... */
+}
+
+/* Controls */
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.theme-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.theme-selector select,
+.theme-selector button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-selector button {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+}
+
+.theme-selector select:hover,
+.theme-selector button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header a,
+footer a {
+    color: var(--bg-color) !important;
+    font-weight: bold;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+header a:hover,
+footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Update filter controls */
+.filter-controls {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem auto;
+    align-items: center;
+    max-width: 800px;
+}
+
+.search-input,
+.sort-select {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+    transition: all 0.2s ease;
+
+    &:focus {
+        outline: 1px solid var(--primary-color);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px var(--primary-color, #2f76ff) 33;
+    }
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.sort-select {
+    min-width: 150px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 1rem;
+
+    .search-container {
+        position: relative;
+        width: 300px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        background: var(--bg-color);
+        color: var(--text-color);
+    }
+
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: 300px;
+        overflow-y: auto;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        margin-top: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none;
+    }
+
+    .search-result-item {
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border-color);
+
+        &:hover {
+            background: var(--card-fade);
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            image-rendering: pixelated;
+        }
+
+        span {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 800px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .search-container {
+        width: 100%;
     }
 }

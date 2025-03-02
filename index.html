@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moonbounce Data</title>
+    <title>MoonbouncePlus Data</title>
 
     <!-- import css/magic.css -->
     <link rel="stylesheet" href="css/magic.css" />
+    <link rel="stylesheet" href="css/themes.css" />
     <link rel="stylesheet" href="css/style.css" />
 
     <style>
@@ -16,41 +17,56 @@
 
 <body>
     <header>
-        <h1>Moonbounce Data</h1>
-        </nav>
+        <div class="header-content">
+            <h1>MoonbouncePlus Data</h1>
+            <div class="search-container">
+                <input type="text" 
+                       id="header-search" 
+                       class="search-input" 
+                       placeholder="Search items, sources..." />
+                <div id="search-results" class="search-results"></div>
+            </div>
+        </div>
     </header>
     <main>
-        <div class="desriptionbox">
-            <p>Below is a list of items and their recipes in the game Moonbounce Plus. The data is pulled from the
-                MoonbouncePlus.json file in the data folder.</p>
-            <p>The data is updated whenever I receive new item data from the game, and so the data may not be up to date
-                with the game.</p>
-            <p>Some recipes are not included in the below data, as the items they create have not been obtained by me
-                yet.</p>
+        <div class="description-card">
+            <p>Below is a list of items and their recipes in the game Moonbounce Plus.</p>
+            <p>The data is updated whenever I receive new item data from the game.</p>
+            <p>Some recipes may not be included as their items haven't been obtained yet.</p>
         </div>
 
-        <div class="group-header">
-            <h2>Items</h2>
-            <div class="searchbox">
-                <input type="text" id="search" placeholder="Search for an item..." onkeyup="searchItems()" />
-            </div>
-            <div class="sort">
-                <label for="sort" hidden>Sort by:</label>
-                <select name="sort" id="sort" onchange="sortItems()"></select>
-            </div>
+        <div class="filter-controls">
+            <input type="text" id="search" placeholder="Search for an item..." 
+                   onkeyup="searchItems()" class="search-input" />
+            <select name="sort" id="sort" onchange="sortItems()" 
+                    class="sort-select"></select>
         </div>
-        <!-- shows the Items, their recipes if they have one, and other various information -->
         <div id="items"></div>
     </main>
     <footer>
-        <div class="footer-text">
-            <p>Created by <a href="https://github.com/Jordy3D/">Jordy3D</a>.</p>
-            <p>View the source code on <a href="https://github.com/Jordy3D/MoonbouncePlus">GitHub</a>.</p>
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>Created by <a href="https://github.com/Jordy3D/">Jordy3D</a></p>
+                <p>View the source code on <a href="https://github.com/Jordy3D/MoonbouncePlus">GitHub</a></p>
+            </div>
+            <div class="theme-selector">
+                <select id="themeSelect" onchange="setTheme(this.value)">
+                    <option value="theme-light">Light Theme</option>
+                    <option value="theme-dark">Dark Theme</option>
+                    <option value="theme-fire">Fire Theme</option>
+                    <option value="theme-water">Water Theme</option>
+                    <option value="theme-air">Air Theme</option>
+                    <option value="theme-earth">Earth Theme</option>
+                </select>
+                <button onclick="cycleTheme()">Cycle Theme</button>
+            </div>
         </div>
     </footer>
 
-</body>
+    <script src="js/config.js"></script>
+    <script src="js/themes.js"></script>
+    <script src="js/script.js"></script>
 
-<script src="js/script.js"></script>
+</body>
 
 </html>

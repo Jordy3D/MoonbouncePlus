@@ -1,0 +1,227 @@
+.infobox {
+    background: var(--bg-color);
+    border: 2px solid var(--infobox-color, var(--primary-color, #2f76ff));
+    border-radius: 8px;
+    padding: 5px;
+    width: 100%;
+    max-width: 300px;
+    float: right;
+    box-sizing: border-box;
+
+    outline: 10px solid var(--bg-color);
+
+    img {
+        display: block;
+        margin: 1rem auto;
+        image-rendering: pixelated;
+        width: 100%;
+        max-width: 128px;
+        height: auto;
+    }
+
+    .infobox-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        background: var(--infobox-color, var(--primary-color, #2f76ff));
+        color: var(--bg-color, white);
+        padding: 5px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .infobox-row {
+        display: flex;
+        margin-bottom: 5px;
+        position: relative;
+    
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 8px;
+            right: 0;
+            bottom: 0px;
+            border-bottom: 1px solid var(--infobox-color, var(--primary-color, #2f76ff));
+        }
+    
+        .infobox-label {
+            font-weight: bold;
+            width: 100px;
+            flex-shrink: 0;
+            background: var(--infobox-color, var(--primary-color, #2f76ff));
+            color: var(--bg-color, white);
+            padding: 3px 5px;
+            border-radius: 8px;
+            border-bottom-right-radius: 0;
+        }
+        
+        .infobox-value {
+            flex-grow: 1;
+            padding: 3px 5px;
+        }
+    }    
+}
+
+.infobox::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--card-fade);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.card {
+    min-width: 150px;
+    max-width: 150px;
+    background: var(--card-fade, var(--bg-color));
+    border: 1px solid var(--card-color, var(--primary-color, #ddd));
+    padding: 5px;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    aspect-ratio: 1 / 1;
+
+    .card-title {
+        font-weight: bold;
+        text-align: center;
+        background: var(--card-color, var(--primary-color));
+        padding: 5px;
+        border-radius: 5px;
+        margin: 0px;
+        width: 100%;
+
+        a {
+            /* color: var(--bg-color, white); */
+            color: var(--bg-color, white);
+            text-decoration: none;
+        }
+    }
+    
+    .card-image {
+        text-align: center;
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        img {
+            width: 100%;
+            max-width: 100px;
+            image-rendering: pixelated;
+        }
+    }
+    
+    .card-rarity {
+        background: var(--card-color, var(--primary-color));
+        color: var(--bg-color, white);
+        padding: 5px;
+        border-radius: 5px;
+
+        width: 100%;
+
+        margin: -5px;
+        text-align: center;
+        font-style: italic;
+    }
+
+    &.common {
+        --card-color: var(--commonColour);
+        --card-fade: var(--commonFadeColour);
+    }
+    &.uncommon {
+        --card-color: var(--uncommonColour);
+        --card-fade: var(--uncommonFadeColour);
+    }
+    &.rare {
+        --card-color: var(--rareColour);
+        --card-fade: var(--rareFadeColour);
+    }
+    &.legendary {
+        --card-color: var(--legendaryColour);
+        --card-fade: var(--legendaryFadeColour);
+    }
+    &.mythic {
+        --card-color: var(--mythicColour);
+        --card-fade: var(--mythicFadeColour);
+    }
+
+    &.common, &.uncommon, &.rare, &.legendary, &.mythic {
+        .card-title {
+            a {
+                color: white;
+            }
+        }
+    }
+}
+
+/* Theme-specific overrides */
+body.theme-dark .card,
+body.theme-dark .infobox {
+    --bg-color: #111111;
+    --text-color: #ffffff;
+}
+
+.card, .infobox {
+    position: relative;
+}
+
+#wiki-content {
+    h1 {
+        /* font-size: 1.5em; */
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+
+        border-bottom: 1px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+    }
+
+    h2 {
+        /* font-size: 1.25em; */
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        text-align: left;
+
+        border-bottom: 1px solid var(--primary-color);
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--primary-color);
+        margin: 1rem 0;
+        opacity: 0.5;
+    }
+}
+
+.categories-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+.trivia-list {
+    list-style: none;
+    padding-left: 1rem;
+    
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 1.5rem;
+        margin-top: 0.25rem;
+        
+        li {
+            margin-bottom: 0.25rem;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+    }
+}

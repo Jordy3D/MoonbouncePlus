@@ -1,0 +1,64 @@
+:root {
+    --sidebar-width: 125px;
+    --primary-color: #2c3e50;
+    --sidebar-bg: #f8f9fa;
+    --text-color: #333;
+    --link-color: #3498db;
+    --border-color: #e9ecef;
+}
+
+/* Theme Variables */
+.theme-light {
+    --sidebar-width: 125px;
+    --primary-color: #2c3e50;
+    --sidebar-bg: #f8f9fa;
+    --text-color: #333;
+    --link-color: #3498db;
+    --border-color: #e9ecef;
+    --bg-color: #ffffff;
+}
+
+.theme-dark {
+    --primary-color: #93c5fd;
+    --sidebar-bg: #1a1a1a;
+    --text-color: #e5e5e5;
+    --link-color: #60a5fa;
+    --border-color: #2d2d2d;
+    --bg-color: #111111;
+}
+
+.theme-fire {
+    --primary-color: #ef4444;
+    --sidebar-bg: #7f1d1d;
+    --text-color: #fef2f2;
+    --link-color: #f87171;
+    --border-color: #991b1b;
+    --bg-color: #450a0a;
+}
+
+.theme-water {
+    --primary-color: #0ea5e9;
+    --sidebar-bg: #075985;
+    --text-color: #f0f9ff;
+    --link-color: #38bdf8;
+    --border-color: #0369a1;
+    --bg-color: #082f49;
+}
+
+.theme-air {
+    --primary-color: #818cf8;
+    --sidebar-bg: #f8fafc;
+    --text-color: #1e293b;
+    --link-color: #4f46e5;
+    --border-color: #e2e8f0;
+    --bg-color: #ffffff;
+}
+
+.theme-earth {
+    --primary-color: #84cc16;
+    --sidebar-bg: #365314;
+    --text-color: #f7fee7;
+    --link-color: #a3e635;
+    --border-color: #4d7c0f;
+    --bg-color: #1c2f0c;
+}

@@ -1,14 +1,21 @@
-
-
 var moonbounceData = null;
 
 var items = [];
 
-var dataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/MoonbouncePlus.json";
+var mainDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/MoonbouncePlus.json";
 var marketplateDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/marketplace.json";
+var wikiDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/wiki_data.json";
+
+var sourcesDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/sources.json";
+
+// if any of these fail, attempt to use local data from /data
+var localMainDataURL = "/data/MoonbouncePlus.json";
+var localMarketplaceDataURL = "/data/marketplace.json";
+var localWikiDataURL = "/data/wiki_data.json";
+var localSourcesDataURL = "/data/sources.json";
 
 // fetch the data from the URL
-fetch(dataURL)
+fetch(mainDataURL)
     .then(response => response.json())
     .then(data => {
         moonbounceData = data;
@@ -18,14 +25,24 @@ fetch(dataURL)
             .then(response => response.json())
             .then(data => {
                 moonbounceData.marketplace = data.marketplace;
-                console.log("Data loaded: ", moonbounceData);
-                // console.log(moonbounceData);
-                // call the function to display the data
+                // console.log("Data loaded: ", moonbounceData);
+                
+                // Dispatch the loadData event after we have the data
+                window.dispatchEvent(new Event('loadData'));
+                
                 displayData();
             })
     })
     .catch(error => {
         console.error("Error fetching data: ", error);
+        // Try local data as fallback
+        fetch(localMainDataURL)
+            .then(response => response.json())
+            .then(data => {
+                moonbounceData = data;
+                window.dispatchEvent(new Event('loadData'));
+                displayData();
+            });
     });
 
 // create a new div for each item in the data
@@ -79,13 +96,6 @@ const sortingMethods = [
     { name: "Value (High > Low)", method: (a, b) => sortValue(b, a) },
 ];
 
-
-
-
-
-
-
-
 function displayData() {
     if (moonbounceData) {
         var itemData = moonbounceData.items;
@@ -103,50 +113,46 @@ function displayData() {
             return null;
         }
 
-        // an item looks lke the following
-        /*
-        {
-            "id": 68,
-            "name": "Nebula Orb",
-            "uuid": "73e0610e-26e5-4e86-b27c-f45ad255530d",
-            "description": "It’s emitting an interesting and chaotic aura",
-            "rarity": "UNCOMMON",
-            "type": "MATERIAL",
-            "value": 100,
-            "sources": []
-        }
-        */
-
         for (var i = 0; i < itemData.length; i++) {
             const item = itemData[i];
-            const itemElement = document.createElement("div");
-            itemElement.innerHTML = itemTemplate;
+            const div = document.createElement('div');
+            div.classList.add('item');
+            div.classList.add(item.rarity.toLowerCase());
+            div.classList.add(item.type.toLowerCase());
 
-            let nameElement = itemElement.querySelector(".name");
-            let descriptionElement =
-                itemElement.querySelector(".description");
-            let rarityElement =
-                itemElement.querySelector(".rarity");
-            let typeElement = itemElement.querySelector(".type");
-            let valueElement = itemElement.querySelector(".value");
+            // Add data attributes for filtering
+            div.setAttribute('data-name', item.name);
+            div.setAttribute('data-id', item.id);
+            div.setAttribute('data-rarity', item.rarity);
+            div.setAttribute('data-type', item.type);
+            div.setAttribute('data-value', item.value || 0);
 
-            // create two spans for the name and id, to name the item "#id name"
-            nameElement.innerHTML = `<span class="id">#${item.id}</span> ${item.name}`;
-            descriptionElement.textContent = item.description;
-            rarityElement.textContent = item.rarity;
-            typeElement.textContent = item.type;
-            valueElement.textContent = `${item.value} MP`;
+            div.innerHTML = `
+                <h3 class="name">
+                    <a href="wiki.html?q=${encodeURIComponent(item.name)}">#${item.id} ${item.name}</a>
+                </h3>
+                <div class="details">
+                    <h4>Description</h4>
+                    <p class="description">${item.description}</p>
+                    <h4>Details</h4>
+                    <div class="pill-details">
+                        <p class="pill rarity">${item.rarity}</p>
+                        <p class="pill type">${item.type}</p>
+                        <p class="pill value">${item.value} MP</p>
+                    </div>
+                    <div class="source-details">
+                        <div class="source">
+                            <h3>Obtainable From</h3>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+            `;
 
             if (item.value === 0 || item.value === null)
-                valueElement.style.display = "none";
+                div.querySelector(".value").style.display = "none";
 
-            // add the class for the rarity and type
-            itemElement.classList.add("item");
-            itemElement.classList.add(item.rarity.toLowerCase());
-            itemElement.classList.add(item.type.toLowerCase());
-
-            const dropsFrom =
-                itemElement.querySelector(".source ul");
+            const dropsFrom = div.querySelector(".source ul");
 
             // get the names of the sources
             let obtainSources = [];
@@ -174,15 +180,7 @@ function displayData() {
                 dropsFrom.appendChild(sourceElement);
             }
 
-            // add various data attributes to the item
-            itemElement.setAttribute("data-name", item.name);
-            itemElement.setAttribute("data-id", item.id);
-            itemElement.setAttribute("data-uuid", item.uuid);
-            itemElement.setAttribute("data-value", item.value || 0);
-            itemElement.setAttribute("data-rarity", item.rarity);
-            itemElement.setAttribute("data-type", item.type);
-
-            itemContainer.appendChild(itemElement);
+            itemContainer.appendChild(div);
         }
 
         // loop through the recipes and add them to the items
@@ -255,9 +253,7 @@ function searchItems() {
 
 
 
-// Sorting
-
-
+//#region Sorting
 
 // add sorting options to the select box
 sortingMethods.forEach((method) => {
@@ -321,3 +317,5 @@ function sortItems() {
         item.style.order = index;
     });
 }
+
+//#endregion
