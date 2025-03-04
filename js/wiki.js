@@ -1,71 +1,7 @@
-var mainDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/MoonbouncePlus.json";
-var marketplaceDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/marketplace.json";
-var wikiDataURL = "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/wiki_data.json";
-
-let combinedData = {};
-
-// Add this after combinedData declaration
-document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-light';
-    setTheme(savedTheme);
-    document.querySelector('.theme-selector select').value = savedTheme;
-});
-
-// Get the query parameter
-const urlParams = new URLSearchParams(window.location.search);
-const searchQuery = urlParams.get('q');
-
-async function fetchData(key) {
-    try {
-        const response = await fetch(config.urls[key]);
-        if (!response.ok) throw new Error(`Remote ${key} not found`);
-        return await response.json();
-    } catch (error) {
-        console.log(`Falling back to local ${key}`);
-        const response = await fetch(config.localUrls[key]);
-        if (!response.ok) throw new Error(`Local ${key} not found`);
-        return await response.json();
-    }
-}
-
-// Replace the Promise.all block with individual fetches
-async function loadAllData() {
-    try {
-        const [mainData, marketplaceData, wikiData, sourcesData] = await Promise.all([
-            fetchData('main'),
-            fetchData('marketplace'),
-            fetchData('wiki'),
-            fetchData('sources')
-        ]);
-
-        combinedData = {
-            items: mainData.items,
-            recipes: mainData.recipes,
-            marketplace: marketplaceData.marketplace,
-            wiki: wikiData,
-            sources: sourcesData.sources
-        };
-
-        // console.log('All data loaded:', combinedData);
-        window.combinedData = combinedData;
-        // console.log('Data available in window.combinedData:', window.combinedData);
-
-        // Dispatch event when data is loaded
-        window.dispatchEvent(new Event('loadData'));
-
-        displayWikiPage(searchQuery);
-    } catch (error) {
-        console.error("Error loading data:", error);
-        showErrorMessage("Failed to load required data");
-    }
-}
-
-config.loadAllData(() => displayWikiPage(searchQuery));
-
-function formatText(text) {
-    if (!text) return '';
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-}
+/*
+█▀▀ █▀█ █▄ █ █▀ ▀█▀ ▄▀█ █▄ █ ▀█▀ █▀ 
+█▄▄ █▄█ █ ▀█ ▄█  █  █▀█ █ ▀█  █  ▄█ 
+*/
 
 // Define page types and their handlers
 const pageTypes = [
@@ -97,83 +33,28 @@ const pageTypes = [
     },
     {
         type: 'collection',
-        check: (name) => combinedData?.items && ['Items', 'Material', 'Tool', 'Accessory', 'Character'].includes(name),
+        check: (name) => combinedData?.items && ['Items', 'Material', 'Tool', 'Accessory', 'Character', 'Quests'].includes(name),
         display: displayCollectionPage
-    }
-];
-
-function displayWikiPage(searchQuery) {
-    if (!searchQuery) {
-        displayWelcomePage();
-        return;
-    }
-
-    // Try each page type until we find one that matches
-    for (const pageType of pageTypes) {
-        if (pageType.check(searchQuery)) {
-            pageType.display(searchQuery);
-            return;
+    },
+    {
+        type: 'quest',
+        check: (name) => combinedData?.quests && findQuest(name),
+        display: (name) => {
+            const quest = findQuest(name);
+            if (quest) displayQuestPage(quest);
+            else showErrorMessage(`Quest "${name}" not found`);
+        }
+    },
+    {
+        type: 'info',
+        check: (name) => findPage(name),
+        display: (name) => {
+            const page = findPage(name);
+            if (page) displayInfoPage(page);
+            else showErrorMessage(`Page "${name}" not found`);
         }
     }
-
-    showErrorMessage(`"${searchQuery}" not found`);
-}
-
-function displayWelcomePage() {
-    updatePageTitle('Welcome');
-    const wikiContent = document.getElementById('wiki-content');
-    
-    const stats = {
-        items: combinedData?.items?.length || 0,
-        sources: combinedData?.sources?.length || 0,
-        recipes: combinedData?.recipes?.length || 0
-    };
-
-    wikiContent.innerHTML = `
-        <div class="welcome-page">
-            <h1>Welcome to the MoonbouncePlus Wiki</h1>
-            
-            <div class="welcome-content">
-                <p>This wiki contains information about items, sources, and recipes in Moonbounce.</p>
-                
-                <div class="wiki-stats">
-                    <h2>Quick Stats</h2>
-                    <ul>
-                        <li><a href="?q=Category:Items">${stats.items} Items</a></li>
-                        <li><a href="?q=Category:Loot Source">${stats.sources} Sources</a></li>
-                        <li>${stats.recipes} Recipes</li>
-                    </ul>
-                </div>
-
-                <div class="browse-categories">
-                    <h2>Browse by Category</h2>
-                    <div class="category-links">
-                        <div class="category-section">
-                            <h3>Rarities</h3>
-                            <ul>
-                                <li><a href="?q=Category:Common">Common Items</a></li>
-                                <li><a href="?q=Category:Uncommon">Uncommon Items</a></li>
-                                <li><a href="?q=Category:Rare">Rare Items</a></li>
-                                <li><a href="?q=Category:Legendary">Legendary Items</a></li>
-                                <li><a href="?q=Category:Mythic">Mythic Items</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="category-section">
-                            <h3>Types</h3>
-                            <ul>
-                                <li><a href="?q=Material">Materials</a></li>
-                                <li><a href="?q=Tool">Tools</a></li>
-                                <li><a href="?q=Accessory">Accessories</a></li>
-                                <li><a href="?q=Character">Characters</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
+];
 
 // Page section configuration
 const pageSections = {
@@ -209,15 +90,348 @@ const pageSections = {
     }
 };
 
+// Update category handlers with better error checking
+const categoryHandlers = {
+    'Loot Source': () => {
+        if (!combinedData?.sources) return [];
+        return combinedData.sources.map(source => ({
+            type: 'source',
+            name: source.name
+        }));
+    },
+    'Quest': () => {
+        if (!combinedData?.quests) return [];
+        return combinedData.quests.map(quest => ({
+            type: 'quest',
+            name: quest.quest_name
+        }));
+    },
+    'Promotional': () => {
+        const items = [];
+        
+        // Add promotional items
+        if (combinedData?.items) {
+            const promoItems = combinedData.items.filter(item => {
+                const wikiInfo = findWikiInfo(item.name);
+                return wikiInfo?.promo === true;
+            });
+            items.push(...promoItems);
+        }
+        
+        // Add promotional sources
+        if (combinedData?.sources) {
+            const promoSources = combinedData.sources.filter(source => {
+                const wikiInfo = findWikiInfo(source.name);
+                return wikiInfo?.promo === true;
+            }).map(source => ({
+                type: 'source',
+                name: source.name
+            }));
+            items.push(...promoSources);
+        }
+
+        // Add promotional quests
+        if (combinedData?.quests) {
+            const promoQuests = combinedData.quests.filter(quest => {
+                const wikiInfo = findWikiInfo(quest.quest_name);
+                return wikiInfo?.promo === true;
+            }).map(quest => ({
+                type: 'quest',
+                name: quest.quest_name
+            }));
+            items.push(...promoQuests);
+        }
+        
+        return items;
+    },
+    'default': (category) => {
+        const items = [];
+        
+        // Check items
+        if (combinedData?.items) {
+            const matchingItems = combinedData.items.filter(item => {
+                if (item.rarity.toLowerCase() === category.toLowerCase() ||
+                    item.type.toLowerCase() === category.toLowerCase()) {
+                    return true;
+                }
+                const wikiInfo = findWikiInfo(item.name);
+                return wikiInfo?.categories?.includes(category);
+            });
+            items.push(...matchingItems);
+        }
+        
+        // Check sources
+        if (combinedData?.sources) {
+            const matchingSources = combinedData.sources.filter(source => {
+                const wikiInfo = findWikiInfo(source.name);
+                return wikiInfo?.categories?.includes(category);
+            }).map(source => ({
+                type: 'source',
+                name: source.name
+            }));
+            items.push(...matchingSources);
+        }
+        
+        return items;
+    }
+};
+
+const themes = ['theme-light', 'theme-dark', 'theme-fire', 'theme-water', 'theme-air', 'theme-earth'];
+
+/*
+█ █▄ █ █ ▀█▀ 
+█ █ ▀█ █  █  
+*/
+
+let combinedData = {};
+let currentThemeIndex = 0;
+
+// Load saved theme or default
+const savedTheme = localStorage.getItem('selectedTheme') || 'theme-light';
+document.body.classList.add(savedTheme);
+currentThemeIndex = themes.indexOf(savedTheme);
+
+
+// Get the query parameter
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get('q');
+
+async function fetchData(key) {
+    try {
+        const response = await fetch(config.urls[key]);
+        if (!response.ok) throw new Error(`Remote ${key} not found`);
+        return await response.json();
+    } catch (error) {
+        console.log(`Falling back to local ${key}`);
+        const response = await fetch(config.localUrls[key]);
+        if (!response.ok) throw new Error(`Local ${key} not found`);
+        return await response.json();
+    }
+}
+
+// Consolidated data loading function
+async function initializeWiki() {
+    try {
+        // Only load data if we haven't already
+        if (!combinedData?.items) {
+            const [mainData, marketplaceData, wikiData, sourcesData, questsData] = await Promise.all([
+                fetchData('main'),
+                fetchData('marketplace'),
+                fetchData('wiki'),
+                fetchData('sources'),
+                fetchData('quests')
+            ]);
+
+            combinedData = {
+                items: mainData.items,
+                recipes: mainData.recipes,
+                marketplace: marketplaceData.marketplace,
+                wiki: wikiData,
+                sources: sourcesData.sources,
+                quests: questsData
+            };
+
+            window.combinedData = combinedData;
+            window.dispatchEvent(new Event('loadData'));
+        }
+
+        displayWikiPage(searchQuery);
+    } catch (error) {
+        console.error("Error loading data:", error);
+        showErrorMessage("Failed to load required data");
+    }
+}
+
+/*
+█▀▀ █ █ █▀▀ █▄ █ ▀█▀ █▀ 
+██▄ ▀▄▀ ██▄ █ ▀█  █  ▄█ 
+*/
+
+
+// Add this after combinedData declaration
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-light';
+    setTheme(savedTheme);
+    document.querySelector('.theme-selector select').value = savedTheme;
+});
+
+// Remove other loadAllData calls and replace with single initialization
+document.addEventListener('DOMContentLoaded', initializeWiki);
+
+/*
+█ █ █▀▀ █   █▀█ █▀▀ █▀█ 
+█▀█ ██▄ █▄▄ █▀▀ ██▄ █▀▄ 
+*/
+
+function findPage(name) {
+    return wikiPages[name?.toLowerCase()];
+}
+
 function updatePageTitle(title) {
-    document.title = `${title} - MoonbouncePlus Wiki`;
+    document.title = `${title} | MB+ Wiki`;
+}
+
+function showErrorMessage(message = "An error occurred") {
+    updatePageTitle('Error');
+    const wikiContent = document.getElementById('wiki-content');
+    wikiContent.innerHTML = `
+        <div class="not-found">
+            <h2>Error</h2>
+            <p>${message}</p>
+            <p><a href="index.html">Return to item list</a></p>
+        </div>
+    `;
+}
+
+function getRewardSize(amount) {
+    if (amount >= 5000) return 'Large';
+    if (amount >= 2000) return 'Medium';
+    return 'Small';
+}
+
+function getRarityValue(rarity = '') {
+    const rarityOrder = {
+        'COMMON': 0,
+        'UNCOMMON': 1,
+        'RARE': 2,
+        'LEGENDARY': 3,
+        'MYTHIC': 4
+    };
+    return rarityOrder[rarity.toUpperCase()] ?? 999;
+}
+
+function parseTrivia(triviaArray) {
+    const cleanAndFormat = (text) => {
+        // Process in specific order with non-overlapping patterns        
+        // Handle wiki-style links with display text: [[Page|Display]]
+        text = text.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, link, display) => {
+            return `<a href="?q=${encodeURIComponent(link.trim())}">${display.trim()}</a>`;
+        });
+
+        // Handle simple wiki links: [[Page]]
+        text = text.replace(/\[\[([^\]]+?)\]\]/g, (_, link) => {
+            return `<a href="?q=${encodeURIComponent(link.trim())}">${link.trim()}</a>`;
+        });
+
+        // Handle simpler wiki links: [Page] only if it's not a URL
+        if (!text.match(/\[https?:\/\//) && !text.match(/\[ftp:\/\//)) {
+            text = text.replace(/\[([^\]]+?)\]/g, (_, link) => {
+                return `<a href="?q=${encodeURIComponent(link.trim())}">${link.trim()}</a>`;
+            });
+        }
+
+        // Handle external URLs: [http... Display Text]
+        text = text.replace(/\[(https?:\/\/[^\s\]]+)\s+([^\]]+)\]/g, (_, url, title) => {
+            return `<a class="external-link" href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
+        });
+
+        // Remove leading asterisks and trim
+        return text.replace(/^\*+\s*/, '').trim();
+    };
+
+    const result = [];
+    let current = null;
+
+    triviaArray.forEach(fact => {
+        const depth = (fact.match(/^\*+/)?.[0] || '').length;
+        const cleanedFact = cleanAndFormat(fact);
+
+        if (depth === 1) {
+            current = { text: cleanedFact, children: [] };
+            result.push(current);
+        } else if (depth > 1 && current) {
+            current.children.push(cleanedFact);
+        }
+    });
+
+    return result;
+}
+
+/*
+█▀█ ▄▀█ █▀▀ █▀▀ █▀ 
+█▀▀ █▀█ █▄█ ██▄ ▄█ 
+*/
+
+function displayWikiPage(searchQuery) {
+    if (!searchQuery) {
+        displayWelcomePage();
+        return;
+    }
+
+    // Try each page type until we find one that matches
+    for (const pageType of pageTypes) {
+        if (pageType.check(searchQuery)) {
+            pageType.display(searchQuery);
+            return;
+        }
+    }
+
+    showErrorMessage(`"${searchQuery}" not found`);
+}
+
+function displayWelcomePage() {
+    updatePageTitle('Welcome');
+    const wikiContent = document.getElementById('wiki-content');
+    
+    const stats = {
+        items: combinedData?.items?.length || 0,
+        sources: combinedData?.sources?.length || 0,
+        recipes: combinedData?.recipes?.length || 0,
+        quests: combinedData?.quests?.length || 0  // Add this line
+    };
+
+    wikiContent.innerHTML = `
+        <div class="welcome-page">
+            <h1>Welcome to the MoonbouncePlus Wiki</h1>
+            
+            <div class="welcome-content">
+                <p>This wiki contains information about items, sources, and recipes in Moonbounce.</p>
+                
+                <div class="wiki-stats">
+                    <h2>Quick Stats</h2>
+                    <ul>
+                        <li><a href="?q=Category:Items">${stats.items} Items</a></li>
+                        <li><a href="?q=Category:Loot Source">${stats.sources} Sources</a></li>
+                        <li><a href="?q=quests">${stats.quests} Quests</a></li>
+                        <li>${stats.recipes} Recipes</li>
+                    </ul>
+                </div>
+
+                <div class="browse-categories">
+                    <h2>Browse by Category</h2>
+                    <div class="category-links">
+                        <div class="category-section">
+                            <h3>Rarities</h3>
+                            <ul>
+                                <li><a href="?q=Category:Common">Common Items</a></li>
+                                <li><a href="?q=Category:Uncommon">Uncommon Items</a></li>
+                                <li><a href="?q=Category:Rare">Rare Items</a></li>
+                                <li><a href="?q=Category:Legendary">Legendary Items</a></li>
+                                <li><a href="?q=Category:Mythic">Mythic Items</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="category-section">
+                            <h3>Types</h3>
+                            <ul>
+                                <li><a href="?q=Material">Materials</a></li>
+                                <li><a href="?q=Tool">Tools</a></li>
+                                <li><a href="?q=Accessory">Accessories</a></li>
+                                <li><a href="?q=Character">Characters</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 function displayItemPage(item) {
     updatePageTitle(item.name);
     // Format item properties
-    item.rarity = formatText(item.rarity);
-    item.type = formatText(item.type);
+    item.rarity = config.formatText(item.rarity);
+    item.type = config.formatText(item.type);
 
     const recipe = findRecipe(item.name);
     const usedInRecipes = findRecipesUsingItem(item.name);
@@ -232,7 +446,7 @@ function displayItemPage(item) {
         ${sections.description ? generateDescription(item) : ''}
         ${sections.foundIn ? generateFoundIn(item) : ''}
         ${sections.recipe ? generateRecipeSection(recipe) : ''}
-        ${sections.usedIn ? generateUsedInSection(usedInRecipes) : ''}
+        ${sections.usedIn ? generateUsedInSection(usedInRecipes, item.name) : ''}
         ${sections.trivia ? generateTriviaSection(wikiInfo) : ''}
         ${sections.categories ? generateItemCategories(item) : ''}
     `;
@@ -286,80 +500,6 @@ function displaySourcePage(source) {
     if (sections.filter) initializeFilters();
 }
 
-// Update category handlers with better error checking
-const categoryHandlers = {
-    'Loot Source': () => {
-        if (!combinedData?.sources) return [];
-        return combinedData.sources.map(source => ({
-            type: 'source',
-            name: source.name
-        }));
-    },
-    'Quests': () => {
-        if (!combinedData?.quests) return [];
-        return combinedData.quests.map(quest => ({
-            type: 'quest',
-            name: quest.name
-        }));
-    },
-    'Promotional': () => {
-        const items = [];
-        
-        // Add promotional items
-        if (combinedData?.items) {
-            const promoItems = combinedData.items.filter(item => {
-                const wikiInfo = findWikiInfo(item.name);
-                return wikiInfo?.promo === true;
-            });
-            items.push(...promoItems);
-        }
-        
-        // Add promotional sources
-        if (combinedData?.sources) {
-            const promoSources = combinedData.sources.filter(source => {
-                const wikiInfo = findWikiInfo(source.name);
-                return wikiInfo?.promo === true;
-            }).map(source => ({
-                type: 'source',
-                name: source.name
-            }));
-            items.push(...promoSources);
-        }
-        
-        return items;
-    },
-    'default': (category) => {
-        const items = [];
-        
-        // Check items
-        if (combinedData?.items) {
-            const matchingItems = combinedData.items.filter(item => {
-                if (item.rarity.toLowerCase() === category.toLowerCase() ||
-                    item.type.toLowerCase() === category.toLowerCase()) {
-                    return true;
-                }
-                const wikiInfo = findWikiInfo(item.name);
-                return wikiInfo?.categories?.includes(category);
-            });
-            items.push(...matchingItems);
-        }
-        
-        // Check sources
-        if (combinedData?.sources) {
-            const matchingSources = combinedData.sources.filter(source => {
-                const wikiInfo = findWikiInfo(source.name);
-                return wikiInfo?.categories?.includes(category);
-            }).map(source => ({
-                type: 'source',
-                name: source.name
-            }));
-            items.push(...matchingSources);
-        }
-        
-        return items;
-    }
-};
-
 function displayCategoryPage(category) {
     updatePageTitle(`${category} Category`);
     try {
@@ -400,10 +540,80 @@ function displayCategoryPage(category) {
     }
 }
 
+function displayCollectionPage(collectionName) {
+    updatePageTitle(`${collectionName} Collection`);
+    const items = collectionName === 'Quest' 
+        ? (combinedData?.quests || []).map(quest => ({
+            type: 'quest',
+            name: quest.quest_name,
+            questType: quest.quest_quest_type,
+            instanceType: quest.quest_instance_type
+        }))
+        : findItemsByType(collectionName);
+    
+    const sections = pageSections.collection;
+
+    const wikiContent = document.getElementById('wiki-content');
+    wikiContent.innerHTML = `
+        ${sections.title ? `<h1>${collectionName}</h1>` : ''}
+        ${sections.description ? `
+            <p>All ${collectionName.toLowerCase()} items in Moonbounce.</p>
+        ` : ''}
+        ${sections.filter ? generateFilterControls() : ''}
+        ${sections.items ? `
+            <div class="category-card-container" id="filtered-items">
+                ${items.map(item => generateCardFromName(item.name)).join('\n')}
+            </div>
+        ` : ''}
+    `;
+
+    if (sections.filter) initializeFilters();
+}
+
+function displayQuestPage(quest) {
+    updatePageTitle(quest.quest_name);
+    const wikiContent = document.getElementById('wiki-content');
+    const wikiInfo = findWikiInfo(quest.quest_name);
+
+    // Create array of quest categories
+    const questCategories = ['Quest'];
+    if (wikiInfo?.promo)
+        questCategories.push('Promotional');
+
+    if (wikiInfo?.categories)
+        questCategories.push(...wikiInfo.categories);
+
+    wikiContent.innerHTML = `
+        <h1>${quest.quest_name}</h1>
+        <div class="quest-page">
+            ${generateQuestInfobox(quest)}
+            ${generateQuestIntroduction(quest)}
+            ${generateQuestDescription(quest)}
+            ${quest.prerequisites?.length ? generateQuestPrerequisites(quest) : ''}
+            ${generateQuestRequirements(quest)}
+            ${generateQuestRewards(quest)}
+            ${generateTriviaSection(wikiInfo)}
+            ${generateCategories(questCategories)}
+        </div>
+    `;
+}
+
+function displayInfoPage(page) {
+    updatePageTitle(page.title);
+    const wikiContent = document.getElementById('wiki-content');
+    wikiContent.innerHTML = page.render();
+    initializeFilters();
+}
+
+/*
+█▀▀ █▀▀ █▄ █ █▀▀ █▀█ ▄▀█ ▀█▀ █▀█ █▀█ █▀ 
+█▄█ ██▄ █ ▀█ ██▄ █▀▄ █▀█  █  █▄█ █▀▄ ▄█ 
+*/
+
 function generateCategoryDescription(category) {
     const descriptions = {
         'Loot Source': 'All sources that drop items in Moonbounce.',
-        'Quests': 'Available quests and their rewards.',
+        'Quest': 'All available Quests.',
         'Promotional': 'Entries related to some sort of promotion, event, or creator.',
         'default': `Entries in the ${category} category.`
     };
@@ -431,10 +641,10 @@ function generateCategoryCard(item) {
             return `
                 <div class="card" ${cardAttrs}>
                     <div class="card-title">
-                        <a href="?q=${linkName}">${item.name}</a>
+                        <a href="?q=${encodeURIComponent(linkName)}">${item.name}</a>
                     </div>
                     <div class="card-image">
-                        <a href="?q=${linkName}">
+                        <a href="?q=${encodeURIComponent(linkName)}">
                             <img src="images/sources/${imagePath}.webp" alt="${item.name}" />
                         </a>
                     </div>
@@ -442,49 +652,20 @@ function generateCategoryCard(item) {
             `;
         case 'quest':
             return `
-                <div class="card quest" ${cardAttrs}>
+                <div class="card quest" data-name="${item.name}">
                     <div class="card-title">
-                        <a href="?q=${linkName}">${item.name}</a>
+                        <a href="?q=${encodeURIComponent(item.name)}">${item.name}</a>
                     </div>
-                    <div class="card-info">Reward: ${item.reward || ''}</div>
+                    <div class="card-image">
+                        <a href="?q=${encodeURIComponent(item.name)}">
+                            <img src="images/quest/Quest.webp" alt="${item.name}" />
+                        </a>
+                    </div>
                 </div>
             `;
         default:
             return generateCardFromName(item.name);
     }
-}
-
-function displayCollectionPage(collectionName) {
-    updatePageTitle(`${collectionName} Collection`);
-    const items = findItemsByType(collectionName);
-    const sections = pageSections.collection;
-
-    const wikiContent = document.getElementById('wiki-content');
-    wikiContent.innerHTML = `
-        ${sections.title ? `<h1>${collectionName}</h1>` : ''}
-        ${sections.description ? `
-            <p>All ${collectionName.toLowerCase()} items in Moonbounce.</p>
-        ` : ''}
-        ${sections.filter ? generateFilterControls() : ''}
-        ${sections.items ? `
-            <div class="category-card-container" id="filtered-items">
-                ${items.map(item => generateCardFromName(item.name)).join('\n')}
-            </div>
-        ` : ''}
-    `;
-
-    if (sections.filter) initializeFilters();
-}
-
-function getRarityValue(rarity = '') {
-    const rarityOrder = {
-        'COMMON': 0,
-        'UNCOMMON': 1,
-        'RARE': 2,
-        'LEGENDARY': 3,
-        'MYTHIC': 4
-    };
-    return rarityOrder[rarity.toUpperCase()] ?? 999;
 }
 
 function generateSourceInfobox(source) {
@@ -551,15 +732,44 @@ function generateDescription(item) {
 }
 
 function generateFoundIn(item) {
+    const sources = item.sources || [];
+    const questRewards = findQuestsRewardingItem(item.name);
+    
+    if (!sources.length && !questRewards.length) {
+        return `
+            <div class="found-in-section">
+                <h2>Found In</h2>
+                <p>This item cannot be found naturally.</p>
+            </div>
+        `;
+    }
+
     return `
         <div class="found-in-section">
             <h2>Found In</h2>
-            <div class="card-container left-align">
-                ${item.sources && item.sources.length > 0
-            ? item.sources.map(source => generateCard(source)).join('\n')
-            : '<p>This item cannot be found naturally.</p>'
-        }
-            </div>
+            ${sources.length > 0 ? `
+                <h3>Sources</h3>
+                <div class="card-container left-align">
+                    ${sources.map(source => generateCard(source)).join('\n')}
+                </div>
+            ` : ''}
+            ${questRewards.length > 0 ? `
+                <h3>Quest Rewards</h3>
+                <div class="card-container left-align">
+                    ${questRewards.map(quest => `
+                        <div class="card quest">
+                            <div class="card-title">
+                                <a href="?q=${encodeURIComponent(quest.quest_name)}">${quest.quest_name}</a>
+                            </div>
+                            <div class="card-image">
+                                <a href="?q=${encodeURIComponent(quest.quest_name)}">
+                                    <img src="images/quest/Quest.webp" alt="${quest.quest_name}" />
+                                </a>
+                            </div>
+                        </div>
+                    `).join('\n')}
+                </div>
+            ` : ''}
         </div>
     `;
 }
@@ -584,28 +794,35 @@ function generateRecipeSection(recipe) {
     `;
 }
 
-function generateUsedInSection(recipes) {
-    if (!recipes || recipes.length === 0) {
-        return '<div class="used-in-section"><h2>Used In</h2><p>This item is not used in any recipes.</p></div>';
+function generateUsedInSection(recipes, itemName) {
+    const usedInRecipes = recipes || [];
+    const usedInQuests = findQuestsRequiringItem(itemName);
+
+    if (!usedInRecipes.length && !usedInQuests.length) {
+        return '<div class="used-in-section"><h2>Used In</h2><p>This item is not used in any recipes or quests.</p></div>';
     }
-
-    // find all recipes that use this item as an ingredient or tool and display all of them in a card container
-
-    let usedInRecipes = recipes.map(recipe => findRecipe(recipe.result));
-
-    // search for the items by the result name
-    usedInRecipes = usedInRecipes.map(recipe => findItem(recipe.result));
-
-    // sort the recipes by rarity
-    usedInRecipes = usedInRecipes.sort((a, b) => getRarityValue(a.rarity) - getRarityValue(b.rarity));
 
     return `
         <div class="used-in-section">
             <h2>Used In</h2>
-            <h3>Recipes</h3>
-            <div class="card-container left-align">
-                ${usedInRecipes.map(recipe => generateCardFromName(recipe.name)).join('\n')}
-            </div>
+            ${usedInRecipes.length > 0 ? generateRecipeGroup('Recipes', usedInRecipes) : ''}
+            ${usedInQuests.length > 0 ? `
+                <h3>Quests</h3>
+                <div class="card-container left-align">
+                    ${usedInQuests.map(quest => `
+                        <div class="card quest">
+                            <div class="card-title">
+                                <a href="?q=${encodeURIComponent(quest.quest_name)}">${quest.quest_name}</a>
+                            </div>
+                            <div class="card-image">
+                                <a href="?q=${encodeURIComponent(quest.quest_name)}">
+                                    <img src="images/quest/Quest.webp" alt="${quest.quest_name}" />
+                                </a>
+                            </div>
+                        </div>
+                    `).join('\n')}
+                </div>
+            ` : ''}
         </div>
     `;
 }
@@ -614,7 +831,7 @@ function generateRecipeGroup(title, recipes) {
     if (!recipes || recipes.length === 0) return '';
 
     return `
-        <h3>${title} Recipes</h3>
+        <h3>${title}</h3>
         <div class="card-container left-align">
             ${recipes.map(recipe => generateCardFromName(recipe.result)).join('\n')}
         </div>
@@ -632,53 +849,6 @@ function generateTriviaSection(wikiInfo) {
             </ul>
         </div>
     `;
-}
-
-function parseTrivia(triviaArray) {
-    const cleanAndFormat = (text) => {
-        // Process in specific order with non-overlapping patterns        
-        // Handle wiki-style links with display text: [[Page|Display]]
-        text = text.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, link, display) => {
-            return `<a href="?q=${encodeURIComponent(link.trim())}">${display.trim()}</a>`;
-        });
-
-        // Handle simple wiki links: [[Page]]
-        text = text.replace(/\[\[([^\]]+?)\]\]/g, (_, link) => {
-            return `<a href="?q=${encodeURIComponent(link.trim())}">${link.trim()}</a>`;
-        });
-
-        // Handle simpler wiki links: [Page] only if it's not a URL
-        if (!text.match(/\[https?:\/\//) && !text.match(/\[ftp:\/\//)) {
-            text = text.replace(/\[([^\]]+?)\]/g, (_, link) => {
-                return `<a href="?q=${encodeURIComponent(link.trim())}">${link.trim()}</a>`;
-            });
-        }
-
-        // Handle external URLs: [http... Display Text]
-        text = text.replace(/\[(https?:\/\/[^\s\]]+)\s+([^\]]+)\]/g, (_, url, title) => {
-            return `<a class="external-link" href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
-        });
-
-        // Remove leading asterisks and trim
-        return text.replace(/^\*+\s*/, '').trim();
-    };
-
-    const result = [];
-    let current = null;
-
-    triviaArray.forEach(fact => {
-        const depth = (fact.match(/^\*+/)?.[0] || '').length;
-        const cleanedFact = cleanAndFormat(fact);
-
-        if (depth === 1) {
-            current = { text: cleanedFact, children: [] };
-            result.push(current);
-        } else if (depth > 1 && current) {
-            current.children.push(cleanedFact);
-        }
-    });
-
-    return result;
 }
 
 function generateTriviaList(trivia) {
@@ -745,72 +915,6 @@ function generateCategories(categories) {
     `;
 }
 
-function findItem(name) {
-    return combinedData.items.find(item =>
-        item.name.toLowerCase() === name.toLowerCase());
-}
-
-function findRecipe(name) {
-    return combinedData.recipes.find(recipe =>
-        recipe.result.toLowerCase() === name.toLowerCase());
-}
-
-function findRecipesUsingItem(itemName) {
-    if (!itemName || !combinedData.recipes) return [];
-
-    return combinedData.recipes.filter(recipe =>
-        recipe.ingredients.includes(itemName) ||
-        recipe.tools.includes(itemName)
-    );
-}
-
-function findInMarketplace(name) {
-    return combinedData.marketplace?.items.find(item =>
-        item.name.toLowerCase() === name.toLowerCase());
-}
-
-function findWikiInfo(name) {
-    // First try to find in items array
-    const itemInfo = combinedData.wiki.items?.find(item =>
-        item.name.toLowerCase() === name.toLowerCase()
-    );
-
-    // Return the item info if found
-    if (itemInfo) {
-        return itemInfo;
-    }
-
-    // If not found in items, try sources
-    return combinedData.wiki.sources?.find(source =>
-        source.name.toLowerCase() === name.toLowerCase());
-}
-
-function findSource(name) {
-    if (!name || !combinedData.sources) return null;
-    return combinedData.sources.find(source =>
-        source.name.toLowerCase() === name.toLowerCase());
-}
-
-function findItemsByCategory(category) {
-    if (!category) return [];
-
-    const searchTerm = category.toLowerCase();
-
-    if (searchTerm === 'items') {
-        return combinedData.items;
-    }
-
-    return combinedData.items.filter(item =>
-        item.rarity.toLowerCase() === searchTerm ||
-        item.type.toLowerCase() === searchTerm
-    );
-}
-
-function findItemsByType(type) {
-    return combinedData.items.filter(item =>
-        item.type.toLowerCase() === type.toLowerCase());
-}
-
 function generateSourcesHTML(item) {
     if (!item.sources || item.sources.length === 0) return '';
 
@@ -871,32 +975,6 @@ function generateWikiHTML(wikiInfo) {
     `;
 }
 
-// Add theme management
-const themes = ['theme-light', 'theme-dark', 'theme-fire', 'theme-water', 'theme-air', 'theme-earth'];
-let currentThemeIndex = 0;
-
-function cycleTheme() {
-    document.body.classList.remove(themes[currentThemeIndex]);
-    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-    document.body.classList.add(themes[currentThemeIndex]);
-    localStorage.setItem('selectedTheme', themes[currentThemeIndex]);
-
-    // Update select value
-    document.getElementById('themeSelect').value = themes[currentThemeIndex];
-}
-
-function setTheme(themeName) {
-    themes.forEach(theme => document.body.classList.remove(theme));
-    document.body.classList.add(themeName);
-    currentThemeIndex = themes.indexOf(themeName);
-    localStorage.setItem('selectedTheme', themeName);
-}
-
-// Load saved theme or default
-const savedTheme = localStorage.getItem('selectedTheme') || 'theme-light';
-document.body.classList.add(savedTheme);
-currentThemeIndex = themes.indexOf(savedTheme);
-
 function generateInfobox(item, recipe) {
     const rarityClass = item.rarity.toLowerCase();
     return `
@@ -933,7 +1011,7 @@ function generateCardFromName(name, showRarity = false) {
     if (!item) return generateCard(name, 'sources');
 
     const folder = item.type.toLowerCase();
-    const rarity = formatText(item.rarity);
+    const rarity = config.formatText(item.rarity);
     const rarityClass = rarity.toLowerCase();
 
     let imagePath = item.name.replace(/ /g, '_').replace(/#/g, '-').replace(/\?/g, '-');
@@ -998,6 +1076,217 @@ function generateFilterControls() {
     `;
 }
 
+function generateQuestInfobox(quest) {
+    let imagePath = quest.quest_name.replace(/ /g, '_').replace(/#/g, '-').replace(/\?/g, '-');
+    
+    return `
+        <div class="infobox">
+            <div class="infobox-title">${quest.quest_name}</div>
+            <img src="images/quest/Quest.webp"
+                 alt="${quest.quest_name}" 
+                 title="${quest.quest_name}" 
+                 onerror="this.src='images/quest/quest.webp'"/>
+            
+            <div class="infobox-rows">
+                ${generateInfoboxRow('Type', quest.quest_quest_type)}
+                ${generateInfoboxRow('Instance', quest.quest_instance_type)}
+                ${generateInfoboxRow('Recurring', quest.recurring ? 'Yes' : 'No')}
+                ${generateInfoboxRow('Items Required', quest.required_items?.length || 0)}
+                ${generateInfoboxRow('Rewards', quest.rewards?.length || 0)}
+            </div>
+        </div>
+    `;
+}
+
+function generateQuestIntroduction(quest) {
+    // The [quest] is a [instance] [quest type] Quest in Moonbounce.
+
+    return `
+        <div class="introduction-section">
+            <p>
+                The <strong>${quest.quest_name}</strong> is a 
+                ${quest.quest_instance_type} ${quest.quest_quest_type} <a href="?q=quests">Quest</a> in Moonbounce.
+            </p>
+        </div>
+    `;
+}
+
+function generateQuestDescription(quest) {
+    // First replace URLs in brackets [https://... Text]
+    const processedDesc = quest.quest_description.replace(
+        /\[(https?:\/\/[^\s\]]+)(?:\s+([^\]]+))?\]/g, 
+        (match, url, text) => `<a class="external-link" href="${url}" target="_blank" rel="noopener noreferrer">${text || url}</a>`
+    );
+
+    // Then replace bare URLs that aren't already in links
+    const finalDesc = processedDesc.replace(
+        /(?<!["'])(https?:\/\/[^\s<]+)/g,
+        '<a class="external-link" href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
+    
+    return `
+        <div class="description-section">
+            <h2>Description</h2>
+            <p>${finalDesc}</p>
+        </div>
+    `;
+}
+
+function generateQuestRequirements(quest) {
+    if (!quest.required_items?.length) return '';
+
+    return `
+        <div class="quest-requirements">
+            <h2>Requirements</h2>
+            <div class="card-container">
+                ${quest.required_items.map(item => `
+                    <div class="quest-requirement">
+                        ${generateCardFromName(item.item_name)}
+                        <div class="requirement-quantity">×${item.quantity}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function generateQuestRewards(quest) {
+    if (!quest.rewards?.length) return '';
+
+    return `
+        <div class="quest-rewards">
+            <h2>Rewards</h2>
+            <div class="card-container">
+                ${quest.rewards.map(reward => generateQuestReward(reward)).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function generateQuestReward(reward) {
+    switch (reward.reward_type) {
+        case 'item':
+            return `
+                <div class="quest-reward">
+                    ${generateCardFromName(reward.item_name)}
+                    ${reward.quantity > 1 ? `<div class="reward-quantity">×${reward.quantity}</div>` : ''}
+                </div>
+            `;
+        case 'currency':
+            return `
+                <div class="quest-reward">
+                    <div class="card">
+                        <div class="card-title">MP Reward</div>
+                        <div class="card-image">
+                            <img src="images/Quest/MP_${getRewardSize(reward.quantity)}.webp" 
+                                 alt="${reward.quantity} MP" />
+                        </div>
+                        <div class="reward-quantity">${reward.quantity} MP</div>
+                    </div>
+                </div>
+            `;
+        case 'recipe':
+            return `
+                <div class="quest-reward">
+                    ${generateRecipeItemCard(reward.recipe_name)}
+                </div>
+            `;
+        case 'quest':
+            return `
+                <div class="quest-reward">
+                    <div class="card">
+                        <div class="card-title">New Quest</div>
+                        <div class="card-image">
+                            <img src="images/quest/quest.webp" alt="New Quest" />
+                        </div>
+                    </div>
+                </div>
+            `;
+        default:
+            return '';
+    }
+}
+
+function generateQuestPrerequisites(quest) {
+    if (!quest.prerequisites?.length) return '';
+
+    const prereqQuests = quest.prerequisites
+        .map(prereqId => combinedData.quests.find(q => q.quest_id === prereqId))
+        .filter(q => q); // Remove any undefined quests
+
+    if (!prereqQuests.length) return '';
+
+    return `
+        <div class="quest-prerequisites">
+            <h2>Prerequisites</h2>
+            <div class="card-container">
+                ${prereqQuests.map(prereq => `
+                    <div class="card quest">
+                        <div class="card-title">
+                            <a href="?q=${encodeURIComponent(prereq.quest_name)}">${prereq.quest_name}</a>
+                        </div>
+                        <div class="card-image">
+                            <a href="?q=${encodeURIComponent(prereq.quest_name)}">
+                                <img src="images/quest/Quest.webp" 
+                                     alt="${prereq.quest_name}"
+                                     onerror="this.src='images/quest/quest.webp'" />
+                            </a>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function generateRecipeItemCard(recipeName) {
+    const item = findItem(recipeName);
+    if (!item) return '';
+
+    return `
+        <div class="recipe-card card">
+            <div class="card-title">
+                <a href="?q=${encodeURIComponent(recipeName)}">${recipeName} Recipe</a>
+            </div>
+            <div class="card-image recipe-stack">
+                <img src="images/quest/recipe_sheet.webp" alt="Recipe" class="recipe-background" />
+                <img src="images/${item.type.toLowerCase()}/${item.name.replace(/ /g, '_')}.webp" 
+                     alt="${item.name}" 
+                     class="recipe-item" />
+            </div>
+        </div>
+    `;
+}
+
+/*
+▀█▀ █ █ █▀▀ █▀▄▀█ █▀▀ █▀ 
+ █  █▀█ ██▄ █ ▀ █ ██▄ ▄█ 
+*/
+
+// Add theme management
+
+function cycleTheme() {
+    document.body.classList.remove(themes[currentThemeIndex]);
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    document.body.classList.add(themes[currentThemeIndex]);
+    localStorage.setItem('selectedTheme', themes[currentThemeIndex]);
+
+    // Update select value
+    document.getElementById('themeSelect').value = themes[currentThemeIndex];
+}
+
+function setTheme(themeName) {
+    themes.forEach(theme => document.body.classList.remove(theme));
+    document.body.classList.add(themeName);
+    currentThemeIndex = themes.indexOf(themeName);
+    localStorage.setItem('selectedTheme', themeName);
+}
+
+/*
+█▀▀ █ █   ▀█▀ █▀▀ █▀█ █▀ 
+█▀  █ █▄▄  █  ██▄ █▀▄ ▄█ 
+*/
+
 function initializeFilters() {
     const searchInput = document.getElementById('item-search');
     const sortSelect = document.getElementById('sort-by');
@@ -1044,85 +1333,102 @@ function updateFilters() {
     }
 }
 
-function showErrorMessage(message = "An error occurred") {
-    updatePageTitle('Error');
-    const wikiContent = document.getElementById('wiki-content');
-    wikiContent.innerHTML = `
-        <div class="not-found">
-            <h2>Error</h2>
-            <p>${message}</p>
-            <p><a href="index.html">Return to item list</a></p>
-        </div>
-    `;
+/*
+█▀▀ █ █▄ █ █▀▄ █▀▀ █▀█ █▀ 
+█▀  █ █ ▀█ █▄▀ ██▄ █▀▄ ▄█ 
+*/
+
+function findQuestsRewardingItem(itemName) {
+    if (!itemName || !combinedData?.quests) return [];
+    
+    return combinedData.quests.filter(quest => 
+        quest.rewards?.some(reward => 
+            reward.reward_type === 'item' && 
+            reward.item_name?.toLowerCase() === itemName.toLowerCase()
+        )
+    );
 }
 
-// Load data and handle loading/errors
-config.loadAllData((data) => {
-    combinedData = data;
-    displayWikiPage(searchQuery);
-}).catch(error => {
-    console.error("Error loading data:", error);
-    showErrorMessage("Failed to load required data");
-});
-
-// Wait for both DOM and data before initializing
-async function initWiki() {
-    try {
-        // Load data first
-        combinedData = await config.loadAllData();
-
-        // Now that we have data, we can safely display the page
-        displayWikiPage(searchQuery);
-    } catch (error) {
-        console.error("Error loading data:", error);
-        showErrorMessage("Failed to load required data");
-    }
+function findQuestsRequiringItem(itemName) {
+    if (!itemName || !combinedData?.quests) return [];
+    
+    return combinedData.quests.filter(quest =>
+        quest.required_items?.some(requirement =>
+            requirement.item_name?.toLowerCase() === itemName.toLowerCase()
+        )
+    );
 }
 
-// Remove old loadAllData and config.loadAllData calls
-document.addEventListener('DOMContentLoaded', initWiki);
+function findQuest(name) {
+    return combinedData.quests?.find(quest => 
+        quest.quest_name.toLowerCase() === name.toLowerCase());
+}
 
-// Add welcome page styles
-const welcomeStyles = document.createElement('style');
-welcomeStyles.textContent = `
-    .welcome-content {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
+function findItem(name) {
+    return combinedData.items.find(item =>
+        item.name.toLowerCase() === name.toLowerCase());
+}
+
+function findRecipe(name) {
+    return combinedData.recipes.find(recipe =>
+        recipe.result.toLowerCase() === name.toLowerCase());
+}
+
+function findRecipesUsingItem(itemName) {
+    if (!itemName || !combinedData.recipes) return [];
+
+    return combinedData.recipes.filter(recipe =>
+        recipe.ingredients.includes(itemName) ||
+        recipe.tools.includes(itemName)
+    );
+}
+
+function findInMarketplace(name) {
+    return combinedData.marketplace?.items.find(item =>
+        item.name.toLowerCase() === name.toLowerCase());
+}
+
+function findWikiInfo(name) {
+    // First try to find in items array
+    const itemInfo = combinedData.wiki.items?.find(item => 
+        item.name.toLowerCase() === name.toLowerCase()
+    );
+    if (itemInfo) return itemInfo;
+
+    // Then try sources
+    const sourceInfo = combinedData.wiki.sources?.find(source =>
+        source.name.toLowerCase() === name.toLowerCase()
+    );
+    if (sourceInfo) return sourceInfo;
+
+    // Finally try quests
+    return combinedData.wiki.quests?.find(quest =>
+        quest.name?.toLowerCase() === name.toLowerCase()
+    );
+}
+
+function findSource(name) {
+    if (!name || !combinedData.sources) return null;
+    return combinedData.sources.find(source =>
+        source.name.toLowerCase() === name.toLowerCase());
+}
+
+function findItemsByCategory(category) {
+    if (!category) return [];
+
+    const searchTerm = category.toLowerCase();
+
+    if (searchTerm === 'items') {
+        return combinedData.items;
     }
 
-    .wiki-stats {
-        margin: 2rem 0;
-        padding: 1rem;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        background: var(--card-fade);
-    }
+    return combinedData.items.filter(item =>
+        item.rarity.toLowerCase() === searchTerm ||
+        item.type.toLowerCase() === searchTerm
+    );
+}
 
-    .wiki-stats ul {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        justify-content: space-around;
-        gap: 2rem;
-    }
-
-    .category-links {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 2rem;
-        margin: 1rem 0;
-    }
-
-    .category-links ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .category-links li {
-        margin: 0.5rem 0;
-    }
-`;
-document.head.appendChild(welcomeStyles);
-
-// ...rest of existing code...
+function findItemsByType(type) {
+    return combinedData.items.filter(item =>
+        item.type.toLowerCase() === type.toLowerCase());
+}

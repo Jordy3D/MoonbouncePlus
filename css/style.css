@@ -85,7 +85,7 @@ main {
     padding: 1rem;
 
     width: 100%;
-    max-width: min(80vw, 1000px);
+    max-width: min(90vw, 1000px);
     margin: 0 auto;
 }
 
@@ -163,6 +163,10 @@ h2 {
 h3,
 p {
     margin: 0;
+
+    &:has(+ h3, + p) {
+        margin-bottom: 1rem !important;
+    }
 }
 
 /* Update items container to use grid */
@@ -441,6 +445,7 @@ a {
 
     &.external-link {
         position: relative;
+        margin-right: 0.75rem;
 
         &::after {
             content: " ↗";
@@ -449,7 +454,7 @@ a {
 
             position: absolute;
             top: 0;
-            right: -1.5em;
+            right: -1.2em;
         }
     }
 }

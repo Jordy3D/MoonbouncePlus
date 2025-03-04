@@ -85,6 +85,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
 
     aspect-ratio: 1 / 1;
 
@@ -97,15 +99,17 @@
         margin: 0px;
         width: 100%;
 
+        color: var(--bg-color, white);
         a {
-            /* color: var(--bg-color, white); */
-            color: var(--bg-color, white);
+            color: inherit;
             text-decoration: none;
         }
     }
 
     .card-image {
         text-align: center;
+        flex: 1;
+        width: 90%;
 
         a {
             text-decoration: none;
@@ -113,6 +117,37 @@
         }
 
         img {
+            width: 100%;
+            max-width: 100px;
+            image-rendering: pixelated;
+        }
+    }
+
+    .recipe-stack {
+        /* contains two img elements tha need to be on top of each other in the same space */
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            /* position: absolute; */
+            top: 0;
+            left: 0;
+            width: 100%;
+            max-width: 100px;
+            image-rendering: pixelated;
+        }
+
+        .recipe-item {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(0.6);
+            filter: drop-shadow(0 0 15px #0006);
             width: 100%;
             max-width: 100px;
             image-rendering: pixelated;
@@ -287,5 +322,221 @@ body.theme-dark .infobox {
         h2 {
             margin: 0 !important;
         }
+    }
+}
+
+/* Welcome page styling */
+.welcome-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.wiki-stats {
+    background: var(--card-fade);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 2rem 0;
+
+    h2 {
+        margin: 0 0 1rem 0;
+        text-align: center;
+    }
+
+    ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+        text-align: center;
+    }
+}
+
+.category-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.category-section {
+    background: var(--card-fade);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+
+    h3 {
+        margin: 0 0 1rem 0;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.5rem;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+}
+
+/* Quest rewards overview */
+.quest-rewards-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.reward-type {
+    background: var(--card-fade);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+
+    img {
+        width: 64px;
+        height: 64px;
+        image-rendering: pixelated;
+    }
+
+    p {
+        margin: 0.5rem 0 0 0;
+        font-size: 0.9em;
+    }
+}
+
+.quest-page {
+    /* max-width: 800px; */
+    /* margin: 0 auto; */
+    /* padding: 20px; */
+}
+
+.quest-details {
+    background: var(--card-fade);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.quest-requirement,
+.quest-reward {
+    position: relative;
+    display: inline-block;
+}
+
+.requirement-quantity,
+.reward-quantity,
+.reward-type {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: var(--bg-color);
+    border: 1px solid var(--card-color, var(--primary-color, #ddd));
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.9em;
+}
+
+.recipe-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+
+    th,
+    td {
+        padding: 0.5rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+        background: var(--primary-color);
+        color: var(--bg-color);
+        font-weight: bold;
+    }
+
+    td {
+        vertical-align: top;
+    }
+
+    tr {
+        td {
+            padding: 0 0.5rem;
+
+            .card-container {
+                margin: 0.5rem 0;
+
+                height: 100%;
+                aspect-ratio: unset;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .card {
+                margin: 0;
+                min-width: 100px;
+                max-width: 120px;
+                width: 100%;
+
+                /* space between */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                
+                height: 100%;
+                aspect-ratio: unset;
+                
+                .card-image {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    align-items: center;
+
+                    a {
+                        bottom: 0;
+                    }
+                }
+            }
+        }
+
+        td:first-child {
+            width: 100px;
+        }
+
+        td:not(:first-child) {
+            padding-left: 1rem;
+
+            .card-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                /* gap: 1rem; */
+                /* padding-left: 1rem; */
+            }
+        }
+
+        &:nth-child(odd) {
+            background: rgb(from var(--border-color) r g b / 0.1);
+        }
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0;
+
+        height: 100%;
+        aspect-ratio: unset;
     }
 }

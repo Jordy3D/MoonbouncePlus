@@ -5,14 +5,14 @@ window.config = {
         marketplace: "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/marketplace.json",
         wiki: "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/wiki_data.json",
         sources: "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/sources.json",
-        quests: "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/quests.json",
+        quests: "https://raw.githubusercontent.com/Jordy3D/MoonbouncePlus/main/data/quests.json",  // Add this line
     },
     localUrls: {
         main: "data/MoonbouncePlus.json",
         marketplace: "data/marketplace.json",
         wiki: "data/wiki_data.json",
         sources: "data/sources.json",
-        quests: "data/quests.json",
+        quests: "data/quests.json",  // Add this line
     },
 
     rarityOrder: {
@@ -61,11 +61,12 @@ window.config = {
 
     loadAllData: async function(onDataLoaded) {
         try {
-            const [mainData, marketplaceData, wikiData, sourcesData] = await Promise.all([
+            const [mainData, marketplaceData, wikiData, sourcesData, questsData] = await Promise.all([
                 this.fetchData('main'),
                 this.fetchData('marketplace'),
                 this.fetchData('wiki'),
-                this.fetchData('sources')
+                this.fetchData('sources'),
+                this.fetchData('quests')  // Add this line
             ]);
 
             const combinedData = {
@@ -73,11 +74,14 @@ window.config = {
                 recipes: mainData.recipes,
                 marketplace: marketplaceData.marketplace,
                 wiki: wikiData,
-                sources: sourcesData.sources
+                sources: sourcesData.sources,
+                quests: questsData  // Add this line
             };
 
             window.moonbounceData = combinedData;
             window.combinedData = combinedData;
+
+            console.log("Data loaded:", combinedData);
 
             window.dispatchEvent(new Event('loadData'));
             
@@ -102,5 +106,10 @@ window.config = {
             if (!response.ok) throw new Error(`Local ${key} not found`);
             return await response.json();
         }
+    },
+
+    formatText: (text) => {
+        if (!text) return '';
+        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
     }
 };
