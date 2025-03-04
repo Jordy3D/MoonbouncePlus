@@ -246,10 +246,10 @@ function displaySourcePage(source) {
     }
 
     const drops = source.drops || [];
+    const wikiInfo = findWikiInfo(source.name);
     const wikiContent = document.getElementById('wiki-content');
     const sections = pageSections.source;
 
-    // Sort drops by rarity with better error handling
     const sortedDrops = drops
         .map(name => ({
             name,
@@ -258,6 +258,15 @@ function displaySourcePage(source) {
         }))
         .sort((a, b) => getRarityValue(a.rarity) - getRarityValue(b.rarity))
         .map(drop => drop.name);
+
+    // Create array of categories
+    const sourceCategories = ['Loot Source'];
+    if (wikiInfo?.promo) {
+        sourceCategories.push('Promotional');
+    }
+    if (wikiInfo?.categories) {
+        sourceCategories.push(...wikiInfo.categories);
+    }
 
     wikiContent.innerHTML = `
         ${sections.title ? generateTitle({ name: source.name }) : ''}
@@ -271,7 +280,7 @@ function displaySourcePage(source) {
                 ${sortedDrops.map(item => generateCardFromName(item)).join('\n')}
             </div>
         ` : ''}
-        ${sections.categories ? generateCategories(['Loot Source']) : ''}
+        ${sections.categories ? generateCategories(sourceCategories) : ''}
     `;
 
     if (sections.filter) initializeFilters();
@@ -293,12 +302,61 @@ const categoryHandlers = {
             name: quest.name
         }));
     },
+    'Promotional': () => {
+        const items = [];
+        
+        // Add promotional items
+        if (combinedData?.items) {
+            const promoItems = combinedData.items.filter(item => {
+                const wikiInfo = findWikiInfo(item.name);
+                return wikiInfo?.promo === true;
+            });
+            items.push(...promoItems);
+        }
+        
+        // Add promotional sources
+        if (combinedData?.sources) {
+            const promoSources = combinedData.sources.filter(source => {
+                const wikiInfo = findWikiInfo(source.name);
+                return wikiInfo?.promo === true;
+            }).map(source => ({
+                type: 'source',
+                name: source.name
+            }));
+            items.push(...promoSources);
+        }
+        
+        return items;
+    },
     'default': (category) => {
-        if (!combinedData?.items) return [];
-        return combinedData.items.filter(item =>
-            item.rarity.toLowerCase() === category.toLowerCase() ||
-            item.type.toLowerCase() === category.toLowerCase()
-        );
+        const items = [];
+        
+        // Check items
+        if (combinedData?.items) {
+            const matchingItems = combinedData.items.filter(item => {
+                if (item.rarity.toLowerCase() === category.toLowerCase() ||
+                    item.type.toLowerCase() === category.toLowerCase()) {
+                    return true;
+                }
+                const wikiInfo = findWikiInfo(item.name);
+                return wikiInfo?.categories?.includes(category);
+            });
+            items.push(...matchingItems);
+        }
+        
+        // Check sources
+        if (combinedData?.sources) {
+            const matchingSources = combinedData.sources.filter(source => {
+                const wikiInfo = findWikiInfo(source.name);
+                return wikiInfo?.categories?.includes(category);
+            }).map(source => ({
+                type: 'source',
+                name: source.name
+            }));
+            items.push(...matchingSources);
+        }
+        
+        return items;
     }
 };
 
@@ -346,7 +404,8 @@ function generateCategoryDescription(category) {
     const descriptions = {
         'Loot Source': 'All sources that drop items in Moonbounce.',
         'Quests': 'Available quests and their rewards.',
-        'default': `All ${category.toLowerCase() === 'items' ? '' : `${category.toLowerCase()} `}items in Moonbounce.`
+        'Promotional': 'Entries related to some sort of promotion, event, or creator.',
+        'default': `Entries in the ${category} category.`
     };
 
     return `<p>${descriptions[category] || descriptions.default}</p>`;
@@ -644,14 +703,31 @@ function generateGallery(item) {
 }
 
 function generateItemCategories(item) {
+    const categories = [
+        `<a href="?q=Category:${item.type}">${item.type}</a>`,
+        `<a href="?q=Category:${item.rarity}">${item.rarity}</a>`,
+        '<a href="?q=Category:Items">Items</a>'
+    ];
+
+    // Add promotional category if item is promotional
+    const wikiInfo = findWikiInfo(item.name);
+    if (wikiInfo?.promo) {
+        categories.push('<a href="?q=Category:Promotional">Promotional</a>');
+    }
+
+    // Add custom categories if they exist
+    if (wikiInfo?.categories) {
+        wikiInfo.categories.forEach(category => {
+            categories.push(`<a href="?q=Category:${category}">${category}</a>`);
+        });
+    }
+
     return `
         <div class="categories-section">
             <hr />
             <p>
                 <strong>Categories:</strong> 
-                <a href="?q=Category:${item.type}">${item.type}</a>,
-                <a href="?q=Category:${item.rarity}">${item.rarity}</a>,
-                <a href="?q=Category:Items">Items</a>
+                ${categories.join(', ')}
             </p>
         </div>
     `;
