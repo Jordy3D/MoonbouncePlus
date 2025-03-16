@@ -1933,6 +1933,18 @@
             ]
         },
         {
+            "id": 453,
+            "name": "Lucky Saint Coin",
+            "uuid": "7f51a3d0-5da6-4386-98c3-b25ff0bce3e7",
+            "description": "We heard that St. Patrick pays his bar tab with this.",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": [
+                "Clover Chest"
+            ]
+        },
+        {
             "id": 454,
             "name": "Golden Horseshoe",
             "uuid": "",
@@ -5284,7 +5296,7 @@
             "result": "Golden Horseshoe",
             "ingredients": [
                 "Gold Charm",
-                "Lucky Coin",
+                "Lucky Saint Coin",
                 "Horseshoe Charm"
             ],
             "tools": [],
@@ -5294,7 +5306,7 @@
             "result": "24k Clover Crown",
             "ingredients": [
                 "Gold Charm",
-                "Lucky Coin",
+                "Lucky Saint Coin",
                 "Quad Luck Crown"
             ],
             "tools": [],
