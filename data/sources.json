@@ -3,57 +3,57 @@
         {
             "name": "Alien Food Pouch",
             "drops": [
-                "Hammer",
-                "Fairy Particles",
                 "Branch",
-                "Iron Plate",
                 "Electricity",
+                "Hammer",
+                "Wooden Plank",
                 "Wooden Spoon",
+                "Iron Plate",
                 "Pie Dish",
-                "Wooden Plank"
+                "Fairy Particles"
             ]
         },
         {
             "name": "Aquamarine Chest",
             "drops": [
-                "Carrot",
-                "Vinegar",
                 "Banana",
-                "Choco De-Lite",
                 "Dream Pop",
-                "Pink Nautilus Shell",
                 "Pastel Cluster",
                 "Thermometer",
-                "Peach"
+                "Vinegar",
+                "Carrot",
+                "Choco De-Lite",
+                "Peach",
+                "Pink Nautilus Shell"
             ]
         },
         {
             "name": "Assorted Goodie Bag",
             "drops": [
+                "Branch",
                 "Empty Bottle",
+                "Four Leaf Clover",
+                "Lucky Fungus",
+                "Old Thread",
+                "Plain Milk Carton",
+                "Slightly Magical Fruit",
                 "Two Blue Coins",
                 "Two Gold Coins",
                 "White Fabric",
-                "Slightly Magical Fruit",
-                "Plain Milk Carton",
-                "Old Thread",
-                "Turtle Shell",
                 "Carrot",
-                "Branch",
-                "Four Leaf Clover",
-                "Lucky Fungus"
+                "Turtle Shell"
             ]
         },
         {
             "name": "Blizzard Box",
             "drops": [
+                "Holly Hairclip",
+                "Snowglobe Hat",
+                "Holiday Lights Crown",
                 "Reindeer Antlers 2.0",
                 "Snowman Plushie",
-                "Holly Hairclip",
-                "Holiday Lights Crown",
-                "North Pole",
-                "Snowglobe Hat",
                 "Gingerbread Plushie",
+                "North Pole",
                 "Nutcracker Plushie"
             ]
         },
@@ -61,284 +61,285 @@
             "name": "Blue Chicken",
             "drops": [
                 "Blue Dye Powder",
-                "Golden Egg",
                 "Plain Egg",
-                "Plain Split Egg"
+                "Plain Split Egg",
+                "Golden Egg"
             ]
         },
         {
             "name": "Blue Loot Crate",
             "drops": [
-                "Halo Hat",
-                "Bowler Hat",
                 "Antenna Hat",
+                "Bowler Hat",
+                "Minicorn Horn",
                 "Flying Saucer",
-                "Minicorn Horn"
+                "Halo Hat"
             ]
         },
         {
             "name": "Box of Cheer",
             "drops": [
-                "Rudolph's Nose",
-                "Fairy Particles",
+                "Red Present",
                 "Red Stocking",
                 "Green Present",
-                "Red Present",
-                "Blue Present"
+                "Blue Present",
+                "Fairy Particles",
+                "Rudolph's Nose"
             ]
         },
         {
             "name": "CTRL Capsule",
             "drops": [
-                "Plain Milk Carton",
                 "Clover Charm",
+                "Dr. Swellman's Supreme Shake",
+                "Plain Milk Carton",
                 "Shaker Bottle",
                 "Stuffed Cookie",
-                "Idyl's Supreme Shake",
-                "Dr. Swellman's Supreme Shake",
+                "Sipho's Supreme Shake",
                 "Abyssoft's Supreme Shake",
-                "Sipho's Supreme Shake"
+                "Idyl's Supreme Shake"
             ]
         },
         {
             "name": "Chicken",
             "drops": [
-                "Carrot",
                 "Vinegar",
+                "Wooden Spoon",
                 "Bunny Headband",
-                "Golden Egg",
-                "Wooden Spoon"
+                "Carrot",
+                "Golden Egg"
             ]
         },
         {
             "name": "Clover Chest",
             "drops": [
-                "St. Paddy's Top Hat",
-                "Quad Luck Crown",
+                "Lucky Saint Coin",
                 "Paddy's Gnome Hat",
-                "Wee Lucky Topper",
-                "Shamrock Bowler"
+                "Quad Luck Crown",
+                "Shamrock Bowler",
+                "St. Paddy's Top Hat",
+                "Wee Lucky Topper"
             ]
         },
         {
             "name": "Cookie Crate",
             "drops": [
-                "Yin Yang",
                 "Firecracker",
-                "Fortune",
                 "Lucky Coin",
-                "Dragon Egg Hat"
+                "Dragon Egg Hat",
+                "Fortune",
+                "Yin Yang"
             ]
         },
         {
             "name": "Creator Crate",
             "drops": [
-                "Hazmask",
-                "Slime Green Hat",
-                "J1mbo's Santa Cap",
-                "Farmer J1m's Hat",
-                "Shiny Glasses",
+                "Elder Hat",
                 "Purple Heandant",
-                "Gary's Grog",
-                "Twisted Branch",
+                "Farmer J1m's Hat",
+                "Hazmask",
+                "Shiny Glasses",
                 "Tattered Canvas",
+                "Twisted Branch",
                 "White Dye Powder",
                 "Dragonforce Mask",
-                "Elder Hat"
+                "Gary's Grog",
+                "J1mbo's Santa Cap",
+                "Slime Green Hat"
             ]
         },
         {
             "name": "Dark Elemental Chest",
             "drops": [
-                "Fairy Particles",
                 "Electricity",
                 "Earth Shard",
-                "Green Scale",
-                "Pink Scale",
-                "Water Shard",
                 "Fire Shard",
+                "Green Scale",
                 "Holographic Leaf",
-                "Time-Warped Acorn"
+                "Pink Scale",
+                "Time-Warped Acorn",
+                "Water Shard",
+                "Fairy Particles"
             ]
         },
         {
             "name": "Disco Mats",
             "drops": [
-                "Haunted Bone",
-                "Red Lens",
-                "Blue Lens",
                 "Electricity",
+                "Haunted Bone",
                 "LED Lights",
-                "Feather"
+                "Blue Lens",
+                "Feather",
+                "Red Lens"
             ]
         },
         {
             "name": "Dusty Box",
             "drops": [
                 "Vinyl Sheet",
-                "Prismatic Dust",
+                "Feather",
                 "Gold Orb",
                 "Strange Cloth",
-                "Feather"
+                "Prismatic Dust"
             ]
         },
         {
             "name": "Egg Basket",
             "drops": [
                 "Bunny Mask",
+                "Bunny Plushie",
                 "Sparkle Egg Hat",
                 "Split Egg Hat",
                 "Striped Egg Hat",
-                "Golden Egg",
-                "Bunny Plushie"
+                "Golden Egg"
             ]
         },
         {
             "name": "Floating Eyeball",
             "drops": [
-                "Monster Eye",
-                "Pumpkin",
-                "Haunted Bone",
-                "Skull Potion",
-                "Anatomical Heart",
-                "Iron Plate",
-                "Strange Cloth",
                 "Candy Corn",
-                "Glowing Tombstone"
+                "Haunted Bone",
+                "Pumpkin",
+                "Glowing Tombstone",
+                "Iron Plate",
+                "Monster Eye",
+                "Skull Potion",
+                "Strange Cloth",
+                "Anatomical Heart"
             ]
         },
         {
             "name": "Framed Chest",
             "drops": [
                 "Crumpled Metal",
-                "Sewing Needle",
+                "Hammer",
                 "Haunted Bone",
                 "Witch's Cauldron",
-                "Skull Potion",
-                "Shadow Essence",
-                "Hammer",
-                "Fairy Particles",
-                "Iron Plate",
-                "Gold Orb",
-                "Strange Cloth",
                 "Feather",
-                "Gold Thread"
+                "Gold Orb",
+                "Gold Thread",
+                "Iron Plate",
+                "Sewing Needle",
+                "Skull Potion",
+                "Strange Cloth",
+                "Fairy Particles",
+                "Shadow Essence"
             ]
         },
         {
             "name": "Heart Box",
             "drops": [
+                "Golden Heart",
                 "Stardust",
-                "Heart Trucker",
                 "Heart Headband",
-                "Heart Tophat",
+                "Heart Trucker",
                 "Anatomical Heart",
-                "Golden Heart"
+                "Heart Tophat"
             ]
         },
         {
             "name": "Heart Crate",
             "drops": [
-                "Heart Emblem",
-                "Mini Heart",
                 "Heart Coin",
+                "Mini Heart",
+                "Heart Emblem",
                 "Prismatic Dust"
             ]
         },
         {
             "name": "Holiday Decorations",
             "drops": [
+                "Green Stocking",
                 "Red Ornament",
+                "Blue Bow",
+                "Green Ornament",
                 "Orange Ornament",
                 "Pink Stocking",
-                "Green Stocking",
-                "Green Ornament",
-                "Tree Star",
-                "Blue Bow",
-                "Red Bow"
+                "Red Bow",
+                "Tree Star"
             ]
         },
         {
             "name": "JoshIsn't Crate",
             "drops": [
-                "Twisted Pengu Collectible",
                 "Brown Wizard Hat",
-                "Orange Wizard Hat",
                 "Creme De Wizard Hat",
-                "OG Wizzy Hat",
+                "Orange Wizard Hat",
                 "Steel Med",
-                "Beaver Plushie"
+                "Beaver Plushie",
+                "OG Wizzy Hat",
+                "Twisted Pengu Collectible"
             ]
         },
         {
             "name": "Living Chicken Chest",
             "drops": [
-                "Golden Egg",
+                "Earthworm",
+                "P?t Ch?ck?n",
                 "Plain Egg",
                 "Chicken Leg",
-                "Earthworm",
-                "P?t Ch?ck?n"
+                "Golden Egg"
             ]
         },
         {
             "name": "Lucky Bag",
             "drops": [
-                "Gold Orb",
-                "Electricity",
-                "Magnet",
-                "Circuit",
-                "Red Button",
-                "24k Clover Crown",
                 "Battery",
+                "Electricity",
+                "Tech Blueprints",
+                "24k Clover Crown",
+                "Gold Orb",
+                "Magnet",
                 "Old CRT",
-                "Tech Blueprints"
+                "Circuit",
+                "Red Button"
             ]
         },
         {
             "name": "Marketplace",
             "drops": [
-                "Pengu",
+                "Craftsman Blade",
+                "Crumpled Metal",
                 "Devo",
-                "Olive",
-                "Slime Green Hat",
-                "Farmer J1m's Hat",
-                "Shiny Glasses",
+                "Empty Bottle",
+                "Hammer",
+                "Pastel Cluster",
+                "Pengu",
+                "Slightly Magical Fruit",
+                "Stardust",
+                "Two Blue Coins",
+                "Two Gold Coins",
+                "White Fabric",
+                "Witch's Cauldron",
+                "Wooden Plank",
+                "Wooden Spoon",
+                "Blueberry Bon Bon",
                 "Brown Wizard Hat",
+                "Empty Potion Bottle",
+                "Expert Potion Bottle",
+                "Farmer J1m's Hat",
                 "Hazmask",
                 "Holy Crown",
-                "Orange Wizard Hat",
-                "2000's CD",
-                "Raw Moonstone",
-                "Empty Potion Bottle",
-                "Crumpled Metal",
-                "Pastel Cluster",
-                "White Fabric",
-                "Wooden Plank",
-                "Blueberry Bon Bon",
-                "Two Gold Coins",
                 "Kiwi Bon Bon",
-                "Two Blue Coins",
-                "Empty Bottle",
-                "Expert Potion Bottle",
-                "Strawberry Bon Bon",
-                "Stardust",
-                "Slightly Magical Fruit",
-                "Prismatic Dust",
-                "Witch's Cauldron",
+                "Orange Wizard Hat",
+                "Raw Moonstone",
                 "Sewing Needle",
-                "Wooden Spoon",
-                "Hammer",
-                "Craftsman Blade"
+                "Shiny Glasses",
+                "Strawberry Bon Bon",
+                "2000's CD",
+                "Olive",
+                "Prismatic Dust",
+                "Slime Green Hat"
             ]
         },
         {
             "name": "Normal Candy Basket",
             "drops": [
-                "Monster Eye",
-                "Pumpkin",
-                "Skull",
                 "Candle",
                 "Haunted Bone",
+                "Pumpkin",
+                "Monster Eye",
+                "Skull",
                 "Shadow Essence"
             ]
         },
@@ -346,25 +347,25 @@
             "name": "Old Candy Basket",
             "drops": [
                 "Candle",
-                "Shadow Essence",
                 "Black Kitten Ears",
                 "Wicked Horns",
-                "Ratty Plush",
-                "Gentlemans Topper"
+                "Gentlemans Topper",
+                "Shadow Essence",
+                "Ratty Plush"
             ]
         },
         {
             "name": "Orange Drawstring",
             "drops": [
+                "Blue Glowstick",
                 "Vinyl Sheet",
-                "Polished Purple Gem",
-                "Cup o' Cola",
-                "Orange Potion (beg.)",
-                "Magenta Potion (beg.)",
-                "Rabbit Plush Mask",
                 "Brown Rabbit Mask",
+                "Cup o' Cola",
                 "EarBudz",
-                "Blue Glowstick"
+                "Magenta Potion (beg.)",
+                "Orange Potion (beg.)",
+                "Polished Purple Gem",
+                "Rabbit Plush Mask"
             ]
         },
         {
@@ -381,35 +382,35 @@
         {
             "name": "Pot O' Gold",
             "drops": [
-                "Heart Charm",
                 "Balloon Charm",
-                "Gold Charm",
                 "Blue Moon Charm",
-                "Pile O' Coins",
                 "Clover Charm",
+                "Gold Charm",
+                "Heart Charm",
+                "Pile O' Coins",
                 "Pot O' Gold Hat"
             ]
         },
         {
             "name": "Potion Supplies",
             "drops": [
-                "Polished Blue Gem",
-                "Hammer",
-                "Iron Plate",
-                "Prismatic Dust",
                 "Four Leaf Clover",
+                "Hammer",
                 "Lucky Fungus",
                 "Wooden Spoon",
-                "Empty Potion Bottle"
+                "Empty Potion Bottle",
+                "Iron Plate",
+                "Polished Blue Gem",
+                "Prismatic Dust"
             ]
         },
         {
             "name": "Red Chicken",
             "drops": [
-                "Red Dye Powder",
-                "Golden Egg",
                 "Plain Egg",
-                "Plain Split Egg"
+                "Red Dye Powder",
+                "Plain Split Egg",
+                "Golden Egg"
             ]
         },
         {
@@ -417,18 +418,18 @@
             "drops": [
                 "Gold Bow",
                 "Pink Bow",
-                "Purple Top Hat",
-                "Green Top Hat",
                 "Yin Yang",
-                "Anatomical Heart"
+                "Anatomical Heart",
+                "Green Top Hat",
+                "Purple Top Hat"
             ]
         },
         {
             "name": "Rock Collection",
             "drops": [
-                "Uncut Nebula",
                 "Green Gem",
                 "Purple Gem",
+                "Uncut Nebula",
                 "Polished Red Gem",
                 "Polished Blue Gem"
             ]
@@ -436,46 +437,46 @@
         {
             "name": "Settled's Satchel",
             "drops": [
+                "Blue Dye Powder",
                 "Uncut Nebula",
                 "Gold Orb",
                 "Strange Cloth",
-                "Blue Dye Powder",
-                "Silver Faceguard",
-                "Mini Mole"
+                "Mini Mole",
+                "Silver Faceguard"
             ]
         },
         {
             "name": "Snow Crate",
             "drops": [
                 "Snowball (small)",
-                "Snowball (large)",
-                "Frosty Tree"
+                "Frosty Tree",
+                "Snowball (large)"
             ]
         },
         {
             "name": "Soup's Goodies",
             "drops": [
+                "Banana",
+                "Electricity",
+                "Salt & Pepper",
                 "Stardust",
+                "Wooden Log",
+                "Wooden Spoon",
+                "Iron Plate",
+                "Lighter",
                 "Polished Red Gem",
                 "Red Party Hat",
-                "Iron Plate",
-                "Prismatic Dust",
-                "Electricity",
-                "Wooden Spoon",
-                "Salt & Pepper",
-                "Lighter",
                 "Soup Can",
-                "Banana",
-                "Wooden Log"
+                "Prismatic Dust"
             ]
         },
         {
             "name": "Special Present",
             "drops": [
-                "Turkey Dinner",
                 "Cup of Cocoa",
-                "Holiday Magic Orb",
-                "Twinkling Lights"
+                "Twinkling Lights",
+                "Turkey Dinner",
+                "Holiday Magic Orb"
             ]
         },
         {
@@ -483,48 +484,48 @@
             "drops": [
                 "Bonnet Sprout",
                 "Fertilizer",
-                "Garden Pot",
-                "Garden Shovel",
-                "Watering Can",
                 "Four Leaf Clover",
-                "Lucky Fungus"
+                "Garden Pot",
+                "Lucky Fungus",
+                "Watering Can",
+                "Garden Shovel"
             ]
         },
         {
             "name": "Style Crate #1",
             "drops": [
-                "Tiny Crown",
-                "Tiny Tiara",
-                "Purple Party Hat",
                 "Blue Party Hat",
+                "Purple Party Hat",
                 "Red Party Hat",
-                "Star Hat"
+                "Star Hat",
+                "Tiny Crown",
+                "Tiny Tiara"
             ]
         },
         {
             "name": "Summery Gifts",
             "drops": [
-                "Strawberry Milk",
-                "Red Dye Powder",
-                "Feather",
-                "Lighter",
                 "Banana",
-                "Mermaid Tiara",
-                "Safari Hat",
-                "Sliced Coconut",
                 "Corn on the Cob",
-                "Watermelon Slice",
+                "Red Dye Powder",
+                "Sliced Coconut",
+                "Feather",
                 "Ice Cream",
+                "Kiwi Fruit",
+                "Lighter",
+                "Mermaid Tiara",
                 "Pineapple",
-                "Kiwi Fruit"
+                "Safari Hat",
+                "Watermelon Slice",
+                "Strawberry Milk"
             ]
         },
         {
             "name": "Yellow Chicken",
             "drops": [
-                "Golden Egg",
                 "Plain Egg",
-                "Plain Split Egg"
+                "Plain Split Egg",
+                "Golden Egg"
             ]
         }
     ]

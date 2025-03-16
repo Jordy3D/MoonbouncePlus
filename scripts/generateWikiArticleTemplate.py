@@ -1278,6 +1278,55 @@ def generate_loot_source_pages(items):
             f.write(new_template)
         
     print(f'Generated loot source pages for {len(sources) - 1} sources.')
+
+
+# generate sources.json
+def generate_sources_json():
+    # structure:
+    # {
+    #     "sources": [
+    #         {
+    #             "name": "source name",
+    #             "drops": ["item1", "item2", ...]
+    #         }
+    #     ]
+    # }
+    # output to data/generated_sources.json
+    sources_json = {
+        "sources": []
+    }
+    
+    # load moonbounceplus.json and loop through every item to get the sources
+    item_data = None
+    with open('data/moonbounceplus.json', 'r', encoding='utf-8') as f:
+        item_data = json.load(f)
+        item_data = item_data['items']
+        
+    for item in items:
+        for source in sources:
+            if item.name in source.drops:
+                # check if the source is already in the sources_json
+                source_json = next((s for s in sources_json['sources'] if s['name'] == source.name), None)
+                if not source_json:
+                    source_json = {
+                        "name": source.name,
+                        "drops": []
+                    }
+                    sources_json['sources'].append(source_json)
+                
+                source_json['drops'].append(item.name)
+                
+    # sort the sources alphabetically
+    sources_json['sources'].sort(key=lambda x: x['name'])
+    
+    # sort the drops in each source by rarity, then by name
+    for source in sources_json['sources']:
+        source['drops'].sort(key=lambda x: (rarity_order[next((i.rarity for i in items if i.name == x), 'Common').lower()], x))
+                
+    with open(os.path.join(script_dir, '..', 'data', 'sources.json'), 'w', encoding='utf-8') as f:
+        json.dump(sources_json, f, indent=4)
+
+
 #endregion
 
 #region Update Readme
@@ -1325,6 +1374,8 @@ if __name__ == '__main__':
     # Initialize the lists to store the items, recipes, and sources
     items, recipes, sources = load_data(data_path, marketplace_data_path)
     
+    initial_items = items.copy()
+    
     # load quests from the JSON file
     quest_data = quests.load_quests(quests_data_path)
     
@@ -1353,5 +1404,7 @@ if __name__ == '__main__':
     generate_loot_source_pages(items)
     
     download_images(items)
+    
+    generate_sources_json()
     
     update_readme()
