@@ -8,3 +8,4 @@ data/import.json
 data/MoonbouncePlus_bak.json
 
 images/*.py
+images/*/*.png
