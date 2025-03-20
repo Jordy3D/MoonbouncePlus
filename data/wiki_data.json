@@ -1000,9 +1000,7 @@
             "name": "Yin Yang",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1413,9 +1411,7 @@
             "name": "Heart Charm",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1423,9 +1419,7 @@
             "name": "Balloon Charm",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1433,9 +1427,7 @@
             "name": "Gold Charm",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1471,9 +1463,15 @@
             "name": "Pile O' Coins",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shooting Star Charm",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -1565,9 +1563,7 @@
             "name": "Shamrock Bowler",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },
@@ -2331,9 +2327,7 @@
             "name": "4th Firework Hat",
             "trivia": [],
             "promo": false,
-            "categories": [
-                "Unverified"
-            ],
+            "categories": [],
             "gallery": [],
             "appearance": ""
         },

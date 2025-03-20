@@ -1967,6 +1967,18 @@
             ]
         },
         {
+            "id": 456,
+            "name": "Shooting Star Charm",
+            "uuid": "c85ea852-d80b-40b0-8fa1-82efc1f3589c",
+            "description": "Dream upon a star , for a place wide and far, reachable, but not by car!",
+            "rarity": "COMMON",
+            "type": "MATERIAL",
+            "value": 5,
+            "sources": [
+                "Pot O' Gold"
+            ]
+        },
+        {
             "id": 458,
             "name": "Clover Charm",
             "uuid": "071493a5-65eb-4abd-a6cc-5174df88956c",

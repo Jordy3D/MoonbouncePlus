@@ -452,8 +452,9 @@ def download_images(items):
         if not os.path.exists(save_path):
             os.makedirs(save_path)
         save_path = os.path.join(save_path, f'{item.name_formatted}.png')
+        save_path_webp = save_path.replace('.png', '.webp')
         
-        if not os.path.exists(save_path):
+        if not os.path.exists(save_path) and not os.path.exists(save_path_webp):
             print(f'Downloading {item.name}...')
             # download the image by combining the UUID with the normal image path
             # https://moonbounce.gg/images/fp/<UUID>/c/f/preview.png
