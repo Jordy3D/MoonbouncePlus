@@ -1994,12 +1994,14 @@
         {
             "id": 459,
             "name": "Horseshoe Charm",
-            "uuid": "",
+            "uuid": "ce7574c3-850b-412b-8366-223e1ce2386b",
             "description": "Perfect for a game of horseshoes, and might put you in the winning with the extra luck it brings",
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
-            "sources": []
+            "sources": [
+                "Pot O' Gold"
+            ]
         },
         {
             "id": 460,
