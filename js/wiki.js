@@ -1085,7 +1085,7 @@ function generateQuestInfobox(quest) {
             <img src="images/quest/Quest.webp"
                  alt="${quest.quest_name}" 
                  title="${quest.quest_name}" 
-                 onerror="this.src='images/quest/quest.webp'"/>
+                 onerror="this.src='images/quest/Quest.webp'"/>
             
             <div class="infobox-rows">
                 ${generateInfoboxRow('Type', quest.quest_quest_type)}
@@ -1178,7 +1178,7 @@ function generateQuestReward(reward) {
                     <div class="card">
                         <div class="card-title">MP Reward</div>
                         <div class="card-image">
-                            <img src="images/Quest/MP_${getRewardSize(reward.quantity)}.webp" 
+                            <img src="images/quest/MP_${getRewardSize(reward.quantity)}.webp" 
                                  alt="${reward.quantity} MP" />
                         </div>
                         <div class="reward-quantity">${reward.quantity} MP</div>
@@ -1197,7 +1197,7 @@ function generateQuestReward(reward) {
                     <div class="card">
                         <div class="card-title">New Quest</div>
                         <div class="card-image">
-                            <img src="images/quest/quest.webp" alt="New Quest" />
+                            <img src="images/quest/Quest.webp" alt="New Quest" />
                         </div>
                     </div>
                 </div>
@@ -1229,7 +1229,7 @@ function generateQuestPrerequisites(quest) {
                             <a href="?q=${encodeURIComponent(prereq.quest_name)}">
                                 <img src="images/quest/Quest.webp" 
                                      alt="${prereq.quest_name}"
-                                     onerror="this.src='images/quest/quest.webp'" />
+                                     onerror="this.src='images/quest/Quest.webp'" />
                             </a>
                         </div>
                     </div>
