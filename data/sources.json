@@ -63,6 +63,7 @@
                 "Blue Dye Powder",
                 "Plain Egg",
                 "Plain Split Egg",
+                "Rabbit Hole Ears",
                 "Golden Egg"
             ]
         },
@@ -107,6 +108,7 @@
                 "Wooden Spoon",
                 "Bunny Headband",
                 "Carrot",
+                "Chocolate Bunny",
                 "Golden Egg"
             ]
         },
@@ -187,6 +189,7 @@
             "name": "Egg Basket",
             "drops": [
                 "Bunny Mask",
+                "Rabbit Hole Ears",
                 "Bunny Plushie",
                 "Sparkle Egg Hat",
                 "Split Egg Hat",
@@ -412,6 +415,7 @@
                 "Plain Egg",
                 "Red Dye Powder",
                 "Plain Split Egg",
+                "Rabbit Hole Ears",
                 "Golden Egg"
             ]
         },
@@ -527,6 +531,7 @@
             "drops": [
                 "Plain Egg",
                 "Plain Split Egg",
+                "Rabbit Hole Ears",
                 "Golden Egg"
             ]
         }

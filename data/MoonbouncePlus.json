@@ -1269,7 +1269,12 @@
             "rarity": "UNCOMMON",
             "type": "ACCESSORY",
             "value": 15,
-            "sources": []
+            "sources": [
+                "Red Chicken",
+                "Blue Chicken",
+                "Egg Basket",
+                "Yellow Chicken"
+            ]
         },
         {
             "id": 395,
@@ -2143,7 +2148,9 @@
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,
-            "sources": []
+            "sources": [
+                "Chicken"
+            ]
         },
         {
             "id": 473,
