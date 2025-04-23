@@ -112,7 +112,7 @@
             "id": 67,
             "name": "Uncut Nebula",
             "uuid": "8d44e793-f6e7-4bf1-a93c-f75336e0c853",
-            "description": "We think this could look really cool, but its too early to tell",
+            "description": "We think this could look really cool, but it's too early to tell",
             "rarity": "COMMON",
             "type": "MATERIAL",
             "value": 5,
@@ -171,7 +171,7 @@
             "id": 72,
             "name": "Minor Magic Potion",
             "uuid": "15a7f336-363d-4e31-b8f7-2fa262ad9437",
-            "description": "You can kinda feel something special about this potion, but its not much.",
+            "description": "You can kinda feel something special about this potion, but it's not much.",
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 100,
@@ -277,7 +277,9 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 30,
-            "sources": []
+            "sources": [
+                "Rare Candy Basket"
+            ]
         },
         {
             "id": 171,
@@ -1315,7 +1317,6 @@
             "type": "MATERIAL",
             "value": 15,
             "sources": [
-                "Red Loot Bag",
                 "Cookie Crate"
             ]
         },
@@ -1444,7 +1445,6 @@
             "type": "MATERIAL",
             "value": 30,
             "sources": [
-                "Red Loot Bag",
                 "Heart Box",
                 "Floating Eyeball"
             ]
@@ -2270,12 +2270,10 @@
             "type": "MATERIAL",
             "value": 5000,
             "sources": [
-                "Living Chicken Chest",
-                "Chicken",
-                "Yellow Chicken",
+                "Lucky Bag",
+                "Egg Basket",
                 "Blue Chicken",
-                "Red Chicken",
-                "Egg Basket"
+                "Living Chicken Chest"
             ]
         },
         {
@@ -2331,7 +2329,7 @@
             "id": 487,
             "name": "Purple Bunny Ears",
             "uuid": "1d2fcd24-ef3c-4957-837d-7755e3c9ed77",
-            "description": "Who knew the big bunny in charge had an purple sibling",
+            "description": "Who knew the big bunny in charge had a purple sibling?",
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 250,
@@ -2412,9 +2410,9 @@
             "name": "Purple Split Egg",
             "uuid": "aa590869-b9e1-4271-8ce0-39b87259c76f",
             "description": "A split egg, dyed only a little purple",
-            "rarity": "UNCOMMON",
+            "rarity": "RARE",
             "type": "MATERIAL",
-            "value": 100,
+            "value": 250,
             "sources": []
         },
         {
@@ -3759,7 +3757,7 @@
             "description": "Ancient face-tech for the modern pixel warrior! Rumor has it this mask grants +5 to woodcutting and a sudden urge to fletch.",
             "rarity": "RARE",
             "type": "ACCESSORY",
-            "value": 0,
+            "value": null,
             "sources": []
         },
         {
@@ -3805,7 +3803,7 @@
             "description": "Epic face mask forged in the fires of dragons. Grants +100 to agility, so don't be surprised if your typing suddenly hits 1000 WPM.",
             "rarity": "RARE",
             "type": "ACCESSORY",
-            "value": 30,
+            "value": null,
             "sources": [
                 "Creator Crate"
             ]
@@ -3817,7 +3815,7 @@
             "description": "Ancient headwear of wisdom (and questionable fashion choices). Grants +5 to lawn-protection skills and the power to ramble about \"the good old days of dial-up.”",
             "rarity": "COMMON",
             "type": "ACCESSORY",
-            "value": 0,
+            "value": null,
             "sources": [
                 "Creator Crate"
             ]
@@ -3968,7 +3966,7 @@
             "id": 659,
             "name": "Glowing Tombstone",
             "uuid": "bdf3e2c5-7886-46fc-994b-d146c13179f6",
-            "description": "A miniature gravestone that emits an eerie light. The inscription changes when you're not looking.",
+            "description": "A miniature gravestone that emits an eerie light like a candle on Samhain. The inscription changes when you're not looking.",
             "rarity": "UNCOMMON",
             "type": "MATERIAL",
             "value": 15,

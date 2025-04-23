@@ -108,8 +108,7 @@
                 "Wooden Spoon",
                 "Bunny Headband",
                 "Carrot",
-                "Chocolate Bunny",
-                "Golden Egg"
+                "Chocolate Bunny"
             ]
         },
         {
@@ -295,7 +294,8 @@
                 "Magnet",
                 "Old CRT",
                 "Circuit",
-                "Red Button"
+                "Red Button",
+                "Golden Egg"
             ]
         },
         {
@@ -410,13 +410,18 @@
             ]
         },
         {
+            "name": "Rare Candy Basket",
+            "drops": [
+                "Mean-O-Lantern"
+            ]
+        },
+        {
             "name": "Red Chicken",
             "drops": [
                 "Plain Egg",
                 "Red Dye Powder",
                 "Plain Split Egg",
-                "Rabbit Hole Ears",
-                "Golden Egg"
+                "Rabbit Hole Ears"
             ]
         },
         {
@@ -424,8 +429,6 @@
             "drops": [
                 "Gold Bow",
                 "Pink Bow",
-                "Yin Yang",
-                "Anatomical Heart",
                 "Green Top Hat",
                 "Purple Top Hat"
             ]
@@ -531,8 +534,7 @@
             "drops": [
                 "Plain Egg",
                 "Plain Split Egg",
-                "Rabbit Hole Ears",
-                "Golden Egg"
+                "Rabbit Hole Ears"
             ]
         }
     ]
