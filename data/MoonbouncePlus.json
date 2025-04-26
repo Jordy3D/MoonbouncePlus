@@ -4419,6 +4419,90 @@
             "type": "MATERIAL",
             "value": 500,
             "sources": []
+        },
+        {
+            "id": 727,
+            "name": "Leaf Crown",
+            "uuid": "c6991d2c-6a37-4cf8-9852-f05433435cf2",
+            "description": "The ultimate symbol of your ascension to woodland internet royalty. For those who claim to 'touch grass' while spending 18 hours daily in Discord servers.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 729,
+            "name": "Octi Hat",
+            "uuid": "770a5622-c4cb-4b7f-ac4c-9f790bb2bb89",
+            "description": "Transform your avatar into the supreme overlord of multitasking with eight pixelated appendages perfect for simultaneous tab management. Warning: May cause inexplicable urge to ink when startled by autoplay videos.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 730,
+            "name": "Cool Octi Hat",
+            "uuid": "cbd0f3dd-ce50-4c18-96d0-6d9c5f9155de",
+            "description": "Like sunglasses but with eight arms and a better excuse for being clingy.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 732,
+            "name": "Tiny Hat",
+            "uuid": "a3260fee-feec-467e-ad11-5d6e056a3dcd",
+            "description": "Perch it atop your avatar's head for that \"I'm not compensating for anything\" look.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 733,
+            "name": "Bugged Eyes",
+            "uuid": "376efa07-776b-4b0f-bf47-5ba7f8690832",
+            "description": "Equip for that \"just saw your browser history\" look. Makes every website seem like it's judging you. Side effect: May cause uncontrollable urge to clear cookies when nobody's watching.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 734,
+            "name": "Jester Hat",
+            "uuid": "28fba97c-9808-4768-867f-773afb10640e",
+            "description": "Perfect for users who enjoy surprising others with unexpected comments or surviving risky clicks. Warning: May cause uncontrollable urge to type \"LOL\" after everything you say.",
+            "rarity": "UNCOMMON",
+            "type": "UNKNOWN",
+            "value": 75,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 735,
+            "name": "Striped Hat",
+            "uuid": "225f2088-dc7b-41fe-a958-c82becba6ede",
+            "description": "Add a touch of whimsical elegance to your avatar with this bold pattern that says \"I'm not afraid to stand out in a chat room.\" Perfect for those who prefer to keep things formal yet funky.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
         }
     ],
     "recipes": [

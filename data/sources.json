@@ -58,6 +58,18 @@
             ]
         },
         {
+            "name": "Blue Backpack",
+            "drops": [
+                "Jester Hat",
+                "Octi Hat",
+                "Tiny Hat",
+                "Bugged Eyes",
+                "Cool Octi Hat",
+                "Leaf Crown",
+                "Striped Hat"
+            ]
+        },
+        {
             "name": "Blue Chicken",
             "drops": [
                 "Blue Dye Powder",

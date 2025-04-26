@@ -3422,6 +3422,64 @@
             "categories": [],
             "gallery": [],
             "appearance": ""
+        },
+        {
+            "name": "Leaf Crown",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Octi Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cool Octi Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Tiny Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Bugged Eyes",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Jester Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Striped Hat",
+            "trivia": [
+                "* This item is likely a reference to the Kisuke Urahara's hat from the anime series Bleach."
+            ],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
         }
     ],
     "quests": [
