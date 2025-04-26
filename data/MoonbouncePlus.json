@@ -4515,6 +4515,30 @@
             "sources": [
                 "Blue Backpack"
             ]
+        },
+        {
+            "id": 736,
+            "name": "Bane's Pointer",
+            "uuid": "6aa38f2d-af54-4a23-9afa-7c850f9263ff",
+            "description": "Sometimes you just need to be pointed in the right direction.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Bane's Bag"
+            ]
+        },
+        {
+            "id": 737,
+            "name": "2025 Hat",
+            "uuid": "23aa9b2c-7c7b-41ec-ab0c-8c35d6dec63c",
+            "description": "Yet another year with Moonbounce! Artist: @Bane",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 25,
+            "sources": [
+                "Bane's Bag"
+            ]
         }
     ],
     "recipes": [
