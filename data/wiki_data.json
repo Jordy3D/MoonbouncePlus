@@ -3495,7 +3495,9 @@
                 "* Bane's Pointer was designed by [[User:Bane|Bane]]."
             ],
             "promo": false,
-            "categories": [],
+            "categories": [
+                "User-Designed Items"
+            ],
             "gallery": [],
             "appearance": ""
         },
@@ -3504,6 +3506,52 @@
             "trivia": [
                 "* The 2025 Hat was designed by [[User:Bane|Bane]]."
             ],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Kat Plushie",
+            "trivia": [
+                "* The Kat Plushie was designed by [[User:Bane|Bane]]."
+            ],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Plunger Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Plague Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Cat Visor",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Flower Headband",
+            "trivia": [],
             "promo": false,
             "categories": [],
             "gallery": [],

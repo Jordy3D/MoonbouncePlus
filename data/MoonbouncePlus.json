@@ -4520,7 +4520,7 @@
             "id": 736,
             "name": "Bane's Pointer",
             "uuid": "6aa38f2d-af54-4a23-9afa-7c850f9263ff",
-            "description": "Sometimes you just need to be pointed in the right direction.",
+            "description": "Sometimes you just need to be pointed in the right direction. Artist: @Bane",
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 250,
@@ -4538,6 +4538,66 @@
             "value": 25,
             "sources": [
                 "Bane's Bag"
+            ]
+        },
+        {
+            "id": 738,
+            "name": "Kat Plushie",
+            "uuid": "c69564ce-6680-4246-96bd-86b7da1b5689",
+            "description": "Perfect for showing your soft spot for virtual pets without the responsibility of feeding them. Artist: @Bane",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Bane's Bag"
+            ]
+        },
+        {
+            "id": 741,
+            "name": "Plunger Hat",
+            "uuid": "e713425c-09f9-4f17-a80a-a9efb8c9d11a",
+            "description": "Perfect for users who pride themselves on unclogging problematic conversations or diving into messy threads. Warning: May cause sudden urges to fix broken links with vigorous up-and-down motions.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 743,
+            "name": "Plague Mask",
+            "uuid": "d0899419-bd33-47ea-bd31-8fe1e1e84ddd",
+            "description": "Crafted during a late-night existential crisis fueled by too much energy drink and a weird history podcast binge. Perfect for users who think they're \"not like other avatars\" while still following every trend.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 750,
+            "name": "Cat Visor",
+            "uuid": "c950cbf2-c8dd-4ab5-b364-27b6bf40d173",
+            "description": "Early 2000s AOL chatroom fashion statement for your digital noggin. Combines the practicality of having no actual sun protection with the style of a retired Florida mall walker.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Animal Crate"
+            ]
+        },
+        {
+            "id": 751,
+            "name": "Flower Headband",
+            "uuid": "905dfa37-9212-4090-83b7-3f02bbea849b",
+            "description": "Millennial festival cosplay for your digital self. Authentically inauthentic like those Instagram filters that made everyone look like they just discovered Coachella in 2014. Caution: May summon inexplicable urges to start a lifestyle blog about minimalism despite owning 47 houseplants.",
+            "rarity": "COMMON",
+            "type": "ACCESSORY",
+            "value": 5,
+            "sources": [
+                "Blue Backpack"
             ]
         }
     ],

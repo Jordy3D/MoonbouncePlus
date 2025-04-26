@@ -14,6 +14,12 @@
             ]
         },
         {
+            "name": "Animal Crate",
+            "drops": [
+                "Cat Visor"
+            ]
+        },
+        {
             "name": "Aquamarine Chest",
             "drops": [
                 "Banana",
@@ -48,7 +54,8 @@
             "name": "Bane's Bag",
             "drops": [
                 "2025 Hat",
-                "Bane's Pointer"
+                "Bane's Pointer",
+                "Kat Plushie"
             ]
         },
         {
@@ -67,12 +74,14 @@
         {
             "name": "Blue Backpack",
             "drops": [
+                "Flower Headband",
                 "Jester Hat",
                 "Octi Hat",
                 "Tiny Hat",
                 "Bugged Eyes",
                 "Cool Octi Hat",
                 "Leaf Crown",
+                "Plague Mask",
                 "Scary Mask",
                 "Striped Hat"
             ]
