@@ -4457,6 +4457,18 @@
             ]
         },
         {
+            "id": 731,
+            "name": "Scary Mask",
+            "uuid": "fe970432-7e55-4d6f-9bbc-28aa5e0f5019",
+            "description": "Perfect for those moments when your actual reaction to a webpage would get you banned.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
             "id": 732,
             "name": "Tiny Hat",
             "uuid": "a3260fee-feec-467e-ad11-5d6e056a3dcd",
