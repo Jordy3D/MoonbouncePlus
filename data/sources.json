@@ -16,7 +16,10 @@
         {
             "name": "Animal Crate",
             "drops": [
-                "Cat Visor"
+                "Blue JellyFish",
+                "Capybara Plush",
+                "Cat Visor",
+                "Shark Hat"
             ]
         },
         {
@@ -55,7 +58,8 @@
             "drops": [
                 "2025 Hat",
                 "Bane's Pointer",
-                "Kat Plushie"
+                "Kat Plushie",
+                "Perry Plushie"
             ]
         },
         {
@@ -77,11 +81,14 @@
                 "Flower Headband",
                 "Jester Hat",
                 "Octi Hat",
+                "Police Hat",
                 "Tiny Hat",
                 "Bugged Eyes",
                 "Cool Octi Hat",
+                "Grad Cap",
                 "Leaf Crown",
                 "Plague Mask",
+                "Plunger Hat",
                 "Scary Mask",
                 "Striped Hat"
             ]

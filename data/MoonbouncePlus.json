@@ -4553,6 +4553,30 @@
             ]
         },
         {
+            "id": 739,
+            "name": "Perry Plushie",
+            "uuid": "8fd91caa-533b-461e-a565-17c5819439b9",
+            "description": "Perfect for secret agents who want to maintain their cover while browsing. Warning: May disappear mysteriously whenever someone asks \"Hey, where's Perry?\" Artist: @Bane",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Bane's Bag"
+            ]
+        },
+        {
+            "id": 740,
+            "name": "Police Hat",
+            "uuid": "de758812-9574-40b9-8b4f-1f3d81b2ac69",
+            "description": "Command respect in your digital domain with this authoritative headgear that says \"I enforce the terms of service.\" Perfect for those who enjoy moderating chat rooms or reporting suspicious links.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
             "id": 741,
             "name": "Plunger Hat",
             "uuid": "e713425c-09f9-4f17-a80a-a9efb8c9d11a",
@@ -4574,6 +4598,54 @@
             "value": 250,
             "sources": [
                 "Blue Backpack"
+            ]
+        },
+        {
+            "id": 745,
+            "name": "Grad Cap",
+            "uuid": "7079b0fd-8a0b-449c-b8d5-03c2a15522a5",
+            "description": "The symbol of academic achievement that says \"I've survived countless all-nighters and earned the right to flip this tassel.\" Perfect for celebrating educational milestones or pretending you remember anything from that class you barely passed.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 746,
+            "name": "Capybara Plush",
+            "uuid": "849acc97-74bf-46b9-aae1-cd2220fba5d1",
+            "description": "Crown yourself with the internet's favorite chillaxing rodent, now available as a cozy head companion.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Animal Crate"
+            ]
+        },
+        {
+            "id": 747,
+            "name": "Blue JellyFish",
+            "uuid": "6790885d-1a7a-4a4c-bf94-e151b52a0070",
+            "description": "Perfect for users who enjoy drifting mysteriously through conversations or stunning others with unexpected stings of wit. Warning: May cause sudden urges to bob hypnotically in place or temporarily disconnect when conversations get too electric.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Animal Crate"
+            ]
+        },
+        {
+            "id": 749,
+            "name": "Shark Hat",
+            "uuid": "94610cbe-33d9-42c4-9187-5d0bdc3e1e36",
+            "description": "Marine apex headgear for those who peaked during Shark Week 2013. Perfect for people who want to look simultaneously threatening and ridiculous in Zoom meetings.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Animal Crate"
             ]
         },
         {

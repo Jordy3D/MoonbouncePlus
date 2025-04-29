@@ -3526,6 +3526,27 @@
             "appearance": ""
         },
         {
+            "name": "Perry Plushie",
+            "trivia": [
+                "* The Perry Plushie was designed by [[User:Bane|Bane]] based on a design by [[User:Frkl|ok22222]].",
+                "* This item is a reference to Perry the Platypus from Phineas and Ferb."
+            ],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Police Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
             "name": "Plunger Hat",
             "trivia": [],
             "promo": false,
@@ -3535,6 +3556,38 @@
         },
         {
             "name": "Plague Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Grad Cap",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Capybara Plush",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Blue Jellyfish",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shark Hat",
             "trivia": [],
             "promo": false,
             "categories": [],
