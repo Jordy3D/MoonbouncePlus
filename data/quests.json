@@ -788,6 +788,54 @@
         "tags": []
     },
     {
+        "quest_id": "2b85bd68-8de1-4dca-91d9-8bab6ce10f2a",
+        "quest_name": "Starting Esfand's Journey",
+        "quest_description": "Gather the legendary gear of the Retribution Paladin of Twitch. Navigate through the internet to collect each piece of the Esfand ensemble.",
+        "quest_instance_type": "One-Time",
+        "quest_quest_type": "Fetch",
+        "quest_tags": [],
+        "prerequisites": [],
+        "availability": [
+            {
+                "start_date": 1746111600,
+                "end_date": 0
+            }
+        ],
+        "recurring": null,
+        "required_items": [
+            {
+                "item_id": "f5fca664-77ea-476b-b5d3-922dfe74b750",
+                "item_name": "Esfand's Cap",
+                "quantity": 1
+            },
+            {
+                "item_id": "6303695a-b6db-4ed5-ae3f-7a20799b01f8",
+                "item_name": "Sheriff's Mask",
+                "quantity": 1
+            },
+            {
+                "item_id": "26af2f52-dbac-4425-9f55-9085b406abf9",
+                "item_name": "Sheriff's Hat",
+                "quantity": 1
+            },
+            {
+                "item_id": "78faa999-10cd-4f57-9742-2ffe6e693b39",
+                "item_name": "Esfand Headphones",
+                "quantity": 1
+            }
+        ],
+        "rewards": [
+            {
+                "item_id": "8d9f106f-060c-442f-81fc-3f0e8bc9b185",
+                "item_name": "Chef's Hat",
+                "quantity": 1,
+                "reward_type": "item",
+                "recipe_name": null
+            }
+        ],
+        "tags": []
+    },
+    {
         "quest_id": "d98cec03-476a-4611-a825-90eb63ca3393",
         "quest_name": "Swamp Lords",
         "quest_description": "The old lords are asking the friends of the swamp-god to search out for four items littered around the internet bogs. These items are the Crafted Blue Cape, and the Crafted Tortuous Ornament, as well as the found Mini Mole and Silver Faceguard. I wonder what they have planned for this? Maybe make a very well dressed mole that's in a bit of pain? Who knows, but they are relying on you to complete this quest.",

@@ -3636,40 +3636,50 @@
         },
         {
             "name": "Sheriff's Mask",
-            "trivia": [],
-            "promo": false,
+            "trivia": [
+                "* This item was part of a promo with [https://www.twitch.tv/esfandtv EsfandTV]"
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
         },
         {
             "name": "Esfand Headphones",
-            "trivia": [],
-            "promo": false,
+            "trivia": [
+                "* This item was part of a promo with [https://www.twitch.tv/esfandtv EsfandTV]"
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
         },
         {
             "name": "Chef's Hat",
-            "trivia": [],
-            "promo": false,
+            "trivia": [
+                "* This item was part of a promo with [https://www.twitch.tv/esfandtv EsfandTV]"
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
         },
         {
             "name": "Esfand's Cap",
-            "trivia": [],
-            "promo": false,
+            "trivia": [
+                "* This item was part of a promo with [https://www.twitch.tv/esfandtv EsfandTV]"
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
         },
         {
             "name": "Sheriff's Hat",
-            "trivia": [],
-            "promo": false,
+            "trivia": [
+                "* This item was part of a promo with [https://www.twitch.tv/esfandtv EsfandTV]"
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
@@ -3806,6 +3816,16 @@
             "name": "Space Walkers",
             "trivia": [],
             "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Starting Esfand's Journey",
+            "trivia": [
+                "* This quest was released as part of a promo with [https://www.twitch.tv/esfandtv EsfandTV]."
+            ],
+            "promo": true,
             "categories": [],
             "gallery": [],
             "appearance": ""
@@ -3992,6 +4012,24 @@
         },
         {
             "name": "Egg Basket",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Esfand's Chest",
+            "trivia": [
+                "* This loot source was released as part of a promo with [https://www.twitch.tv/esfandtv EsfandTV]."
+            ],
+            "promo": true,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Fallen Star",
             "trivia": [],
             "promo": false,
             "categories": [],

@@ -19,7 +19,9 @@
                 "Blue JellyFish",
                 "Capybara Plush",
                 "Cat Visor",
-                "Shark Hat"
+                "Shark Hat",
+                "Purple Jellyfish",
+                "Duck Plushie"
             ]
         },
         {
@@ -90,7 +92,8 @@
                 "Plague Mask",
                 "Plunger Hat",
                 "Scary Mask",
-                "Striped Hat"
+                "Striped Hat",
+                "Neon Cat Headphones"
             ]
         },
         {
@@ -230,6 +233,15 @@
                 "Split Egg Hat",
                 "Striped Egg Hat",
                 "Golden Egg"
+            ]
+        },
+        {
+            "name": "Esfand's Chest",
+            "drops": [
+                "Esfand Headphones",
+                "Sewing Needle",
+                "Sheriff's Hat",
+                "Esfand's Cap"
             ]
         },
         {
