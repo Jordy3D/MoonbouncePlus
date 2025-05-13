@@ -329,12 +329,13 @@
         {
             "id": 175,
             "name": "Sewing Needle",
-            "uuid": "2cb8ae87-7fb2-40ff-a65b-86c640bc42f7",
+            "uuid": "681257cf-b923-487b-866c-0f136e673edc",
             "description": "Perfect for sewing tons of items together.",
             "rarity": "UNCOMMON",
             "type": "TOOL",
             "value": 5,
             "sources": [
+                "Esfand's Chest",
                 "Framed Chest"
             ]
         },
@@ -4589,6 +4590,18 @@
             ]
         },
         {
+            "id": 742,
+            "name": "Duck Plushie",
+            "uuid": "9891df72-289c-4e8d-b21c-852e96896546",
+            "description": "Add a touch of waterfowl whimsy to your avatar with this soft, squeezable duck friend perched atop your head. Perfect for making a splash in chat rooms or showing your affinity for bath time companions.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": [
+                "Animal Crate"
+            ]
+        },
+        {
             "id": 743,
             "name": "Plague Mask",
             "uuid": "d0899419-bd33-47ea-bd31-8fe1e1e84ddd",
@@ -4596,6 +4609,18 @@
             "rarity": "RARE",
             "type": "ACCESSORY",
             "value": 250,
+            "sources": [
+                "Blue Backpack"
+            ]
+        },
+        {
+            "id": 744,
+            "name": "Neon Cat Headphones",
+            "uuid": "88f2d880-eaed-4b49-a271-0713ada4e7e3",
+            "description": "Perfect for users who want to broadcast their music taste and cat obsession simultaneously.",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
             "sources": [
                 "Blue Backpack"
             ]
@@ -4637,6 +4662,18 @@
             ]
         },
         {
+            "id": 748,
+            "name": "Purple Jellyfish",
+            "uuid": "2576fca7-a1c0-4685-9797-5eabfca26e3c",
+            "description": "Floaty translucent squishy neon nonsense for your digital aquarium. Like that desktop screensaver your cool teacher had in 2003, but with more existential dread.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Animal Crate"
+            ]
+        },
+        {
             "id": 749,
             "name": "Shark Hat",
             "uuid": "94610cbe-33d9-42c4-9187-5d0bdc3e1e36",
@@ -4670,6 +4707,62 @@
             "value": 5,
             "sources": [
                 "Blue Backpack"
+            ]
+        },
+        {
+            "id": 752,
+            "name": "Sheriff's Mask",
+            "uuid": "b9c37ce2-082c-41f6-8731-9bd2f9c86308",
+            "description": "Perfect for commanding respect in Just Chatting lobbies or silently judging your raid party's DPS.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 753,
+            "name": "Esfand Headphones",
+            "uuid": "feb8b953-98ac-4f99-b604-d0cba42f7c05",
+            "description": "Warning: May cause spontaneous OTK membership and mysterious urges to lift weights.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Esfand's Chest"
+            ]
+        },
+        {
+            "id": 754,
+            "name": "Chef's Hat",
+            "uuid": "84887b7f-2c97-4846-94ce-ce1a287303ac",
+            "description": "Transforms raid-wipe excuses into gourmet content while boosting your cooking skill from \"ramen\" to \"ramen with an egg.\"",
+            "rarity": "LEGENDARY",
+            "type": "ACCESSORY",
+            "value": 500,
+            "sources": []
+        },
+        {
+            "id": 755,
+            "name": "Esfand's Cap",
+            "uuid": "f81936e6-94c8-4adc-99fe-a02cf419b678",
+            "description": "Pixelated headdress that will turn you into the best WoW Paladin.",
+            "rarity": "RARE",
+            "type": "ACCESSORY",
+            "value": 250,
+            "sources": [
+                "Esfand's Chest"
+            ]
+        },
+        {
+            "id": 756,
+            "name": "Sheriff's Hat",
+            "uuid": "ff167ea8-ab81-4700-97b5-0f1b88ba2e7f",
+            "description": "Digital authority cosplay as seen on EsfandTV's Twitch streams. Cornwood is re-hired.",
+            "rarity": "UNCOMMON",
+            "type": "ACCESSORY",
+            "value": 75,
+            "sources": [
+                "Esfand's Chest"
             ]
         }
     ],

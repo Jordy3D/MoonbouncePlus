@@ -3555,7 +3555,23 @@
             "appearance": ""
         },
         {
+            "name": "Duck Plushie",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
             "name": "Plague Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Neon Cat Headphones",
             "trivia": [],
             "promo": false,
             "categories": [],
@@ -3587,6 +3603,14 @@
             "appearance": ""
         },
         {
+            "name": "Purple Jellyfish",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
             "name": "Shark Hat",
             "trivia": [],
             "promo": false,
@@ -3604,6 +3628,46 @@
         },
         {
             "name": "Flower Headband",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sheriff's Mask",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Esfand Headphones",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Chef's Hat",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Esfand's Cap",
+            "trivia": [],
+            "promo": false,
+            "categories": [],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Sheriff's Hat",
             "trivia": [],
             "promo": false,
             "categories": [],
