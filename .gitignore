@@ -9,3 +9,4 @@ data/MoonbouncePlus_bak.json
 
 images/*.py
 images/*/*.png
+/scripts/__pycache__
