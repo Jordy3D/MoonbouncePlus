@@ -442,6 +442,15 @@ def check_if_in_marketplace(item_name, marketplace_items):
 
 def download_images(items):
     should_download = True
+    has_magick = True
+    
+    # check if imagemagick is available
+    try:
+        # check using windows formatting
+        os.system('magick -version >nul 2>&1')
+    except OSError:
+        print('Imagemagick is not installed. Skipping webp conversion.')
+        has_magick = False
     
     """Download the images for the items in the items list."""
     for item in items:
@@ -470,6 +479,14 @@ def download_images(items):
                 # save the image to the save path
                 with open(save_path, 'wb') as f:
                     f.write(image.content)
+                
+                # check if imagemagick is installed
+                if not has_magick:
+                    continue
+                
+                # convert the image to webp using imagemagick
+                os.system(f'convert "{save_path}" "{save_path_webp}"')
+                os.remove(save_path)
 
             except requests.exceptions.Timeout:
                 print(f"Request for {image_path} timed out after {timeout} seconds")
