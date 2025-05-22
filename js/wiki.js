@@ -1249,7 +1249,7 @@ function generateRecipeItemCard(recipeName) {
                 <a href="?q=${encodeURIComponent(recipeName)}">${recipeName} Recipe</a>
             </div>
             <div class="card-image recipe-stack">
-                <img src="images/quest/recipe_sheet.webp" alt="Recipe" class="recipe-background" />
+                <img src="images/quest/Recipe_Sheet.webp" alt="Recipe" class="recipe-background" />
                 <img src="images/${item.type.toLowerCase()}/${item.name.replace(/ /g, '_')}.webp" 
                      alt="${item.name}" 
                      class="recipe-item" />
