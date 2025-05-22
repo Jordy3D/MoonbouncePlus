@@ -88,7 +88,7 @@ window.addEventListener('loadData', () => {
                         <h2>Reward Types</h2>
                         <div class="quest-rewards-overview card-container">
                             ${generateSpecificCard('New Quest', 'quest/Quest.webp', 'Quest')}
-                            ${generateSpecificCard('Recipe', 'quest/recipe_sheet.webp', 'Recipe')}
+                            ${generateSpecificCard('Recipe', 'quest/Recipe_Sheet.webp', 'Recipe')}
                             ${generateSpecificCard('Small MP', 'quest/MP_Small.webp', 'MP_Small')}
                             ${generateSpecificCard('Medium MP', 'quest/MP_Medium.webp', 'MP_Medium')}
                             ${generateSpecificCard('Large MP', 'quest/MP_Large.webp', 'MP_Large')}
