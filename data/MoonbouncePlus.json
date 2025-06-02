@@ -4808,6 +4808,16 @@
             "sources": []
         },
         {
+            "id": 766,
+            "name": "Ignis",
+            "uuid": "1ab59267-171c-48bb-8a30-d5b2a8312dba",
+            "description": "A baby red dragon with an igneous tail",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
             "id": 767,
             "name": "The Don",
             "uuid": "eefd584b-0006-44e9-98f5-caf9ca84d39d",
@@ -4825,6 +4835,16 @@
             "rarity": "UNCOMMON",
             "type": "PET",
             "value": 75,
+            "sources": []
+        },
+        {
+            "id": 772,
+            "name": "Shiny Phone-A-Friend",
+            "uuid": "580ce752-4e81-428b-849d-6f6cfada18be",
+            "description": "You're never lonely with them around! A dear friend or companion is always on the other end of the line!",
+            "rarity": "RARE",
+            "type": "PET",
+            "value": 250,
             "sources": []
         },
         {

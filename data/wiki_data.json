@@ -3733,6 +3733,16 @@
             "appearance": ""
         },
         {
+            "name": "Ignis",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
             "name": "The Don",
             "trivia": [
                 "* Item was designed by [[User:Bane|Bane]]."
@@ -3749,6 +3759,26 @@
             "trivia": [
                 "* Item was designed by [[User:Bane|Bane]]."
             ],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Thunder",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Shiny Phone-A-Friend",
+            "trivia": [],
             "promo": false,
             "categories": [
                 "User-Designed Items"
