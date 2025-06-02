@@ -48,9 +48,11 @@
             "uuid": "698450c8-8e5c-4360-a015-3c15c2ba8dca",
             "description": "This could hold nothing, but it could also hold prizes or even a pet...if you’re lucky!",
             "rarity": "RARE",
-            "type": "MATERIAL",
+            "type": "EGG",
             "value": 30,
-            "sources": []
+            "sources": [
+                "Speckled Egg"
+            ]
         },
         {
             "id": 10,
@@ -4764,6 +4766,126 @@
             "sources": [
                 "Esfand's Chest"
             ]
+        },
+        {
+            "id": 757,
+            "name": "Eyedoll",
+            "uuid": "5c6686cc-5339-4ad8-92c2-77a71420592a",
+            "description": "Always watching out for you. And at you. And at everyone else.",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
+            "id": 758,
+            "name": "Bob",
+            "uuid": "a42e1261-e42f-452a-a2a2-4f5df6461c7e",
+            "description": "A friendly visitor from... Well, he claims he's from the moon, and that you now owe him royalties.",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
+            "id": 759,
+            "name": "Luna",
+            "uuid": "6a132603-85d8-4e5a-8144-1b37f7c4e1b4",
+            "description": "Moon...bounce?",
+            "rarity": "COMMON",
+            "type": "PET",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 760,
+            "name": "Marky",
+            "uuid": "879aa2a5-a602-412d-b4cf-90136dd50745",
+            "description": "His brother got a better job.",
+            "rarity": "COMMON",
+            "type": "PET",
+            "value": 5,
+            "sources": []
+        },
+        {
+            "id": 767,
+            "name": "The Don",
+            "uuid": "eefd584b-0006-44e9-98f5-caf9ca84d39d",
+            "description": "Some say they can actually understand The Don's meowing, but can they really be trusted?",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
+            "id": 770,
+            "name": "Hikiko",
+            "uuid": "8421c545-e798-48d4-ba49-c9a4db84bf83",
+            "description": "Your fun, furry, flickering flame-fox familiar friend.",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
+            "id": 774,
+            "name": "Shiny Marky",
+            "uuid": "37486240-5d00-4d61-a5b3-7547e736963e",
+            "description": "This bendy browser buddy hovers near forms asking if you \"need help writing that strongly-worded email.\" Last seen in 2003, now exclusively dispenses outdated tech advice.",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
+            "id": 775,
+            "name": "Shiny Bob",
+            "uuid": "fe0c42b6-9a5e-4593-b673-300dba44e395",
+            "description": "A friendly visitor from... Well, he claims he's from the moon, and that you now owe him royalties.",
+            "rarity": "RARE",
+            "type": "PET",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 776,
+            "name": "Shiny The Don",
+            "uuid": "fc75921e-b152-4ff3-9e19-51a800fea0e6",
+            "description": "Some say they can actually understand The Don's meowing, but can they really be trusted?",
+            "rarity": "RARE",
+            "type": "PET",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 777,
+            "name": "Shiny Luna",
+            "uuid": "028cf237-0204-4be7-9cdd-8f6f4e184105",
+            "description": "Moon...bounce?",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
+            "id": 778,
+            "name": "Shiny Hikiko",
+            "uuid": "bc1c3bbf-f6f7-473f-8f2c-c81da0d2ee33",
+            "description": "Your fun, furry, flickering flame-fox familiar friend.",
+            "rarity": "RARE",
+            "type": "PET",
+            "value": 250,
+            "sources": []
+        },
+        {
+            "id": 779,
+            "name": "Shiny Eyedoll",
+            "uuid": "21c57aea-caa3-40a1-8ac8-cb8444514d6b",
+            "description": "Always watching out for you. And at you. And at everyone else.",
+            "rarity": "RARE",
+            "type": "PET",
+            "value": 250,
+            "sources": []
         }
     ],
     "recipes": [
@@ -6061,6 +6183,18 @@
                 "Magic Mirror"
             ],
             "type": "Competition (Nitro)"
+        },
+        {
+            "result": "Sheriff's Mask",
+            "ingredients": [
+                "Gold Thread",
+                "Fallen Star",
+                "Sheriff's Hat"
+            ],
+            "tools": [
+                "Sewing Needle"
+            ],
+            "type": "Partnership (Esfand)"
         }
     ]
 }

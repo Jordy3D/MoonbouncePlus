@@ -137,6 +137,7 @@ class MarketplaceItem:
 type_to_types_dict = {
     "accessory": "Accessories",
     "material": "Materials",
+    "pet": "Pets",
     "character": "Characters",
     "tool": "Tools",
     "unknown": "Unknown"
@@ -197,7 +198,7 @@ The '''<NAME>''' is <AAN> [[<TYPE>]] in Moonbounce.
 """
 
 characterTemplate = """\
-[[Category:Character]][[Category:Items]][[Category:<RARITY>]]<PROMOCATEGORY>
+[[Category:Character]][[Category:Items]][[Category:<RARITY>]]<PROMOCATEGORY><EXTRACATEGORIES>
 {{Infobox
 | name = <NAME>
 | item_no = #<ID>
@@ -275,6 +276,22 @@ materialsPageTableItemTemplate = """
 |<RARITY>
 |-"""
 
+petsPageTableTemplate = """\
+== Alternative Sortable Table ==
+{| class="wikitable sortable mw-collapsible mw-collapsed"
+|+
+!Preview
+!Name
+!Rarity
+|-<ITEMS>
+|}
+"""
+
+petsPageTableItemTemplate = """
+|[[File:<NAMEFORMATTED>.png|frameless|80x80px|link=<NAME>]]
+|[[<NAME>]]
+|<RARITY>
+|-"""
 
 toolsPageTableTemplate = """\
 == Alternative Sortable Table ==
@@ -336,6 +353,21 @@ materialCardBodyTemplate = """\
 </div>"""
 
 materialCardItemTemplate = """
+{{Card
+|title=<NAME>
+|image=<NAMEHYPHENED>.png
+|rarity=<RARITY>
+|linktarget=<NAMEHYPHENED>
+}}
+"""
+
+petCardBodyTemplate = """\
+== Pet List ==
+<div class="card-container">
+<ITEMS>
+</div>"""
+
+petCardItemTemplate = """
 {{Card
 |title=<NAME>
 |image=<NAMEHYPHENED>.png
@@ -821,6 +853,11 @@ def generate_wiki_articles(items, print_file_names=False):
             type_path = 'materials'
             new_template = new_template.replace('<AAN>', 'a')
             valid = True
+        elif item.type.lower() == 'pet':
+            new_template = characterTemplate
+            new_template = new_template.replace('<AAN>', 'a')
+            type_path = 'pets'
+            valid = True
         elif item.type.lower() == 'character':
             new_template = characterTemplate
             type_path = 'characters'
@@ -984,12 +1021,14 @@ def generate_page_tables(items):
     """Generate the page tables for the items in the items list."""
     accessories_table = accessoriesPageTableTemplate
     materials_table = materialsPageTableTemplate
+    pets_table = petsPageTableTemplate
     tools_table = toolsPageTableTemplate
     characters_table = characterPageTableTemplate
     
     item_templates = {
         'accessory': accessoriesPageTableItemTemplate,
         'material': materialsPageTableItemTemplate,
+        'pets': petsPageTableItemTemplate,
         'tool': toolsPageTableItemTemplate,
         'character': characterPageTableItemTemplate
     }
@@ -997,6 +1036,7 @@ def generate_page_tables(items):
     item_lists = {
         'accessory': [],
         'material': [],
+        'pets': [],
         'tool': [],
         'character': []
     }
@@ -1012,6 +1052,7 @@ def generate_page_tables(items):
                 
     accessories_table = replace_text(accessories_table, '<ITEMS>', ''.join(item_lists['accessory']))
     materials_table = replace_text(materials_table, '<ITEMS>', ''.join(item_lists['material']))
+    pets_table = replace_text(pets_table, '<ITEMS>', ''.join(item_lists['pets'])) 
     tools_table = replace_text(tools_table, '<ITEMS>', ''.join(item_lists['tool']))
     characters_table = replace_text(characters_table, '<ITEMS>', ''.join(item_lists['character']))
     
@@ -1021,6 +1062,9 @@ def generate_page_tables(items):
     with open(os.path.join(script_dir, '..', 'wiki', 'materials-table.mw'), 'w', encoding='utf-8') as f:
         f.write(materials_table)
         
+    with open(os.path.join(script_dir, '..', 'wiki', 'pets-table.mw'), 'w', encoding='utf-8') as f:
+        f.write(pets_table)
+        
     with open(os.path.join(script_dir, '..', 'wiki', 'tools-table.mw'), 'w', encoding='utf-8') as f:
         f.write(tools_table)
         
@@ -1029,6 +1073,7 @@ def generate_page_tables(items):
         
     print('Generated page tables for accessories.')
     print('Generated page tables for materials.')
+    print('Generated page tables for pets.')
     print('Generated page tables for tools.')
     print('Generated page tables for characters.')
 
@@ -1040,6 +1085,9 @@ def generate_cards_lists(items):
 
     material_card_body = materialCardBodyTemplate
     materialItems = []
+    
+    pet_card_body = petCardBodyTemplate
+    petItems = []
 
     tool_card_body = toolCardBodyTemplate
     toolItems = []
@@ -1050,6 +1098,7 @@ def generate_cards_lists(items):
     item_templates = {
         'accessory': (accessoryCardItemTemplate, accessoryItems),
         'material': (materialCardItemTemplate, materialItems),
+        'pet': (petCardItemTemplate, petItems),
         'tool': (toolCardItemTemplate, toolItems),
         'character': (characterCardItemTemplate, characterItems)
     }
@@ -1085,6 +1134,7 @@ def generate_cards_lists(items):
             
     accessory_card_body = replace_text(accessory_card_body, '<ITEMS>', ''.join(accessoryItems))
     material_card_body = replace_text(material_card_body, '<ITEMS>', ''.join(materialItems))
+    pet_card_body = replace_text(pet_card_body, '<ITEMS>', ''.join(petItems))
     tool_card_body = replace_text(tool_card_body, '<ITEMS>', ''.join(toolItems))
     character_card_body = replace_text(character_card_body, '<ITEMS>', ''.join(characterItems))
     
@@ -1094,6 +1144,9 @@ def generate_cards_lists(items):
     with open(os.path.join(script_dir, '..', 'wiki', 'materials-cards.mw'), 'w', encoding='utf-8') as f:
         f.write(material_card_body)
         
+    with open(os.path.join(script_dir, '..', 'wiki', 'pets-cards.mw'), 'w', encoding='utf-8') as f:
+        f.write(pet_card_body)
+        
     with open(os.path.join(script_dir, '..', 'wiki', 'tools-cards.mw'), 'w', encoding='utf-8') as f:
         f.write(tool_card_body)
         
@@ -1102,6 +1155,7 @@ def generate_cards_lists(items):
         
     print('Generated accessory cards.')
     print('Generated material cards.')
+    print('Generated pet cards.')
     print('Generated tool cards.')
     print('Generated character cards.')
 
@@ -1403,6 +1457,7 @@ if __name__ == '__main__':
     # print the number of each type of item in the items list
     print(f'Accessories: {len([item for item in items if item.type == "Accessory"])}')
     print(f'Materials: {len([item for item in items if item.type == "Material"])}')
+    print(f'Pets: {len([item for item in items if item.type == "Pet"])}')
     print(f'Tools: {len([item for item in items if item.type == "Tool"])}')
     print(f'Characters: {len([item for item in items if item.type == "Character"])}')
     
