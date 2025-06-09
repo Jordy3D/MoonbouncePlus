@@ -4808,6 +4808,26 @@
             "sources": []
         },
         {
+            "id": 761,
+            "name": "Phone-A-Friend",
+            "uuid": "ed740c81-7120-43e1-bd9a-dd325f565356",
+            "description": "You're never lonely with them around! A dear friend or companion is always on the other end of the line!",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
+            "id": 764,
+            "name": "Pocket PC Pal",
+            "uuid": "34b205c5-bfa1-44e3-85ee-545b8994d32f",
+            "description": "Occasionally displays blue screen of death when you try to stream anything above 240p. Will absolutely judge your Spotify playlists for not being on cassette.",
+            "rarity": "UNCOMMON",
+            "type": "PET",
+            "value": 75,
+            "sources": []
+        },
+        {
             "id": 766,
             "name": "Ignis",
             "uuid": "1ab59267-171c-48bb-8a30-d5b2a8312dba",

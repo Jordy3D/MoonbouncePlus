@@ -3733,6 +3733,26 @@
             "appearance": ""
         },
         {
+            "name": "Phone-A-Friend",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
+            "name": "Pocket PC Pal",
+            "trivia": [],
+            "promo": false,
+            "categories": [
+                "User-Designed Items"
+            ],
+            "gallery": [],
+            "appearance": ""
+        },
+        {
             "name": "Ignis",
             "trivia": [],
             "promo": false,
